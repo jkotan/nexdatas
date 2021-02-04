@@ -228,14 +228,14 @@ nxswriter.FileWriter module
     :undoc-members:
     :show-inheritance:
 
-nxswriter.PNIWriter module
---------------------------
+nxswriter.H5CppWriter module
+----------------------------
 
-.. automodule:: nxswriter.PNIWriter
+.. automodule:: nxswriter.H5CppWriter
     :members:
     :undoc-members:
     :show-inheritance:
-
+       
 nxswriter.H5PYWriter module
 ---------------------------
 

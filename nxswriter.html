@@ -4,23 +4,21 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter package &#8212; NXSDataWriter 2.27.0 documentation</title>
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
+    <title>nxswriter package &#8212; NXSDataWriter 2.29.0 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to NXSDataWriter’s documentation!" href="index.html" />
+    <link rel="prev" title="Welcome to NXSDataWriter&#39;s documentation!" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -39,7 +37,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.27</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.29</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -85,7 +83,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.Types">nxswriter.Types module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.PNIWriter">nxswriter.PNIWriter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-nxswriter">Module contents</a></li>
 </ul>
@@ -133,7 +131,7 @@
 <li><a class="reference internal" href="#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li><a class="reference internal" href="#module-nxswriter.Types">nxswriter.Types module</a></li>
 <li><a class="reference internal" href="#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.PNIWriter">nxswriter.PNIWriter module</a></li>
+<li><a class="reference internal" href="#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
 <li><a class="reference internal" href="#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li><a class="reference internal" href="#module-nxswriter">Module contents</a></li>
 </ul>
@@ -147,7 +145,7 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: Welcome to NXSDataWriter’s documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to NX...</span>
+    <a href="index.html" title="Previous Chapter: Welcome to NXSDataWriter's documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to NX...</span>
     </a>
   </li>
               
@@ -173,63 +171,7 @@
 
 <div class="container">
   <div class="row">
-      <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">nxswriter package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-nxswriter.ClientSource">nxswriter.ClientSource module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DBaseSource">nxswriter.DBaseSource module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DataHolder">nxswriter.DataHolder module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DataSourceFactory">nxswriter.DataSourceFactory module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DataSourcePool">nxswriter.DataSourcePool module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DataSources">nxswriter.DataSources module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.DecoderPool">nxswriter.DecoderPool module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.EAttribute">nxswriter.EAttribute module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.EField">nxswriter.EField module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.EGroup">nxswriter.EGroup module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.ELink">nxswriter.ELink module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.EStrategy">nxswriter.EStrategy module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.Element">nxswriter.Element module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.ElementThread">nxswriter.ElementThread module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.Errors">nxswriter.Errors module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.FElement">nxswriter.FElement module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.FetchNameHandler">nxswriter.FetchNameHandler module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.H5Elements">nxswriter.H5Elements module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.InnerXMLParser">nxswriter.InnerXMLParser module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.NXSWriter">nxswriter.NXSWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.NexusXMLHandler">nxswriter.NexusXMLHandler module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.PyEvalSource">nxswriter.PyEvalSource module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.StreamSet">nxswriter.StreamSet module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.TangoDataWriter">nxswriter.TangoDataWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.TangoSource">nxswriter.TangoSource module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.Types">nxswriter.Types module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.PNIWriter">nxswriter.PNIWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
-<li><a class="reference internal" href="#module-nxswriter">Module contents</a></li>
-</ul>
-</li>
-</ul>
-
-  <li>
-    <a href="index.html" title="Previous Chapter: Welcome to NXSDataWriter’s documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to NX...</span>
-    </a>
-  </li>
-<div id="sourcelink">
-  <a href="_sources/nxswriter.rst.txt"
-     rel="nofollow">Source</a>
-</div>
-<form action="search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-        </div>
-      </div>
-    <div class="col-md-9 content">
+    <div class="col-md-12 content">
       
   <div class="section" id="nxswriter-package">
 <h1>nxswriter package<a class="headerlink" href="#nxswriter-package" title="Permalink to this headline">¶</a></h1>
@@ -483,7 +425,7 @@ if <a class="reference internal" href="#nxswriter.DBaseSource.DBaseSource.format
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy array of defined type or list
 for strings or value for SCALAR</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -939,7 +881,7 @@ is registered</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the decoded data if data was loaded</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -1099,7 +1041,7 @@ is registered</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the decoded data if data was loaded</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -3642,8 +3584,8 @@ removes the thread pools</td>
 
 <dl class="attribute">
 <dt id="nxswriter.TangoDataWriter.TangoDataWriter.fileName">
-<code class="descname">fileName</code><em class="property"> = None</em><a class="headerlink" href="#nxswriter.TangoDataWriter.TangoDataWriter.fileName" title="Permalink to this definition">¶</a></dt>
-<dd><p>(<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) output file name</p>
+<code class="descname">fileName</code><a class="headerlink" href="#nxswriter.TangoDataWriter.TangoDataWriter.fileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>the parent nexus path</p>
 </dd></dl>
 
 <dl class="method">
@@ -5436,12 +5378,12 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 </div>
-<div class="section" id="module-nxswriter.PNIWriter">
-<span id="nxswriter-pniwriter-module"></span><h2>nxswriter.PNIWriter module<a class="headerlink" href="#module-nxswriter.PNIWriter" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nxswriter.H5CppWriter">
+<span id="nxswriter-h5cppwriter-module"></span><h2>nxswriter.H5CppWriter module<a class="headerlink" href="#module-nxswriter.H5CppWriter" title="Permalink to this headline">¶</a></h2>
 <p>Provides pni file writer</p>
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIAttribute">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIAttribute</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppAttribute</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTAttribute" title="nxswriter.FileWriter.FTAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTAttribute</span></code></a></p>
 <p>file tree attribute</p>
 <p>constructor</p>
@@ -5458,20 +5400,20 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttribute.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close attribute</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIAttribute.dtype">
-<code class="descname">dtype</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>attribute data type</p>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.dtype">
+<code class="descname">dtype</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>field data type</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">attribute data type</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">field data type</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></td>
 </tr>
@@ -5480,8 +5422,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIAttribute.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if attribute is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5496,8 +5438,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttribute.read">
-<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.read" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>read attribute value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5512,14 +5454,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttribute.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen attribute</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIAttribute.shape">
-<code class="descname">shape</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.shape" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.shape">
+<code class="descname">shape</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>attribute shape</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5534,8 +5476,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttribute.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttribute.write" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttribute.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttribute.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>write attribute value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5550,8 +5492,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIAttributeManager">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIAttributeManager</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttributeManager" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttributeManager">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppAttributeManager</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttributeManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTAttributeManager" title="nxswriter.FileWriter.FTAttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTAttributeManager</span></code></a></p>
 <p>file tree attribute</p>
 <p>constructor</p>
@@ -5568,14 +5510,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttributeManager.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttributeManager.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttributeManager.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttributeManager.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close attribure manager</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttributeManager.create">
-<code class="descname">create</code><span class="sig-paren">(</span><em>name</em>, <em>dtype</em>, <em>shape=None</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttributeManager.create" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttributeManager.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>name</em>, <em>dtype</em>, <em>shape=None</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttributeManager.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>create a new attribute</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5592,7 +5534,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">attribute object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIAtribute</span></code></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppAtribute</span></code></p>
 </td>
 </tr>
 </tbody>
@@ -5600,8 +5542,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIAttributeManager.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttributeManager.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttributeManager.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttributeManager.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if link is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5616,16 +5558,16 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIAttributeManager.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIAttributeManager.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppAttributeManager.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppAttributeManager.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen field</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIDeflate">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIDeflate</code><span class="sig-paren">(</span><em>h5object</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIDeflate" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppDeflate">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppDeflate</code><span class="sig-paren">(</span><em>h5object</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppDeflate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTDeflate" title="nxswriter.FileWriter.FTDeflate"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTDeflate</span></code></a></p>
 <p>file tree deflate</p>
 <p>constructor</p>
@@ -5638,8 +5580,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIDeflate.rate">
-<code class="descname">rate</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIDeflate.rate" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppDeflate.rate">
+<code class="descname">rate</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppDeflate.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>getter for compression rate</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5654,8 +5596,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIDeflate.shuffle">
-<code class="descname">shuffle</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIDeflate.shuffle" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppDeflate.shuffle">
+<code class="descname">shuffle</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppDeflate.shuffle" title="Permalink to this definition">¶</a></dt>
 <dd><p>getter for compression shuffle</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5672,8 +5614,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIField">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIField</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppField</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTField" title="nxswriter.FileWriter.FTField"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTField</span></code></a></p>
 <p>file tree file</p>
 <p>constructor</p>
@@ -5690,8 +5632,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIField.attributes">
-<code class="descname">attributes</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.attributes">
+<code class="descname">attributes</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the attribute manager</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5699,21 +5641,21 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">attribute manager</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.PNIWriter.PNIAttributeManager" title="nxswriter.PNIWriter.PNIAttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIAttributeManager</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppAttributeManager" title="nxswriter.H5CppWriter.H5CppAttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppAttributeManager</span></code></a></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close field</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIField.dtype">
-<code class="descname">dtype</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.dtype" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.dtype">
+<code class="descname">dtype</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>field data type</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5728,8 +5670,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.grow">
-<code class="descname">grow</code><span class="sig-paren">(</span><em>dim=0</em>, <em>ext=1</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.grow" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.grow">
+<code class="descname">grow</code><span class="sig-paren">(</span><em>dim=0</em>, <em>ext=1</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.grow" title="Permalink to this definition">¶</a></dt>
 <dd><p>grow the field</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5746,8 +5688,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIField.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if field is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5762,8 +5704,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.read">
-<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.read" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>read the field value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5778,8 +5720,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.refresh">
-<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.refresh" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.refresh" title="Permalink to this definition">¶</a></dt>
 <dd><p>refresh the field</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5794,14 +5736,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen field</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIField.shape">
-<code class="descname">shape</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.shape" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.shape">
+<code class="descname">shape</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>field shape</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5816,8 +5758,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIField.size">
-<code class="descname">size</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.size" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.size">
+<code class="descname">size</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>field size</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5832,8 +5774,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIField.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIField.write" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppField.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppField.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>write the field value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5848,8 +5790,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIFile">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIFile</code><span class="sig-paren">(</span><em>h5object</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppFile</code><span class="sig-paren">(</span><em>h5object</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTFile" title="nxswriter.FileWriter.FTFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTFile</span></code></a></p>
 <p>file tree file</p>
 <p>constructor</p>
@@ -5866,20 +5808,20 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIFile.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIFile.flush">
-<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.flush" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.flush" title="Permalink to this definition">¶</a></dt>
 <dd><p>flash the data</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIFile.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if file is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5894,8 +5836,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIFile.readonly">
-<code class="descname">readonly</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.readonly" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.readonly">
+<code class="descname">readonly</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.readonly" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if file is readonly</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5910,8 +5852,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIFile.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><em>readonly=False</em>, <em>swmr=False</em>, <em>_=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><em>readonly=False</em>, <em>swmr=False</em>, <em>libver=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5929,8 +5871,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIFile.root">
-<code class="descname">root</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIFile.root" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppFile.root">
+<code class="descname">root</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppFile.root" title="Permalink to this definition">¶</a></dt>
 <dd><p>root object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5938,7 +5880,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">parent object</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.PNIWriter.PNIGroup" title="nxswriter.PNIWriter.PNIGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIGroup</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppGroup" title="nxswriter.H5CppWriter.H5CppGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppGroup</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -5947,8 +5889,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIGroup">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNIGroup</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppGroup</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTGroup" title="nxswriter.FileWriter.FTGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTGroup</span></code></a></p>
 <p>file tree group</p>
 <p>constructor</p>
@@ -5965,8 +5907,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNIGroup.PNIGroupIter">
-<em class="property">class </em><code class="descname">PNIGroupIter</code><span class="sig-paren">(</span><em>group</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.PNIGroupIter" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.H5CppGroupIter">
+<em class="property">class </em><code class="descname">H5CppGroupIter</code><span class="sig-paren">(</span><em>group</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.H5CppGroupIter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -5978,8 +5920,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.PNIGroupIter.next">
-<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.PNIGroupIter.next" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.H5CppGroupIter.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.H5CppGroupIter.next" title="Permalink to this definition">¶</a></dt>
 <dd><p>the next attribute</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -5996,8 +5938,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIGroup.attributes">
-<code class="descname">attributes</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.attributes">
+<code class="descname">attributes</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the attribute manager</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6005,21 +5947,21 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">attribute manager</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.PNIWriter.PNIAttributeManager" title="nxswriter.PNIWriter.PNIAttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIAttributeManager</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppAttributeManager" title="nxswriter.H5CppWriter.H5CppAttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppAttributeManager</span></code></a></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close group</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.create_field">
-<code class="descname">create_field</code><span class="sig-paren">(</span><em>name</em>, <em>type_code</em>, <em>shape=None</em>, <em>chunk=None</em>, <em>dfilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.create_field" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.create_field">
+<code class="descname">create_field</code><span class="sig-paren">(</span><em>name</em>, <em>type_code</em>, <em>shape=None</em>, <em>chunk=None</em>, <em>dfilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.create_field" title="Permalink to this definition">¶</a></dt>
 <dd><p>open a file tree element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6030,14 +5972,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <li><strong>type_code</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – nexus field type</li>
 <li><strong>shape</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> &lt; <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> &gt;) – shape</li>
 <li><strong>chunk</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> &lt; <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a> &gt;) – chunk</li>
-<li><strong>dfilter</strong> (<a class="reference internal" href="#nxswriter.PNIWriter.PNIDeflate" title="nxswriter.PNIWriter.PNIDeflate"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIDeflate</span></code></a>) – filter deflater</li>
+<li><strong>dfilter</strong> (<a class="reference internal" href="#nxswriter.H5CppWriter.H5CppDeflate" title="nxswriter.H5CppWriter.H5CppDeflate"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppDeflate</span></code></a>) – filter deflater</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">file tree field</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.PNIWriter.PNIField" title="nxswriter.PNIWriter.PNIField"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIField</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppField" title="nxswriter.H5CppWriter.H5CppField"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppField</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -6045,8 +5987,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.create_group">
-<code class="descname">create_group</code><span class="sig-paren">(</span><em>n</em>, <em>nxclass=''</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.create_group" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.create_group">
+<code class="descname">create_group</code><span class="sig-paren">(</span><em>n</em>, <em>nxclass=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.create_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>open a file tree element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6061,7 +6003,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">file tree group</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.PNIWriter.PNIGroup" title="nxswriter.PNIWriter.PNIGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIGroup</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppGroup" title="nxswriter.H5CppWriter.H5CppGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppGroup</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -6069,8 +6011,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.exists">
-<code class="descname">exists</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.exists" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.exists">
+<code class="descname">exists</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>if child exists</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6087,8 +6029,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIGroup.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if field is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6103,8 +6045,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.names">
-<code class="descname">names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.names" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.names">
+<code class="descname">names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.names" title="Permalink to this definition">¶</a></dt>
 <dd><p>read the child names</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6119,8 +6061,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.open">
-<code class="descname">open</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.open" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.open">
+<code class="descname">open</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>open a file tree element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6137,14 +6079,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNIGroup.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen group</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNIGroup.size">
-<code class="descname">size</code><a class="headerlink" href="#nxswriter.PNIWriter.PNIGroup.size" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppGroup.size">
+<code class="descname">size</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppGroup.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>group size</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6161,8 +6103,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="class">
-<dt id="nxswriter.PNIWriter.PNILink">
-<em class="property">class </em><code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">PNILink</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNILink" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink">
+<em class="property">class </em><code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">H5CppLink</code><span class="sig-paren">(</span><em>h5object</em>, <em>tparent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#nxswriter.FileWriter.FTLink" title="nxswriter.FileWriter.FTLink"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTLink</span></code></a></p>
 <p>file tree link</p>
 <p>constructor</p>
@@ -6179,14 +6121,19 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </tbody>
 </table>
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNILink.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNILink.close" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close group</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="nxswriter.H5CppWriter.H5CppLink.getfilename">
+<em class="property">classmethod </em><code class="descname">getfilename</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.getfilename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNILink.is_valid">
-<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.PNIWriter.PNILink.is_valid" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink.is_valid">
+<code class="descname">is_valid</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.is_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if link is valid</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6201,8 +6148,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNILink.refresh">
-<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNILink.refresh" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.refresh" title="Permalink to this definition">¶</a></dt>
 <dd><p>refresh the field</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6217,14 +6164,14 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="method">
-<dt id="nxswriter.PNIWriter.PNILink.reopen">
-<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.PNILink.reopen" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink.reopen">
+<code class="descname">reopen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.reopen" title="Permalink to this definition">¶</a></dt>
 <dd><p>reopen field</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nxswriter.PNIWriter.PNILink.target_path">
-<code class="descname">target_path</code><a class="headerlink" href="#nxswriter.PNIWriter.PNILink.target_path" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.H5CppLink.target_path">
+<code class="descname">target_path</code><a class="headerlink" href="#nxswriter.H5CppWriter.H5CppLink.target_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>target path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6241,8 +6188,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="function">
-<dt id="nxswriter.PNIWriter.create_file">
-<code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">create_file</code><span class="sig-paren">(</span><em>filename</em>, <em>overwrite=False</em>, <em>libver=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.create_file" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.create_file">
+<code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">create_file</code><span class="sig-paren">(</span><em>filename</em>, <em>overwrite=False</em>, <em>libver=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.create_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>create a new file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6258,7 +6205,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">file object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.PNIWriter.PNIFile" title="nxswriter.PNIWriter.PNIFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIFile</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppFile" title="nxswriter.H5CppWriter.H5CppFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppFile</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -6266,8 +6213,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="function">
-<dt id="nxswriter.PNIWriter.deflate_filter">
-<code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">deflate_filter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.deflate_filter" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.deflate_filter">
+<code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">deflate_filter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.deflate_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>create deflate filter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6275,15 +6222,15 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">deflate filter object</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.PNIWriter.PNIDeflate" title="nxswriter.PNIWriter.PNIDeflate"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIDeflate</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppDeflate" title="nxswriter.H5CppWriter.H5CppDeflate"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppDeflate</span></code></a></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="function">
-<dt id="nxswriter.PNIWriter.get_links">
-<code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">get_links</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.get_links" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.get_links">
+<code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">get_links</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.get_links" title="Permalink to this definition">¶</a></dt>
 <dd><p>get links</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6299,7 +6246,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">obj:</th><td class="field-body"><cite>list</cite> &lt;<a class="reference internal" href="#nxswriter.PNIWriter.PNILink" title="nxswriter.PNIWriter.PNILink"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNILink</span></code></a>&gt;</td>
+<tr class="field-odd field"><th class="field-name">obj:</th><td class="field-body"><cite>list</cite> &lt;<a class="reference internal" href="#nxswriter.H5CppWriter.H5CppLink" title="nxswriter.H5CppWriter.H5CppLink"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppLink</span></code></a>&gt;</td>
 </tr>
 </tbody>
 </table>
@@ -6310,15 +6257,15 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="function">
-<dt id="nxswriter.PNIWriter.link">
-<code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">link</code><span class="sig-paren">(</span><em>target</em>, <em>parent</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.link" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.link">
+<code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">link</code><span class="sig-paren">(</span><em>target</em>, <em>parent</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.link" title="Permalink to this definition">¶</a></dt>
 <dd><p>create link</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>target</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – file name</li>
+<li><strong>target</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – nexus path name</li>
 <li><strong>parent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">FTObject</span></code>) – parent object</li>
 <li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) – link name</li>
 </ul>
@@ -6327,7 +6274,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">link object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.PNIWriter.PNILink" title="nxswriter.PNIWriter.PNILink"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNILink</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppLink" title="nxswriter.H5CppWriter.H5CppLink"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppLink</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -6335,8 +6282,8 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 </dd></dl>
 
 <dl class="function">
-<dt id="nxswriter.PNIWriter.open_file">
-<code class="descclassname">nxswriter.PNIWriter.</code><code class="descname">open_file</code><span class="sig-paren">(</span><em>filename</em>, <em>readonly=False</em>, <em>libver=None</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.PNIWriter.open_file" title="Permalink to this definition">¶</a></dt>
+<dt id="nxswriter.H5CppWriter.open_file">
+<code class="descclassname">nxswriter.H5CppWriter.</code><code class="descname">open_file</code><span class="sig-paren">(</span><em>filename</em>, <em>readonly=False</em>, <em>libver=None</em>, <em>swmr=False</em><span class="sig-paren">)</span><a class="headerlink" href="#nxswriter.H5CppWriter.open_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>open the new file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -6352,7 +6299,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">file object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.PNIWriter.PNIFile" title="nxswriter.PNIWriter.PNIFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">PNIFile</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#nxswriter.H5CppWriter.H5CppFile" title="nxswriter.H5CppWriter.H5CppFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">H5CppFile</span></code></a></p>
 </td>
 </tr>
 </tbody>
@@ -7390,7 +7337,7 @@ or <code class="xref py py-mod docutils literal notranslate"><span class="pre">H
         &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.<br/>
     </p>
   </div>
 </footer>

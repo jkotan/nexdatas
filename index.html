@@ -4,19 +4,17 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome to NXSDataWriter’s documentation! &#8212; NXSDataWriter 2.27.0 documentation</title>
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css" />
+    <title>Welcome to NXSDataWriter&#39;s documentation! &#8212; NXSDataWriter 2.29.0 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,7 +37,7 @@
         </button>
         <a class="navbar-brand" href="#">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.27</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2.29</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -85,7 +83,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.Types">nxswriter.Types module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.PNIWriter">nxswriter.PNIWriter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter">Module contents</a></li>
 </ul>
@@ -103,7 +101,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Welcome to NXSDataWriter’s documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to NXSDataWriter's documentation!</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#from-sources">From sources</a></li>
@@ -152,45 +150,10 @@
 
 <div class="container">
   <div class="row">
-      <div class="col-md-3">
-        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">Welcome to NXSDataWriter’s documentation!</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#from-sources">From sources</a></li>
-<li><a class="reference internal" href="#debian-packages">Debian packages</a></li>
-<li><a class="reference internal" href="#from-pip">From pip</a></li>
-<li><a class="reference internal" href="#setting-nexus-writer-server">Setting NeXus Writer Server</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#client-code">Client code</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#contents">Contents</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-
-  <li>
-    <a href="nxswriter.html" title="Next Chapter: nxswriter package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">nxswriter package &raquo;</span>
-    </a>
-  </li>
-<div id="sourcelink">
-  <a href="_sources/index.rst.txt"
-     rel="nofollow">Source</a>
-</div>
-<form action="search.html" method="get">
- <div class="form-group">
-  <input type="text" name="q" class="form-control" placeholder="Search" />
- </div>
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-</form>
-        </div>
-      </div>
-    <div class="col-md-9 content">
+    <div class="col-md-12 content">
       
   <div class="section" id="welcome-to-nxsdatawriter-s-documentation">
-<h1>Welcome to NXSDataWriter’s documentation!<a class="headerlink" href="#welcome-to-nxsdatawriter-s-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to NXSDataWriter's documentation!<a class="headerlink" href="#welcome-to-nxsdatawriter-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -405,7 +368,7 @@ was created by XMLFile class defined in XMLCreator/simpleXML.py.</p>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.Types">nxswriter.Types module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.PNIWriter">nxswriter.PNIWriter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter">Module contents</a></li>
 </ul>
@@ -437,7 +400,7 @@ was created by XMLFile class defined in XMLCreator/simpleXML.py.</p>
         &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.<br/>
     </p>
   </div>
 </footer>
