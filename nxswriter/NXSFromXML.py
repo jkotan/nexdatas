@@ -67,14 +67,10 @@ class CreateFile(object):
             self.__writer = "h5cpp"
         elif options.h5py:
             self.__writer = "h5py"
-        elif options.pni:
-            self.__writer = "pni"
         elif "h5cpp" in TangoDataWriter.WRITERS.keys():
             self.__writer = "h5cpp"
-        elif "h5py" in TangoDataWriter.WRITERS.keys():
-            self.__writer = "h5py"
         else:
-            self.__writer = "pni"
+            self.__writer = "h5py"
         if self.__writer not in TangoDataWriter.WRITERS.keys():
             raise Exception("nxsfromxml: Writer '%s' cannot be found\n"
                             % self.__writer)
@@ -229,10 +225,6 @@ def main():
         "--h5py", action="store_true",
         default=False, dest="h5py",
         help="use h5py module as a nexus reader")
-    parser.add_argument(
-        "--pni", action="store_true",
-        default=False, dest="pni",
-        help="use pni module as a nexus reader")
 
     try:
         options = parser.parse_args()
