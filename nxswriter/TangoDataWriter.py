@@ -46,11 +46,6 @@ from .DataSourcePool import DataSourcePool
 
 WRITERS = {}
 try:
-    from nxstools import pniwriter as PNIWriter
-    WRITERS["pni"] = PNIWriter
-except Exception:
-    pass
-try:
     from nxstools import h5pywriter as H5PYWriter
     WRITERS["h5py"] = H5PYWriter
 except Exception:
@@ -61,7 +56,7 @@ try:
     WRITERS["h5cpp"] = H5CppWriter
 except Exception:
     pass
-DEFAULTWRITERS = ["h5cpp", "h5py", "pni"]
+DEFAULTWRITERS = ["h5cpp", "h5py"]
 
 
 #: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
