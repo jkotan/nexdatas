@@ -61,7 +61,7 @@ try:
     WRITERS["h5cpp"] = H5CppWriter
 except Exception:
     pass
-DEFAULTWRITERS = ["pni", "h5py", "h5cpp"]
+DEFAULTWRITERS = ["h5cpp", "h5py", "pni"]
 
 
 #: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
