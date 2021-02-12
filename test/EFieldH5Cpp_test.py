@@ -1492,13 +1492,13 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(len(el.h5Object.attributes), 14)
         self.assertEqual(el.h5Object.attributes["type"][...], fattrs["type"])
         self.assertEqual(el.h5Object.attributes["type"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["type"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["type"].shape, ())
 
         for k in maTn.keys():
             self.assertEqual(el.h5Object.attributes[k][...], fattrs[k])
             self.assertEqual(
                 el.h5Object.attributes[k].dtype, NTP.nTnp[NTP.aTn[k]])
-            self.assertEqual(el.h5Object.attributes[k].shape, (1,))
+            self.assertEqual(el.h5Object.attributes[k].shape, ())
 
         self._nxFile.close()
 
@@ -1541,7 +1541,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(len(el.h5Object.attributes), 2)
         self.assertEqual(el.h5Object.attributes["type"][...], fattrs["type"])
         self.assertEqual(el.h5Object.attributes["type"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["type"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["type"].shape, ())
 
         for k in raTnv.keys():
             for i in range(len(rattrs[k])):

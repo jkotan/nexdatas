@@ -469,8 +469,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                     for at in ch.attributes:
                         self.assertTrue(at.is_valid)
                         self.assertTrue(hasattr(at.shape, "__iter__"))
-                        self.assertEqual(len(at.shape), 1)
-                        self.assertEqual(at.shape, (1,))
+                        self.assertEqual(len(at.shape), 0)
+                        self.assertEqual(at.shape, ())
                         self.assertEqual(at.dtype, "string")
                     #                    self.assertEqual(at.dtype,"string")
                         self.assertEqual(at.name, "NX_class")
@@ -493,8 +493,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                     for at in ch.attributes:
                         self.assertTrue(at.is_valid)
                         self.assertTrue(hasattr(at.shape, "__iter__"))
-                        self.assertEqual(len(at.shape), 1)
-                        self.assertEqual(at.shape, (1,))
+                        self.assertEqual(len(at.shape), 0)
+                        self.assertEqual(at.shape, ())
                         self.assertEqual(at.dtype, "string")
                     #                    self.assertEqual(at.dtype,"string")
                         self.assertEqual(at.name, "NX_class")
@@ -707,8 +707,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = en.attributes["NX_class"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "NX_class")
                 self.assertEqual(at[...], "NXentry")
@@ -724,7 +724,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = ins.attributes["NX_class"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
+                self.assertEqual(len(at.shape), 0)
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "NX_class")
                 self.assertEqual(at[...], "NXinstrument")
@@ -732,8 +732,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = ins.attributes["short_name"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "short_name")
                 self.assertEqual(at[...], "scan instrument")
@@ -747,8 +747,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = det.attributes["NX_class"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "NX_class")
                 self.assertEqual(at[...], "NXdetector")
@@ -772,8 +772,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_strategy"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "nexdatas_strategy")
                 self.assertEqual(at[...], "STEP")
@@ -781,8 +781,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["type"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "type")
                 self.assertEqual(at[...], "NX_FLOAT")
@@ -790,8 +790,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["units"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "units")
                 self.assertEqual(at[...], "m")
@@ -799,8 +799,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_source"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
 
                 mca = det.open("mca")
@@ -823,8 +823,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_strategy"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "nexdatas_strategy")
                 self.assertEqual(at[...], "STEP")
@@ -832,8 +832,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["type"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "type")
                 self.assertEqual(at[...], "NX_FLOAT")
@@ -841,8 +841,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["units"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "units")
                 self.assertEqual(at[...], "")
@@ -850,8 +850,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["nexdatas_source"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
 
                 dt = en.open("data")
@@ -863,8 +863,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = dt.attributes["NX_class"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "NX_class")
                 self.assertEqual(at[...], "NXdata")
@@ -890,8 +890,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_strategy"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "nexdatas_strategy")
                 self.assertEqual(at[...], "STEP")
@@ -899,8 +899,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["type"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "type")
                 self.assertEqual(at[...], "NX_FLOAT")
@@ -908,8 +908,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["units"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "units")
                 self.assertEqual(at[...], "m")
@@ -917,8 +917,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_source"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
 
                 mca = dt.open("data")
@@ -941,8 +941,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = cnt.attributes["nexdatas_strategy"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "nexdatas_strategy")
                 self.assertEqual(at[...], "STEP")
@@ -950,8 +950,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["type"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "type")
                 self.assertEqual(at[...], "NX_FLOAT")
@@ -959,8 +959,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["units"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
                 self.assertEqual(at.name, "units")
                 self.assertEqual(at[...], "")
@@ -968,8 +968,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                 at = mca.attributes["nexdatas_source"]
                 self.assertTrue(at.is_valid)
                 self.assertTrue(hasattr(at.shape, "__iter__"))
-                self.assertEqual(len(at.shape), 1)
-                self.assertEqual(at.shape, (1,))
+                self.assertEqual(len(at.shape), 0)
+                self.assertEqual(at.shape, ())
                 self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -1058,8 +1058,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -1075,8 +1075,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -1084,8 +1084,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -1099,8 +1099,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -1124,8 +1124,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1133,8 +1133,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -1142,16 +1142,16 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1176,8 +1176,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1185,8 +1185,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1194,8 +1194,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -1203,8 +1203,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1217,8 +1217,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -1241,8 +1241,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1250,8 +1250,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1259,8 +1259,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -1268,8 +1268,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1296,8 +1296,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1305,8 +1305,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1314,8 +1314,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -1323,8 +1323,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1539,8 +1539,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -1556,8 +1556,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -1565,8 +1565,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -1580,8 +1580,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -1605,8 +1605,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1614,8 +1614,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -1623,16 +1623,16 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1657,8 +1657,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1666,8 +1666,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1675,8 +1675,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -1684,8 +1684,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1698,8 +1698,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -1722,8 +1722,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1731,8 +1731,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1740,8 +1740,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -1749,8 +1749,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1777,8 +1777,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1786,8 +1786,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -1795,8 +1795,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -1804,8 +1804,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_source")
 
@@ -1902,8 +1902,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -1919,7 +1919,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -1927,8 +1927,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -1942,8 +1942,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -1968,8 +1968,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -1977,8 +1977,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_canfail"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail")
             self.assertEqual(at[...], "FAILED")
@@ -1986,8 +1986,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_canfail_error"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail_error")
             self.assertEqual(
@@ -2002,8 +2002,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2011,8 +2011,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2020,8 +2020,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -2046,8 +2046,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2055,8 +2055,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_canfail"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail")
             self.assertEqual(at[...], "FAILED")
@@ -2064,8 +2064,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_canfail_error"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail_error")
             self.assertEqual(
@@ -2080,8 +2080,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2089,8 +2089,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2098,8 +2098,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -2111,8 +2111,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -2140,8 +2140,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2149,8 +2149,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_canfail"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail")
             self.assertEqual(at[...], "FAILED")
@@ -2158,8 +2158,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_canfail_error"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail_error")
             self.assertEqual(
@@ -2174,8 +2174,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2183,8 +2183,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2192,8 +2192,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -2221,8 +2221,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2230,8 +2230,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2239,8 +2239,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2248,8 +2248,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_canfail"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail")
             self.assertEqual(at[...], "FAILED")
@@ -2257,8 +2257,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_canfail_error"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_canfail_error")
             self.assertEqual(
@@ -2273,8 +2273,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -2367,8 +2367,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -2384,7 +2384,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -2392,8 +2392,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -2407,8 +2407,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -2433,8 +2433,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2442,8 +2442,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2451,8 +2451,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2460,8 +2460,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -2484,8 +2484,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2493,8 +2493,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2502,8 +2502,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2511,8 +2511,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -2524,8 +2524,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -2553,8 +2553,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2562,8 +2562,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2571,8 +2571,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2580,8 +2580,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -2606,8 +2606,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2615,8 +2615,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2624,8 +2624,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2633,8 +2633,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -2710,8 +2710,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -2727,7 +2727,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -2735,8 +2735,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -2750,8 +2750,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -2776,8 +2776,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2785,8 +2785,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2794,8 +2794,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2803,8 +2803,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -2831,8 +2831,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2840,8 +2840,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2849,8 +2849,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2858,8 +2858,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -2871,8 +2871,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -2899,8 +2899,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2908,8 +2908,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2917,8 +2917,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -2926,8 +2926,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -2954,8 +2954,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -2963,8 +2963,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -2972,8 +2972,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -2981,8 +2981,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -3108,8 +3108,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -3125,7 +3125,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -3133,8 +3133,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -3148,8 +3148,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -3173,8 +3173,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3182,8 +3182,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3191,8 +3191,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3200,8 +3200,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -3224,8 +3224,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3233,8 +3233,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3242,8 +3242,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3251,8 +3251,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -3264,8 +3264,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -3291,8 +3291,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3300,8 +3300,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3309,8 +3309,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3318,8 +3318,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -3342,8 +3342,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3351,8 +3351,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3360,8 +3360,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3369,8 +3369,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -3394,8 +3394,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -3411,7 +3411,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -3419,8 +3419,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -3434,8 +3434,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -3459,8 +3459,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3468,8 +3468,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3477,8 +3477,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3486,8 +3486,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -3510,8 +3510,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3519,8 +3519,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3528,8 +3528,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3537,8 +3537,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -3550,8 +3550,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -3577,8 +3577,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3586,8 +3586,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3595,8 +3595,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3604,8 +3604,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -3628,8 +3628,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3637,8 +3637,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3646,8 +3646,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3655,8 +3655,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -3680,8 +3680,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -3697,7 +3697,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -3705,8 +3705,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -3720,8 +3720,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -3745,8 +3745,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3754,8 +3754,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3763,8 +3763,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3772,8 +3772,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("mca")
@@ -3796,8 +3796,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3805,8 +3805,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3814,8 +3814,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3823,8 +3823,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -3836,8 +3836,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -3863,8 +3863,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3872,8 +3872,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3881,8 +3881,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -3890,8 +3890,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -3914,8 +3914,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -3923,8 +3923,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -3932,8 +3932,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -3941,8 +3941,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -4027,8 +4027,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -4044,7 +4044,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -4052,8 +4052,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -4067,8 +4067,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -4093,8 +4093,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4102,8 +4102,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4111,8 +4111,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4120,8 +4120,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("image")
@@ -4152,8 +4152,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4161,8 +4161,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -4170,8 +4170,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -4179,8 +4179,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -4192,8 +4192,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -4219,8 +4219,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4228,8 +4228,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4237,8 +4237,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4246,8 +4246,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -4278,8 +4278,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4287,8 +4287,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -4296,8 +4296,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -4305,8 +4305,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -4387,8 +4387,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -4404,7 +4404,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -4412,8 +4412,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -4427,8 +4427,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -4453,8 +4453,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4462,8 +4462,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4471,8 +4471,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4480,8 +4480,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("image")
@@ -4512,8 +4512,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4521,8 +4521,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -4530,8 +4530,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -4539,8 +4539,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -4552,8 +4552,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -4579,8 +4579,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4588,8 +4588,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4597,8 +4597,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4606,8 +4606,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -4638,8 +4638,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4647,8 +4647,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -4656,8 +4656,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -4665,8 +4665,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()
@@ -4746,8 +4746,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = en.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXentry")
@@ -4763,7 +4763,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
+            self.assertEqual(len(at.shape), 0)
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXinstrument")
@@ -4771,8 +4771,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = ins.attributes["short_name"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "short_name")
             self.assertEqual(at[...], "scan instrument")
@@ -4786,8 +4786,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = det.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdetector")
@@ -4812,8 +4812,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4821,8 +4821,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4830,8 +4830,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4839,8 +4839,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = det.open("image")
@@ -4871,8 +4871,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4880,8 +4880,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -4889,8 +4889,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -4898,8 +4898,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             dt = en.open("data")
@@ -4911,8 +4911,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = dt.attributes["NX_class"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "NX_class")
             self.assertEqual(at[...], "NXdata")
@@ -4938,8 +4938,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -4947,8 +4947,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_FLOAT")
@@ -4956,8 +4956,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "m")
@@ -4965,8 +4965,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             mca = dt.open("data")
@@ -4997,8 +4997,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = cnt.attributes["nexdatas_strategy"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "nexdatas_strategy")
             self.assertEqual(at[...], "STEP")
@@ -5006,8 +5006,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["type"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "type")
             self.assertEqual(at[...], "NX_INT64")
@@ -5015,8 +5015,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["units"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
             self.assertEqual(at[...], "")
@@ -5024,8 +5024,8 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             at = mca.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
             self.assertTrue(hasattr(at.shape, "__iter__"))
-            self.assertEqual(len(at.shape), 1)
-            self.assertEqual(at.shape, (1,))
+            self.assertEqual(len(at.shape), 0)
+            self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
 
             f.close()

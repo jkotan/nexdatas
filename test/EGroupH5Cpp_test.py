@@ -130,8 +130,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         self._nxFile.close()
         os.remove(self._fname)
@@ -160,8 +160,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         self.myAssertRaise(XMLSettingSyntaxError, EGroup, self._gattrs, eFile)
         el = EGroup(self._gattrs, eFile, reloadmode=True)
@@ -177,8 +177,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         self._nxFile.close()
         os.remove(self._fname)
@@ -207,8 +207,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         self.myAssertRaise(XMLSettingSyntaxError, EGroup, self._gattrs, eFile)
 
@@ -240,11 +240,11 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
         self.assertEqual(el.h5Object.attributes[
                          "short_name"][...], gattrs["short_name"])
         self.assertEqual(el.h5Object.attributes["short_name"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["short_name"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["short_name"].shape, ())
 
         self._nxFile.close()
         os.remove(self._fname)
@@ -310,13 +310,13 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(
             el.h5Object.attributes["NX_class"][...], gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         for k in maTn.keys():
             self.assertEqual(el.h5Object.attributes[k][...], gattrs[k])
             self.assertEqual(
                 el.h5Object.attributes[k].dtype, NTP.nTnp[NTP.aTn[k]])
-            self.assertEqual(el.h5Object.attributes[k].shape, (1,))
+            self.assertEqual(el.h5Object.attributes[k].shape, ())
 
         self._nxFile.close()
         os.remove(self._fname)
@@ -354,7 +354,7 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(
             el.h5Object.attributes["NX_class"][...], gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         for k in raTnv.keys():
             for i in range(len(rattrs[k])):
@@ -908,8 +908,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(el.h5Object.attributes[
                          "NX_class"][...], self._gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         # gNames = {}
         self.assertEqual(el.store(), None)
@@ -944,8 +944,8 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(
             el.h5Object.attributes["NX_class"][...], gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         # gNames = {}
         self.assertEqual(el.store(), None)
@@ -980,7 +980,7 @@ class EGroupH5CppTest(unittest.TestCase):
         self.assertEqual(
             el.h5Object.attributes["NX_class"][...], gattrs["type"])
         self.assertEqual(el.h5Object.attributes["NX_class"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["NX_class"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["NX_class"].shape, ())
 
         # gNames = {}
         el._tagAttrs.pop("type")

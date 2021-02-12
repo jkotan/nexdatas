@@ -340,7 +340,6 @@ class FElementWithAttr(FElement):
                     if fat:
                         fat = None
                         continue
-
                 if len(self.tagAttributes[key]) < 3:
                     if sys.version_info > (3,):
                         if ekey not in self.__h5Instances:
@@ -401,7 +400,7 @@ class FElementWithAttr(FElement):
                     if val:
                         rank = len(shape)
                         hsp = self.__h5Instances[ekey].shape
-                        if hsp and set(hsp) == set([1]) and \
+                        if (hsp == ()) and \
                            self.__h5Instances[ekey].dtype in ['string', 'str']:
                             dh = self._setValue(0, val)
                         else:

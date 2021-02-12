@@ -66,11 +66,12 @@ class ServerSetUp(object):
         else:
             if os.path.isfile("../NXSDataWriter"):
                 self._psub = subprocess.call(
-                    "cd ..; ./NXSDataWriter %s &" % self.instance, stdout=None,
+                    "cd ..; python2 ./NXSDataWriter %s &" % self.instance,
+                    stdout=None,
                     stderr=None, shell=True)
             else:
                 self._psub = subprocess.call(
-                    "NXSDataWriter %s &" % self.instance, stdout=None,
+                    "python2 NXSDataWriter %s &" % self.instance, stdout=None,
                     stderr=None, shell=True)
         sys.stdout.write("waiting for server ")
 
