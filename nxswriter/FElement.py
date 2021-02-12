@@ -340,6 +340,7 @@ class FElementWithAttr(FElement):
                     if fat:
                         fat = None
                         continue
+
                 if len(self.tagAttributes[key]) < 3:
                     if sys.version_info > (3,):
                         if ekey not in self.__h5Instances:
