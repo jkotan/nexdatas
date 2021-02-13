@@ -401,7 +401,7 @@ class FElementWithAttr(FElement):
                     if val:
                         rank = len(shape)
                         hsp = self.__h5Instances[ekey].shape
-                        if hsp and set(hsp) == set([1]) and \
+                        if (hsp == ()) and \
                            self.__h5Instances[ekey].dtype in ['string', 'str']:
                             dh = self._setValue(0, val)
                         else:

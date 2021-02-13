@@ -909,7 +909,6 @@ class EAttributeH5CppTest(unittest.TestCase):
                 self.assertEqual(at[...], '' if attrs[k][2] == 'string' else 0)
 
         for k in attrs.keys():
-            print(k)
             el[k].tagAttributes[k] = (attrs[k][1], str(attrs[k][0]), [1])
             el[k]._createAttributes()
             at = el[k].h5Object.attributes[k]
@@ -1443,12 +1442,14 @@ class EAttributeH5CppTest(unittest.TestCase):
             ea[k].run()
             self.assertEqual(type(ea[k].h5Object), H5CppWriter.H5CppAttribute)
             self.assertEqual(ea[k].h5Object.name, k)
-            self.assertEqual(ea[k].h5Object.shape, (1,))
+
             if attrs[k][2] and attrs[k][2] != 'string':
+                self.assertEqual(ea[k].h5Object.shape, (1,))
                 self._sc.checkSpectrumAttribute(
                     el[k].h5Object, k, attrs[k][2], [attrs[k][0]],
                     attrs[k][4] if len(attrs[k]) > 4 else 0)
             else:
+                self.assertEqual(ea[k].h5Object.shape, ())
                 self._sc.checkScalarAttribute(
                     el[k].h5Object, k, attrs[k][2], attrs[k][0],
                     attrs[k][4] if len(attrs[k]) > 4 else 0)

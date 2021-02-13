@@ -611,8 +611,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
         self.assertEqual(at[...], "NXentry")
@@ -663,8 +663,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -673,8 +673,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["shortname"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "shortname")
@@ -725,8 +725,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -741,8 +741,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -804,8 +804,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -820,8 +820,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = ins.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -830,8 +830,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = ins.attributes["signal"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "int64")
         self.assertEqual(at.name, "signal")
@@ -890,8 +890,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -900,8 +900,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["axis"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "int64")
         self.assertEqual(at.name, "axis")
@@ -952,8 +952,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1005,8 +1005,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1067,8 +1067,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1184,8 +1184,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -1203,8 +1203,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = cnt.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1269,8 +1269,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -1288,8 +1288,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = cnt.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1353,8 +1353,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -1363,8 +1363,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes[attr2["name"]]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.name, "counter")
         self.assertEqual(at.dtype, "int32")
@@ -1416,8 +1416,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["NX_class"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "NX_class")
@@ -1426,8 +1426,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes[attr2["name"]]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.name, "counter")
         self.assertEqual(at.dtype, "int32")
@@ -1497,8 +1497,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1507,8 +1507,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes[attr2["name"]]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.name, "counter")
         self.assertEqual(at.dtype, "int32")
@@ -1565,8 +1565,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.dtype, "string")
         self.assertEqual(at.name, "type")
@@ -1575,8 +1575,8 @@ class NexusXMLHandlerH5PYTest(unittest.TestCase):
         at = en.attributes[attr2["name"]]
         self.assertTrue(at.is_valid)
         self.assertTrue(hasattr(at.shape, "__iter__"))
-        self.assertEqual(len(at.shape), 1)
-        self.assertEqual(at.shape, (1,))
+        self.assertEqual(len(at.shape), 0)
+        self.assertEqual(at.shape, ())
 
         self.assertEqual(at.name, "counter")
         self.assertEqual(at.dtype, "int32")

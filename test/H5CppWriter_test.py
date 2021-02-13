@@ -27,9 +27,10 @@ import random
 import binascii
 import string
 import time
+import io
 
-from nxstools import filewriter as FileWriter
-from nxstools import h5cppwriter as H5CppWriter
+import nxstools.filewriter as FileWriter
+import nxstools.h5cppwriter as H5CppWriter
 
 from pninexus import h5cpp
 # from pninexus import nexus
@@ -69,8 +70,8 @@ class testwriter(object):
         self.params.append([target, parent, name])
         return self.result
 
-    def deflate_filter(self):
-        self.commands.append("deflate_filter")
+    def data_filter(self):
+        self.commands.append("data_filter")
         self.params.append([])
         return self.result
 
@@ -237,7 +238,65 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnifile(self):
+    def test_default_loadfile(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        self._fname = '%s/%s%s.h5' % (os.getcwd(),
+                                      self.__class__.__name__, fun)
+        try:
+            fl = H5CppWriter.create_file(self._fname)
+            fl.close()
+            fl = H5CppWriter.create_file(self._fname, True)
+            fl.close()
+
+            fl = H5CppWriter.open_file(self._fname, readonly=True)
+            f = fl.root()
+            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(
+                f.attributes["file_name"][...],
+                self._fname)
+            for at in f.attributes:
+                print("%s %s %s" % (at.name, at.read(), at.dtype))
+                at.close()
+            self.assertTrue(f.attributes["NX_class"][...], "NXroot")
+            self.assertEqual(f.size, 0)
+            f.close()
+            fl.close()
+
+            with open(self._fname, "rb") as fh:
+                buf = io.BytesIO(fh.read())
+
+            if not H5CppWriter.is_image_file_supported():
+                self.myAssertRaise(
+                    Exception, H5CppWriter.load_file, buf, self._fname)
+            else:
+                fl = H5CppWriter.load_file(buf, self._fname, readonly=True)
+                f = fl.root()
+                self.assertEqual(6, len(f.attributes))
+                self.assertEqual(
+                    f.attributes["file_name"][...], self._fname)
+                for at in f.attributes:
+                    print("%s %s %s" % (at.name, at.dtype, at.read()))
+                self.assertTrue(f.attributes["NX_class"][...], "NXroot")
+                self.assertEqual(f.size, 0)
+                fl.close()
+                fl.reopen()
+                self.assertEqual(6, len(f.attributes))
+                for at in f.attributes:
+                    print("%s %s %s" % (at.name, at.read(), at.dtype))
+                self.assertEqual(
+                    f.attributes["file_name"][...],
+                    self._fname)
+                self.assertTrue(f.attributes["NX_class"][...], "NXroot")
+                self.assertEqual(f.size, 0)
+                fl.close()
+
+        finally:
+            os.remove(self._fname)
+
+    # default createfile test
+    # \brief It tests default settings
+    def test_h5cppfile(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -272,7 +331,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifile.h5"))
+                                 "H5CppWriterTesttest_h5cppfile.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
 
@@ -305,7 +364,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifile.h5"))
+                                 "H5CppWriterTesttest_h5cppfile.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -319,7 +378,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifile.h5"))
+                                 "H5CppWriterTesttest_h5cppfile.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -352,7 +411,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnigroup(self):
+    def test_h5cppgroup(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -369,10 +428,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -534,6 +593,15 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(kids, set(["detector", "floatspec",
                                         "intspec", "strspec"]))
 
+            ins_lk = entry.open_link("instrument")
+            self.assertTrue(
+                isinstance(ins_lk, H5CppWriter.H5CppLink))
+            self.assertEqual(ins_lk.name, "instrument")
+            self.assertEqual(
+                ins_lk.path, "/entry12345:NXentry/instrument")
+            self.assertEqual(ins_lk.is_valid, True)
+            self.assertEqual(ins_lk.parent, entry)
+
             self.assertTrue(
                 isinstance(det, H5CppWriter.H5CppGroup))
             self.assertEqual(det.name, "detector")
@@ -575,7 +643,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(strscalar.name, 'strscalar')
             self.assertEqual(strscalar.path, '/entry12345:NXentry/strscalar')
             self.assertEqual(strscalar.dtype, 'string')
-            self.assertEqual(strscalar.shape, (1,))
+            self.assertEqual(strscalar.shape, ())
 
             self.assertTrue(isinstance(floatscalar, H5CppWriter.H5CppField))
             self.assertTrue(
@@ -703,7 +771,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(
                 strscalar_op.path, '/entry12345:NXentry/strscalar')
             self.assertEqual(strscalar_op.dtype, 'string')
-            self.assertEqual(strscalar_op.shape, (1,))
+            self.assertEqual(strscalar_op.shape, ())
 
             self.assertTrue(isinstance(floatscalar_op, H5CppWriter.H5CppField))
             self.assertTrue(
@@ -925,7 +993,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnigroup.h5"))
+                                 "H5CppWriterTesttest_h5cppgroup.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -939,7 +1007,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnigroup.h5"))
+                                 "H5CppWriterTesttest_h5cppgroup.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -972,7 +1040,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnifield_scalar(self):
+    def test_h5cppfield_scalar(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -989,10 +1057,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -1022,12 +1090,12 @@ class H5CppWriterTest(unittest.TestCase):
                 str(strscalar.h5object.link.path), '/entry12345/strscalar')
             self.assertEqual(strscalar.dtype, 'string')
             # self.assertEqual(strscalar.h5object.dtype, 'string')
-            self.assertEqual(strscalar.shape, (1,))
+            self.assertEqual(strscalar.shape, ())
             # self.assertEqual(
             #    strscalar.h5object.dataspace.current_dimensions, (1,))
             self.assertEqual(strscalar.is_valid, True)
             self.assertEqual(strscalar.h5object.is_valid, True)
-            self.assertEqual(strscalar.shape, (1,))
+            self.assertEqual(strscalar.shape, ())
             # self.assertEqual(
             #     strscalar.h5object.dataspace.current_dimensions, (1,))
 
@@ -1036,35 +1104,35 @@ class H5CppWriterTest(unittest.TestCase):
             strscalar[...] = vl[0]
             self.assertEqual(strscalar.read(), vl[0])
             strscalar.write(vl[1])
-            self.assertEqual(strscalar[0], vl[1])
-            strscalar[0] = vl[2]
+            self.assertEqual(strscalar[()], vl[1])
+            strscalar[()] = vl[2]
             self.assertEqual(strscalar[...], vl[2])
-            strscalar[0] = vl[0]
+            strscalar[()] = vl[0]
 
             strscalar.grow()
-            self.assertEqual(strscalar.shape, (2,))
-            self.assertEqual(
-                strscalar.h5object.dataspace.current_dimensions, (2,))
+            self.assertEqual(strscalar.shape, ())
+            # self.assertEqual(
+            #     strscalar.h5object.dataspace.current_dimensions, (2,))
 
-            self.assertEqual(strscalar[0], vl[0])
-            strscalar[1] = vl[3]
-            self.assertEqual(list(strscalar[...]), [vl[0], vl[3]])
+            self.assertEqual(strscalar[()], vl[0])
+            # strscalar[1] = vl[3]
+            # self.assertEqual(list(strscalar[...]), [vl[0], vl[3]])
 
-            strscalar.grow(ext=2)
-            self.assertEqual(strscalar.shape, (4,))
-            self.assertEqual(
-                strscalar.h5object.dataspace.current_dimensions, (4,))
-            strscalar[1:4] = vl[1:4]
-            self.assertEqual(list(strscalar.read()), vl[0:4])
-            self.assertEqual(list(strscalar[0:2]), vl[0:2])
+            # strscalar.grow(ext=2)
+            # self.assertEqual(strscalar.shape, (4,))
+            # self.assertEqual(
+            #     strscalar.h5object.dataspace.current_dimensions, (4,))
+            # strscalar[1:4] = vl[1:4]
+            # self.assertEqual(list(strscalar.read()), vl[0:4])
+            # self.assertEqual(list(strscalar[0:2]), vl[0:2])
 
-            strscalar.grow(0, 3)
-            self.assertEqual(strscalar.shape, (7,))
-            self.assertEqual(
-                strscalar.h5object.dataspace.current_dimensions, (7,))
-            strscalar.write(vl[0:7])
-            self.assertEqual(list(strscalar.read()), vl[0:7])
-            self.assertEqual(list(strscalar[...]), vl[0:7])
+            # strscalar.grow(0, 3)
+            # self.assertEqual(strscalar.shape, (7,))
+            # self.assertEqual(
+            #     strscalar.h5object.dataspace.current_dimensions, (7,))
+            # strscalar.write(vl[0:7])
+            # self.assertEqual(list(strscalar.read()), vl[0:7])
+            # self.assertEqual(list(strscalar[...]), vl[0:7])
 
             attrs = strscalar.attributes
             self.assertTrue(
@@ -1219,13 +1287,14 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_scalar.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_scalar.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
             self.assertEqual(fl.readonly, False)
             # self.assertEqual(fl.h5object.readonly, False)
 
+            self.assertEqual(fl.default_field(), None)
             fl.close()
 
             fl.reopen(True)
@@ -1233,7 +1302,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_scalar.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_scalar.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -1266,7 +1335,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnifield_spectrum(self):
+    def test_h5cppfield_spectrum(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -1283,10 +1352,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -1504,7 +1573,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_spectrum.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_spectrum.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -1518,7 +1587,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_spectrum.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_spectrum.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -1558,7 +1627,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnifield_image(self):
+    def test_h5cppfield_image(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -1575,10 +1644,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -1813,7 +1882,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_image.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_image.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -1827,7 +1896,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_image.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_image.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -1860,7 +1929,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnifield_vec(self):
+    def test_h5cppfield_vec(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(),
@@ -1877,10 +1946,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -2166,7 +2235,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_vec.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_vec.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -2180,7 +2249,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnifield_vec.h5"))
+                                 "H5CppWriterTesttest_h5cppfield_vec.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -2213,7 +2282,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnideflate(self):
+    def test_h5cppdeflate(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -2230,10 +2299,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = True
 
@@ -2271,7 +2340,74 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnideflate_const(self):
+    def test_h5cppbitshuffle(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        self._fname = '%s/%s%s.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+
+        if hasattr(h5cpp.filter, "is_filter_available") \
+           and h5cpp.filter.is_filter_available(32008):
+            try:
+                # overwrite = False
+                fl = H5CppWriter.create_file(self._fname)
+
+                rt = fl.root()
+                rt.create_group("notype")
+                entry = rt.create_group("entry12345", "NXentry")
+                ins = entry.create_group("instrument", "NXinstrument")
+                det = ins.create_group("detector", "NXdetector")
+                entry.create_group("data", "NXdata")
+
+                df0 = H5CppWriter.data_filter()
+                df1 = H5CppWriter.data_filter()
+                df1.filterid = 32008
+                df1.options = (0, 2)
+                df2 = H5CppWriter.data_filter()
+                df2.filterid = 32008
+                df2.options = (0, 2)
+                df2.shuffle = True
+
+                entry.create_field("strscalar", "string")
+                entry.create_field("floatscalar", "float64")
+                entry.create_field("intscalar", "uint64")
+                ins.create_field("strspec", "string", [10], [6])
+                ins.create_field("floatspec", "float32", [20], [16])
+                ins.create_field("intspec", "int64", [30], [5])
+                det.create_field("strimage", "string", [2, 2], [2, 1])
+                det.create_field(
+                    "floatimage", "float64", [20, 10], dfilter=df0)
+                det.create_field("intimage", "uint32", [0, 30], [1, 30])
+                det.create_field("strvec", "string", [0, 2, 2], [1, 2, 2])
+                det.create_field(
+                    "floatvec", "float64", [1, 20, 10], [1, 10, 10],
+                    dfilter=df1)
+                det.create_field(
+                    "intvec", "uint32", [0, 2, 30], dfilter=df2)
+
+                self.assertEqual(df0.rate, 0)
+                self.assertEqual(df0.shuffle, False)
+                self.assertEqual(df0.parent, None)
+                self.assertTrue(isinstance(df0.h5object,
+                                           h5cpp._filter.Deflate))
+                self.assertEqual(df1.rate, 0)
+                self.assertEqual(df1.shuffle, False)
+                self.assertEqual(df1.parent, None)
+                self.assertTrue(isinstance(df1.h5object,
+                                           h5cpp._filter.Deflate))
+                self.assertEqual(df2.rate, 0)
+                self.assertEqual(df2.shuffle, True)
+                self.assertEqual(df2.parent, None)
+                self.assertTrue(isinstance(df2.h5object,
+                                           h5cpp._filter.Deflate))
+            finally:
+                os.remove(self._fname)
+        else:
+            print("Skip: %s.%s() " % (self.__class__.__name__, fun))
+
+    # default createfile test
+    # \brief It tests default settings
+    def test_h5cppdeflate_const(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -2328,7 +2464,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pnilink(self):
+    def test_h5cpplink(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(),
@@ -2345,10 +2481,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -2507,13 +2643,14 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnilink.h5"))
+                                 "H5CppWriterTesttest_h5cpplink.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
             self.assertEqual(fl.readonly, False)
             # self.assertEqual(fl.h5object.readonly, False)
 
+            self.assertEqual(fl.default_field().name, "lkfloatvec")
             fl.close()
 
             fl.reopen(True)
@@ -2521,7 +2658,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(fl.path,
                              "%s/%s" % (
                                  os.getcwd(),
-                                 "H5CppWriterTesttest_pnilink.h5"))
+                                 "H5CppWriterTesttest_h5cpplink.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -2554,7 +2691,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pniattributemanager(self):
+    def test_h5cppattributemanager(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__,
@@ -2571,10 +2708,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -2651,7 +2788,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atintscalar.name, 'atintscalar')
             self.assertEqual(atintscalar.path, '/@atintscalar')
             self.assertEqual(atintscalar.dtype, 'int64')
-            self.assertEqual(atintscalar.shape, (1,))
+            self.assertEqual(atintscalar.shape, ())
             self.assertEqual(atintscalar.is_valid, True)
             self.assertEqual(atintscalar.read(), 0)
             self.assertEqual(atintscalar[...], 0)
@@ -2718,7 +2855,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(
                 atstrscalar.path, '/entry12345:NXentry@atstrscalar')
             self.assertEqual(atstrscalar.dtype, 'string')
-            self.assertEqual(atstrscalar.shape, (1,))
+            self.assertEqual(atstrscalar.shape, ())
             self.assertEqual(atstrscalar.is_valid, True)
             self.assertEqual(atstrscalar.read(), '')
             self.assertEqual(atstrscalar[...], '')
@@ -2788,7 +2925,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atfloatscalar.path,
                              '/entry12345:NXentry/intscalar@atfloatscalar')
             self.assertEqual(atfloatscalar.dtype, 'float64')
-            self.assertEqual(atfloatscalar.shape, (1,))
+            self.assertEqual(atfloatscalar.shape, ())
             self.assertEqual(atfloatscalar.is_valid, True)
             self.assertEqual(atfloatscalar.read(), 0)
             self.assertEqual(atfloatscalar[...], 0)
@@ -2871,7 +3008,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atintscalar.name, 'atintscalar')
             self.assertEqual(atintscalar.path, '/@atintscalar')
             self.assertEqual(atintscalar.dtype, 'int64')
-            self.assertEqual(atintscalar.shape, (1,))
+            self.assertEqual(atintscalar.shape, ())
             self.assertEqual(atintscalar.is_valid, True)
             self.assertEqual(atintscalar.read(), 0)
             self.assertEqual(atintscalar[...], 0)
@@ -2938,7 +3075,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(
                 atstrscalar.path, '/entry12345:NXentry@atstrscalar')
             self.assertEqual(atstrscalar.dtype, 'string')
-            self.assertEqual(atstrscalar.shape, (1,))
+            self.assertEqual(atstrscalar.shape, ())
             self.assertEqual(atstrscalar.is_valid, True)
             self.assertEqual(atstrscalar.read(), '')
             self.assertEqual(atstrscalar[...], '')
@@ -3009,7 +3146,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atfloatscalar.path,
                              '/entry12345:NXentry/intscalar@atfloatscalar')
             self.assertEqual(atfloatscalar.dtype, 'float64')
-            self.assertEqual(atfloatscalar.shape, (1,))
+            self.assertEqual(atfloatscalar.shape, ())
             self.assertEqual(atfloatscalar.is_valid, True)
             self.assertEqual(atfloatscalar.read(), 0)
             self.assertEqual(atfloatscalar[...], 0)
@@ -3143,10 +3280,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen()
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattributemanager.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattributemanager.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3157,10 +3295,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen(True)
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattributemanager.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattributemanager.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3193,7 +3332,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pniattribute_scalar(self):
+    def test_h5cppattribute_scalar(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__,
@@ -3210,10 +3349,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -3303,7 +3442,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atintscalar.name, 'atintscalar')
             self.assertEqual(atintscalar.path, '/@atintscalar')
             self.assertEqual(atintscalar.dtype, 'int64')
-            self.assertEqual(atintscalar.shape, (1,))
+            self.assertEqual(atintscalar.shape, ())
             self.assertEqual(atintscalar.is_valid, True)
             self.assertEqual(atintscalar.read(), itvl[0])
             self.assertEqual(atintscalar[...], itvl[0])
@@ -3349,7 +3488,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(
                 atstrscalar.path, '/entry12345:NXentry@atstrscalar')
             self.assertEqual(atstrscalar.dtype, 'string')
-            self.assertEqual(atstrscalar.shape, (1,))
+            self.assertEqual(atstrscalar.shape, ())
             self.assertEqual(atstrscalar.is_valid, True)
             self.assertEqual(atstrscalar.read(), stvl[0])
             self.assertEqual(atstrscalar[...], stvl[0])
@@ -3396,7 +3535,7 @@ class H5CppWriterTest(unittest.TestCase):
             self.assertEqual(atfloatscalar.path,
                              '/entry12345:NXentry/intscalar@atfloatscalar')
             self.assertEqual(atfloatscalar.dtype, 'float64')
-            self.assertEqual(atfloatscalar.shape, (1,))
+            self.assertEqual(atfloatscalar.shape, ())
             self.assertEqual(atfloatscalar.is_valid, True)
             self.assertEqual(atfloatscalar.read(), flvl[0])
             self.assertEqual(atfloatscalar[...], flvl[0])
@@ -3483,10 +3622,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen()
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattribute_scalar.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattribute_scalar.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3497,10 +3637,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen(True)
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattribute_scalar.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattribute_scalar.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3533,7 +3674,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pniattribute_scalar_bis(self):
+    def test_h5cppattribute_scalar_bis(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__,
@@ -3558,7 +3699,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pniattribute_spectrum(self):
+    def test_h5cppattribute_spectrum(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (
@@ -3575,10 +3716,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -3915,7 +4056,7 @@ class H5CppWriterTest(unittest.TestCase):
                 fl.path,
                 "%s/%s" % (
                     os.getcwd(),
-                    "H5CppWriterTesttest_pniattribute_spectrum.h5"))
+                    "H5CppWriterTesttest_h5cppattribute_spectrum.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3930,7 +4071,7 @@ class H5CppWriterTest(unittest.TestCase):
                 fl.path,
                 "%s/%s" % (
                     os.getcwd(),
-                    "H5CppWriterTesttest_pniattribute_spectrum.h5"))
+                    "H5CppWriterTesttest_h5cppattribute_spectrum.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -3963,7 +4104,7 @@ class H5CppWriterTest(unittest.TestCase):
 
     # default createfile test
     # \brief It tests default settings
-    def test_pniattribute_image(self):
+    def test_h5cppattribute_image(self):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         self._fname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__,
@@ -3980,10 +4121,10 @@ class H5CppWriterTest(unittest.TestCase):
             det = ins.create_group("detector", "NXdetector")
             dt = entry.create_group("data", "NXdata")
 
-            df0 = H5CppWriter.deflate_filter()
-            df1 = H5CppWriter.deflate_filter()
+            df0 = H5CppWriter.data_filter()
+            df1 = H5CppWriter.data_filter()
             df1.rate = 2
-            df2 = H5CppWriter.deflate_filter()
+            df2 = H5CppWriter.data_filter()
             df2.rate = 4
             df2.shuffle = 6
 
@@ -4303,10 +4444,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen()
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattribute_image.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattribute_image.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -4317,10 +4459,11 @@ class H5CppWriterTest(unittest.TestCase):
 
             fl.reopen(True)
             self.assertEqual(fl.name, self._fname)
-            self.assertEqual(fl.path,
-                             "%s/%s" % (
-                                 os.getcwd(),
-                                 "H5CppWriterTesttest_pniattribute_image.h5"))
+            self.assertEqual(
+                fl.path,
+                "%s/%s" % (
+                    os.getcwd(),
+                    "H5CppWriterTesttest_h5cppattribute_image.h5"))
             self.assertTrue(
                 isinstance(fl.h5object, h5cpp._file.File))
             self.assertEqual(fl.parent, None)
@@ -4348,6 +4491,308 @@ class H5CppWriterTest(unittest.TestCase):
             fl.close()
 
         finally:
+            os.remove(self._fname)
+
+    def test_h5cpp_vitualfield_image_concatinate(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        if not H5CppWriter.is_vds_supported():
+            self.myAssertRaise(
+                Exception, H5CppWriter.virtual_field_layout, [100])
+            print("Skip the test")
+            return
+        self._fname = '%s/%s%s.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname1 = '%s/%s%s_1.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname2 = '%s/%s%s_2.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname3 = '%s/%s%s_3.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+
+        try:
+            vl = [[[self.__rnd.randint(1, 1600) for _ in range(20)]
+                   for _ in range(10)]
+                  for _ in range(30)]
+
+            fl = H5CppWriter.create_file(fname1, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry1", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[n][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(fname2, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry2", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[n + 10][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(fname3, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry3", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[n + 20][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(self._fname, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry123", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+
+            ef1 = H5CppWriter.external_field(
+                fname1, "/entry1/data/data", [10, 10, 20], "uint32")
+            ef2 = H5CppWriter.external_field(
+                fname2, "/entry2/data/data", [10, 10, 20], "uint32")
+            ef3 = H5CppWriter.external_field(
+                fname3, "/entry3/data/data", [10, 10, 20], "uint32")
+
+            vfl = H5CppWriter.virtual_field_layout([30, 10, 20], "uint32")
+            vfl[0:10, :, :] = ef1
+            vfl[10:20, :, :] = ef2
+            vfl[20:30, :, :] = ef3
+
+            intimage = dt.create_virtual_field("data", vfl)
+            rw = intimage.read()
+            for i in range(30):
+                self.myAssertImage(rw[i], vl[i])
+            intimage.close()
+
+            dt.close()
+            entry.close()
+            fl.close()
+
+        finally:
+            os.remove(fname1)
+            os.remove(fname2)
+            os.remove(fname3)
+            os.remove(self._fname)
+
+    def test_h5cpp_vitualfield_image_interleaving(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        if not H5CppWriter.is_vds_supported():
+            self.myAssertRaise(
+                Exception, H5CppWriter.virtual_field_layout, [100])
+            print("Skip the test")
+            return
+        self._fname = '%s/%s%s.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname1 = '%s/%s%s_1.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname2 = '%s/%s%s_2.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname3 = '%s/%s%s_3.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+
+        try:
+            vl = [[[self.__rnd.randint(1, 1600) for _ in range(20)]
+                   for _ in range(10)]
+                  for _ in range(30)]
+
+            fl = H5CppWriter.create_file(fname1, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry1", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[3 * n][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(fname2, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry2", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[3 * n + 1][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(fname3, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry3", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "uint32", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[3 * n + 2][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(self._fname, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry123", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+
+            ef1 = H5CppWriter.external_field(
+                fname1, "/entry1/data/data", [10, 10, 20], "uint32")
+            ef2 = H5CppWriter.external_field(
+                fname2, "/entry2/data/data", [10, 10, 20], "uint32")
+            ef3 = H5CppWriter.external_field(
+                fname3, "/entry3/data/data", [10, 10, 20], "uint32")
+
+            vfl = H5CppWriter.virtual_field_layout([30, 10, 20], "uint32")
+            vfl[0:28:3, :, :] = ef1
+            vfl[1:29:3, :, :] = ef2
+            vfl[2:30:3, :, :] = ef3
+
+            intimage = dt.create_virtual_field("data", vfl)
+            rw = intimage.read()
+            for i in range(30):
+                self.myAssertImage(rw[i], vl[i])
+            intimage.close()
+
+            dt.close()
+            entry.close()
+            fl.close()
+
+        finally:
+            os.remove(fname1)
+            os.remove(fname2)
+            os.remove(fname3)
+            os.remove(self._fname)
+
+    def test_h5cpp_vitualfield_image_gap(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+        if not H5CppWriter.is_vds_supported():
+            self.myAssertRaise(
+                Exception, H5CppWriter.virtual_field_layout, [100])
+            print("Skip the test")
+            return
+        self._fname = '%s/%s%s.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname1 = '%s/%s%s_1.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+        fname3 = '%s/%s%s_3.h5' % (
+            os.getcwd(), self.__class__.__name__, fun)
+
+        try:
+            vl = [[[self.__rnd.randint(1, 1600) for _ in range(20)]
+                   for _ in range(10)]
+                  for _ in range(30)]
+            mone = [[[-1 for _ in range(20)]
+                     for _ in range(10)]
+                    for _ in range(10)]
+
+            fl = H5CppWriter.create_file(fname1, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry1", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "int16", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[n][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(fname3, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry3", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+            intimage = dt.create_field(
+                "data", "int16", [10, 10, 20], [1, 10, 20])
+            vv = [[[vl[n + 20][j][i] for i in range(20)]
+                   for j in range(10)] for n in range(10)]
+            intimage[...] = vv
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vv[i])
+            intimage.close()
+            dt.close()
+            entry.close()
+            fl.close()
+
+            fl = H5CppWriter.create_file(self._fname, overwrite=True)
+            rt = fl.root()
+            entry = rt.create_group("entry123", "NXentry")
+            dt = entry.create_group("data", "NXdata")
+
+            ef1 = H5CppWriter.external_field(
+                fname1, "/entry1/data/data", [10, 10, 20], "int16")
+            ef3 = H5CppWriter.external_field(
+                fname3, "/entry3/data/data", [10, 10, 20], "int16")
+
+            vfl = H5CppWriter.virtual_field_layout([30, 10, 20], "int16")
+            vfl[0:10, :, :] = ef1
+            vfl[20:30, :, :] = ef3
+
+            intimage = dt.create_virtual_field("data", vfl, fillvalue=-1)
+            rw = intimage.read()
+            for i in range(10):
+                self.myAssertImage(rw[i], vl[i])
+            for i in range(10, 20):
+                self.myAssertImage(rw[i], mone[i - 10])
+            for i in range(20, 30):
+                self.myAssertImage(rw[i], vl[i])
+            intimage.close()
+
+            dt.close()
+            entry.close()
+            fl.close()
+
+        finally:
+            os.remove(fname1)
+            os.remove(fname3)
             os.remove(self._fname)
 
 

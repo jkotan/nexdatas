@@ -1492,13 +1492,13 @@ class EFieldH5PYTest(unittest.TestCase):
         self.assertEqual(len(el.h5Object.attributes), 14)
         self.assertEqual(el.h5Object.attributes["type"][...], fattrs["type"])
         self.assertEqual(el.h5Object.attributes["type"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["type"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["type"].shape, ())
 
         for k in maTn.keys():
             self.assertEqual(el.h5Object.attributes[k][...], fattrs[k])
             self.assertEqual(
                 el.h5Object.attributes[k].dtype, NTP.nTnp[NTP.aTn[k]])
-            self.assertEqual(el.h5Object.attributes[k].shape, (1,))
+            self.assertEqual(el.h5Object.attributes[k].shape, ())
 
         self._nxFile.close()
 
@@ -1541,7 +1541,7 @@ class EFieldH5PYTest(unittest.TestCase):
         self.assertEqual(len(el.h5Object.attributes), 2)
         self.assertEqual(el.h5Object.attributes["type"][...], fattrs["type"])
         self.assertEqual(el.h5Object.attributes["type"].dtype, "string")
-        self.assertEqual(el.h5Object.attributes["type"].shape, (1,))
+        self.assertEqual(el.h5Object.attributes["type"].shape, ())
 
         for k in raTnv.keys():
             for i in range(len(rattrs[k])):
@@ -1779,14 +1779,12 @@ class EFieldH5PYTest(unittest.TestCase):
 
             el = {}
             for k in attrs.keys():
-                # print k, attrs[k][0]
                 el[k] = EField(
                     {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
 
                 self.assertEqual(el[k].tagAttributes, {})
                 el[k].tagAttributes[k] = (attrs[k][1], "".join(
                     [str(it) + " " for it in attrs[k][0]]), attrs[k][3])
-                # print el[k].tagAttributes[k]
                 ds = TestDataSource()
                 ds.valid = True
                 el[k].source = ds
@@ -1796,7 +1794,6 @@ class EFieldH5PYTest(unittest.TestCase):
 
                 # at =
                 el[k].h5Object.attributes[k]
-                # print(at)
                 self._sc.checkSpectrumAttribute(
                     el[k].h5Object, k, attrs[k][2], attrs[k][0],
                     attrs[k][4] if len(attrs[k]) > 4 else 0)
