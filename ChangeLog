@@ -1,3 +1,8 @@
+2021-02-13 Jan Kotanski <jankotan@gmail.com>
+	* store strings by default as scalar
+	* requires nxstools 3.0.1
+	* tagged as 3.0.0
+
 2021-02-04 Jan Kotanski <jankotan@gmail.com>
 	* change default h5writer from pni to h5cpp
 	* tagged as 2.29.0
