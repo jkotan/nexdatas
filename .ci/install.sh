@@ -34,9 +34,7 @@ docker exec  --user root ndts service tango-starter restart
 
 if [ $2 = "2" ]; then
     echo "install python-pytango"
-    docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y   python-pytango python-tz; apt-get -qq install -y nxsconfigserver-db python-nxstools python-setuptools git; sleep 10'
-    docker exec  --user root ndts /bin/sh -c 'git clone https://github.com/nexdatas/tools tools'
-    docker exec  --user root ndts /bin/sh -c 'cd tools; python setup.py install'
+    docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y   python-pytango python-tz; apt-get -qq install -y nxsconfigserver-db python-nxstools python-setuptools; sleep 10'
 else
     echo "install python3-pytango"
     if [ $1 = "ubuntu20.04" ]; then
@@ -45,10 +43,8 @@ else
 	docker exec  --user root ndts /bin/sh -c 'cd h5py; python3 setup.py install'
 
     else
-	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y   python3-pytango python3-tz; apt-get -qq install -y nxsconfigserver-db python3-nxstools python3-setuptools git; sleep 10'
+	docker exec  --user root ndts /bin/sh -c 'export DEBIAN_FRONTEND=noninteractive; apt-get -qq update; apt-get -qq install -y   python3-pytango python3-tz; apt-get -qq install -y nxsconfigserver-db python3-nxstools python3-setuptools; sleep 10'
     fi
-    docker exec  --user root ndts /bin/sh -c 'git clone  https://github.com/nexdatas/tools tools'
-    docker exec  --user root ndts /bin/sh -c 'cd tools; python3 setup.py install'
 fi
 if [ $? -ne "0" ]
 then
