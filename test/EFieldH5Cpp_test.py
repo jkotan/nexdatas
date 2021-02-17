@@ -143,7 +143,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
         self.assertEqual(el.source, None)
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
         self.assertEqual(el.compression, False)
@@ -171,7 +171,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, None)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
@@ -204,7 +204,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, None)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
@@ -240,7 +240,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, None)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
@@ -262,7 +262,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, None)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
@@ -293,7 +293,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, None)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
@@ -328,14 +328,14 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.source, ds)
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
         self.assertEqual(el.compression, False)
         self.assertEqual(el.rate, 2)
         self.assertEqual(el.shuffle, True)
-        self.assertEqual(el.store(), (None, None))
+        self.assertEqual(el.store(), ('INIT', None))
 
         self.assertEqual(type(el.h5Object), H5CppWriter.H5CppField)
 
@@ -700,12 +700,16 @@ class EFieldH5CppTest(unittest.TestCase):
 
         for k in attrs:
             h5 = el[k].h5Object
-            self.assertEqual(h5.shape, (1,))
+            if attrs[k][2] and attrs[k][2] not in ['string']:
+                self.assertEqual(h5.shape, (1,))
+            else:
+                self.assertEqual(h5.shape, ())
             self.assertEqual(
                 h5.dtype, attrs[k][2] if attrs[k][2] else 'string')
             self.assertEqual(h5.size, 1)
             self.assertEqual(len(h5.attributes), 2)
-            self._sc.checkScalarAttribute(h5, "type", "string", attrs[k][1])
+            self._sc.checkScalarAttribute(
+                h5, "type", "string", attrs[k][1])
             self._sc.checkScalarAttribute(h5, "units", "string", "m")
 
         self._nxFile.close()
@@ -1974,22 +1978,32 @@ class EFieldH5CppTest(unittest.TestCase):
 #            self.myAssertRaise(ValueError, el[k].store)
             self.assertEqual(el[k].grows, None)
             if stt != 'POSTRUN':
-                self._sc.checkXMLScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
-                    attrs[k][1], attrs[k][0],
-                    attrs[k][4] if len(
-                        attrs[k]) > 4 else 0,
-                    attrs={"type": attrs[k][1], "units": "m"})
+                if stt in ['STEP'] or (
+                        attrs[k][2] and attrs[k][2] not in ['string']):
+                    self._sc.checkXMLScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][4] if len(
+                            attrs[k]) > 4 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
+                else:
+                    self._sc.checkXMLStringScalarField(
+                        self._nxFile, k, 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][4] if len(
+                            attrs[k]) > 4 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
             else:
                 self._sc.checkXMLScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
+                    self._nxFile, k,
+                    attrs[k][2] if attrs[k][2] else 'string',
                     attrs[k][1], attrs[k][0],
                     attrs[k][4] if len(
                         attrs[k]) > 4 else 0,
                     attrs={
                         "type": attrs[k][1], "units": "m", "postrun": None}
                 )
-
         self._nxFile.close()
         os.remove(self._fname)
 
@@ -2511,7 +2525,7 @@ class EFieldH5CppTest(unittest.TestCase):
         self.assertEqual(el.content, [])
         self.assertEqual(el.rank, "0")
         self.assertEqual(el.lengths, {})
-        self.assertEqual(el.strategy, None)
+        self.assertEqual(el.strategy, 'INIT')
         self.assertEqual(el.trigger, None)
         self.assertEqual(el.grows, None)
         self.assertEqual(el.compression, False)
@@ -2614,11 +2628,21 @@ class EFieldH5CppTest(unittest.TestCase):
             #            self.myAssertRaise(ValueError, el[k].store)
             if stt != 'POSTRUN':
                 self.assertEqual(el[k].grows, None)
-                self._sc.checkSingleScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
-                    attrs[k][1], attrs[k][0],
-                    attrs[k][3] if len(attrs[k]) > 3 else 0,
-                    attrs={"type": attrs[k][1], "units": "m"})
+                if stt in ['STEP'] or (
+                        attrs[k][2] and attrs[k][2] not in ['string']):
+                    self._sc.checkSingleScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
+                else:
+                    self._sc.checkSingleStringScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
             else:
                 self.assertEqual(el[k].grows, None)
                 self._sc.checkSingleScalarField(
@@ -2729,12 +2753,23 @@ class EFieldH5CppTest(unittest.TestCase):
 #            self.myAssertRaise(ValueError, el[k].store)
             if stt != 'POSTRUN':
                 self.assertEqual(el[k].grows, None)
-                self._sc.checkSingleScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
-                    attrs[k][1], attrs[k][0],
-                    attrs[k][3] if len(attrs[k]) > 3 else 0,
-                    attrs={"type": attrs[k][1], "units": "m",
-                           "nexdatas_canfail": "FAILED"})
+                if stt in ['STEP'] or (
+                        attrs[k][2] and attrs[k][2] not in ['string']):
+                    self._sc.checkSingleScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m",
+                               "nexdatas_canfail": "FAILED"})
+                else:
+                    self._sc.checkSingleStringScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m",
+                               "nexdatas_canfail": "FAILED"})
             else:
                 self.assertEqual(el[k].grows, None)
                 self._sc.checkSingleScalarField(

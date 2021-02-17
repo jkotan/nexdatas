@@ -514,6 +514,70 @@ class Checker(object):
             if atts[a] is not None:
                 self._tc.assertEqual(at[...], atts[a])
 
+    # checks  scalar counter
+    # \param det detector group
+    # \param name field name
+    # \param dtype numpy type
+    # \param nxtype nexus type
+    # \param values  original values
+    # \param error data precision
+    # \param attrs dictionary with string attributes
+    def checkSingleStringScalarField(self, det, name, dtype, nxtype, values,
+                                     error=0,
+                                     attrs=None):
+
+        atts = {"type": nxtype, "units": "m",
+                "nexdatas_source": None, "nexdatas_strategy": None}
+        if attrs is not None:
+            atts = attrs
+        cnt = det.open(name)
+        self._tc.assertTrue(cnt.is_valid)
+        self._tc.assertEqual(cnt.name, name)
+        self._tc.assertTrue(hasattr(cnt.shape, "__iter__"))
+        self._tc.assertEqual(len(cnt.shape), 0)
+        self._tc.assertEqual(cnt.shape, ())
+        self._tc.assertEqual(cnt.dtype, dtype)
+        self._tc.assertEqual(cnt.size, 1)
+        # pninx is not supporting reading string areas
+        if not isinstance(values, str) and not isinstance(values, unicode):
+            value = cnt.read()
+            if self._isNumeric(value):
+                try:
+                    self._tc.assertTrue(abs(values - value) <= error)
+                except Exception:
+                    self._tc.assertEqual(values, value)
+            else:
+                self._tc.assertEqual(values, value)
+        if self._isNumeric(cnt.read()) and not (
+            isinstance(cnt[...], numpy.ndarray) and
+                str(cnt[...].dtype) == 'object'):
+            if not self._isNumeric(values):
+                #  print "BOOL: ", values[i] ,cnt[i]
+                self._tc.assertEqual(
+                    Types.Converters.toBool(values), cnt.read())
+            else:
+                try:
+                    self._tc.assertTrue(abs(values - cnt.read()) <= error)
+                except Exception:
+                    self._tc.assertEqual(values, cnt.read())
+        else:
+            self._tc.assertEqual(values, cnt.read())
+
+        self._tc.assertEqual(len(cnt.attributes), len(atts))
+        for a in atts:
+            at = cnt.attributes[a]
+            self._tc.assertTrue(at.is_valid)
+            self._tc.assertTrue(hasattr(at.shape, "__iter__"))
+            try:
+                self._tc.assertEqual(len(at.shape), 1)
+                self._tc.assertEqual(at.shape, (1,))
+            except Exception:
+                self._tc.assertEqual(len(at.shape), 0)
+            self._tc.assertEqual(at.dtype, "string")
+            self._tc.assertEqual(at.name, a)
+            if atts[a] is not None:
+                self._tc.assertEqual(at[...], atts[a])
+
     # checks post scalar counter
     # \param det detector group
     # \param name field name
@@ -575,6 +639,65 @@ class Checker(object):
         self._tc.assertTrue(hasattr(cnt.shape, "__iter__"))
         self._tc.assertEqual(len(cnt.shape), 1)
         self._tc.assertEqual(cnt.shape, (1,))
+        self._tc.assertEqual(cnt.dtype, dtype)
+        self._tc.assertEqual(cnt.size, 1)
+
+        self._tc.assertEqual(len(cnt.attributes), len(atts))
+        for a in atts:
+            at = cnt.attributes[a]
+            self._tc.assertTrue(at.is_valid)
+            self._tc.assertTrue(hasattr(at.shape, "__iter__"))
+            self._tc.assertEqual(len(at.shape), 0)
+            self._tc.assertEqual(at.shape, ())
+            self._tc.assertEqual(at.dtype, "string")
+            self._tc.assertEqual(at.name, a)
+            if atts[a] is not None:
+                self._tc.assertEqual(at[...], atts[a])
+
+        if not isinstance(values, str) and not isinstance(values, unicode):
+            value = cnt.read()
+            if self._isNumeric(value):
+                try:
+                    self._tc.assertTrue(abs(values - value) <= error)
+                except Exception:
+                    self._tc.assertEqual(values, value)
+            else:
+                self._tc.assertEqual(values, value)
+        if self._isNumeric(cnt.read()) and not (
+                isinstance(cnt[...], numpy.ndarray) and
+                str(cnt[...].dtype) == 'object'):
+            if not self._isNumeric(values):
+                self._tc.assertEqual(
+                    Types.Converters.toBool(values), cnt.read())
+            else:
+                try:
+                    self._tc.assertTrue(abs(values - cnt.read()) <= error)
+                except Exception:
+                    self._tc.assertEqual(values, cnt.read())
+        else:
+            self._tc.assertEqual(values, cnt.read())
+
+    # checks XML scalar counter
+    # \param det detector group
+    # \param name field name
+    # \param dtype numpy type
+    # \param nxtype nexus type
+    # \param values  original values
+    # \param error data precision
+    # \param attrs dictionary with string attributes
+    def checkXMLStringScalarField(self, det, name, dtype, nxtype, values,
+                                  error=0, attrs=None):
+
+        atts = {"type": nxtype, "units": "m", "nexdatas_strategy": None}
+        if attrs is not None:
+            atts = attrs
+
+        cnt = det.open(name)
+        self._tc.assertTrue(cnt.is_valid)
+        self._tc.assertEqual(cnt.name, name)
+        self._tc.assertTrue(hasattr(cnt.shape, "__iter__"))
+        self._tc.assertEqual(len(cnt.shape), 0)
+        self._tc.assertEqual(cnt.shape, ())
         self._tc.assertEqual(cnt.dtype, dtype)
         self._tc.assertEqual(cnt.size, 1)
 

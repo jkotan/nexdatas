@@ -23,10 +23,20 @@ import unittest
 
 import PyTango
 
-from ProxyHelper import ProxyHelper
+try:
+    from ProxyHelper import ProxyHelper
+except Exception:
+    from .ProxyHelper import ProxyHelper
 
-import ServerSetUp
-import ClientFieldTagWriterH5PY_test
+try:
+    import ServerSetUp
+except Exception:
+    from . import ServerSetUp
+
+try:
+    import ClientFieldTagWriterH5PY_test
+except Exception:
+    from . import ClientFieldTagWriterH5PY_test
 
 # test fixture
 

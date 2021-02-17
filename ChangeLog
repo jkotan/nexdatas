@@ -1,3 +1,8 @@
+2021-02-17 Jan Kotanski <jankotan@gmail.com>
+	* fix for storing strings by default as scalar
+	* set default strategy as init
+	* tagged as 3.0.1
+
 2021-02-13 Jan Kotanski <jankotan@gmail.com>
 	* store strings by default as scalar
 	* requires nxstools 3.0.1

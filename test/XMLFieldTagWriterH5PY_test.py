@@ -26,7 +26,11 @@ import struct
 
 
 from nxswriter.TangoDataWriter import TangoDataWriter
-from Checkers import Checker
+
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
 
 from nxstools import filewriter as FileWriter
 from nxstools import h5pywriter as H5PYWriter
@@ -224,13 +228,13 @@ class XMLFieldTagWriterH5PYTest(unittest.TestCase):
             det, "number", "float64", "NX_NUMBER", fc, 1.0e-14,
             attrs={"type": "NX_NUMBER", "units": "m"})
 
-        self._sc.checkXMLScalarField(
+        self._sc.checkXMLStringScalarField(
             det, "time", "string", "NX_DATE_TIME", string,
             attrs={"type": "NX_DATE_TIME", "units": "m"})
-        self._sc.checkXMLScalarField(
+        self._sc.checkXMLStringScalarField(
             det, "isotime", "string", "ISO8601", string,
             attrs={"type": "ISO8601", "units": "m"})
-        self._sc.checkXMLScalarField(
+        self._sc.checkXMLStringScalarField(
             det, "string_time", "string", "NX_CHAR", string,
             attrs={"type": "NX_CHAR", "units": "m"})
         self._sc.checkXMLScalarField(

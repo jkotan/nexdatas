@@ -29,7 +29,12 @@ import time
 import numpy
 
 from nxswriter.TangoDataWriter import TangoDataWriter
-from Checkers import Checker
+
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
+
 from nxstools import filewriter as FileWriter
 from nxstools import h5pywriter as H5PYWriter
 
@@ -461,7 +466,7 @@ $mycnf/>
 
         self._sc.checkSingleScalarField(
             det, "init_pid_scalar_int32", "int32", "NX_INT32", int(scalar))
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "init_pid_scalar_string", "string", "NX_CHAR", scalar)
         self._sc.checkSingleScalarField(
             det, "final_pid_scalar_float32", "float32", "NX_FLOAT32",
@@ -477,7 +482,7 @@ $mycnf/>
         self._sc.checkSingleScalarField(
             det, "final_pid2_scalar_string", "string", "NX_CHAR",
             str(scalar))
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "final_pid3_scalar_string", "string", "NX_CHAR",
             str(scalar))
 
@@ -775,7 +780,7 @@ $mycnf/>
             attrs={"type": "NX_INT32", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "INIT", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "init_pid_scalar_string", "string", "NX_CHAR", '',
             attrs={"type": "NX_CHAR", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "INIT", "nexdatas_canfail": "FAILED",
@@ -798,17 +803,17 @@ $mycnf/>
                 "nexdatas_strategy": "FINAL", "nexdatas_canfail": "FAILED",
                 "nexdatas_canfail_error": None},
             error=1e-14)
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "final_pid_scalar_string", "string", "NX_CHAR", '',
             attrs={"type": "NX_CHAR", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "FINAL", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "final_pid2_scalar_string", "string", "NX_CHAR", '',
             attrs={"type": "NX_CHAR", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "FINAL", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "final_pid3_scalar_string", "string", "NX_CHAR", '',
             attrs={"type": "NX_CHAR", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "FINAL", "nexdatas_canfail": "FAILED",

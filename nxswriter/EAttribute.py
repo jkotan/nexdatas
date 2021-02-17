@@ -52,7 +52,7 @@ class EAttribute(FElement):
         #:         shape of the attribute, i.e. {index: length}
         self.lengths = {}
         #: (:obj:`str`) strategy, i.e. INIT, STEP, FINAL
-        self.strategy = None
+        self.strategy = 'INIT'
         #: (:obj:`str`) trigger for asynchronous writting
         self.trigger = None
 
