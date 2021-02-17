@@ -23,9 +23,21 @@ import unittest
 
 import PyTango
 
-import ServerSetUp
-import ClientFieldTagWriterH5Cpp_test
-from ProxyHelper import ProxyHelper
+try:
+    from ProxyHelper import ProxyHelper
+except Exception:
+    from .ProxyHelper import ProxyHelper
+
+try:
+    import ServerSetUp
+except Exception:
+    from . import ServerSetUp
+
+try:
+    import ClientFieldTagWriterH5Cpp_test
+except Exception:
+    from . import ClientFieldTagWriterH5Cpp_test
+
 
 # test fixture
 

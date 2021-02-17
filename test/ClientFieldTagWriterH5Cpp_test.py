@@ -754,7 +754,7 @@ class ClientFieldTagWriterH5CppTest(unittest.TestCase):
                    "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
 
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "final_string_canfail", "string", "NX_CHAR", '',
             attrs={"type": "NX_CHAR", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "FINAL", "nexdatas_canfail": "FAILED",
@@ -766,7 +766,7 @@ class ClientFieldTagWriterH5CppTest(unittest.TestCase):
                 "nexdatas_strategy": "INIT", "nexdatas_canfail": "FAILED",
                 "nexdatas_canfail_error": None})
 
-        self._sc.checkSingleScalarField(
+        self._sc.checkSingleStringScalarField(
             det, "init_string", "string", "NX_CHAR", dates[0])
         self._sc.checkSingleScalarField(
             det, "final_flag", "bool", "NX_BOOLEAN", logical[0])

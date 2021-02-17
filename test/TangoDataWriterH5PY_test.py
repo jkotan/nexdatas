@@ -6075,44 +6075,44 @@ ds.res2 = str(True)
             self.assertTrue(cnt.is_valid)
             self.assertEqual(cnt.name, "nxrootstr")
             self.assertTrue(hasattr(cnt.shape, "__iter__"))
-            self.assertEqual(len(cnt.shape), 1)
-            self.assertEqual(cnt.shape, (1,))
+            self.assertEqual(len(cnt.shape), 0)
+            self.assertEqual(cnt.shape, ())
             self.assertEqual(cnt.dtype, "string")
             self.assertEqual(cnt.size, 1)
-            value = cnt[:]
+            value = cnt[...]
             self.assertEqual(fname, value)
 
             cnt = en.open("nxrootpath")
             self.assertTrue(cnt.is_valid)
             self.assertEqual(cnt.name, "nxrootpath")
             self.assertTrue(hasattr(cnt.shape, "__iter__"))
-            self.assertEqual(len(cnt.shape), 1)
-            self.assertEqual(cnt.shape, (1,))
+            self.assertEqual(len(cnt.shape), 0)
+            self.assertEqual(cnt.shape, ())
             self.assertEqual(cnt.dtype, "string")
             self.assertEqual(cnt.size, 1)
-            value = cnt[:]
+            value = cnt[...]
             self.assertEqual('/', value)
 
             cnt = en.open("nxrootlink")
             self.assertTrue(cnt.is_valid)
             self.assertEqual(cnt.name, "nxrootlink")
             self.assertTrue(hasattr(cnt.shape, "__iter__"))
-            self.assertEqual(len(cnt.shape), 1)
-            self.assertEqual(cnt.shape, (1,))
+            self.assertEqual(len(cnt.shape), 0)
+            self.assertEqual(cnt.shape, ())
             self.assertEqual(cnt.dtype, "string")
             self.assertEqual(cnt.size, 1)
-            value = cnt[:]
+            value = cnt[...]
             self.assertEqual('True', value)
 
             cnt = en.open("mylink")
             self.assertTrue(cnt.is_valid)
             self.assertEqual(cnt.name, "mylink")
             self.assertTrue(hasattr(cnt.shape, "__iter__"))
-            self.assertEqual(len(cnt.shape), 1)
-            self.assertEqual(cnt.shape, (1,))
+            self.assertEqual(len(cnt.shape), 0)
+            self.assertEqual(cnt.shape, ())
             self.assertEqual(cnt.dtype, "string")
             self.assertEqual(cnt.size, 1)
-            value = cnt[:]
+            value = cnt[...]
             self.assertEqual('/', value)
 
             f.close()

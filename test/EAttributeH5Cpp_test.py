@@ -36,9 +36,15 @@ from nxswriter.Element import Element
 from nxswriter.H5Elements import EFile
 from nxswriter.Types import NTP, Converters
 
-from TestDataSource import TestDataSource
+try:
+    from TestDataSource import TestDataSource
+except Exception:
+    from .TestDataSource import TestDataSource
 
-from Checkers import Checker
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
 
 from nxstools import filewriter as FileWriter
 from nxstools import h5cppwriter as H5CppWriter
@@ -133,7 +139,7 @@ class EAttributeH5CppTest(unittest.TestCase):
         self.assertEqual(at.name, "")
         self.assertEqual(at.rank, "0")
         self.assertEqual(at.lengths, {})
-        self.assertEqual(at.strategy, None)
+        self.assertEqual(at.strategy, 'INIT')
         self.assertEqual(at.trigger, None)
 
         self.assertEqual(at.h5Object, None)
@@ -159,7 +165,7 @@ class EAttributeH5CppTest(unittest.TestCase):
         self.assertEqual(at.name, "")
         self.assertEqual(at.rank, "0")
         self.assertEqual(at.lengths, {})
-        self.assertEqual(at.strategy, None)
+        self.assertEqual(at.strategy, 'INIT')
         self.assertEqual(at.trigger, None)
 
         self.assertEqual(at.h5Object, None)
@@ -220,8 +226,8 @@ class EAttributeH5CppTest(unittest.TestCase):
         ds = TestDataSource()
         at.source = ds
         self.assertEqual(at.h5Object, None)
-        self.assertEqual(at.store(), (None, None))
-        self.assertEqual(at.store(), (None, None))
+        self.assertEqual(at.store(), ('INIT', None))
+        self.assertEqual(at.store(), ('INIT', None))
         self._nxFile.close()
         os.remove(self._fname)
 

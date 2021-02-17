@@ -885,8 +885,8 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
         self.assertEqual(len(en.attributes), 2)
         self.assertEqual(en.read(), value)
         self.assertTrue(hasattr(en.shape, "__iter__"))
-        self.assertEqual(len(en.shape), 1)
-        self.assertEqual(en.shape[0], 1)
+        self.assertEqual(len(en.shape), 0)
+        self.assertEqual(en.shape, ())
 
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
@@ -947,8 +947,8 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
         self.assertEqual(len(en.attributes), 1)
         self.assertEqual(en.read(), "field")
         self.assertTrue(hasattr(en.shape, "__iter__"))
-        self.assertEqual(len(en.shape), 1)
-        self.assertEqual(en.shape[0], 1)
+        self.assertEqual(len(en.shape), 0)
+        self.assertEqual(en.shape, ())
 
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
@@ -997,11 +997,11 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
         self.assertTrue(en.is_valid)
         self.assertEqual(en.name, "counter")
         self.assertEqual(len(en.attributes), 1)
-        self.assertEqual(len(en.read()), len([]))
+        self.assertEqual(en.read(), "")
         #        self.myAssertRaise(MemoryError, en.read)
         self.assertTrue(hasattr(en.shape, "__iter__"))
-        self.assertEqual(len(en.shape), 1)
-        self.assertEqual(en.shape[0], 0)
+        self.assertEqual(len(en.shape), 0)
+        self.assertEqual(en.shape, ())
 
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
@@ -1058,12 +1058,12 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
         self.assertTrue(en.is_valid)
         self.assertEqual(en.name, "counter")
         self.assertEqual(len(en.attributes), 1)
-        self.assertEqual(len(en.read()), len([]))
+        self.assertEqual(en.read(), "")
 #        self.myAssertRaise(MemoryError, en.read)
 #        self.assertEqual(en.read(), "")
         self.assertTrue(hasattr(en.shape, "__iter__"))
-        self.assertEqual(len(en.shape), 1)
-        self.assertEqual(en.shape[0], 0)
+        self.assertEqual(len(en.shape), 0)
+        self.assertEqual(en.shape, ())
 
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)
@@ -1492,8 +1492,8 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
         self.assertEqual(len(en.attributes), 2)
         self.assertEqual(en.read(), '1234')
         self.assertTrue(hasattr(en.shape, "__iter__"))
-        self.assertEqual(len(en.shape), 1)
-        self.assertEqual(en.shape[0], 1)
+        self.assertEqual(len(en.shape), 0)
+        self.assertEqual(en.shape, ())
 
         at = en.attributes["type"]
         self.assertTrue(at.is_valid)

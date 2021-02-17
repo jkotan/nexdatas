@@ -59,7 +59,7 @@ class EField(FElementWithAttr):
         #: (:obj:`bool`) True if field is stored in STEP mode
         self.__extraD = False
         #: (:obj:`str`) strategy, i.e. INIT, STEP, FINAL, POSTRUN
-        self.strategy = None
+        self.strategy = 'INIT'
         #: (:obj:`str`) trigger for asynchronous writing
         self.trigger = None
         #: (:obj:`int`) growing dimension
@@ -184,13 +184,21 @@ class EField(FElementWithAttr):
                         name, dtype, minshape or [1], chunk,
                         datafilter)
             else:
-                mshape = [1] if self.strategy in ['INIT', 'FINAL'] else [0]
-                if datafilter:
+                if self.strategy in ['INIT', 'FINAL', None] and \
+                   dtype in ["string", b"string", "unicode"]:
                     f = self._lastObject().create_field(
-                        name, dtype, mshape, [1], datafilter)
+                        name, dtype)
                 else:
-                    f = self._lastObject().create_field(
-                        name, dtype, mshape, [1])
+                    if self.strategy in ['INIT', 'FINAL', None]:
+                        mshape = [1]
+                    else:
+                        mshape = [0]
+                    if datafilter:
+                        f = self._lastObject().create_field(
+                            name, dtype, mshape, [1], datafilter)
+                    else:
+                        f = self._lastObject().create_field(
+                            name, dtype, mshape, [1])
         except Exception:
             info = sys.exc_info()
             import traceback

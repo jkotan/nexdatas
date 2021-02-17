@@ -29,7 +29,15 @@ import binascii
 import time
 
 
-from TestDataSource import TestDataSource
+try:
+    from TestDataSource import TestDataSource
+except Exception:
+    from .TestDataSource import TestDataSource
+
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
 
 from nxswriter.FElement import FElementWithAttr
 from nxswriter.FElement import FElement
@@ -41,7 +49,6 @@ from nxswriter.Types import NTP, Converters
 from nxstools import filewriter as FileWriter
 from nxstools import h5pywriter as H5PYWriter
 
-from Checkers import Checker
 
 # if 64-bit machione
 IS64BIT = (struct.calcsize("P") == 8)
@@ -190,11 +197,21 @@ class EFieldReshapeH5PYTest(unittest.TestCase):
 #            self.myAssertRaise(ValueError, el[k].store)
             if stt != 'POSTRUN':
                 self.assertEqual(el[k].grows, None)
-                self._sc.checkSingleScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
-                    attrs[k][1], attrs[k][0],
-                    attrs[k][3] if len(attrs[k]) > 3 else 0,
-                    attrs={"type": attrs[k][1], "units": "m"})
+                if stt in ['STEP'] or (
+                        attrs[k][2] and attrs[k][2] not in ['string']):
+                    self._sc.checkSingleScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
+                else:
+                    self._sc.checkSingleStringScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m"})
             else:
                 self.assertEqual(el[k].grows, None)
                 self._sc.checkSingleScalarField(
@@ -306,12 +323,23 @@ class EFieldReshapeH5PYTest(unittest.TestCase):
 #            self.myAssertRaise(ValueError, el[k].store)
             if stt != 'POSTRUN':
                 self.assertEqual(el[k].grows, None)
-                self._sc.checkSingleScalarField(
-                    self._nxFile, k, attrs[k][2] if attrs[k][2] else 'string',
-                    attrs[k][1], attrs[k][0],
-                    attrs[k][3] if len(attrs[k]) > 3 else 0,
-                    attrs={"type": attrs[k][1], "units": "m",
-                           "nexdatas_canfail": "FAILED"})
+                if stt in ['STEP'] or (
+                        attrs[k][2] and attrs[k][2] not in ['string']):
+                    self._sc.checkSingleScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m",
+                               "nexdatas_canfail": "FAILED"})
+                else:
+                    self._sc.checkSingleStringScalarField(
+                        self._nxFile, k,
+                        attrs[k][2] if attrs[k][2] else 'string',
+                        attrs[k][1], attrs[k][0],
+                        attrs[k][3] if len(attrs[k]) > 3 else 0,
+                        attrs={"type": attrs[k][1], "units": "m",
+                               "nexdatas_canfail": "FAILED"})
             else:
                 self.assertEqual(el[k].grows, None)
                 self._sc.checkSingleScalarField(
