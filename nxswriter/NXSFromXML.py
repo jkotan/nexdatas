@@ -59,7 +59,8 @@ class CreateFile(object):
         if options.args and len(options.args):
             self.__xml = options.args[0].strip()
         else:
-            self.__xml = open(options.xmlfile, 'r').read()
+            with open(options.xmlfile, 'r') as fl:
+                self.__xml = fl.read()
 
         #: (:obj:`str`) writer module
         self.__writer = ""
@@ -96,7 +97,8 @@ class CreateFile(object):
         """
         jsn = {}
         if self.__jsonfile:
-            sjsn = open(self.__jsonfile, 'r').read()
+            with open(self.__jsonfile, 'r') as fl:
+                sjsn = fl.read()
             if sjsn.strip():
                 jsn = json.loads(sjsn.strip())
         if "data" not in jsn.keys():

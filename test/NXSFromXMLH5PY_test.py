@@ -231,7 +231,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 FileWriter.writer = H5PYWriter
                 f = FileWriter.open_file(fname, readonly=True)
                 f = f.root()
-                self.assertEqual(6, len(f.attributes))
+                self.assertEqual(5, len(f.attributes))
                 self.assertEqual(f.attributes["file_name"][...], fname)
                 self.assertTrue(f.attributes["NX_class"][...], "NXroot")
                 self.assertEqual(f.size, 2)
@@ -615,7 +615,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 FileWriter.writer = H5PYWriter
                 f = FileWriter.open_file(fname, readonly=True)
                 f = f.root()
-                self.assertEqual(6, len(f.attributes))
+                self.assertEqual(5, len(f.attributes))
                 self.assertEqual(f.attributes["file_name"][...], fname)
                 self.assertTrue(f.attributes["NX_class"][...], "NXroot")
                 self.assertEqual(f.size, 2)
@@ -861,6 +861,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
+                    print(er)
                     self.assertEqual('', er)
                 if ci % 2:
                     self.assertEqual('', vl)
@@ -873,7 +874,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 FileWriter.writer = H5PYWriter
                 f = FileWriter.open_file(fname, readonly=True)
                 f = f.root()
-                self.assertEqual(6, len(f.attributes))
+                self.assertEqual(5, len(f.attributes))
                 self.assertEqual(f.attributes["file_name"][...], fname)
                 self.assertTrue(f.attributes["NX_class"][...], "NXroot")
                 self.assertEqual(f.size, 2)

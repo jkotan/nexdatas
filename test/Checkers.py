@@ -63,7 +63,7 @@ class Checker(object):
     def checkFieldTree(self, f, fname, children):
         # self._tc.assertEqual("%s/%s" % ( os.getcwd(), f.name), fname)
         f = f.root()
-        self._tc.assertEqual(6, len(f.attributes))
+        self._tc.assertEqual(5, len(f.attributes))
         self._tc.assertEqual(f.attributes["file_name"][...], fname)
         #        f = f.root()
         self._tc.assertTrue(f.attributes["NX_class"][...], "NXroot")
@@ -135,7 +135,7 @@ class Checker(object):
     def checkAttributeTree(self, f, fname, gattributes, fattributes):
         #  self._tc.assertEqual("%s/%s" % ( os.getcwd(), f.name), fname)
         f = f.root()
-        self._tc.assertEqual(6, len(f.attributes))
+        self._tc.assertEqual(5, len(f.attributes))
         self._tc.assertEqual(f.attributes["file_name"][...], fname)
         self._tc.assertTrue(f.attributes["NX_class"][...], "NXroot")
         self._tc.assertEqual(f.size, 2)

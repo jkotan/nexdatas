@@ -1,3 +1,7 @@
+2021-02-22 Jan Kotanski <jankotan@gmail.com>
+	* update test for nxstools v3.1.0
+	* tagged as 3.0.2
+
 2021-02-17 Jan Kotanski <jankotan@gmail.com>
 	* fix for storing strings by default as scalar
 	* set default strategy as init

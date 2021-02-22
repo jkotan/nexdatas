@@ -303,7 +303,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print ""
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -384,7 +384,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print ""
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -698,7 +698,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             FileWriter.writer = H5CppWriter
             f = FileWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 3)
@@ -1055,7 +1055,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
 #            self.assertEqual(f.path, fname)
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -1540,7 +1540,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
             # self.assertEqual(f.path, fname)
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -1904,7 +1904,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
 
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -2370,7 +2370,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
 
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -2710,7 +2710,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -3112,7 +3112,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 os.getcwd(), self.__class__.__name__, fun)
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -3398,7 +3398,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 os.getcwd(), self.__class__.__name__, fun)
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -3684,7 +3684,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 os.getcwd(), self.__class__.__name__, fun)
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -4032,7 +4032,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -4393,7 +4393,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -4753,7 +4753,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             f = H5CppWriter.open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)

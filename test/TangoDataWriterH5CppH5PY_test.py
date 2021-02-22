@@ -192,7 +192,7 @@ ds.res2 = str(True)
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print("")
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -259,7 +259,7 @@ ds.res2 = str(True)
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print ""
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -324,7 +324,7 @@ ds.res2 = str(True)
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print ""
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -409,7 +409,7 @@ ds.res2 = str(True)
                 cnt += 1
 #                print(at.name),"=",at[...]
             self.assertEqual(cnt, len(f.attributes))
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
 #            print ""
 
             self.assertEqual(f.attributes["file_name"][...], fname)
@@ -615,7 +615,7 @@ ds.res2 = str(True)
 
             f = open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)
@@ -930,7 +930,7 @@ ds.res2 = str(True)
 
             f = open_file(fname, readonly=True)
             f = f.root()
-            self.assertEqual(6, len(f.attributes))
+            self.assertEqual(5, len(f.attributes))
             self.assertEqual(f.attributes["file_name"][...], fname)
             self.assertTrue(f.attributes["NX_class"][...], "NXroot")
             self.assertEqual(f.size, 2)

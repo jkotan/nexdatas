@@ -185,8 +185,8 @@ except Exception:
 try:
     import cx_Oracle
     # pwd
-    passwd = open('%s/pwd' %
-                  os.path.dirname(Converters_test.__file__)).read()[:-1]
+    with open('%s/pwd' % os.path.dirname(Converters_test.__file__)) as fl:
+        passwd = fl.read()[:-1]
 
     # connection arguments to ORACLE DB
     args = {}
