@@ -45,7 +45,8 @@ def read(fname):
 
     :param fname: readme file name
     """
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    with open(os.path.join(os.path.dirname(__file__), fname)) as fl:
+        return fl.read()
 
 
 class TestCommand(Command):

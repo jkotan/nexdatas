@@ -202,6 +202,6 @@ if __name__ == "__main__":
             #: (:class:`FetchNameHandler`) SAX2 handler object
             handler = FetchNameHandler()
             parser.setContentHandler(handler)
-
-            parser.parse(open(fi))
+            with open(fi) as fl:
+                parser.parse(fl)
             print("GT: %s" % handler.groupTypes)

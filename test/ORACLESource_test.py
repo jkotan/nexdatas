@@ -62,7 +62,8 @@ class ORACLESourceTest(unittest.TestCase):
 
         self.__user = "read"
         path = os.path.dirname(Checkers.__file__)
-        self.__passwd = open('%s/pwd' % path).read()[:-1]
+        with open('%s/pwd' % path) as fl:
+            self.__passwd = fl.read()[:-1]
 
         try:
             self.__seed = long(binascii.hexlify(os.urandom(16)), 16)

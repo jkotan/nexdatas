@@ -749,7 +749,8 @@ if __name__ == "__main__":
             xmlf = sys.argv[i]
 
             #: (:obj:`str`) xml string
-            xml = open(xmlf, 'r').read()
+            with open(xmlf, 'r') as fl:
+                xml = fl.read()
             tdw.xmlsettings = xml
 
             print("opening the data entry ")

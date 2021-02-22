@@ -144,7 +144,8 @@ comments related to the client code.
    # the output file as well as defining a way of data storing.
    # Examples of the XMLSettings can be found in the XMLExamples directory.
 
-   xml = open("test.xml", 'r').read()
+   with open("test.xml", 'r') as fl:
+       xml = fl.read()
    dpx.XMLSettings = xml
 
    dpx.JSONRecord = '{"data": {"parameterA":0.2},
