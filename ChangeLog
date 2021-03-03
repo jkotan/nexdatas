@@ -1,3 +1,7 @@
+2021-03-03 Jan Kotanski <jankotan@gmail.com>
+	* add DATA_ARRAY decoder
+	* tagged as 3.1.0
+
 2021-02-22 Jan Kotanski <jankotan@gmail.com>
 	* update test for nxstools v3.1.0
 	* tagged as 3.0.2
