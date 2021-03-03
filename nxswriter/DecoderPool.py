@@ -154,6 +154,130 @@ class UINT32decoder(object):
         return self.__value
 
 
+class DATAARRAYdecoder(object):
+
+    """ DATA ARRAY LIMA decoder
+    """
+
+    def __init__(self):
+        """ constructor
+
+        :brief: It clears the local variables
+        """
+        #: (:obj:`str`) decoder name
+        self.name = "DATA_ARRAY"
+        #: (:obj:`str`) decoder format
+        self.format = None
+        #: (:obj:`str`) data type
+        self.dtype = None
+
+        #: (:class:`numpy.ndarray`) image data
+        self.__value = None
+        #: ([:obj:`str`, :obj:`str`]) header and image data
+        self.__data = None
+        #: (:obj:`str`) struct header format
+        self.__headerFormat = '<IHHIIHHHHHHHHIIIIIIII'
+        #: (:obj:`dict` <:obj:`str`, :obj:`any` > ) header data
+        self.__header = {}
+        #: (:obj:`dict` <:obj:`int`, :obj:`str` > ) format modes
+        self.__formatID = {
+            0: 'B', 1: 'H', 2: 'I', 3: 'Q',
+            4: 'b', 5: 'h', 6: 'i', 7: 'q',
+            8: 'f', 9: 'd'
+        }
+        #: (:obj:`dict` <:obj:`int`, :obj:`str` > ) dtype modes
+        self.__dtypeID = {
+            0: 'uint8', 1: 'uint16', 2: 'uint32', 3: 'uint64',
+            4: 'int8', 5: 'int16', 6: 'int32', 7: 'int64',
+            8: 'float32', 9: 'float64',
+        }
+
+    def load(self, data):
+        """  loads encoded data
+
+        :param data: encoded data
+        :type data: [:obj:`str`, :obj:`str`]
+        """
+        self.__data = data
+        self.format = data[0]
+        self._loadHeader(data[1][:struct.calcsize(self.__headerFormat)])
+        self.__value = None
+
+    def _loadHeader(self, headerData):
+        """ loads the image header
+
+        :param headerData: buffer with header data
+        :type headerData: :obj:`str`
+        """
+        hdr = struct.unpack(self.__headerFormat, headerData)
+        self.__header = {}
+        self.__header['magic'] = hdr[0]
+        self.__header['headerVersion'] = hdr[1]
+        self.__header['headerSize'] = hdr[2]
+        self.__header['category'] = hdr[3]
+        self.__header['imageMode'] = hdr[4]
+        self.__header['endianness'] = hdr[5]
+        self.__header['dim'] = hdr[6]
+        self.__header['shape'] = [
+            hdr[7], hdr[8], hdr[9], hdr[10], hdr[11], hdr[12]]
+        self.__header['steps'] = [
+            hdr[13], hdr[14], hdr[15], hdr[16], hdr[17], hdr[18]]
+
+        self.__header['padding'] = hdr[19:]
+
+        self.dtype = self.__dtypeID[self.__header['imageMode']]
+
+    def frameNumber(self):
+        """ no data """
+
+    def shape(self):
+        """ provides the data shape
+
+        :returns: the data shape if data was loaded
+        :rtype: :obj:`list` <:obj:`int` >
+        """
+        if self.__header:
+            return list(reversed(
+                [self.__header['shape'][i]
+                 for i in range(self.__header['dim'])]))
+
+    def steps(self):
+        """ provides the data steps
+
+        :returns: the data steps if data was loaded
+        :rtype: :obj:`list` <:obj:`int` >
+        """
+        if self.__header:
+            return list(reversed(
+                [self.__header['steps'][i]
+                 for i in range(self.__header['dim'])]))
+
+    def decode(self):
+        """ provides the decoded data
+
+        :returns: the decoded data if data was loaded
+        :rtype: :class:`numpy.ndarray`
+        """
+        if not self.__header or not self.__data:
+            return
+        if self.__value is None:
+            image = self.__data[1][struct.calcsize(self.__headerFormat):]
+            dformat = self.__formatID[self.__header['imageMode']]
+            fSize = struct.calcsize(dformat)
+            self.__value = numpy.array(
+                struct.unpack(dformat * (len(image) // fSize), image),
+                dtype=self.dtype).reshape(self.shape())
+            fendian = self.__header['endianness']
+            lendian = ord(struct.pack('=H', 1).decode()[-1])
+            if fendian != lendian:
+                try:
+                    self.__value.byteswap(inplace=False)
+                except TypeError:
+                    self.__value = self.__value.byteswap()
+
+        return self.__value
+
+
 class VDEOdecoder(object):
 
     """ VIDEO IMAGE LIMA decoder
@@ -265,6 +389,8 @@ class DecoderPool(object):
         """
         self.__knowDecoders = {
             "LIMA_VIDEO_IMAGE": VDEOdecoder,
+            "VIDEO_IMAGE": VDEOdecoder,
+            "DATA_ARRAY": DATAARRAYdecoder,
             "UTF8": UTF8decoder,
             "UINT32": UINT32decoder}
         self.__pool = {}

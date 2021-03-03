@@ -23,7 +23,7 @@ import unittest
 import sys
 import struct
 import json
-
+import numpy as np
 import nxswriter
 
 from nxswriter.DecoderPool import (
@@ -137,6 +137,28 @@ class DecoderPoolTest(unittest.TestCase):
         self._bint = "int64" if IS64BIT else "int32"
         self._buint = "uint64" if IS64BIT else "uint32"
         self._bfloat = "float64" if IS64BIT else "float32"
+
+        self.__images = [
+            b'YATD\x02\x00@\x00\x02\x00\x00\x00\x05\x00\x00\x00\x00\x00'
+            b'\x02\x00\x06\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02'
+            b'\x00\x00\x00\x0c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+            b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+            b'\x00\x00\x00\x01\x00\x02\x00\x03\x00\x04\x00\x05\x00\x06\x00'
+            b'\x07\x00\x08\x00\t\x00\n\x00\x0b\x00\x0c\x00\r\x00\x0e\x00'
+            b'\x0f\x00\x10\x00\x11\x00\x12\x00\x13\x00\x14\x00\x15\x00\x16'
+            b'\x00\x17\x00',
+            b'YATD\x02\x00@\x00\x02\x00\x00\x00\x02\x00\x00\x00\x00\x00'
+            b'\x03\x00\x02\x00\x03\x00\x04\x00\x00\x00\x00\x00\x00\x00\x04'
+            b'\x00\x00\x00\x08\x00\x00\x00\x18\x00\x00\x00\x00\x00\x00\x00'
+            b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+            b'\x00\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x03\x00'
+            b'\x00\x00\x04\x00\x00\x00\x05\x00\x00\x00\x06\x00\x00\x00\x07'
+            b'\x00\x00\x00\x08\x00\x00\x00\t\x00\x00\x00\n\x00\x00\x00\x0b'
+            b'\x00\x00\x00\x0c\x00\x00\x00\r\x00\x00\x00\x0e\x00\x00\x00\x0f'
+            b'\x00\x00\x00\x10\x00\x00\x00\x11\x00\x00\x00\x12\x00\x00\x00'
+            b'\x13\x00\x00\x00\x14\x00\x00\x00\x15\x00\x00\x00\x16\x00\x00'
+            b'\x00\x17\x00\x00\x00'
+        ]
 
     # test starter
     # \brief Common set up
@@ -347,6 +369,28 @@ class DecoderPoolTest(unittest.TestCase):
         self.assertTrue(isinstance(ds, VDEOdecoder))
         self.assertEqual(el.get("DDB"), None)
         self.assertEqual(el.get("W0"), None)
+
+    def test_DATA_ARRAY_decoder(self):
+        fun = sys._getframe().f_code.co_name
+        print("Run: %s.%s() " % (self.__class__.__name__, fun))
+
+        w1 = self.__images[0]
+        w2 = self.__images[1]
+        ad = nxswriter.DecoderPool.DATAARRAYdecoder()
+
+        ad.load(("DATA_ARRAY", w1))
+        dw1 = ad.decode()
+        tw1 = np.array(range(24), dtype='int16').reshape(4, 6)
+        self.assertEqual(dw1.shape, (4, 6))
+        self.assertEqual(ad.shape(), [4, 6])
+        self.assertTrue(np.allclose(dw1, tw1))
+
+        ad.load(("DATA_ARRAY", w2))
+        dw2 = ad.decode()
+        tw2 = np.array(range(24), dtype='uint32').reshape(4, 3, 2)
+        self.assertEqual(tw2.shape, (4, 3, 2))
+        self.assertEqual(ad.shape(), [4, 3, 2])
+        self.assertTrue(np.allclose(dw2, tw2))
 
 
 if __name__ == '__main__':
