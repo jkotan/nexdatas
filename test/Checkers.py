@@ -486,7 +486,8 @@ class Checker(object):
                 self._tc.assertEqual(values, value)
         if self._isNumeric(cnt.read()) and not (
             isinstance(cnt[...], numpy.ndarray) and
-                str(cnt[...].dtype) == 'object'):
+                (str(cnt[...].dtype) in ['object'] or
+                 str(cnt[...].dtype).startswith("<U"))):
             if not self._isNumeric(values):
                 #  print "BOOL: ", values[i] ,cnt[i]
                 self._tc.assertEqual(
@@ -550,7 +551,8 @@ class Checker(object):
                 self._tc.assertEqual(values, value)
         if self._isNumeric(cnt.read()) and not (
             isinstance(cnt[...], numpy.ndarray) and
-                str(cnt[...].dtype) == 'object'):
+                (str(cnt[...].dtype) in ['object'] or
+                 str(cnt[...].dtype).startswith("<U"))):
             if not self._isNumeric(values):
                 #  print "BOOL: ", values[i] ,cnt[i]
                 self._tc.assertEqual(
@@ -665,7 +667,8 @@ class Checker(object):
                 self._tc.assertEqual(values, value)
         if self._isNumeric(cnt.read()) and not (
                 isinstance(cnt[...], numpy.ndarray) and
-                str(cnt[...].dtype) == 'object'):
+                (str(cnt[...].dtype) in ['object'] or
+                 str(cnt[...].dtype).startswith("<U"))):
             if not self._isNumeric(values):
                 self._tc.assertEqual(
                     Types.Converters.toBool(values), cnt.read())
@@ -724,7 +727,8 @@ class Checker(object):
                 self._tc.assertEqual(values, value)
         if self._isNumeric(cnt.read()) and not (
                 isinstance(cnt[...], numpy.ndarray) and
-                str(cnt[...].dtype) == 'object'):
+                (str(cnt[...].dtype) in ['object'] or
+                 str(cnt[...].dtype).startswith("<U"))):
             if not self._isNumeric(values):
                 self._tc.assertEqual(
                     Types.Converters.toBool(values), cnt.read())
