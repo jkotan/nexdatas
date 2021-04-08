@@ -613,8 +613,11 @@ class EField(FElementWithAttr):
                     value = numpy.iinfo(getattr(numpy, nptype)).max
             except Exception:
                 try:
-                    value = numpy.asscalar(
-                        numpy.finfo(getattr(numpy, nptype)).max)
+                    try:
+                        value = numpy.finfo(getattr(numpy, nptype)).max.item()
+                    except Exception:
+                        value = numpy.asscalar(
+                            numpy.finfo(getattr(numpy, nptype)).max)
                 except Exception:
                     value = 0
         else:
