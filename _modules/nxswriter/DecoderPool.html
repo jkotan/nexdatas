@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter.DecoderPool &#8212; NXSDataWriter 2.29.0 documentation</title>
+    <title>nxswriter.DecoderPool &#8212; NXSDataWriter 3.1.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -36,7 +36,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.29</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -81,9 +81,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.TangoSource">nxswriter.TangoSource module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.Types">nxswriter.Types module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../nxswriter.html#module-nxswriter">Module contents</a></li>
 </ul>
 </li>
@@ -288,6 +285,130 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__value</span></div></div>
 
 
+<div class="viewcode-block" id="DATAARRAYdecoder"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder">[docs]</a><span class="k">class</span> <span class="nc">DATAARRAYdecoder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot; DATA ARRAY LIMA decoder</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; constructor</span>
+
+<span class="sd">        :brief: It clears the local variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#: (:obj:`str`) decoder name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DATA_ARRAY&quot;</span>
+        <span class="c1">#: (:obj:`str`) decoder format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#: (:obj:`str`) data type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">#: (:class:`numpy.ndarray`) image data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#: ([:obj:`str`, :obj:`str`]) header and image data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1">#: (:obj:`str`) struct header format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__headerFormat</span> <span class="o">=</span> <span class="s1">&#39;&lt;IHHIIHHHHHHHHIIIIIIII&#39;</span>
+        <span class="c1">#: (:obj:`dict` &lt;:obj:`str`, :obj:`any` &gt; ) header data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1">#: (:obj:`dict` &lt;:obj:`int`, :obj:`str` &gt; ) format modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__formatID</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span>
+            <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span>
+        <span class="p">}</span>
+        <span class="c1">#: (:obj:`dict` &lt;:obj:`int`, :obj:`str` &gt; ) dtype modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dtypeID</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;uint8&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;uint16&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;uint32&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;uint64&#39;</span><span class="p">,</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;int16&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;int64&#39;</span><span class="p">,</span>
+            <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;float32&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="DATAARRAYdecoder.load"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;  loads encoded data</span>
+
+<span class="sd">        :param data: encoded data</span>
+<span class="sd">        :type data: [:obj:`str`, :obj:`str`]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loadHeader</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__headerFormat</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_loadHeader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headerData</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; loads the image header</span>
+
+<span class="sd">        :param headerData: buffer with header data</span>
+<span class="sd">        :type headerData: :obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__headerFormat</span><span class="p">,</span> <span class="n">headerData</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;magic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;headerVersion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;headerSize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;imageMode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;endianness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">hdr</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">12</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">hdr</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">18</span><span class="p">]]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;padding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">19</span><span class="p">:]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dtypeID</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;imageMode&#39;</span><span class="p">]]</span>
+
+<div class="viewcode-block" id="DATAARRAYdecoder.frameNumber"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder.frameNumber">[docs]</a>    <span class="k">def</span> <span class="nf">frameNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; no data &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="DATAARRAYdecoder.shape"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder.shape">[docs]</a>    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; provides the data shape</span>
+
+<span class="sd">        :returns: the data shape if data was loaded</span>
+<span class="sd">        :rtype: :obj:`list` &lt;:obj:`int` &gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])]))</span></div>
+
+<div class="viewcode-block" id="DATAARRAYdecoder.steps"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder.steps">[docs]</a>    <span class="k">def</span> <span class="nf">steps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; provides the data steps</span>
+
+<span class="sd">        :returns: the data steps if data was loaded</span>
+<span class="sd">        :rtype: :obj:`list` &lt;:obj:`int` &gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])]))</span></div>
+
+<div class="viewcode-block" id="DATAARRAYdecoder.decode"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.DATAARRAYdecoder.decode">[docs]</a>    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; provides the decoded data</span>
+
+<span class="sd">        :returns: the decoded data if data was loaded</span>
+<span class="sd">        :rtype: :class:`numpy.ndarray`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__header</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__headerFormat</span><span class="p">):]</span>
+            <span class="n">dformat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__formatID</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;imageMode&#39;</span><span class="p">]]</span>
+            <span class="n">fSize</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="n">dformat</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">dformat</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="o">//</span> <span class="n">fSize</span><span class="p">),</span> <span class="n">image</span><span class="p">),</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">())</span>
+            <span class="n">fendian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__header</span><span class="p">[</span><span class="s1">&#39;endianness&#39;</span><span class="p">]</span>
+            <span class="n">lendian</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;=H&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">fendian</span> <span class="o">!=</span> <span class="n">lendian</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__value</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__value</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__value</span></div></div>
+
+
 <div class="viewcode-block" id="VDEOdecoder"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.DecoderPool.VDEOdecoder">[docs]</a><span class="k">class</span> <span class="nc">VDEOdecoder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot; VIDEO IMAGE LIMA decoder</span>
@@ -399,6 +520,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__knowDecoders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;LIMA_VIDEO_IMAGE&quot;</span><span class="p">:</span> <span class="n">VDEOdecoder</span><span class="p">,</span>
+            <span class="s2">&quot;VIDEO_IMAGE&quot;</span><span class="p">:</span> <span class="n">VDEOdecoder</span><span class="p">,</span>
+            <span class="s2">&quot;DATA_ARRAY&quot;</span><span class="p">:</span> <span class="n">DATAARRAYdecoder</span><span class="p">,</span>
             <span class="s2">&quot;UTF8&quot;</span><span class="p">:</span> <span class="n">UTF8decoder</span><span class="p">,</span>
             <span class="s2">&quot;UINT32&quot;</span><span class="p">:</span> <span class="n">UINT32decoder</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__pool</span> <span class="o">=</span> <span class="p">{}</span>

@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Welcome to NXSDataWriter&#39;s documentation! &#8212; NXSDataWriter 2.29.0 documentation</title>
+    <title>Welcome to NXSDataWriter’s documentation! &#8212; NXSDataWriter 3.1.0 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -37,7 +37,7 @@
         </button>
         <a class="navbar-brand" href="#">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>2.29</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -82,9 +82,6 @@
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.TangoSource">nxswriter.TangoSource module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.Types">nxswriter.Types module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter">Module contents</a></li>
 </ul>
 </li>
@@ -101,7 +98,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Welcome to NXSDataWriter's documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to NXSDataWriter’s documentation!</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#from-sources">From sources</a></li>
@@ -153,7 +150,7 @@
     <div class="col-md-12 content">
       
   <div class="section" id="welcome-to-nxsdatawriter-s-documentation">
-<h1>Welcome to NXSDataWriter's documentation!<a class="headerlink" href="#welcome-to-nxsdatawriter-s-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to NXSDataWriter’s documentation!<a class="headerlink" href="#welcome-to-nxsdatawriter-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -266,7 +263,8 @@ comments related to the client code.</p>
 <span class="c1"># the output file as well as defining a way of data storing.</span>
 <span class="c1"># Examples of the XMLSettings can be found in the XMLExamples directory.</span>
 
-<span class="n">xml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.xml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fl</span><span class="p">:</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">dpx</span><span class="o">.</span><span class="n">XMLSettings</span> <span class="o">=</span> <span class="n">xml</span>
 
 <span class="n">dpx</span><span class="o">.</span><span class="n">JSONRecord</span> <span class="o">=</span> <span class="s1">&#39;{&quot;data&quot;: {&quot;parameterA&quot;:0.2},</span>
@@ -367,9 +365,6 @@ was created by XMLFile class defined in XMLCreator/simpleXML.py.</p>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.TangoSource">nxswriter.TangoSource module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.ThreadPool">nxswriter.ThreadPool module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.Types">nxswriter.Types module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.FileWriter">nxswriter.FileWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5CppWriter">nxswriter.H5CppWriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter.H5PYWriter">nxswriter.H5PYWriter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nxswriter.html#module-nxswriter">Module contents</a></li>
 </ul>
 </li>
