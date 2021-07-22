@@ -82,7 +82,7 @@ class CreateFile(object):
         :returns: current time
         :rtype: :obj:`str`
         """
-        return filewriter.FileWriter.currenttime()
+        return filewriter.FTFile.currenttime()
 
     def jsonstring(self):
         """ merges data in json string
