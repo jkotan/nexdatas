@@ -22,9 +22,8 @@
 import sys
 import json
 import time
-import pytz
-import datetime
 import argparse
+from nxstools import filewriter
 
 from . import TangoDataWriter
 
@@ -83,11 +82,7 @@ class CreateFile(object):
         :returns: current time
         :rtype: :obj:`str`
         """
-        tzone = time.tzname[0]
-        tz = pytz.timezone(tzone)
-        fmt = '%Y-%m-%dT%H:%M:%S.%f%z'
-        starttime = tz.localize(datetime.datetime.now())
-        return str(starttime.strftime(fmt))
+        return filewriter.FileWriter.currenttime()
 
     def jsonstring(self):
         """ merges data in json string
