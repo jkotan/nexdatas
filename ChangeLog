@@ -1,3 +1,7 @@
+2021-07-29 Jan Kotanski <jankotan@gmail.com>
+	* currenttime from the nxstools package used
+	* tagged as 3.1.2
+
 2021-04-08 Jan Kotanski <jankotan@gmail.com>
 	* update tests for h5py >= 3.0
 	* tagged as 3.1.1
