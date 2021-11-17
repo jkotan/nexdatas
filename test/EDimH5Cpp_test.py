@@ -36,7 +36,10 @@ from nxswriter.H5Elements import EFile
 from nxswriter.H5Elements import EDim
 from nxswriter.H5Elements import EDimensions
 
-from TestDataSource import TestDataSource
+try:
+    from TstDataSource import TstDataSource
+except Exception:
+    from .TstDataSource import TstDataSource
 
 if sys.version_info > (3,):
     long = int
@@ -349,7 +352,7 @@ class EDimTest(unittest.TestCase):
         fi = EField(self._fattrs2, el)
         el2 = EDimensions(self._fattrs4, fi)
         el3 = EDim(self._attrs5, el2)
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.value0d = self.__rnd.randint(1, 10)
         el3.source = ds
         el3.store()
@@ -392,11 +395,11 @@ class EDimTest(unittest.TestCase):
         fi = EField(self._fattrs2, el)
         el2 = EDimensions(self._fattrs3, fi)
         el3 = EDim(self._attrs5, el2)
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.value0d = self.__rnd.randint(1, 10)
         el3.source = ds
         el4 = EDim(self._attrs4, el2)
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value0d = self.__rnd.randint(1, 10)
         el4.source = ds2
         el3.store()
@@ -442,7 +445,7 @@ class EDimTest(unittest.TestCase):
         fi = EField(self._fattrs2, el)
         el2 = EDimensions(self._fattrs3, fi)
         el3 = EDim(self._attrs5, el2)
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.value0d = self.__rnd.randint(1, 10)
         el3.source = ds
         EDim(self._attrs2, el2)
@@ -489,7 +492,7 @@ class EDimTest(unittest.TestCase):
         el2 = EDimensions(self._fattrs3, fi)
         el3 = EDim({}, el2)
 
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.value0d = self.__rnd.randint(1, 10)
         el3.source = ds
         el3.store()
@@ -532,7 +535,7 @@ class EDimTest(unittest.TestCase):
         fi = EField(self._fattrs2, el)
         el2 = EDimensions(self._fattrs4, fi)
         el3 = EDim(self._attrs5, el2)
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.value0d = ""
         el3.source = ds
         el3.store()

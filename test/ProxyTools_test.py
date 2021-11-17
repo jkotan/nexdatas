@@ -30,7 +30,10 @@ import time
 import threading
 
 
-import SimpleServerSetUp
+try:
+    import SimpleServerSetUp
+except Exception:
+    from . import SimpleServerSetUp
 
 
 from nxswriter.TangoSource import ProxyTools

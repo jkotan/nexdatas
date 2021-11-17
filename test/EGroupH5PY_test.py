@@ -39,7 +39,10 @@ from nxswriter.Errors import XMLSettingSyntaxError
 from nxstools import filewriter as FileWriter
 from nxstools import h5pywriter as H5PYWriter
 
-from Checkers import Checker
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
 
 # from  xml.sax import SAXParseException
 

@@ -26,7 +26,11 @@ import random
 import struct
 import binascii
 import time
-import Checkers
+try:
+    import Checkers
+except Exception:
+    from . import Checkers
+    
 
 import cx_Oracle
 

@@ -37,9 +37,9 @@ from nxswriter.H5Elements import EFile
 from nxswriter.Types import NTP, Converters
 
 try:
-    from TestDataSource import TestDataSource
+    from TstDataSource import TstDataSource
 except Exception:
-    from .TestDataSource import TestDataSource
+    from .TstDataSource import TstDataSource
 
 try:
     from Checkers import Checker
@@ -226,7 +226,7 @@ class EAttributeH5PYTest(unittest.TestCase):
         eFile = EFile({}, None, self._nxFile)
         el = EField({"name": "test"}, eFile)
         at = EAttribute({"name": "mystring"}, el)
-        ds = TestDataSource()
+        ds = TstDataSource()
         at.source = ds
         self.assertEqual(at.h5Object, None)
         self.assertEqual(at.store(), ('INIT', None))
@@ -247,7 +247,7 @@ class EAttributeH5PYTest(unittest.TestCase):
         eFile = EFile({}, None, self._nxFile)
         el = EField({"name": "test"}, eFile)
         at = EAttribute({"name": "mystring", "type": "NX_INT"}, el)
-        ds = TestDataSource()
+        ds = TstDataSource()
         at.source = ds
         at.strategy = "INIT"
         self.assertEqual(at.h5Object, None)
@@ -276,7 +276,7 @@ class EAttributeH5PYTest(unittest.TestCase):
         eFile = EFile({}, None, self._nxFile)
         el = EField({"name": "test"}, eFile)
         at = EAttribute({"name": "mystring"}, el)
-        ds = TestDataSource()
+        ds = TstDataSource()
         at.source = ds
         at.strategy = "INIT"
         at.trigger = "myTrigger"
@@ -327,7 +327,7 @@ class EAttributeH5PYTest(unittest.TestCase):
         for k in attrs.keys():
 
             el[k] = EAttribute({"name": k, "type": attrs[k][1]}, fi)
-            ds = TestDataSource()
+            ds = TstDataSource()
             el[k].source = ds
             el[k].strategy = "INIT"
             self.assertEqual(el[k].h5Object, None)
@@ -809,7 +809,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
             el[k].strategy = 'STEP'
@@ -871,7 +871,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
             el[k].strategy = 'STEP'
@@ -952,7 +952,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0],
                         "tangoDType":
@@ -1037,7 +1037,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0]
                         if attrs[k][2] != "bool"
@@ -1135,7 +1135,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0]
                         if attrs[k][2] != "bool"
@@ -1220,7 +1220,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0]
                         if attrs[k][2] != "bool"
@@ -1318,7 +1318,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '')
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0]
                         if attrs[k][2] != "bool"
@@ -1406,7 +1406,7 @@ class EAttributeH5PYTest(unittest.TestCase):
                 el[k].tagAttributes[k] = (attrs[k][1], '', (1,))
             else:
                 el[k].tagAttributes[k] = (attrs[k][1], '',)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {"rank": NTP.rTf[1], "value": [attrs[k][0]]
                         if attrs[k][2] != "bool"
@@ -1505,7 +1505,7 @@ class EAttributeH5PYTest(unittest.TestCase):
                 el[k].tagAttributes[k] = (attrs[k][1], '', (1,))
             else:
                 el[k].tagAttributes[k] = (attrs[k][1], '',)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             ds.value = {
                 "rank": NTP.rTf[1],
@@ -1608,7 +1608,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '', (attrs[k][3][0],))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[1], "value": attrs[k][0]
@@ -1714,7 +1714,7 @@ class EAttributeH5PYTest(unittest.TestCase):
 
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (attrs[k][1], '', (attrs[k][3][0],))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[1], "value": attrs[k][0]
@@ -1810,7 +1810,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[2], "value": attrs[k][0]
@@ -1910,7 +1910,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[2],
@@ -2012,7 +2012,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[2],
@@ -2113,7 +2113,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             ds.value = {"rank": NTP.rTf[2],
@@ -2213,7 +2213,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             print
@@ -2316,7 +2316,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             print
@@ -2433,7 +2433,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             print
@@ -2539,7 +2539,7 @@ class EAttributeH5PYTest(unittest.TestCase):
             self.assertEqual(el[k].tagAttributes, {})
             el[k].tagAttributes[k] = (
                 attrs[k][1], '', (attrs[k][3][0], attrs[k][3][1]))
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
 
             print

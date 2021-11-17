@@ -27,8 +27,15 @@ import struct
 import PyTango
 import binascii
 
-import SimpleServerSetUp
-from ProxyHelper import ProxyHelper
+try:
+    import SimpleServerSetUp
+except Exception:
+    from . import SimpleServerSetUp
+
+try:
+    from ProxyHelper import ProxyHelper
+except Exception:
+    from .ProxyHelper import ProxyHelper
 
 
 from nxswriter.TangoSource import TgMember

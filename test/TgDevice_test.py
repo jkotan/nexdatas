@@ -27,7 +27,10 @@ import struct
 import binascii
 import time
 
-import SimpleServerSetUp
+try:
+    import SimpleServerSetUp
+except Exception:
+    from . import SimpleServerSetUp
 
 
 from nxswriter.TangoSource import TgMember
