@@ -603,19 +603,7 @@ class NXSFromXMLH5CppTest(unittest.TestCase):
                 else:
                     self.assertTrue(vl)
 
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
