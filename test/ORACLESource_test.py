@@ -32,7 +32,30 @@ except Exception:
     from . import Checkers
     
 
-import cx_Oracle
+try:
+    import cx_Oracle
+    with open('%s/pwd' % os.path.dirname(Converters_test.__file__)) as fl:
+        passwd = fl.read()[:-1]
+
+    # connection arguments to ORACLE DB
+    args = {}
+    args["dsn"] = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)" \
+                  "(HOST=dbsrv01.desy.de)" \
+                  "(PORT=1521))(LOAD_BALANCE=yes)" \
+                  "(CONNECT_DATA=(SERVER=DEDICATED)" \
+                  "(SERVICE_NAME=desy_db.desy.de)(FAILOVER_MODE=(TYPE=NONE)" \
+                  "(METHOD=BASIC)(RETRIES=180)(DELAY=5))))"
+    args["user"] = "read"
+    args["password"] = passwd
+    # inscance of cx_Oracle
+    ordb = cx_Oracle.connect(**args)
+    ordb.close()
+except Exception:
+    import pytest
+    if pytest.__version__ < "3.0.0":
+        pytest.skip()
+    else:
+        pytestmark = pytest.mark.skip
 
 from nxswriter.DBaseSource import DBaseSource
 from nxswriter.Errors import PackageError

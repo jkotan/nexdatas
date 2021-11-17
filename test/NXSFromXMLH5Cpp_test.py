@@ -146,6 +146,46 @@ class NXSFromXMLH5CppTest(unittest.TestCase):
     def tearDown(self):
         print("tearing down ...")
 
+    def runtest(self, argv, pipeinput=None):
+        old_stdout = sys.stdout
+        old_stderr = sys.stderr
+        sys.stdout = mystdout = StringIO()
+        sys.stderr = mystderr = StringIO()
+        old_argv = sys.argv
+        sys.argv = argv
+
+        if pipeinput is not None:
+            r, w = os.pipe()
+            new_stdin = mytty(os.fdopen(r, 'r'))
+            old_stdin, sys.stdin = sys.stdin, new_stdin
+            tm = threading.Timer(1., myinput, [w, pipeinput])
+            tm.start()
+        else:
+            old_stdin = sys.stdin
+            sys.stdin = StringIO()
+
+        etxt = None
+        try:
+            NXSFromXML.main()
+        except Exception as e:
+            etxt = str(e)
+        except SystemExit as e:
+            etxt = str(e)
+        sys.argv = old_argv
+
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+        sys.stdin = old_stdin
+        sys.argv = old_argv
+        vl = mystdout.getvalue()
+        er = mystderr.getvalue()
+        # print(vl)
+        # print(er)
+        if etxt:
+            print(etxt)
+        self.assertTrue(etxt is None)
+        return vl, er
+
     # Exception tester
     # \param exception expected exception
     # \param method called method
@@ -203,19 +243,7 @@ class NXSFromXMLH5CppTest(unittest.TestCase):
                     text_file.write(self._scanXml % fname)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
@@ -565,19 +593,7 @@ class NXSFromXMLH5CppTest(unittest.TestCase):
                     text_file.write(self._scanXml % fname)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
@@ -845,19 +861,7 @@ class NXSFromXMLH5CppTest(unittest.TestCase):
                     text_file.write(self._scanXmlpart)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:

@@ -26,7 +26,20 @@ import random
 import struct
 import binascii
 
-import psycopg2
+try:
+    import psycopg2
+    # connection arguments to PGSQL DB
+    args = {}
+    args["database"] = 'mydb'
+    # inscance of psycog2
+    pgdb = psycopg2.connect(**args)
+    pgdb.close()
+except Exception:
+    import pytest
+    if pytest.__version__ < "3.0.0":
+        pytest.skip()
+    else:
+        pytestmark = pytest.mark.skip
 
 from nxswriter.DBaseSource import DBaseSource
 from nxswriter.Errors import PackageError
