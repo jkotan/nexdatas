@@ -30,11 +30,11 @@ try:
     import Checkers
 except Exception:
     from . import Checkers
-    
+
 
 try:
     import cx_Oracle
-    with open('%s/pwd' % os.path.dirname(Converters_test.__file__)) as fl:
+    with open('%s/pwd' % os.path.dirname(Checkers.__file__)) as fl:
         passwd = fl.read()[:-1]
 
     # connection arguments to ORACLE DB

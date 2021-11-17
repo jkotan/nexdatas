@@ -28,11 +28,6 @@ import binascii
 import time
 
 try:
-    import MySQLdb
-except Exception:
-    import pymysql
-    pymysql.install_as_MySQLdb()
-try:
     try:
         import MySQLdb
     except Exception:
@@ -69,8 +64,7 @@ except Exception:
             pytest.skip()
         else:
             pytestmark = pytest.mark.skip
-        
-        
+
 
 from nxswriter.DBaseSource import DBaseSource
 from nxswriter.Errors import PackageError

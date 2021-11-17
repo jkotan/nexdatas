@@ -159,7 +159,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
             error = True
         self.assertEqual(error, True)
 
-    def runtest(self, argv, pipeinput=None):
+    def runtest(self, argv):
         old_stdout = sys.stdout
         old_stderr = sys.stderr
         sys.stdout = mystdout = StringIO()
@@ -167,15 +167,8 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
         old_argv = sys.argv
         sys.argv = argv
 
-        if pipeinput is not None:
-            r, w = os.pipe()
-            new_stdin = mytty(os.fdopen(r, 'r'))
-            old_stdin, sys.stdin = sys.stdin, new_stdin
-            tm = threading.Timer(1., myinput, [w, pipeinput])
-            tm.start()
-        else:
-            old_stdin = sys.stdin
-            sys.stdin = StringIO()
+        old_stdin = sys.stdin
+        sys.stdin = StringIO()
 
         etxt = None
         try:
