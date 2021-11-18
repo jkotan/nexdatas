@@ -15,7 +15,7 @@ RUN add-apt-repository "deb http://repos.pni-hdri.de/apt/debian buster main" -y
 
 # install packages
 RUN apt-get -qq update && apt-get -qq -y dist-upgrade
-RUN apt-get -qq update && apt-get -qq install -y default-mysql-client  python3-h5py python3-sphinx  apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libomnithread4-dev libzmq3-dev python3-pninexus hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4 hdf5-plugins-common liblog4j1.2-java python3-tz python3-setuptools
+RUN apt-get -qq update && apt-get -qq install -y default-mysql-client  python3-h5py python3-sphinx  apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libomnithread4-dev libzmq3-dev python3-pninexus hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4 hdf5-plugins-common liblog4j1.2-java python3-tz python3-setuptools python3-pytest
 
 # set db configuration
 RUN useradd -ms /bin/bash tango

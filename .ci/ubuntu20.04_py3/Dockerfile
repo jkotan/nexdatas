@@ -13,7 +13,7 @@ RUN add-apt-repository "deb http://repos.pni-hdri.de/apt/debian focal main" -y
 
 # install packages
 RUN apt-get -qq update && apt-get -qq dist-upgrade
-RUN apt-get -qq update && apt-get -qq install -y mysql-client mysql-client python3-h5py python3-sphinx apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libzmq3-dev python3-distutils python3-pninexus hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4 liblog4j1.2-java python3-tz python3-setuptools
+RUN apt-get -qq update && apt-get -qq install -y mysql-client mysql-client python3-h5py python3-sphinx apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libzmq3-dev python3-distutils python3-pninexus hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4 liblog4j1.2-java python3-tz python3-setuptools python3-pytest
 
 # install h5py 2.10
 RUN  apt-get -qq update &&  apt-get -qq install -y  git cython3 libhdf5-dev python3-dev \
