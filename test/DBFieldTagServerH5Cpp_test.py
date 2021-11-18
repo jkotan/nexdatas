@@ -23,9 +23,20 @@
 import unittest
 import PyTango
 
-import ServerSetUp
-import DBFieldTagWriterH5Cpp_test
-from ProxyHelper import ProxyHelper
+try:
+    import ServerSetUp
+except Exception:
+    from . import ServerSetUp
+
+try:
+    import DBFieldTagWriterH5Cpp_test
+except Exception:
+    from . import DBFieldTagWriterH5Cpp_test
+
+try:
+    from ProxyHelper import ProxyHelper
+except Exception:
+    from .ProxyHelper import ProxyHelper
 
 # test fixture
 

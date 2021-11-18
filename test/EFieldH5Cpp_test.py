@@ -42,9 +42,9 @@ from nxstools import h5cppwriter as H5CppWriter
 from nxswriter.Errors import XMLSettingSyntaxError
 
 try:
-    from TestDataSource import TestDataSource
+    from TstDataSource import TstDataSource
 except Exception:
-    from .TestDataSource import TestDataSource
+    from .TstDataSource import TstDataSource
 
 
 try:
@@ -319,7 +319,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
         self.assertTrue(isinstance(el, Element))
         self.assertTrue(isinstance(el, FElement))
@@ -355,7 +355,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
         el.strategy = 'STEP'
         self.assertTrue(isinstance(el, Element))
@@ -389,7 +389,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
         el.strategy = 'STEP'
         el.grows = 2
@@ -424,7 +424,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
         el.strategy = 'INIT'
         self.assertTrue(isinstance(el, Element))
@@ -458,7 +458,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.valid = False
         el.source = ds
         el.strategy = 'STEP'
@@ -494,7 +494,7 @@ class EFieldH5CppTest(unittest.TestCase):
         eFile = EFile({}, None, self._nxFile)
         el = EField(self._fattrs, eFile)
         el.rank = '2'
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.dims = [3, 4]
         el.source = ds
         el.strategy = 'STEP'
@@ -532,7 +532,7 @@ class EFieldH5CppTest(unittest.TestCase):
         fattrs = {"name": "test", "units": "m", "type": "NX_INT64"}
         el = EField(fattrs, eFile)
         el.rank = '2'
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.dims = [3, 4]
         el.source = ds
         el.strategy = 'STEP'
@@ -594,7 +594,7 @@ class EFieldH5CppTest(unittest.TestCase):
         for k in attrs:
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
             el[k].strategy = 'STEP'
@@ -674,7 +674,7 @@ class EFieldH5CppTest(unittest.TestCase):
                     {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
             else:
                 el[k] = EField({"name": k, "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
 
@@ -754,7 +754,7 @@ class EFieldH5CppTest(unittest.TestCase):
             stt = 'POSTRUN'
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
             el[k].postrun = k
@@ -853,7 +853,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "1"
             el[k].lengths = {"1": str(attrs[k][3][0])}
@@ -968,7 +968,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "1"
             el[k].lengths = {"1": str(attrs[k][3][0])}
@@ -1070,7 +1070,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "1"
             el[k].lengths = {"1": str(attrs[k][3][0])}
@@ -1176,7 +1176,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "2"
             el[k].lengths = {
@@ -1297,7 +1297,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "2"
             el[k].lengths = {
@@ -1411,7 +1411,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
             el[k] = EField(
                 {"name": k, "type": attrs[k][1], "units": "m"}, eFile)
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].rank = "2"
             el[k].lengths = {
@@ -1484,7 +1484,7 @@ class EFieldH5CppTest(unittest.TestCase):
         fattrs = dict(fattrs, **(maTn))
         el = EField(fattrs, eFile)
 
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.valid = True
         el.source = ds
         el.strategy = 'STEP'
@@ -1532,7 +1532,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
         el = EField(fattrs, eFile)
 
-        ds = TestDataSource()
+        ds = TstDataSource()
         ds.valid = True
         el.source = ds
         el.strategy = 'STEP'
@@ -1606,7 +1606,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
                 self.assertEqual(el[k].tagAttributes, {})
                 el[k].tagAttributes[k] = (attrs[k][1], str(attrs[k][0]))
-                ds = TestDataSource()
+                ds = TstDataSource()
                 ds.valid = True
                 el[k].source = ds
                 el[k].strategy = 'STEP'
@@ -1690,7 +1690,7 @@ class EFieldH5CppTest(unittest.TestCase):
             el[k].tagAttributes[k] = (
                 attrs[k][1], str(attrs[k][0]), attrs[k][3])
 
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.valid = True
             el[k].source = ds
             el[k].strategy = 'STEP'
@@ -1781,7 +1781,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k].tagAttributes[k] = (attrs[k][1], "".join(
                     [str(it) + " " for it in attrs[k][0]]), attrs[k][3])
                 # print el[k].tagAttributes[k]
-                ds = TestDataSource()
+                ds = TstDataSource()
                 ds.valid = True
                 el[k].source = ds
                 el[k].strategy = 'STEP'
@@ -1875,7 +1875,7 @@ class EFieldH5CppTest(unittest.TestCase):
                     attrs[k][3]
                 )
 
-                ds = TestDataSource()
+                ds = TstDataSource()
                 ds.valid = True
                 el[k].source = ds
                 el[k].strategy = 'STEP'
@@ -2515,7 +2515,7 @@ class EFieldH5CppTest(unittest.TestCase):
             self._fname, overwrite=True).root()
         eFile = EFile({}, None, self._nxFile)
         el = EField({"name": "myfield", "units": "m"}, eFile)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
 
         self.assertTrue(isinstance(el, Element))
@@ -2601,7 +2601,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0],
                         "tangoDType": NTP.pTt[(attrs[k][2]) if attrs[k][2]
                                               else "string"], "shape": [0, 0]}
@@ -2726,7 +2726,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0],
                         "tangoDType": NTP.pTt[(attrs[k][2]) if attrs[k][2]
                                               else "string"], "shape": [0, 0]}
@@ -2854,7 +2854,7 @@ class EFieldH5CppTest(unittest.TestCase):
                                    for c in range(steps)]
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0][0],
                         "tangoDType": NTP.pTt[(attrs[k][2]) if attrs[k][2]
                                               else "string"],
@@ -2980,7 +2980,7 @@ class EFieldH5CppTest(unittest.TestCase):
                                for r in range(steps)]
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[0], "value": attrs[k][0][0],
                         "tangoDType": NTP.pTt[(attrs[k][2]) if attrs[k][2]
                                               else "string"], "shape": [0, 0]}
@@ -3101,7 +3101,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [Converters.toBool(attrs[k][0][0])]),
@@ -3246,7 +3246,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [Converters.toBool(attrs[k][0][0])]),
@@ -3376,7 +3376,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
 
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0][0] if attrs[k][2] != "bool"
@@ -3524,7 +3524,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
 
             ds.value = {"rank": NTP.rTf[1],
                         "value": attrs[k][0][0],
@@ -3666,7 +3666,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [Converters.toBool(c)
@@ -3790,7 +3790,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             el[k].source = ds
             el[k].rank = "1"
             el[k].grows = grow
@@ -3930,7 +3930,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [Converters.toBool(c)
@@ -4064,7 +4064,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0][0] if attrs[k][2] != "bool"
                                   else [Converters.toBool(c)
@@ -4203,7 +4203,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[1],
                         "value": (attrs[k][0][0]
                                   if attrs[k][2] != "bool"
@@ -4338,7 +4338,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {
                 "rank": NTP.rTf[2],
                 "value": (attrs[k][0] if attrs[k][2] != "bool"
@@ -4483,7 +4483,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value":
                         (attrs[k][0] if attrs[k][2] != "bool"
@@ -4637,7 +4637,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [[Converters.toBool(
@@ -4770,7 +4770,7 @@ class EFieldH5CppTest(unittest.TestCase):
                 el[k] = EField({"name": k, "units": "m"}, eFile)
 
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2]) if attrs[k][2]
@@ -4909,7 +4909,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [[Converters.toBool(c)
@@ -5050,7 +5050,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])
@@ -5201,7 +5201,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0][0] if attrs[k][2] != "bool"
                                   else [[Converters.toBool(c)
@@ -5341,7 +5341,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])
@@ -5479,7 +5479,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (
                             attrs[k][0] if attrs[k][2] != "bool"
@@ -5622,7 +5622,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])
@@ -5769,7 +5769,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nnn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0][0] if attrs[k][2] != "bool"
                                   else [[Converters.toBool(c[0])]
@@ -5906,7 +5906,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nnn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])
@@ -6047,7 +6047,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0] if attrs[k][2] != "bool"
                                   else [[Converters.toBool(c) for c in row]
@@ -6191,7 +6191,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])
@@ -6344,7 +6344,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {
                 "rank": NTP.rTf[2],
                 "value": (attrs[k][0][0]
@@ -6481,7 +6481,7 @@ class EFieldH5CppTest(unittest.TestCase):
 
 #            print "nn",k
             el[k].strategy = stt
-            ds = TestDataSource()
+            ds = TstDataSource()
             ds.value = {"rank": NTP.rTf[2],
                         "value": (attrs[k][0][0]),
                         "tangoDType": NTP.pTt[(attrs[k][2])

@@ -34,7 +34,10 @@ from nxswriter.Errors import XMLSettingSyntaxError
 from nxstools import filewriter as FileWriter
 from nxstools import h5cppwriter as H5CppWriter
 
-from TestDataSource import TestDataSource
+try:
+    from TstDataSource import TstDataSource
+except Exception:
+    from .TstDataSource import TstDataSource
 
 # if 64-bit machione
 IS64BIT = (struct.calcsize("P") == 8)
@@ -160,7 +163,7 @@ class FElementH5CppTest(unittest.TestCase):
         self.assertEqual(el.doc, "")
         self.assertEqual(el.run(), None)
         self.assertEqual(el.source, None)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el.source = ds
         self.assertEqual(el.source, ds)
         self.assertTrue(hasattr(el.source, "getData"))
@@ -428,7 +431,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_1d(self):
         print("Run: %s.test_findShape_ds_1d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -537,7 +540,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -591,7 +594,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_checkData(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -647,7 +650,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_ext_checkData(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -707,7 +710,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends_checkData(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -766,7 +769,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends2_checkData(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -825,7 +828,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends3_checkData(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -882,7 +885,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_ext(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -942,7 +945,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -996,7 +999,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends2(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -1050,7 +1053,7 @@ class FElementH5CppTest(unittest.TestCase):
     # \brief It tests _findShape method
     def test_findShape_ds_2d_extends3(self):
         print("Run: %s.test_findShape_ds_2d() " % self.__class__.__name__)
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         el.source = ds
 
@@ -1145,7 +1148,7 @@ class FElementH5CppTest(unittest.TestCase):
         text = "Data for %s not found. DATASOURCE:%s"
         uob = "unnamed object"
         uds = "unknown datasource"
-        ds = TestDataSource()
+        ds = TstDataSource()
         el = FElement(self._tfname, self._fattrs, None)
         self.assertEqual(
             el.setMessage(), (text % (uob, uds), None))

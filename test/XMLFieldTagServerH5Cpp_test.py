@@ -23,9 +23,20 @@ import unittest
 
 import PyTango
 
-import ServerSetUp
-import XMLFieldTagWriterH5Cpp_test
-from ProxyHelper import ProxyHelper
+try:
+    import ServerSetUp
+except Exception:
+    from . import ServerSetUp
+
+try:
+    import XMLFieldTagWriterH5Cpp_test
+except Exception:
+    from . import XMLFieldTagWriterH5Cpp_test
+
+try:
+    from ProxyHelper import ProxyHelper
+except Exception:
+    from .ProxyHelper import ProxyHelper
 
 # test fixture
 

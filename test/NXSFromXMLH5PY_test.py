@@ -159,6 +159,39 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
             error = True
         self.assertEqual(error, True)
 
+    def runtest(self, argv):
+        old_stdout = sys.stdout
+        old_stderr = sys.stderr
+        sys.stdout = mystdout = StringIO()
+        sys.stderr = mystderr = StringIO()
+        old_argv = sys.argv
+        sys.argv = argv
+
+        old_stdin = sys.stdin
+        sys.stdin = StringIO()
+
+        etxt = None
+        try:
+            NXSFromXML.main()
+        except Exception as e:
+            etxt = str(e)
+        except SystemExit as e:
+            etxt = str(e)
+        sys.argv = old_argv
+
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+        sys.stdin = old_stdin
+        sys.argv = old_argv
+        vl = mystdout.getvalue()
+        er = mystderr.getvalue()
+        # print(vl)
+        # print(er)
+        if etxt:
+            print(etxt)
+        self.assertTrue(etxt is None)
+        return vl, er
+
     # scanRecord test
     # \brief It tests recording of simple h5 file
     def test_scanRecord(self):
@@ -203,19 +236,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                     text_file.write(self._scanXml % fname)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
@@ -565,19 +586,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                     text_file.write(self._scanXml % fname)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
@@ -587,19 +596,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 else:
                     self.assertTrue(vl)
 
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:
@@ -845,19 +842,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                     text_file.write(self._scanXmlpart)
                 with open(jsonfile, "w") as text_file:
                     text_file.write(jdata)
-                old_stdout = sys.stdout
-                old_stderr = sys.stderr
-                sys.stdout = mystdout = StringIO()
-                sys.stderr = mystderr = StringIO()
-                old_argv = sys.argv
-                sys.argv = cmd
-                NXSFromXML.main()
-
-                sys.argv = old_argv
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-                vl = mystdout.getvalue()
-                er = mystderr.getvalue()
+                vl, er = self.runtest(cmd)
                 if PYTG_BUG_213:
                     self.assertTrue(er)
                 else:

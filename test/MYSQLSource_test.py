@@ -28,10 +28,43 @@ import binascii
 import time
 
 try:
-    import MySQLdb
+    try:
+        import MySQLdb
+    except Exception:
+        import pymysql
+        pymysql.install_as_MySQLdb()
+    # connection arguments to MYSQL DB
+    args = {}
+    args["db"] = 'tango'
+    args["host"] = 'localhost'
+    args["read_default_file"] = '/etc/my.cnf'
+    # inscance of MySQLdb
+    mydb = MySQLdb.connect(**args)
+    mydb.close()
 except Exception:
-    import pymysql
-    pymysql.install_as_MySQLdb()
+    try:
+        try:
+            import MySQLdb
+        except Exception:
+            import pymysql
+            pymysql.install_as_MySQLdb()
+        import MySQLdb
+        from os.path import expanduser
+        home = expanduser("~")
+        # connection arguments to MYSQL DB
+        args2 = {'host': u'localhost', 'db': u'tango',
+                 'read_default_file': u'%s/.my.cnf' % home,
+                 'use_unicode': True}
+        # inscance of MySQLdb
+        mydb = MySQLdb.connect(**args2)
+        mydb.close()
+    except Exception:
+        import pytest
+        if pytest.__version__ < "3.0.0":
+            pytest.skip()
+        else:
+            pytestmark = pytest.mark.skip
+
 
 from nxswriter.DBaseSource import DBaseSource
 from nxswriter.Errors import PackageError

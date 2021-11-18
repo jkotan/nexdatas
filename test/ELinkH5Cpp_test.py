@@ -24,8 +24,15 @@ import os
 import sys
 import struct
 
-from TestDataSource import TestDataSource
+try:
+    from TstDataSource import TstDataSource
+except Exception:
+    from .TstDataSource import TstDataSource
 
+try:
+    from Checkers import Checker
+except Exception:
+    from .Checkers import Checker
 
 from nxswriter.FElement import FElement
 from nxswriter.ELink import ELink
@@ -35,8 +42,6 @@ from nxswriter.Element import Element
 from nxswriter.H5Elements import EFile
 from nxswriter.Errors import XMLSettingSyntaxError
 from nxswriter.FetchNameHandler import TNObject
-
-from Checkers import Checker
 
 from nxstools import filewriter as FileWriter
 from nxstools import h5cppwriter as H5CppWriter
@@ -502,22 +507,22 @@ class ELinkH5CppTest(unittest.TestCase):
         TNObject("entry3", "NXentry", gT2)
 
         gT = TNObject()
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 
@@ -720,22 +725,22 @@ class ELinkH5CppTest(unittest.TestCase):
         gT2 = TNObject()
         TNObject("entry3", "NXentry", gT2)
 
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 
@@ -947,22 +952,22 @@ class ELinkH5CppTest(unittest.TestCase):
         gT2 = TNObject()
         TNObject("entry3", "NXentry", gT2)
 
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 
@@ -1176,22 +1181,22 @@ class ELinkH5CppTest(unittest.TestCase):
         gT2 = TNObject()
         TNObject("entry3", "NXentry", gT2)
 
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 
@@ -1353,22 +1358,22 @@ class ELinkH5CppTest(unittest.TestCase):
         gT2 = TNObject()
         TNObject("entry3", "NXentry", gT2)
 
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 
@@ -1597,22 +1602,22 @@ class ELinkH5CppTest(unittest.TestCase):
         gT2 = TNObject()
         TNObject("entry3", "NXentry", gT2)
 
-        ds1 = TestDataSource()
+        ds1 = TstDataSource()
         ds1.value = {"rank": 0, "value": tatts1["target1"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds2 = TestDataSource()
+        ds2 = TstDataSource()
         ds2.value = {"rank": 0, "value": tatts1["target2"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds3 = TestDataSource()
+        ds3 = TstDataSource()
         ds3.value = {"rank": 0, "value": tatts1["target3"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds4 = TestDataSource()
+        ds4 = TstDataSource()
         ds4.value = {"rank": 0, "value": tatts1["target4"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds5 = TestDataSource()
+        ds5 = TstDataSource()
         ds5.value = {"rank": 0, "value": tatts1["target5"],
                      "tangoDType": "DevString", "shape": [0, 0]}
-        ds6 = TestDataSource()
+        ds6 = TstDataSource()
         ds6.value = {"rank": 0, "value": tatts1["target6"],
                      "tangoDType": "DevString", "shape": [0, 0]}
 

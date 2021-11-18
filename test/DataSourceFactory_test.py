@@ -24,8 +24,10 @@ import sys
 import struct
 import json
 
-import TestDataSource
-
+try:
+    import TstDataSource
+except Exception:
+    from . import TstDataSource
 
 from nxswriter.DataSourceFactory import DataSourceFactory
 from nxswriter.DataSourcePool import DataSourcePool
@@ -322,14 +324,14 @@ ds.result = ds.myclient + 1
 
         atts = {"type": "CL"}
         name = "myRecord"
-        if "test.TestDataSource" in sys.modules.keys():
+        if "test.TstDataSource" in sys.modules.keys():
             wjson = json.loads(
                 '{"datasources":{'
-                '"CL":"test.TestDataSource.TestDataSource"}}')
+                '"CL":"test.TstDataSource.TstDataSource"}}')
         else:
             wjson = json.loads(
                 '{"datasources":{'
-                '"CL":"TestDataSource.TestDataSource"}}')
+                '"CL":"TstDataSource.TstDataSource"}}')
         gjson = json.loads('{"data":{"myRecord":1123}}')
         el = EField(self._fattrs, None)
         ds = DataSourceFactory(atts, el)
@@ -373,7 +375,7 @@ ds.result = ds.myclient + 1
         self.assertEqual(td.stack[7], "isValid")
         self.assertEqual(td.stack[8], "setDecoders")
         self.assertEqual(td.stack[9], dcp)
-        self.assertEqual(type(ds.last.source), TestDataSource.TestDataSource)
+        self.assertEqual(type(ds.last.source), TstDataSource.TstDataSource)
         self.assertEqual(ds.last.source.__str__(), "Test DataSource")
         self.assertEqual(len(td.stack), 11)
         self.assertEqual(td.stack[10], '__str__')
