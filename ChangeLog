@@ -1,3 +1,7 @@
+2021-11-30 Jan Kotanski <jankotan@gmail.com>
+	* add stderrflag and stoutflag  for std streams
+	* tagged as 3.2.0
+
 2021-07-29 Jan Kotanski <jankotan@gmail.com>
 	* currenttime from the nxstools package used
 	* tagged as 3.1.2
