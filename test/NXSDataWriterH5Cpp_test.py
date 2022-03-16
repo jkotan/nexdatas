@@ -621,7 +621,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
-        fmname1 = '%s.entry001.json' % fname 
+        fmname1 = '%s.entry001.json' % fname
         fmname2 = '%s.entry002.json' % fname
         try:
             dp = PyTango.DeviceProxy(self._sv.device)
@@ -1017,9 +1017,9 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                     "dataParameters": {
                         "NX_class": "NXdata",
                         "cnt1": {
-                        "shape": [
-                            2
-                        ],
+                            "shape": [
+                                2
+                            ],
                             "source": "exp_c01",
                             "source_name": "",
                             "source_type": "CLIENT",
@@ -1038,7 +1038,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
                             "units": ""
-                    }
+                        }
                     },
                     "instrumentParameters": {
                         "NX_class": "NXinstrument",
@@ -1051,7 +1051,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                                 "source": "exp_c01",
                                 "source_name": "",
                                 "source_type": "CLIENT",
-                            "strategy": "STEP",
+                                "strategy": "STEP",
                                 "type": "NX_FLOAT",
                                 "units": "m"
                             },
@@ -1063,7 +1063,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                                 "source": "p09/mca/exp.02",
                                 "source_name": "",
                                 "source_type": "CLIENT",
-                            "strategy": "STEP",
+                                "strategy": "STEP",
                                 "type": "NX_FLOAT",
                                 "units": ""
                             }

@@ -774,7 +774,7 @@ ds.res2 = str(True)
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__, fun)
-        fmname1 = '%s.entry001.json' % fname 
+        fmname1 = '%s.entry001.json' % fname
         fmname2 = '%s.entry002.json' % fname
         try:
             tdw = TangoDataWriter()
@@ -1134,9 +1134,9 @@ ds.res2 = str(True)
                     "dataParameters": {
                         "NX_class": "NXdata",
                         "cnt1": {
-                        "shape": [
-                            2
-                        ],
+                            "shape": [
+                                2
+                            ],
                             "source": "exp_c01",
                             "source_name": "",
                             "source_type": "CLIENT",
@@ -1155,7 +1155,7 @@ ds.res2 = str(True)
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
                             "units": ""
-                    }
+                        }
                     },
                     "instrumentParameters": {
                         "NX_class": "NXinstrument",
@@ -1168,7 +1168,7 @@ ds.res2 = str(True)
                                 "source": "exp_c01",
                                 "source_name": "",
                                 "source_type": "CLIENT",
-                            "strategy": "STEP",
+                                "strategy": "STEP",
                                 "type": "NX_FLOAT",
                                 "units": "m"
                             },
@@ -1180,7 +1180,7 @@ ds.res2 = str(True)
                                 "source": "p09/mca/exp.02",
                                 "source_name": "",
                                 "source_type": "CLIENT",
-                            "strategy": "STEP",
+                                "strategy": "STEP",
                                 "type": "NX_FLOAT",
                                 "units": ""
                             }
