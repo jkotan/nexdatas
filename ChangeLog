@@ -1,3 +1,8 @@
+2022-03-16 Jan Kotanski <jankotan@gmail.com>
+	* add metadataOutput property
+	* requires nxstools 3.16.1
+	* tagged as 3.3.0
+
 2021-11-30 Jan Kotanski <jankotan@gmail.com>
 	* add stderrflag and stoutflag  for std streams
 	* tagged as 3.2.0
