@@ -684,7 +684,7 @@ class TangoDataWriter(object):
 
         if NXSMETA and self.__nxRoot:
             args = {}
-            if True or self.metadataOutput and \
+            if self.metadataOutput and \
                'file' in self.metadataOutput.split(","):
                 for ad in self.__entryAttrs:
                     nm = ad.get("name", None)
