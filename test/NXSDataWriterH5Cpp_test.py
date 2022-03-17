@@ -268,6 +268,29 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             error = True
         self.assertEqual(error, True)
 
+    def myAssertDict(self, dct, dct2, skip=None, parent=None):
+        parent = parent or ""
+        self.assertTrue(isinstance(dct, dict))
+        self.assertTrue(isinstance(dct2, dict))
+        if len(list(dct.keys())) != len(list(dct2.keys())):
+            print(list(dct.keys()))
+            print(list(dct2.keys()))
+        self.assertEqual(
+            len(list(dct.keys())), len(list(dct2.keys())))
+        for k, v in dct.items():
+            if parent:
+                node = "%s.%s" % (parent, k)
+            else:
+                node = k
+            if k not in dct2.keys():
+                print("%s not in %s" % (k, dct2))
+            self.assertTrue(k in dct2.keys())
+            if not skip or node not in skip:
+                if isinstance(v, dict):
+                    self.myAssertDict(v, dct2[k], skip, node)
+                else:
+                    self.assertEqual(v, dct2[k])
+
     # openFile test
     # \brief It tests validation of opening and closing H5 files.
     def test_openFile(self):
@@ -598,11 +621,14 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fun = sys._getframe().f_code.co_name
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
+        fmname1 = '%s.entry001.json' % fname
+        fmname2 = '%s.entry002.json' % fname
         try:
             dp = PyTango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
+            self.setProp(dp, "metadataOutput", "file")
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
@@ -981,9 +1007,83 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 self.assertEqual(at.dtype, "string")
 
             f.close()
+            with open(fmname1, "r") as mf:
+                md1 = mf.read()
+            with open(fmname2, "r") as mf:
+                md2 = mf.read()
+            mresult = {
+                "scientificMetadata": {
+                    "NX_class": "NXentry",
+                    "dataParameters": {
+                        "NX_class": "NXdata",
+                        "cnt1": {
+                            "shape": [
+                                2
+                            ],
+                            "source": "exp_c01",
+                            "source_name": "",
+                            "source_type": "CLIENT",
+                            "strategy": "STEP",
+                            "type": "NX_FLOAT",
+                            "units": "m"
+                        },
+                        "data": {
+                            "shape": [
+                                2,
+                                2048
+                            ],
+                            "source": "p09/mca/exp.02",
+                            "source_name": "",
+                            "source_type": "CLIENT",
+                            "strategy": "STEP",
+                            "type": "NX_FLOAT",
+                            "units": ""
+                        }
+                    },
+                    "instrumentParameters": {
+                        "NX_class": "NXinstrument",
+                        "detectorParameters": {
+                            "NX_class": "NXdetector",
+                            "counter1": {
+                                "shape": [
+                                    2
+                                ],
+                                "source": "exp_c01",
+                                "source_name": "",
+                                "source_type": "CLIENT",
+                                "strategy": "STEP",
+                                "type": "NX_FLOAT",
+                                "units": "m"
+                            },
+                            "mca": {
+                                "shape": [
+                                    2,
+                                    2048
+                                ],
+                                "source": "p09/mca/exp.02",
+                                "source_name": "",
+                                "source_type": "CLIENT",
+                                "strategy": "STEP",
+                                "type": "NX_FLOAT",
+                                "units": ""
+                            }
+                        },
+                        "short_name": "scan instrument"
+                    },
+                    "name": "entry001"
+                }
+            }
+            mresult["scientificMetadata"]["name"] = "entry001"
+            self.myAssertDict(mresult, json.loads(md1))
+            mresult["scientificMetadata"]["name"] = "entry002"
+            self.myAssertDict(mresult, json.loads(md2))
         finally:
             if os.path.isfile(fname):
                 os.remove(fname)
+            if os.path.isfile(fmname2):
+                os.remove(fmname2)
+            if os.path.isfile(fmname1):
+                os.remove(fmname1)
 
     # scanRecord test
     # \brief It tests recording of simple h5 file

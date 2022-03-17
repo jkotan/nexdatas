@@ -42,6 +42,7 @@ from .H5Elements import EFile
 from .EGroup import EGroup
 from .DecoderPool import DecoderPool
 from .DataSourcePool import DataSourcePool
+from .Metadata import Metadata, NXSMETA
 
 
 WRITERS = {}
@@ -120,6 +121,9 @@ class TangoDataWriter(object):
         #:  :class:`nxswriter.ThreadPool.ThreadPool` >) \
         #:     collection of thread pool with triggered STEP elements
         self.__triggerPools = {}
+        #: (:obj:`list` <:obj:`dict` <:obj:`str`, :obj:`str` > >) \
+        #: list of entry group attributes
+        self.__entryAttrs = []
         #: (:class:`nxswriter.FileWriter.FTGroup`) H5 file handle
         self.__nxRoot = None
         #: (:obj: `list` <:class:`nxswriter.FileWriter.FTGroup` >)
@@ -139,6 +143,8 @@ class TangoDataWriter(object):
                 self.writer = wr
                 break
 
+        #: (:obj:`str`) metadata output
+        self.metadataOutput = ''
         #: (:obj:`int`) steps per file
         self.stepsperfile = 0
 
@@ -493,6 +499,8 @@ class TangoDataWriter(object):
             self.__finalPool = handler.finalPool
             self.__triggerPools = handler.triggerPools
 
+            self.__entryAttrs = handler.entryAttrs
+
             self.__initPool.numberOfThreads = self.numberOfThreads
             self.__stepPool.numberOfThreads = self.numberOfThreads
             self.__finalPool.numberOfThreads = self.numberOfThreads
@@ -674,6 +682,23 @@ class TangoDataWriter(object):
         if self.__nxFile and hasattr(self.__nxFile, "flush"):
             self.__nxFile.flush()
 
+        if NXSMETA and self.__nxRoot:
+            args = {}
+            if self.metadataOutput and \
+               'file' in self.metadataOutput.split(","):
+                for ad in self.__entryAttrs:
+                    nm = ad.get("name", None)
+                    tp = ad.get("type", None)
+                    if nm and tp in ["NXentry"]:
+                        args["output"] = "%s.%s.json" % (
+                            self.__fileName, ad["name"])
+                        args["args"] = [self.__fileName]
+                        args["entrynames"] = nm
+                        mdata = Metadata(self.__nxRoot).get(**args)
+                        if mdata:
+                            if args["output"]:
+                                with open(args["output"], "w") as fl:
+                                    fl.write(mdata)
         gc.collect()
 
     def closeFile(self):

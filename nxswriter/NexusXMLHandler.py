@@ -124,6 +124,10 @@ class NexusXMLHandler(sax.ContentHandler):
             'strategy': EStrategy
         }
 
+        #: (:obj:`list` <:obj:`dict` <:obj:`str`, :obj:`str` > >) \
+        #: list of entry group attributes
+        self.entryAttrs = []
+
         #: (:obj:`dict` <:obj:`str`, :obj:`type` > ) \
         #: map of tag names to related classes
         self.withAttr = ['group', 'field']
@@ -131,6 +135,7 @@ class NexusXMLHandler(sax.ContentHandler):
         #: (:obj:`list` <:obj:`str`>) transparent tags
         self.transparentTags = ['definition']
 
+        #: (:obj:`list` <:obj:`str`>) transparent tags
         #: (:class:`nxswriter.ThreadPool.ThreadPool`) \
         #:       thread pool with INIT elements
         self.initPool = ThreadPool(streams=StreamSet(
@@ -203,6 +208,8 @@ class NexusXMLHandler(sax.ContentHandler):
         :param attrs: attribute dictionary
         :type attrs: :obj:`dict` <:obj:`str`, :obj:`str`>
         """
+        if name == 'group' and len(self.__stack) == 1:
+            self.entryAttrs.append(dict(attrs))
         if self.__inner is True:
             if hasattr(self.__innerHandler, "xml"):
                 self.__createInnerTag(self.__innerHandler.xml)

@@ -556,6 +556,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
             self.errors = []
         try:
             self.tdw.writer = self.Writer
+            self.tdw.metadataOutput = self.MetadataOutput
             self.tdw.openFile()
             self.set_state(PyTango.DevState.OPEN)
         except (PyTango.DevFailed, BaseException):
@@ -703,6 +704,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         self.get_device_properties(self.get_device_class())
         self.tdw.numberOfThreads = self.NumberOfThreads
         self.tdw.writer = self.Writer
+        self.tdw.metadataOutput = self.MetadataOutput
         self.othread = CommandThread(
             self, "openEntry", PyTango.DevState.EXTRACT)
         self.othread.start()
@@ -845,6 +847,10 @@ class NXSDataWriterClass(PyTango.DeviceClass):
         [PyTango.DevBoolean,
          "Add XML logs",
          [True]],
+        'MetadataOutput':
+        [PyTango.DevString,
+         "metadata output",
+         [""]],
     }
 
     #: (:obj:`dict` <:obj:`str`, \
