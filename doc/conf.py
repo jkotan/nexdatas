@@ -427,11 +427,12 @@ autoclass_content = 'both'
 
 
 intersphinx_mapping = {
-    # http://docs.python.org/dev': None,
-    # 'http://docs.python.org/2.7/': None,
-    'https://docs.python.org/3/': None,
-    'http://docs.scipy.org/doc/scipy/reference': None,
-    'http://docs.scipy.org/doc/numpy': None,
-    'http://pytango.readthedocs.io/en/stable/': None,
+    'https://nexdatas.github.io/tools/':None,
+    'https://nexdatas.github.io/configserver/':None,
+    'https://docs.python.org/2.7/': None,
+    'https://docs.python.org/3.5/': None,
+    'https://docs.scipy.org/doc/scipy/': None,
+    'https://numpy.org/doc/stable': None,
+    'https://pytango.readthedocs.io/en/stable/': None,
     # 'file:///usr/share/doc/python-pni-doc/html/': None,
 }

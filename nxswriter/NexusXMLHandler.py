@@ -135,7 +135,6 @@ class NexusXMLHandler(sax.ContentHandler):
         #: (:obj:`list` <:obj:`str`>) transparent tags
         self.transparentTags = ['definition']
 
-        #: (:obj:`list` <:obj:`str`>) transparent tags
         #: (:class:`nxswriter.ThreadPool.ThreadPool`) \
         #:       thread pool with INIT elements
         self.initPool = ThreadPool(streams=StreamSet(
