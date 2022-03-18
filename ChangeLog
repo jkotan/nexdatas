@@ -1,6 +1,6 @@
 2022-03-16 Jan Kotanski <jankotan@gmail.com>
 	* add the metadataOutput property
-	* requires nxstools 3.16.1
+	* requires nxstools 3.16.2
 	* tagged as 3.3.0
 
 2021-11-30 Jan Kotanski <jankotan@gmail.com>
