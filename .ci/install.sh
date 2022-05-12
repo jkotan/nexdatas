@@ -37,7 +37,6 @@ docker exec  --user root ndts /bin/sh -c 'apt-get -qq update; apt-get -qq instal
 if [ "$?" != "0" ]; then exit -1; fi
 
 # restart tango services
-docker exec  --user root ndts service tango-db restart
 docker exec  --user root ndts service tango-starter restart
 docker exec  --user root ndts chown -R tango:tango .
 
