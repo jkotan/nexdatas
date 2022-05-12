@@ -222,7 +222,7 @@ class TangoFieldTagWriterH5CppTest(unittest.TestCase):
        <field units="m" type="NX_BOOLEAN" name="ScalarBoolean">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarBoolean"/>
           </datasource>
@@ -231,7 +231,7 @@ class TangoFieldTagWriterH5CppTest(unittest.TestCase):
         <field units="m" type="NX_UINT8" name="ScalarUChar">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarUChar"/>
           </datasource>
@@ -240,7 +240,7 @@ class TangoFieldTagWriterH5CppTest(unittest.TestCase):
         <field units="m" type="NX_INT16" name="ScalarShort">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarShort"/>
           </datasource>
@@ -249,7 +249,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT16" name="ScalarUShort">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarUShort"/>
           </datasource>
@@ -258,7 +258,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_INT" name="ScalarLong">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarLong"/>
           </datasource>
@@ -267,7 +267,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT" name="ScalarULong">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong"/>
           </datasource>
@@ -276,7 +276,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_INT64" name="ScalarLong64">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarLong64"/>
           </datasource>
@@ -285,7 +285,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT32" name="ScalarFloat">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarFloat"/>
           </datasource>
@@ -294,7 +294,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT64" name="ScalarDouble">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarDouble"/>
           </datasource>
@@ -304,7 +304,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_CHAR" name="ScalarString">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarString"/>
           </datasource>
@@ -314,7 +314,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"/>
           <datasource type="TANGO">
             <record name="ScalarEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="UTF8"/>
           </datasource>
         </field>
@@ -324,7 +324,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"/>
           <datasource type="TANGO">
             <record name="ScalarEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MUTF8"/>
           </datasource>
         </field>
@@ -333,7 +333,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_CHAR" name="ScalarState">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="State"/>
           </datasource>
@@ -342,7 +342,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT32" name="InitScalarULong">
           <strategy mode="INIT"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong"/>
           </datasource>
@@ -351,7 +351,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT64" name="FinalScalarDouble">
           <strategy mode="FINAL"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarDouble"/>
           </datasource>
@@ -361,7 +361,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT64" name="ScalarULong64">
           <strategy mode="STEP"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong64"/>
           </datasource>
@@ -472,7 +472,7 @@ name="stestp09/testss/s1r228" port="10000" />
        <field units="m" type="NX_BOOLEAN" name="ScalarBoolean">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarBoolean"/>
           </datasource>
@@ -481,7 +481,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT8" name="ScalarUChar">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarUChar"/>
           </datasource>
@@ -490,7 +490,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_INT16" name="ScalarShort">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarShort"/>
           </datasource>
@@ -499,7 +499,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT16" name="ScalarUShort">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarUShort"/>
           </datasource>
@@ -508,7 +508,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_INT" name="ScalarLong">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarLong"/>
           </datasource>
@@ -517,7 +517,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT" name="ScalarULong">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong"/>
           </datasource>
@@ -526,7 +526,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_INT64" name="ScalarLong64">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarLong64"/>
           </datasource>
@@ -536,7 +536,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT64" name="ScalarULong64">
           <strategy mode="STEP"  canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong64"/>
           </datasource>
@@ -545,7 +545,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT32" name="ScalarFloat">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarFloat"/>
           </datasource>
@@ -554,7 +554,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT64" name="ScalarDouble">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarDouble"/>
           </datasource>
@@ -564,7 +564,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_CHAR" name="ScalarString">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarString"/>
           </datasource>
@@ -574,7 +574,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
             <record name="ScalarEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="UTF8"/>
           </datasource>
         </field>
@@ -584,7 +584,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
             <record name="ScalarEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MUTF8"/>
           </datasource>
         </field>
@@ -593,7 +593,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_CHAR" name="ScalarState">
           <strategy mode="STEP" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="State"/>
           </datasource>
@@ -602,7 +602,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_UINT32" name="InitScalarULong">
           <strategy mode="INIT" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarULong_canfail"/>
           </datasource>
@@ -611,7 +611,7 @@ name="stestp09/testss/s1r228" port="10000" />
         <field units="m" type="NX_FLOAT64" name="FinalScalarDouble">
           <strategy mode="FINAL" canfail="true"/>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ScalarDouble"/>
           </datasource>
@@ -815,7 +815,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP" canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumBoolean"/>
           </datasource>
@@ -827,7 +827,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false" canfail="true" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumUChar"/>
           </datasource>
@@ -838,7 +838,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True"  canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumShort"/>
           </datasource>
@@ -848,7 +848,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="2"  canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumUShort"/>
           </datasource>
@@ -861,7 +861,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong"/>
           </datasource>
@@ -872,7 +872,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumULong"/>
           </datasource>
@@ -886,7 +886,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True" canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong64"/>
           </datasource>
@@ -898,7 +898,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True" canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumULong64"/>
           </datasource>
@@ -909,7 +909,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumFloat"/>
           </datasource>
@@ -921,7 +921,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false" canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumDouble"/>
           </datasource>
@@ -931,7 +931,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP" canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumString"/>
           </datasource>
@@ -942,7 +942,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="1" />
           <datasource type="TANGO">
             <record name="SpectrumEncoded"/>
-            <device hostname="localhost" member="attribute"
+            <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="UINT32"/>
           </datasource>
         </field>
@@ -953,7 +953,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="1" />
           <datasource type="TANGO">
             <record name="SpectrumEncoded"/>
-            <device hostname="localhost" member="attribute"
+            <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MUINT32"/>
           </datasource>
         </field>
@@ -967,7 +967,7 @@ name="stestp09/testss/s1r228" port="10000" />
             <dim value="256" index="1"/>
           </dimensions>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong64_canfail"/>
           </datasource>
@@ -978,7 +978,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="FINAL"  canfail="true"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumFloat"/>
           </datasource>
@@ -1216,7 +1216,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumBoolean"/>
           </datasource>
@@ -1228,7 +1228,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumUChar"/>
           </datasource>
@@ -1239,7 +1239,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumShort"/>
           </datasource>
@@ -1249,7 +1249,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="2" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumUShort"/>
           </datasource>
@@ -1261,7 +1261,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  compression="true"   shuffle="false" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong"/>
           </datasource>
@@ -1271,7 +1271,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   compression="true"  grows="1" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumULong"/>
           </datasource>
@@ -1285,7 +1285,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong64"/>
           </datasource>
@@ -1297,7 +1297,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="True"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumULong64"/>
           </datasource>
@@ -1308,7 +1308,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumFloat"/>
           </datasource>
@@ -1320,7 +1320,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumDouble"/>
           </datasource>
@@ -1330,7 +1330,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumString"/>
           </datasource>
@@ -1341,7 +1341,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="1" />
           <datasource type="TANGO">
             <record name="SpectrumEncoded"/>
-            <device hostname="localhost" member="attribute"
+            <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="UINT32"/>
           </datasource>
         </field>
@@ -1352,7 +1352,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="1" />
           <datasource type="TANGO">
             <record name="SpectrumEncoded"/>
-            <device hostname="localhost" member="attribute"
+            <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MUINT32"/>
           </datasource>
         </field>
@@ -1363,7 +1363,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="INIT"  compression="true"  shuffle="True"/>
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumLong64"/>
           </datasource>
@@ -1374,7 +1374,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="FINAL" />
           <dimensions rank="1" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="SpectrumFloat"/>
           </datasource>
@@ -1508,7 +1508,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageBoolean"/>
           </datasource>
@@ -1518,7 +1518,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   compression="true"  grows="2" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUChar"/>
           </datasource>
@@ -1529,7 +1529,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageShort"/>
           </datasource>
@@ -1540,7 +1540,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUShort"/>
           </datasource>
@@ -1551,7 +1551,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong"/>
           </datasource>
@@ -1562,7 +1562,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  grows="3"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong"/>
           </datasource>
@@ -1574,7 +1574,7 @@ name="stestp09/testss/s1r228" port="10000" />
 shuffle="false"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong64"/>
           </datasource>
@@ -1585,7 +1585,7 @@ shuffle="false"  />
           <strategy mode="STEP"  compression="true"  grows="2"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -1598,7 +1598,7 @@ shuffle="false"  />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -1609,7 +1609,7 @@ shuffle="false"  />
           <strategy mode="STEP"  compression="true"  grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageDouble"/>
           </datasource>
@@ -1619,7 +1619,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageString"/>
           </datasource>
@@ -1631,7 +1631,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="2" />
           <datasource type="TANGO">
             <record name="ImageEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="LIMA_VIDEO_IMAGE"/>
           </datasource>
         </field>
@@ -1643,7 +1643,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="2" />
           <datasource type="TANGO">
             <record name="ImageEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MLIMA"/>
           </datasource>
         </field>
@@ -1654,7 +1654,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="INIT" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -1666,7 +1666,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="FINAL"  compression="true"  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -1690,7 +1690,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageBoolean"/>
           </datasource>
@@ -1700,7 +1700,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   compression="true"  grows="2" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUChar"/>
           </datasource>
@@ -1711,7 +1711,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageShort"/>
           </datasource>
@@ -1722,7 +1722,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUShort"/>
           </datasource>
@@ -1733,7 +1733,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong"/>
           </datasource>
@@ -1744,7 +1744,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  grows="3"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong"/>
           </datasource>
@@ -1756,7 +1756,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong64"/>
           </datasource>
@@ -1767,7 +1767,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  compression="true"  grows="2"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -1780,7 +1780,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -1791,7 +1791,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  compression="true"  grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageDouble"/>
           </datasource>
@@ -1801,7 +1801,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageString"/>
           </datasource>
@@ -1812,7 +1812,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="INIT" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -1824,7 +1824,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="FINAL"  compression="true"  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
 
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
@@ -1950,7 +1950,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageBoolean"/>
           </datasource>
@@ -1961,7 +1961,7 @@ name="stestp09/testss/s1r228" port="10000" />
  compression_opts="0,0" grows="2" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUChar"/>
           </datasource>
@@ -1972,7 +1972,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageShort"/>
           </datasource>
@@ -1983,7 +1983,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUShort"/>
           </datasource>
@@ -1995,7 +1995,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong"/>
           </datasource>
@@ -2006,7 +2006,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  grows="3"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong"/>
           </datasource>
@@ -2018,7 +2018,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong64"/>
           </datasource>
@@ -2029,7 +2029,7 @@ name="stestp09/testss/s1r228" port="10000" />
  compression_opts="0,0"  grows="2"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -2042,7 +2042,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -2053,7 +2053,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  compression="32008"  grows="1"   />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageDouble"/>
           </datasource>
@@ -2063,7 +2063,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageString"/>
           </datasource>
@@ -2075,7 +2075,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="INIT" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -2087,7 +2087,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="FINAL"  compression="32008"  shuffle="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -2208,7 +2208,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageBoolean"/>
           </datasource>
@@ -2219,7 +2219,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUChar"/>
           </datasource>
@@ -2230,7 +2230,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false" canfail="true"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageShort"/>
           </datasource>
@@ -2241,7 +2241,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="1"  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUShort"/>
           </datasource>
@@ -2252,7 +2252,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong"/>
           </datasource>
@@ -2263,7 +2263,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  grows="3"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong"/>
           </datasource>
@@ -2275,7 +2275,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong64"/>
           </datasource>
@@ -2287,7 +2287,7 @@ name="stestp09/testss/s1r228" port="10000" />
  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -2300,7 +2300,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -2312,7 +2312,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageDouble"/>
           </datasource>
@@ -2322,7 +2322,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageString"/>
           </datasource>
@@ -2334,7 +2334,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="2" />
           <datasource type="TANGO">
             <record name="ImageEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="LIMA_VIDEO_IMAGE"/>
           </datasource>
         </field>
@@ -2346,7 +2346,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <dimensions rank="2" />
           <datasource type="TANGO">
             <record name="ImageEncoded"/>
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" encoding="MLIMA"/>
           </datasource>
         </field>
@@ -2360,7 +2360,7 @@ name="stestp09/testss/s1r228" port="10000" />
             <dim value="8" index="2"/>
           </dimensions>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64_canfail"/>
           </datasource>
@@ -2373,7 +2373,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -2397,7 +2397,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageBoolean"/>
           </datasource>
@@ -2408,7 +2408,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUChar"/>
           </datasource>
@@ -2419,7 +2419,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false" canfail="true"/>
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageShort"/>
           </datasource>
@@ -2430,7 +2430,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"   grows="1"  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageUShort"/>
           </datasource>
@@ -2441,7 +2441,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong"/>
           </datasource>
@@ -2452,7 +2452,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  grows="3"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong"/>
           </datasource>
@@ -2464,7 +2464,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="false"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageLong64"/>
           </datasource>
@@ -2476,7 +2476,7 @@ name="stestp09/testss/s1r228" port="10000" />
  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64"/>
           </datasource>
@@ -2489,7 +2489,7 @@ name="stestp09/testss/s1r228" port="10000" />
  shuffle="true"  canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>
@@ -2501,7 +2501,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true"  />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageDouble"/>
           </datasource>
@@ -2511,7 +2511,7 @@ name="stestp09/testss/s1r228" port="10000" />
           <strategy mode="STEP"  canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageString"/>
           </datasource>
@@ -2525,7 +2525,7 @@ name="stestp09/testss/s1r228" port="10000" />
             <dim value="8" index="2"/>
           </dimensions>
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageULong64_canfail"/>
           </datasource>
@@ -2538,7 +2538,7 @@ name="stestp09/testss/s1r228" port="10000" />
   canfail="true" />
           <dimensions rank="2" />
           <datasource type="TANGO">
-           <device hostname="localhost" member="attribute"
+           <device member="attribute"
  name="stestp09/testss/s1r228" port="10000" />
            <record name="ImageFloat"/>
           </datasource>

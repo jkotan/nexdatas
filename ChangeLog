@@ -1,3 +1,8 @@
+2022-05-12 Jan Kotanski <jankotan@gmail.com>
+	* remove default mysql localhost
+	* add tests for ubuntu jammy
+	* tagged as 3.3.1
+
 2022-03-16 Jan Kotanski <jankotan@gmail.com>
 	* add the metadataOutput property
 	* requires nxstools 3.16.2

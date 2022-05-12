@@ -36,7 +36,7 @@ try:
     # connection arguments to MYSQL DB
     args = {}
     args["db"] = 'tango'
-    args["host"] = 'localhost'
+    # args["host"] = 'localhost'
     args["read_default_file"] = '/etc/my.cnf'
     # inscance of MySQLdb
     mydb = MySQLdb.connect(**args)
@@ -52,9 +52,11 @@ except Exception:
         from os.path import expanduser
         home = expanduser("~")
         # connection arguments to MYSQL DB
-        args2 = {'host': u'localhost', 'db': u'tango',
-                 'read_default_file': u'%s/.my.cnf' % home,
-                 'use_unicode': True}
+        args2 = {
+            # 'host': u'localhost',
+            'db': u'tango',
+            'read_default_file': u'%s/.my.cnf' % home,
+            'use_unicode': True}
         # inscance of MySQLdb
         mydb = MySQLdb.connect(**args2)
         mydb.close()
@@ -113,15 +115,17 @@ class MYSQLSourceTest(unittest.TestCase):
         try:
             args = {}
             args["db"] = 'tango'
-            args["host"] = 'localhost'
+            # args["host"] = 'localhost'
             args["read_default_file"] = '/etc/my.cnf'
             self._mydb = MySQLdb.connect(**args)
         except Exception:
             from os.path import expanduser
             home = expanduser("~")
-            args2 = {'host': u'localhost', 'db': u'tango',
-                     'read_default_file': u'%s/.my.cnf' % home,
-                     'use_unicode': True}
+            args2 = {
+                # 'host': u'localhost',
+                'db': u'tango',
+                'read_default_file': u'%s/.my.cnf' % home,
+                'use_unicode': True}
             self._mydb = MySQLdb.connect(**args2)
             self._largs = args2
             print("ARGS: %s" % str(args2))
