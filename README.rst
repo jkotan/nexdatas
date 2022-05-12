@@ -14,12 +14,12 @@ Welcome to NXSDataWriter's documentation!
    :target: https://nexdatas.github.io/writer/index.html
    :alt:
 
-.. |Pypi Version| image:: https://img.shields.io/pypi/v/writer.svg
-                  :target: https://pypi.python.org/pypi/writer
+.. |Pypi Version| image:: https://img.shields.io/pypi/v/nxswriter.svg
+                  :target: https://pypi.python.org/pypi/nxswriter
                   :alt:
 
-.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/writer.svg
-                     :target: https://pypi.python.org/pypi/writer/
+.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/nxswriter.svg
+                     :target: https://pypi.python.org/pypi/nxswriter/
                      :alt:
 
 
