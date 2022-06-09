@@ -203,7 +203,7 @@ class PyEvalSourceTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         script = 'ds.result = 123.2'
-        script1 = 'ds.result = commonblock["counter"]'
+        script1 = 'ds.result = commonblock["stepcounter"]'
         script2 = 'ds.result = ds.inp'
         script3 = 'ds.res = ds.inp + ds.inp2'
         dp = DataSourcePool()

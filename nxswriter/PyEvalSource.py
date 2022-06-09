@@ -72,6 +72,8 @@ class PyEvalSource(DataSource):
         self.__script = ""
         #: (:obj:`bool`) True if common block used
         self.__commonblock = False
+        #: (:obj:`bool`) True if stepcounter used
+        self.__stepcounter = False
         #: (:class:`threading.Lock`) lock for common block
         self.__lock = None
         #: (:obj:`dict` <:obj:`str`, any> ) \
@@ -154,7 +156,11 @@ class PyEvalSource(DataSource):
         else:
             self.__commonblock = False
 
-    #
+        if "stepcounter" in self.__script:
+            self.__stepcounter = True
+        else:
+            self.__stepcounter = False
+
     def __str__(self):
         """ self-description
 
@@ -198,8 +204,8 @@ class PyEvalSource(DataSource):
             raise DataSourceSetupError(
                 "PyEvalSource::getData() - PyEval datasource not set up")
 
-        if self.__commonblock:
-            self.__pool.common['PYEVAL']["common"]["counter"] = \
+        if self.__commonblock and self.__stepcounter:
+            self.__pool.common['PYEVAL']["common"]["stepcounter"] = \
                 self.__pool.counter
         ds = Variables()
         for name, source in self.__datasources.items():
@@ -266,7 +272,7 @@ class PyEvalSource(DataSource):
                         self.__pool.nxroot.h5object
                     self.__pool.common['PYEVAL']["common"]["__root__"] = \
                         self.__pool.nxroot
-                    self.__pool.common['PYEVAL']["common"]["counter"] = \
+                    self.__pool.common['PYEVAL']["common"]["stepcounter"] = \
                         self.__pool.counter
             self.__common = self.__pool.common['PYEVAL']["common"]
 
