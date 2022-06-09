@@ -203,6 +203,7 @@ class PyEvalSourceTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         script = 'ds.result = 123.2'
+        script1 = 'ds.result = commonblock["stepcounter"]'
         script2 = 'ds.result = ds.inp'
         script3 = 'ds.res = ds.inp + ds.inp2'
         dp = DataSourcePool()
@@ -216,6 +217,18 @@ class PyEvalSourceTest(unittest.TestCase):
             None)
         dt = ds.getData()
         self.checkData(dt, "SCALAR", 123.2, "DevDouble", [])
+
+        ds = PyEvalSource()
+        self.assertEqual(ds.setDataSources(dp), None)
+        self.assertTrue(isinstance(ds, DataSource))
+        self.myAssertRaise(DataSourceSetupError, ds.getData)
+        self.assertEqual(ds.setup(
+            "<datasource>"
+            "<result>%s</result></datasource>" % script1),
+            None)
+        dp.counter = 134
+        dt = ds.getData()
+        self.checkData(dt, "SCALAR", 134, "DevLong64", [])
 
         ds = PyEvalSource()
         self.assertTrue(isinstance(ds, DataSource))
