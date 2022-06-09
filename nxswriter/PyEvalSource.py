@@ -72,8 +72,6 @@ class PyEvalSource(DataSource):
         self.__script = ""
         #: (:obj:`bool`) True if common block used
         self.__commonblock = False
-        #: (:obj:`bool`) True if stepcounter used
-        self.__stepcounter = False
         #: (:class:`threading.Lock`) lock for common block
         self.__lock = None
         #: (:obj:`dict` <:obj:`str`, any> ) \
@@ -156,11 +154,6 @@ class PyEvalSource(DataSource):
         else:
             self.__commonblock = False
 
-        if "stepcounter" in self.__script:
-            self.__stepcounter = True
-        else:
-            self.__stepcounter = False
-
     def __str__(self):
         """ self-description
 
@@ -204,7 +197,7 @@ class PyEvalSource(DataSource):
             raise DataSourceSetupError(
                 "PyEvalSource::getData() - PyEval datasource not set up")
 
-        if self.__commonblock and self.__stepcounter:
+        if self.__commonblock:
             self.__pool.common['PYEVAL']["common"]["stepcounter"] = \
                 self.__pool.counter
         ds = Variables()
