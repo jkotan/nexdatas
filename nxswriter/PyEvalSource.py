@@ -72,6 +72,8 @@ class PyEvalSource(DataSource):
         self.__script = ""
         #: (:obj:`bool`) True if common block used
         self.__commonblock = False
+        #: (:obj:`bool`) True if stepcounter used
+        self.__stepcounter = False
         #: (:class:`threading.Lock`) lock for common block
         self.__lock = None
         #: (:obj:`dict` <:obj:`str`, any> ) \
