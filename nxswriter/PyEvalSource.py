@@ -198,6 +198,9 @@ class PyEvalSource(DataSource):
             raise DataSourceSetupError(
                 "PyEvalSource::getData() - PyEval datasource not set up")
 
+        if self.__commonblock:
+            self.__pool.common['PYEVAL']["common"]["counter"] = \
+                self.__pool.counter
         ds = Variables()
         for name, source in self.__datasources.items():
             if name in self.__script:
@@ -263,6 +266,8 @@ class PyEvalSource(DataSource):
                         self.__pool.nxroot.h5object
                     self.__pool.common['PYEVAL']["common"]["__root__"] = \
                         self.__pool.nxroot
+                    self.__pool.common['PYEVAL']["common"]["counter"] = \
+                        self.__pool.counter
             self.__common = self.__pool.common['PYEVAL']["common"]
 
         finally:

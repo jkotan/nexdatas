@@ -1,7 +1,8 @@
-2022-05-12 Jan Kotanski <jankotan@gmail.com>
+2022-06-09 Jan Kotanski <jankotan@gmail.com>
+	* add a step counter to the PYEVAL common block
 	* remove default mysql localhost
 	* add tests for ubuntu jammy
-	* tagged as 3.3.1
+	* tagged as 3.4.0
 
 2022-03-16 Jan Kotanski <jankotan@gmail.com>
 	* add the metadataOutput property
