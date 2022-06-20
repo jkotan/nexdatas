@@ -1,3 +1,7 @@
+2022-06-20 Jan Kotanski <jankotan@gmail.com>
+	* add a workaround for etree.tostring utf8 problem
+	* tagged as 3.4.1
+
 2022-06-09 Jan Kotanski <jankotan@gmail.com>
 	* add a step counter to the PYEVAL common block
 	* remove default mysql localhost
