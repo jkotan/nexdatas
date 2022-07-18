@@ -43,6 +43,8 @@ class Options(object):
         #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
         self.entryclasses = "NXentry"
         #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
+        self.relpath = ""
+        #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
         self.entrynames = ""
         #: (:obj:`bool`) do not store NXentry as scientificMetadata
         self.rawscientific = False
