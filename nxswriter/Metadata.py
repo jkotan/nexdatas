@@ -42,12 +42,20 @@ class Options(object):
         self.group_postfix = "Parameters"
         #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
         self.entryclasses = "NXentry"
+        #: (:obj:`str`) relative path between beamtime dir and scan dir
+        self.relpath = ""
+        #: (:obj:`str`) owner group
+        self.ownergroup = None
+        #: (:obj:`str`) access  groups
+        self.accessgroups = None
         #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
         self.entrynames = ""
         #: (:obj:`bool`) do not store NXentry as scientificMetadata
         self.rawscientific = False
         #: (:obj:`str`) dataset pid
         self.pid = None
+        #: (:obj:`str`) DOOR proposal as SciCat proposal option
+        self.pap = False
         #: (:obj:`str`) beamtime id
         self.beamtimeid = None
         #: (:obj:`bool`) generate pid with uuid
