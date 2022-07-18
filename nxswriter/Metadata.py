@@ -48,6 +48,8 @@ class Options(object):
         self.rawscientific = False
         #: (:obj:`str`) dataset pid
         self.pid = None
+        #: (:obj:`str`) DOOR proposal as SciCat proposal option
+        self.pap = False
         #: (:obj:`str`) beamtime id
         self.beamtimeid = None
         #: (:obj:`bool`) generate pid with uuid

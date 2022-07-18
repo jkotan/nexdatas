@@ -1,3 +1,8 @@
+2022-07-18 Jan Kotanski <jankotan@gmail.com>
+	* add the pap option to Metadata options
+	* requires nxstools 3.23.0
+	* tagged as 3.4.1
+
 2022-06-21 Jan Kotanski <jankotan@gmail.com>
 	* add a workaround for etree.tostring utf8 problem
 	* add a step counter to the PYEVAL common block
