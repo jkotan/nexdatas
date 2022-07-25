@@ -6,12 +6,12 @@ Welcome to NXSDataWriter's documentation!
 |Pypi Version|
 |Python Versions|
 
-.. |github workflow| image:: https://github.com/nexdatas/writer/actions/workflows/tests.yml/badge.svg
-   :target: https://github.com/nexdatas/writer/actions
+.. |github workflow| image:: https://github.com/nexdatas/nxsdatawriter/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/nexdatas/nxsdatawriter/actions
    :alt:
 
 .. |docs| image:: https://img.shields.io/badge/Documentation-webpages-ADD8E6.svg
-   :target: https://nexdatas.github.io/writer/index.html
+   :target: https://nexdatas.github.io/nxsdatawriter/index.html
    :alt:
 
 .. |Pypi Version| image:: https://img.shields.io/pypi/v/nxswriter.svg
@@ -34,10 +34,10 @@ NXSDataWriter is a Tango server which allows to store NeXuS Data in H5 files.
 The server provides storing data from other Tango devices,
 various databases as well as passed by a user client via JSON strings.
 
-Tango Server API: https://nexdatas.github.io/writer/doc_html
+Tango Server API: https://nexdatas.github.io/nxsdatawriter/doc_html
 
-| Source code: https://github.com/nexdatas/writer
-| Project Web page: https://nexdatas.github.io/writer
+| Source code: https://github.com/nexdatas/nxsdatawriter
+| Project Web page: https://nexdatas.github.io/nxsdatawriter
 | NexDaTaS Web page: https://nexdatas.github.io
 
 ------------
@@ -53,7 +53,7 @@ From sources
 
 Download the latest NexDaTaS version from
 
-|    https://github.com/nexdatas/writer
+|    https://github.com/nexdatas/nxsdatawriter
 
 Extract sources and run
 
