@@ -35,7 +35,7 @@ class Options(object):
         self.attrs = None
         #: (:obj:`str`) names of field or group attributes
         #               to be hidden separated by ,
-        self.nattrs = 'nexdatas_source,nexdatas_strategy'
+        self.nattrs = 'nexdatas_source,nexdatas_strategy,units'
         #: (:obj:`str`) field names of more dimensional datasets to be shown
         self.values = ""
         #: (:obj:`str`) postfix to be added to NeXus group name
@@ -66,6 +66,8 @@ class Options(object):
         self.beamtimemeta = None
         #: (:obj:`str`) scientific metadata file
         self.scientificmeta = None
+        #: (:obj:`str`) experiment techniques
+        self.technuques = None
         #: (:obj:`str`) output scicat metadata file
         self.output = None
         #: (:obj:`list` < :obj:`str`>) list of file names

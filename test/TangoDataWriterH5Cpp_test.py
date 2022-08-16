@@ -1129,6 +1129,7 @@ ds.res2 = str(True)
             with open(fmname2, "r") as mf:
                 md2 = mf.read()
             mresult = {
+                "techniques": [],
                 "scientificMetadata": {
                     "NX_class": "NXentry",
                     "dataParameters": {
@@ -1142,7 +1143,7 @@ ds.res2 = str(True)
                             "source_type": "CLIENT",
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
-                            "units": "m"
+                            "unit": "m"
                         },
                         "data": {
                             "shape": [
@@ -1154,7 +1155,7 @@ ds.res2 = str(True)
                             "source_type": "CLIENT",
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
-                            "units": ""
+                            "unit": ""
                         }
                     },
                     "instrumentParameters": {
@@ -1170,7 +1171,7 @@ ds.res2 = str(True)
                                 "source_type": "CLIENT",
                                 "strategy": "STEP",
                                 "type": "NX_FLOAT",
-                                "units": "m"
+                                "unit": "m"
                             },
                             "mca": {
                                 "shape": [
@@ -1182,7 +1183,7 @@ ds.res2 = str(True)
                                 "source_type": "CLIENT",
                                 "strategy": "STEP",
                                 "type": "NX_FLOAT",
-                                "units": ""
+                                "unit": ""
                             }
                         },
                         "short_name": "scan instrument"
