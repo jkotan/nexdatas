@@ -1132,7 +1132,7 @@ ds.res2 = str(True)
                 "techniques": [],
                 "scientificMetadata": {
                     "NX_class": "NXentry",
-                    "dataParameters": {
+                    "data": {
                         "NX_class": "NXdata",
                         "cnt1": {
                             "shape": [
@@ -1158,9 +1158,9 @@ ds.res2 = str(True)
                             "unit": ""
                         }
                     },
-                    "instrumentParameters": {
+                    "instrument": {
                         "NX_class": "NXinstrument",
-                        "detectorParameters": {
+                        "detector": {
                             "NX_class": "NXdetector",
                             "counter1": {
                                 "shape": [
