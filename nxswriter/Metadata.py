@@ -39,9 +39,11 @@ class Options(object):
         #: (:obj:`str`) field names of more dimensional datasets to be shown
         self.values = ""
         #: (:obj:`str`) postfix to be added to NeXus group name
-        self.group_postfix = "Parameters"
+        self.group_postfix = ""
         #: (:obj:`str`) ames of entry NX_class to be shown separated by ,
         self.entryclasses = "NXentry"
+        #: (:obj:`str`) experiment techniques
+        self.technuques = None
         #: (:obj:`str`) relative path between beamtime dir and scan dir
         self.relpath = ""
         #: (:obj:`str`) owner group
@@ -66,8 +68,6 @@ class Options(object):
         self.beamtimemeta = None
         #: (:obj:`str`) scientific metadata file
         self.scientificmeta = None
-        #: (:obj:`str`) experiment techniques
-        self.technuques = None
         #: (:obj:`str`) output scicat metadata file
         self.output = None
         #: (:obj:`list` < :obj:`str`>) list of file names

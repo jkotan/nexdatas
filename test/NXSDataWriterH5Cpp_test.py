@@ -1015,7 +1015,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                 "techniques": [],
                 "scientificMetadata": {
                     "NX_class": "NXentry",
-                    "dataParameters": {
+                    "data": {
                         "NX_class": "NXdata",
                         "cnt1": {
                             "shape": [
@@ -1041,9 +1041,9 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                             "unit": ""
                         }
                     },
-                    "instrumentParameters": {
+                    "instrument": {
                         "NX_class": "NXinstrument",
-                        "detectorParameters": {
+                        "detector": {
                             "NX_class": "NXdetector",
                             "counter1": {
                                 "shape": [
