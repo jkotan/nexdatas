@@ -1004,6 +1004,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             with open(fmname2, "r") as mf:
                 md2 = mf.read()
             mresult = {
+                "techniques": [],
                 "scientificMetadata": {
                     "NX_class": "NXentry",
                     "dataParameters": {
@@ -1017,7 +1018,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                             "source_type": "CLIENT",
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
-                            "units": "m"
+                            "unit": "m"
                         },
                         "data": {
                             "shape": [
@@ -1029,7 +1030,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                             "source_type": "CLIENT",
                             "strategy": "STEP",
                             "type": "NX_FLOAT",
-                            "units": ""
+                            "unit": ""
                         }
                     },
                     "instrumentParameters": {
@@ -1045,7 +1046,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                                 "source_type": "CLIENT",
                                 "strategy": "STEP",
                                 "type": "NX_FLOAT",
-                                "units": "m"
+                                "unit": "m"
                             },
                             "mca": {
                                 "shape": [
@@ -1057,7 +1058,7 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
                                 "source_type": "CLIENT",
                                 "strategy": "STEP",
                                 "type": "NX_FLOAT",
-                                "units": ""
+                                "unit": ""
                             }
                         },
                         "short_name": "scan instrument"
