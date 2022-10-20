@@ -1,3 +1,7 @@
+2022-10-20 Jan Kotanski <jankotan@gmail.com>
+	* add support for dynamic attribute shapes
+	* tagged as 3.5.0
+
 2022-08-16 Jan Kotanski <jankotan@gmail.com>
 	* update Metadata parameters
 	* adopt tests to nxstools 3.25.0
