@@ -25,6 +25,7 @@ import numpy
 
 from .DataHolder import DataHolder
 from .FElement import FElement
+from .Types import NTP
 
 
 class EAttribute(FElement):
@@ -76,7 +77,13 @@ class EAttribute(FElement):
                 tp = "NX_CHAR"
 
             if tp == "NX_CHAR":
-                shape = self._findShape(self.rank, self.lengths)
+                try:
+                    shape = self._findShape(self.rank, self.lengths)
+                except Exception:
+                    if self.rank and int(self.rank) >= 0:
+                        shape = [1] * (int(self.rank))
+                    else:
+                        shape = [1]
             else:
                 shape = self._findShape(self.rank, self.lengths,
                                         extends=True, checkData=True)
@@ -118,7 +125,15 @@ class EAttribute(FElement):
                                 "Attribute::run() - %s " % message[0])
                         self.error = message
                     else:
+                        vl = dh.cast(self.h5Object.dtype)
+                        if hasattr(vl, "shape") and hasattr(self.h5Object, "shape") \
+                                and  tuple(vl.shape) != tuple(self.h5Object.shape):
+                            self.h5Object = self.last.h5Object.attributes.create(
+                                    self.name,
+                                    NTP.nTnp[self.last.tagAttributes[self.name][0]],
+                                    vl.shape, overwrite=True)
                         self.h5Object[...] = dh.cast(self.h5Object.dtype)
+
         except Exception:
             message = self.setMessage(sys.exc_info()[1].__str__())
             self.error = message
