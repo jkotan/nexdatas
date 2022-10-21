@@ -126,11 +126,14 @@ class EAttribute(FElement):
                         self.error = message
                     else:
                         vl = dh.cast(self.h5Object.dtype)
-                        if hasattr(vl, "shape") and hasattr(self.h5Object, "shape") \
-                                and  tuple(vl.shape) != tuple(self.h5Object.shape):
-                            self.h5Object = self.last.h5Object.attributes.create(
+                        if hasattr(vl, "shape") and \
+                                hasattr(self.h5Object, "shape") and \
+                                tuple(vl.shape) != tuple(self.h5Object.shape):
+                            self.h5Object = \
+                                self.last.h5Object.attributes.create(
                                     self.name,
-                                    NTP.nTnp[self.last.tagAttributes[self.name][0]],
+                                    NTP.nTnp[
+                                        self.last.tagAttributes[self.name][0]],
                                     vl.shape, overwrite=True)
                         self.h5Object[...] = dh.cast(self.h5Object.dtype)
 
