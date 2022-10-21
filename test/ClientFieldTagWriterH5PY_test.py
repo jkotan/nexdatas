@@ -1616,9 +1616,19 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
           </datasource>
         </attribute>
 
+        <attribute type="NX_CHAR" name="flag_spectrum_string">
+          <dimensions rank="1">
+            <dim value="0" index="1"/>
+          </dimensions>
+          <strategy mode="STEP"/>
+          <datasource type="CLIENT">
+            <record name="flags"/>
+          </datasource>
+        </attribute>
+
         <attribute type="NX_UINT64" name="final_spectrum_uint64">
           <dimensions rank="1">
-            <dim value="256" index="1"/>
+            <dim index="1"/>
           </dimensions>
           <strategy mode="FINAL"/>
           <datasource type="CLIENT">
@@ -1661,16 +1671,6 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
 </definition>
 """
 
-#        <attribute type="NX_CHAR" name="flag_spectrum_string">
-#          <dimensions rank="1">
-#            <dim value="8" index="1"/>
-#          </dimensions>
-#          <strategy mode="STEP"/>
-#          <datasource type="CLIENT">
-#            <record name="flags"/>
-#          </datasource>
-#        </attribute>
-
         logical = ["1", "0", "true", "false", "True", "False", "TrUe", "FaLsE"]
         tdw = self.openWriter(
             fname, xml, json='{"data": {' + ' "mca_float":' +
@@ -1694,7 +1694,7 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
         # check the created file
         FileWriter.writer = H5PYWriter
         f = FileWriter.open_file(fname, readonly=True)
-        det, field = self._sc.checkAttributeTree(f, fname, 7, 7)
+        det, field = self._sc.checkAttributeTree(f, fname, 7, 8)
         self._sc.checkSpectrumAttribute(
             det, "spectrum_float", "float64", self._fmca1[steps - 1],
             error=1.e-14)

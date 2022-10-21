@@ -68,7 +68,6 @@ class EAttribute(FElement):
         :returns: (strategy,trigger)
         :rtype: (:obj:`str`, :obj:`str`)
         """
-
         if "name" in self._tagAttrs.keys():
             self.name = self._tagAttrs["name"]
             if "type" in self._tagAttrs.keys():
@@ -76,17 +75,18 @@ class EAttribute(FElement):
             else:
                 tp = "NX_CHAR"
 
-            if tp == "NX_CHAR":
-                try:
+            try:
+                if tp == "NX_CHAR":
                     shape = self._findShape(self.rank, self.lengths)
-                except Exception:
-                    if self.rank and int(self.rank) >= 0:
-                        shape = [1] * (int(self.rank))
-                    else:
-                        shape = [1]
-            else:
-                shape = self._findShape(self.rank, self.lengths,
-                                        extends=True, checkData=True)
+                else:
+                    shape = self._findShape(self.rank, self.lengths,
+                                            extends=True, checkData=True)
+            except Exception:
+                if self.rank and int(self.rank) >= 0:
+                    shape = [1] * (int(self.rank))
+                else:
+                    shape = [1]
+
             if sys.version_info > (3,):
                 val = ("".join(self.content)).strip()
             else:
