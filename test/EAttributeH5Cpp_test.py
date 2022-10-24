@@ -1422,10 +1422,7 @@ class EAttributeH5CppTest(unittest.TestCase):
             ea[k].name = k
 
             self.assertEqual(el[k].tagAttributes, {})
-            if attrs[k][2] and attrs[k][2] != 'string':
-                el[k].tagAttributes[k] = (attrs[k][1], '', (1,))
-            else:
-                el[k].tagAttributes[k] = (attrs[k][1], '',)
+            el[k].tagAttributes[k] = (attrs[k][1], '', (1,))
             ds = TstDataSource()
             ds.valid = True
             ds.value = {
@@ -1455,7 +1452,7 @@ class EAttributeH5CppTest(unittest.TestCase):
                     el[k].h5Object, k, attrs[k][2], [attrs[k][0]],
                     attrs[k][4] if len(attrs[k]) > 4 else 0)
             else:
-                self.assertEqual(ea[k].h5Object.shape, ())
+                self.assertEqual(ea[k].h5Object.shape, (1,))
                 self._sc.checkScalarAttribute(
                     el[k].h5Object, k, attrs[k][2], attrs[k][0],
                     attrs[k][4] if len(attrs[k]) > 4 else 0)

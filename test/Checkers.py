@@ -270,12 +270,12 @@ class Checker(object):
         self._tc.assertEqual(cnt.name, name)
         self._tc.assertTrue(hasattr(cnt.shape, "__iter__"))
         self._tc.assertEqual(len(cnt.shape), 1)
+        # print ("values", values, type(values))
+        # print ("cnt", cnt[...], type(cnt[...]))
         self._tc.assertEqual(cnt.shape, (len(values),))
         self._tc.assertEqual(cnt.dtype, dtype)
         # pninx is not supporting reading string areas
 
-        # print "values", values, type(values)
-        # print "cnt", cnt[...], type(cnt[...])
         for i in range(len(values)):
             if isinstance(cnt[...], str) or isinstance(cnt[...], unicode):
                 self._tc.assertEqual(values[i], cnt[...])
