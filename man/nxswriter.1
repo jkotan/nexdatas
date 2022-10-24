@@ -1,5 +1,8 @@
 .\" Man page generated from reStructuredText.
 .
+.TH "NXSWRITER" "1" "Oct 24, 2022" "3.5" "NXSDataWriter"
+.SH NAME
+nxswriter \- nxswriter Documentation
 .
 .nr rst2man-indent-level 0
 .
@@ -27,9 +30,11 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "NXSWRITER" "1" "Mar 18, 2022" "3.3" "NXSDataWriter"
-.SH NAME
-nxswriter \- nxswriter Documentation
+.sp
+\fI\%\fP
+\fI\%\fP
+\fI\%\fP
+\fI\%\fP
 .sp
 Authors: Jan Kotanski, Eugen Wintersberger, Halil Pasic
 .SH INTRODUCTION
@@ -344,7 +349,7 @@ dictionary with collected data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) data name
 .UNINDENT
 .INDENT 7.0
@@ -405,22 +410,22 @@ It sets all member variables to None
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dbname
+.B dbname = None
 (\fI\%str\fP) database name
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dbtype
+.B dbtype = None
 (\fI\%str\fP) database type, i.e. MYSQL, PGSQL, ORACLE
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dsn
+.B dsn = None
 (\fI\%str\fP) DSN string
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) record format, i.e. \fISCALAR\fP, \fISPECTRUM\fP, \fIIMAGE\fP
 .UNINDENT
 .INDENT 7.0
@@ -438,32 +443,32 @@ dictionary with collected data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B hostname
+.B hostname = None
 (\fI\%str\fP) name of the host with the data source
 .UNINDENT
 .INDENT 7.0
 .TP
-.B mode
+.B mode = None
 (\fI\%str\fP) oracle database mode
 .UNINDENT
 .INDENT 7.0
 .TP
-.B mycnf
+.B mycnf = None
 (\fI\%str\fP) mysql database configuration file
 .UNINDENT
 .INDENT 7.0
 .TP
-.B passwd
+.B passwd = None
 (\fI\%str\fP) database password
 .UNINDENT
 .INDENT 7.0
 .TP
-.B port
+.B port = None
 (\fI\%str\fP) port related to the host
 .UNINDENT
 .INDENT 7.0
 .TP
-.B query
+.B query = None
 (\fI\%str\fP) database query
 .UNINDENT
 .INDENT 7.0
@@ -482,7 +487,7 @@ if \fI\%format\fP or \fI\%query\fP is not defined
 .UNINDENT
 .INDENT 7.0
 .TP
-.B user
+.B user = None
 (\fI\%str\fP) database user
 .UNINDENT
 .UNINDENT
@@ -536,32 +541,32 @@ for strings or value for SCALAR
 .UNINDENT
 .INDENT 7.0
 .TP
-.B decoders
+.B decoders = None
 pool with decoding algorithm
 .UNINDENT
 .INDENT 7.0
 .TP
-.B encoding
+.B encoding = None
 (\fI\%str\fP)  encoding type of Tango DevEncoded varibles
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) data format, i.e. SCALAR, SPECTRUM, IMAGE, VERTEX
 .UNINDENT
 .INDENT 7.0
 .TP
-.B shape
+.B shape = None
 (\fI\%list\fP <\fI\%int\fP>) data shape
 .UNINDENT
 .INDENT 7.0
 .TP
-.B tangoDType
+.B tangoDType = None
 (\fI\%str\fP)  tango data type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B value
+.B value = None
 (any) data value
 .UNINDENT
 .UNINDENT
@@ -676,17 +681,17 @@ loads user datasources
 .UNINDENT
 .INDENT 7.0
 .TP
-.B canfail
+.B canfail = None
 (\fI\%bool\fP) can fail switch
 .UNINDENT
 .INDENT 7.0
 .TP
-.B common
+.B common = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%dict\fP <\fI\%str\fP, any>>) global variables for specific datasources
 .UNINDENT
 .INDENT 7.0
 .TP
-.B counter
+.B counter = None
 (\fI\%int\fP) step counter: INIT: \-1; STEP: 1,2,3…; FINAL: \-2;
 .UNINDENT
 .INDENT 7.0
@@ -724,12 +729,12 @@ True if it the datasource is registered
 .UNINDENT
 .INDENT 7.0
 .TP
-.B lock
+.B lock = None
 (\fI\%threading.Lock\fP) pool lock
 .UNINDENT
 .INDENT 7.0
 .TP
-.B nxroot
+.B nxroot = None
 (\fBnxswriter.FileWriter.FTGroup\fP) H5 file handle
 .UNINDENT
 .INDENT 7.0
@@ -827,12 +832,12 @@ the decoded data if data was loaded
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dtype
+.B dtype = None
 (\fI\%str\fP) data type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) decoder format
 .UNINDENT
 .INDENT 7.0
@@ -852,7 +857,7 @@ loads encoded data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) decoder name
 .UNINDENT
 .INDENT 7.0
@@ -1000,12 +1005,12 @@ the decoded data if data was loaded
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dtype
+.B dtype = None
 (\fI\%str\fP) data type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) decoder format
 .UNINDENT
 .INDENT 7.0
@@ -1020,7 +1025,7 @@ loads encoded data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) decoder name
 .UNINDENT
 .INDENT 7.0
@@ -1065,12 +1070,12 @@ the decoded data if data was loaded
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dtype
+.B dtype = None
 (\fI\%str\fP) data type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) decoder format
 .UNINDENT
 .INDENT 7.0
@@ -1085,7 +1090,7 @@ loads encoded data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) decoder name
 .UNINDENT
 .INDENT 7.0
@@ -1130,12 +1135,12 @@ the decoded data if data was loaded
 .UNINDENT
 .INDENT 7.0
 .TP
-.B dtype
+.B dtype = None
 (\fI\%str\fP) data type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B format
+.B format = None
 (\fI\%str\fP) decoder format
 .UNINDENT
 .INDENT 7.0
@@ -1150,7 +1155,7 @@ loads encoded data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) decoder name
 .UNINDENT
 .INDENT 7.0
@@ -1192,7 +1197,7 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B lengths
+.B lengths = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%str\fP>) shape of the attribute, i.e. {index: length}
 .UNINDENT
 .INDENT 7.0
@@ -1210,12 +1215,12 @@ It marks the field as failed
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) attribute name
 .UNINDENT
 .INDENT 7.0
 .TP
-.B rank
+.B rank = None
 (\fI\%str\fP) rank of the attribute
 .UNINDENT
 .INDENT 7.0
@@ -1251,12 +1256,12 @@ stores the tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B strategy
+.B strategy = None
 (\fI\%str\fP) strategy, i.e. INIT, STEP, FINAL
 .UNINDENT
 .INDENT 7.0
 .TP
-.B trigger
+.B trigger = None
 (\fI\%str\fP) trigger for asynchronous writting
 .UNINDENT
 .UNINDENT
@@ -1287,22 +1292,22 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B compression
+.B compression = None
 (\fI\%bool\fP) compression algorithm id
 .UNINDENT
 .INDENT 7.0
 .TP
-.B compression_opts
+.B compression_opts = None
 (\fI\%int\fP) compression rate
 .UNINDENT
 .INDENT 7.0
 .TP
-.B grows
+.B grows = None
 (\fI\%int\fP) growing dimension
 .UNINDENT
 .INDENT 7.0
 .TP
-.B lengths
+.B lengths = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%str\fP>) shape of the field, i.e. {index: length}
 .UNINDENT
 .INDENT 7.0
@@ -1320,17 +1325,17 @@ It marks the field as failed
 .UNINDENT
 .INDENT 7.0
 .TP
-.B postrun
+.B postrun = None
 (\fI\%str\fP) label for postprocessing data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B rank
+.B rank = None
 (\fI\%str\fP) rank of the field
 .UNINDENT
 .INDENT 7.0
 .TP
-.B rate
+.B rate = None
 (\fI\%list\fP < \fI\%int\fP >) compression algorithm options
 .UNINDENT
 .INDENT 7.0
@@ -1345,7 +1350,7 @@ During its thread run it fetches the data from the source
 .UNINDENT
 .INDENT 7.0
 .TP
-.B shuffle
+.B shuffle = None
 (\fI\%bool\fP) compression shuffle
 .UNINDENT
 .INDENT 7.0
@@ -1371,12 +1376,12 @@ stores the tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B strategy
+.B strategy = None
 (\fI\%str\fP) strategy, i.e. INIT, STEP, FINAL, POSTRUN
 .UNINDENT
 .INDENT 7.0
 .TP
-.B trigger
+.B trigger = None
 (\fI\%str\fP) trigger for asynchronous writing
 .UNINDENT
 .UNINDENT
@@ -1461,7 +1466,7 @@ creates the link the H5 file
 .UNINDENT
 .INDENT 7.0
 .TP
-.B h5Object
+.B h5Object = None
 (\fBnxswriter.FileWriter.FTLink\fP) stored H5 file object (defined in base class)
 .UNINDENT
 .INDENT 7.0
@@ -1497,12 +1502,12 @@ stores the tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B strategy
+.B strategy = None
 (\fI\%str\fP) strategy, i.e. INIT, STEP, FINAL
 .UNINDENT
 .INDENT 7.0
 .TP
-.B trigger
+.B trigger = None
 (\fI\%str\fP) trigger for asynchronous writting
 .UNINDENT
 .UNINDENT
@@ -1577,17 +1582,17 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B content
+.B content = None
 (\fI\%list\fP <\fI\%str\fP>) stored tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B doc
+.B doc = None
 (\fI\%str\fP) doc string
 .UNINDENT
 .INDENT 7.0
 .TP
-.B last
+.B last = None
 (\fI\%nxswriter.Element.Element\fP) the previous element
 .UNINDENT
 .INDENT 7.0
@@ -1610,7 +1615,7 @@ abstract method to store the tag element
 .UNINDENT
 .INDENT 7.0
 .TP
-.B tagName
+.B tagName = None
 (\fI\%str\fP) stored tag name
 .UNINDENT
 .UNINDENT
@@ -1640,7 +1645,7 @@ It creates ElementThread from the runnable element
 .UNINDENT
 .INDENT 7.0
 .TP
-.B index
+.B index = None
 (\fI\%int\fP) thread index
 .UNINDENT
 .INDENT 7.0
@@ -1743,17 +1748,17 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B canfail
+.B canfail = None
 (\fI\%bool\fP) flag for devices for which is allowed to failed
 .UNINDENT
 .INDENT 7.0
 .TP
-.B error
+.B error = None
 (\fI\%str\fP) notification of error in the run method
 .UNINDENT
 .INDENT 7.0
 .TP
-.B h5Object
+.B h5Object = None
 (\fBnxswriter.FileWriter.FTObject\fP) stored H5 file object
 .UNINDENT
 .INDENT 7.0
@@ -1784,7 +1789,7 @@ error message
 .UNINDENT
 .INDENT 7.0
 .TP
-.B source
+.B source = None
 (\fI\%nxswriter.DataSources.DataSource\fP) data source
 .UNINDENT
 .UNINDENT
@@ -1833,7 +1838,7 @@ instance of the attribute object if created
 .UNINDENT
 .INDENT 7.0
 .TP
-.B tagAttributes
+.B tagAttributes = None
 (\fI\%dict\fP <\fI\%str\fP, (\fI\%str\fP, \fI\%str\fP, \fI\%tuple\fP)>  or \fI\%dict\fP <\fI\%str\fP, (\fI\%str\fP, \fI\%str\fP) > ) dictionary with attribures from sepatare attribute tags
 written as (name, value, shape)
 .UNINDENT
@@ -1879,7 +1884,7 @@ parses an closing tag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B groupTypes
+.B groupTypes = None
 (\fI\%TNObject\fP) tree of TNObjects with names and types
 .UNINDENT
 .INDENT 7.0
@@ -1944,22 +1949,22 @@ child instance
 .UNINDENT
 .INDENT 7.0
 .TP
-.B children
+.B children = None
 (:obj\(ga:list\(ga <\fI\%nxswriter.Element.Element\fP>) object children
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) object name
 .UNINDENT
 .INDENT 7.0
 .TP
-.B nxtype
+.B nxtype = None
 (\fI\%str\fP) object Nexus type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B parent
+.B parent = None
 (\fI\%nxswriter.Element.Element\fP) object parent
 .UNINDENT
 .UNINDENT
@@ -1988,12 +1993,12 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B content
+.B content = None
 (\fI\%list\fP <\fI\%str\fP>) tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B source
+.B source = None
 (\fI\%nxswriter.DataSources.DataSource\fP) data source
 .UNINDENT
 .INDENT 7.0
@@ -2129,7 +2134,7 @@ stores the tag content
 .UNINDENT
 .INDENT 7.0
 .TP
-.B symbols
+.B symbols = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%str\fP>) dictionary with symbols4
 .UNINDENT
 .UNINDENT
@@ -2198,7 +2203,7 @@ parses the opening tag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B xml
+.B xml = None
 (\fI\%str\fP) xml string
 .UNINDENT
 .UNINDENT
@@ -2229,22 +2234,22 @@ constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B args
+.B args = None
 (\fI\%list\fP <\fI\%str\fP>) command arguments
 .UNINDENT
 .INDENT 7.0
 .TP
-.B command
+.B command = None
 (\fB__callable__\fP) command
 .UNINDENT
 .INDENT 7.0
 .TP
-.B estate
+.B estate = None
 (\fBPyTango.DevState\fP) error state
 .UNINDENT
 .INDENT 7.0
 .TP
-.B fstate
+.B fstate = None
 (\fBPyTango.DevState\fP) final state
 .UNINDENT
 .INDENT 7.0
@@ -2254,7 +2259,7 @@ runs the given command on the server and changes the state on exit
 .UNINDENT
 .INDENT 7.0
 .TP
-.B server
+.B server = None
 (\fBPyTango.Device_4Impl\fP) tango server
 .UNINDENT
 .UNINDENT
@@ -2380,7 +2385,7 @@ Always excuted hook method
 .UNINDENT
 .INDENT 7.0
 .TP
-.B cthread
+.B cthread = None
 (\fI\%CommandThread\fP) closentry thread
 .UNINDENT
 .INDENT 7.0
@@ -2421,7 +2426,7 @@ Status description
 .UNINDENT
 .INDENT 7.0
 .TP
-.B errors
+.B errors = None
 (\fBlist\(ga<:obj:\(gastr\fP>) list with errors
 .UNINDENT
 .INDENT 7.0
@@ -2665,12 +2670,12 @@ True if the operation allowed
 .UNINDENT
 .INDENT 7.0
 .TP
-.B lock
+.B lock = None
 (\fI\%threading.Lock\fP) thread lock
 .UNINDENT
 .INDENT 7.0
 .TP
-.B othread
+.B othread = None
 (\fI\%CommandThread\fP) openentry thread
 .UNINDENT
 .INDENT 7.0
@@ -2760,7 +2765,7 @@ Read Attribute Hardware
 .UNINDENT
 .INDENT 7.0
 .TP
-.B rthread
+.B rthread = None
 (\fI\%CommandThread\fP) record thread
 .UNINDENT
 .INDENT 7.0
@@ -2775,12 +2780,12 @@ set_state method
 .UNINDENT
 .INDENT 7.0
 .TP
-.B state_flag
+.B state_flag = None
 (\fBPyTango.DevState\fP) state flag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B tdw
+.B tdw = None
 (\fI\%nxswriter.TangoDataWriter.TangoDataWriter\fP) Tango Data Writer
 .UNINDENT
 .INDENT 7.0
@@ -2932,7 +2937,7 @@ It goes through all stack elements closing them
 .UNINDENT
 .INDENT 7.0
 .TP
-.B elementClass
+.B elementClass = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%type\fP > ) map of tag names to related classes
 .UNINDENT
 .INDENT 7.0
@@ -2947,22 +2952,22 @@ parses the closing tag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B entryAttrs
+.B entryAttrs = None
 (\fI\%list\fP <\fI\%dict\fP <\fI\%str\fP, \fI\%str\fP > >) list of entry group attributes
 .UNINDENT
 .INDENT 7.0
 .TP
-.B finalPool
+.B finalPool = None
 (\fI\%nxswriter.ThreadPool.ThreadPool\fP) thread pool with FINAL elements
 .UNINDENT
 .INDENT 7.0
 .TP
-.B initPool
+.B initPool = None
 (\fI\%nxswriter.ThreadPool.ThreadPool\fP) thread pool with INIT elements
 .UNINDENT
 .INDENT 7.0
 .TP
-.B raiseUnsupportedTag
+.B raiseUnsupportedTag = None
 (\fI\%bool\fP) True if raise exception on unsupported tag
 .UNINDENT
 .INDENT 7.0
@@ -2982,27 +2987,27 @@ parses the opening tag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B stepPool
+.B stepPool = None
 (\fI\%nxswriter.ThreadPool.ThreadPool\fP) thread pool with STEP elements
 .UNINDENT
 .INDENT 7.0
 .TP
-.B transparentTags
+.B transparentTags = None
 (\fI\%list\fP <\fI\%str\fP>) transparent tags
 .UNINDENT
 .INDENT 7.0
 .TP
-.B triggerPools
+.B triggerPools = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%nxswriter.ThreadPool.ThreadPool\fP> ) collection of thread pool with triggered STEP elements
 .UNINDENT
 .INDENT 7.0
 .TP
-.B withAttr
+.B withAttr = None
 (\fI\%dict\fP <\fI\%str\fP, \fI\%type\fP > ) map of tag names to related classes
 .UNINDENT
 .INDENT 7.0
 .TP
-.B withXMLinput
+.B withXMLinput = None
 (\fI\%dict\fP <\fI\%str\fP: \fI\%nxswriter.Element.Element\fP > ) tags with inner xml as its input
 .UNINDENT
 .UNINDENT
@@ -3174,27 +3179,27 @@ when log stream does not exist
 .UNINDENT
 .INDENT 7.0
 .TP
-.B log_debug
+.B log_debug = None
 (\fBPyTango.log4tango.TangoStream\fP) Tango debug log stream
 .UNINDENT
 .INDENT 7.0
 .TP
-.B log_error
+.B log_error = None
 (\fBPyTango.log4tango.TangoStream\fP) Tango error log stream
 .UNINDENT
 .INDENT 7.0
 .TP
-.B log_fatal
+.B log_fatal = None
 (\fBPyTango.log4tango.TangoStream\fP) Tango fatal log stream
 .UNINDENT
 .INDENT 7.0
 .TP
-.B log_info
+.B log_info = None
 (\fBPyTango.log4tango.TangoStream\fP) Tango info log stream
 .UNINDENT
 .INDENT 7.0
 .TP
-.B log_warn
+.B log_warn = None
 (\fBPyTango.log4tango.TangoStream\fP) Tango warn log stream
 .UNINDENT
 .INDENT 7.0
@@ -3240,12 +3245,12 @@ It initialize the data writer for the H5 output file
 .UNINDENT
 .INDENT 7.0
 .TP
-.B addingLogs
+.B addingLogs = None
 (\fI\%str\fP) adding logs
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property canfail
+.B canfail
 the global can fail flag
 .UNINDENT
 .INDENT 7.0
@@ -3271,17 +3276,17 @@ It closes the H5 file
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property currentfileid
+.B currentfileid
 the json data string
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property defaultCanFail
+.B defaultCanFail
 the global can fail flag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property fileName
+.B fileName
 the parent nexus path
 .UNINDENT
 .INDENT 7.0
@@ -3299,17 +3304,17 @@ the H5 file handle
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property jsonrecord
+.B jsonrecord
 the json data string
 .UNINDENT
 .INDENT 7.0
 .TP
-.B metadataOutput
+.B metadataOutput = None
 (\fI\%str\fP) metadata output
 .UNINDENT
 .INDENT 7.0
 .TP
-.B numberOfThreads
+.B numberOfThreads = None
 (\fI\%int\fP) maximal number of threads
 .UNINDENT
 .INDENT 7.0
@@ -3348,22 +3353,22 @@ It runs threads from the STEP pool
 .UNINDENT
 .INDENT 7.0
 .TP
-.B skipacquisition
+.B skipacquisition = None
 (\fI\%bool\fP) skip acquisition flag
 .UNINDENT
 .INDENT 7.0
 .TP
-.B stepsperfile
+.B stepsperfile = None
 (\fI\%int\fP) steps per file
 .UNINDENT
 .INDENT 7.0
 .TP
-.B writer
+.B writer = None
 (\fI\%str\fP) writer type
 .UNINDENT
 .INDENT 7.0
 .TP
-.B property xmlsettings
+.B xmlsettings
 the xmlsettings
 .UNINDENT
 .UNINDENT
@@ -3434,17 +3439,17 @@ It cleans all member variables
 .UNINDENT
 .INDENT 7.0
 .TP
-.B client
+.B client = None
 (\fI\%str\fP) client datasource for mixed CLIENT/TANGO mode
 .UNINDENT
 .INDENT 7.0
 .TP
-.B device
+.B device = None
 (\fI\%str\fP) full device name
 .UNINDENT
 .INDENT 7.0
 .TP
-.B fullclient
+.B fullclient = None
 (\fI\%str\fP) client datasource for mixed CLIENT/TANGO mode with fqdn
 .UNINDENT
 .INDENT 7.0
@@ -3462,12 +3467,12 @@ dictionary with collected data
 .UNINDENT
 .INDENT 7.0
 .TP
-.B group
+.B group = None
 (\fI\%TgGroup\fP) datasource tango group
 .UNINDENT
 .INDENT 7.0
 .TP
-.B member
+.B member = None
 (\fI\%TgMember\fP) Tango device member
 .UNINDENT
 .INDENT 7.0
@@ -3541,32 +3546,32 @@ default constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B attributes
+.B attributes = None
 (\fI\%list\fP <\fI\%str\fP>) device attribute names
 .UNINDENT
 .INDENT 7.0
 .TP
-.B commands
+.B commands = None
 (\fI\%list\fP <\fI\%str\fP>) device command names
 .UNINDENT
 .INDENT 7.0
 .TP
-.B device
+.B device = None
 (\fI\%str\fP) tango device name
 .UNINDENT
 .INDENT 7.0
 .TP
-.B members
+.B members = None
 (\fI\%dict\fP <\fI\%str\fP , \fI\%TgMember\fP > ) dictionary with tango members
 .UNINDENT
 .INDENT 7.0
 .TP
-.B properties
+.B properties = None
 (\fI\%list\fP <\fI\%str\fP>) device property names
 .UNINDENT
 .INDENT 7.0
 .TP
-.B proxy
+.B proxy = None
 (\fBPyTango.DeviceProxy\fP) device proxy
 .UNINDENT
 .INDENT 7.0
@@ -3606,12 +3611,12 @@ default constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B counter
+.B counter = None
 (\fI\%int\fP) counter of steps
 .UNINDENT
 .INDENT 7.0
 .TP
-.B devices
+.B devices = None
 (\fI\%dict\fP <\fI\%str\fP,  \fI\%TgDevice\fP> ) TANGO devices
 .UNINDENT
 .INDENT 7.0
@@ -3649,7 +3654,7 @@ TgDevice instance of tango device
 .UNINDENT
 .INDENT 7.0
 .TP
-.B lock
+.B lock = None
 (\fI\%threading.Lock\fP) threading lock
 .UNINDENT
 .UNINDENT
@@ -3677,7 +3682,7 @@ default constructor
 .UNINDENT
 .INDENT 7.0
 .TP
-.B encoding
+.B encoding = None
 (\fI\%str\fP) encoding type of Tango DevEncoded variables
 .UNINDENT
 .INDENT 7.0
@@ -3725,12 +3730,12 @@ True if data is set
 .UNINDENT
 .INDENT 7.0
 .TP
-.B memberType
+.B memberType = None
 (\fI\%str\fP) member type of the data, i.e. attribute, property,…
 .UNINDENT
 .INDENT 7.0
 .TP
-.B name
+.B name = None
 (\fI\%str\fP) name of data record
 .UNINDENT
 .INDENT 7.0
@@ -3815,7 +3820,7 @@ waits for all thread from the pool
 .UNINDENT
 .INDENT 7.0
 .TP
-.B numberOfThreads
+.B numberOfThreads = None
 (\fI\%int\fP) maximal number of threads
 .UNINDENT
 .INDENT 7.0
@@ -4028,11 +4033,6 @@ nupy type
 Tango Data Writer
 .INDENT 0.0
 .TP
-.B nxswriter.globallock = <unlocked _thread.lock object>
-(\fI\%threading.Lock\fP) global lock
-.UNINDENT
-.INDENT 0.0
-.TP
 .B nxswriter.run(argv)
 launches the TANGO server
 .INDENT 7.0
@@ -4040,6 +4040,11 @@ launches the TANGO server
 .B Parameters
 \fBargv\fP (\fI\%list\fP <\fI\%str\fP>) – command\-line arguments
 .UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B nxswriter.globallock = <unlocked _thread.lock object>
+(\fI\%threading.Lock\fP) global lock
 .UNINDENT
 .INDENT 0.0
 .IP \(bu 2

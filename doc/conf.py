@@ -427,8 +427,8 @@ autoclass_content = 'both'
 
 
 intersphinx_mapping = {
-    'https://nexdatas.github.io/tools/':None,
-    'https://nexdatas.github.io/configserver/':None,
+    'https://nexdatas.github.io/nxstools/':None,
+    'https://nexdatas.github.io/nxsconfigserver/':None,
     'https://docs.python.org/2.7/': None,
     'https://docs.python.org/3.5/': None,
     'https://docs.scipy.org/doc/scipy/': None,
