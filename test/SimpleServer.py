@@ -31,10 +31,15 @@
 #
 
 
-import PyTango
 import sys
 import numpy
 import struct
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
 
 if sys.version_info > (3,):
     long = int
@@ -54,7 +59,7 @@ else:
 # ==================================================================
 
 
-class SimpleServer(PyTango.Device_4Impl):
+class SimpleServer(tango.Device_4Impl):
 
     # --------- Add you global variables here --------------------------
 
@@ -63,7 +68,7 @@ class SimpleServer(PyTango.Device_4Impl):
     # ------------------------------------------------------------------
 
     def __init__(self, cl, name):
-        PyTango.Device_4Impl.__init__(self, cl, name)
+        tango.Device_4Impl.__init__(self, cl, name)
         SimpleServer.init_device(self)
 
     # ------------------------------------------------------------------
@@ -79,7 +84,7 @@ class SimpleServer(PyTango.Device_4Impl):
 
     def init_device(self):
         # print "In ", self.get_name(), "::init_device()"
-        self.set_state(PyTango.DevState.ON)
+        self.set_state(tango.DevState.ON)
         self.get_device_properties(self.get_device_class())
 
         self.attr_ScalarBoolean = True
@@ -949,361 +954,361 @@ class SimpleServer(PyTango.Device_4Impl):
 #    SimpleServerClass class definition
 #
 # ==================================================================
-class SimpleServerClass(PyTango.DeviceClass):
+class SimpleServerClass(tango.DeviceClass):
     #    Class Properties
     class_property_list = {
         'ClassBoolean':
-        [PyTango.DevBoolean,
+        [tango.DevBoolean,
          "classBoolean",
          [True]],
         'ClassShort':
-        [PyTango.DevShort,
+        [tango.DevShort,
          "ClassShort",
          [1]],
         'ClassLong':
-        [PyTango.DevLong,
+        [tango.DevLong,
          "ClassLong",
          [-123555]],
         'ClassFloat':
-        [PyTango.DevFloat,
+        [tango.DevFloat,
          "ClassFloat",
          [12.345]],
         'ClassDouble':
-        [PyTango.DevDouble,
+        [tango.DevDouble,
          "ClassDouble",
          [1.23445]],
         'ClassUShort':
-        [PyTango.DevUShort,
+        [tango.DevUShort,
          "ClassUShort",
          [1]],
         'ClassULong':
-        [PyTango.DevULong,
+        [tango.DevULong,
          "ClassULong",
          [12343]],
         'ClassString':
-        [PyTango.DevString,
+        [tango.DevString,
          "ClassString",
          ["My ClassString"]],
     }
     #    Device Properties
     device_property_list = {
         'DeviceBoolean':
-        [PyTango.DevBoolean,
+        [tango.DevBoolean,
          "DeviceBoolean",
          [False]],
         'DeviceShort':
-        [PyTango.DevShort,
+        [tango.DevShort,
          "DeviceShort",
          [12]],
         'DeviceLong':
-        [PyTango.DevLong,
+        [tango.DevLong,
          "DeviceLong",
          [1234566]],
         'DeviceFloat':
-        [PyTango.DevFloat,
+        [tango.DevFloat,
          "DeviceFloat",
          [12.4345]],
         'DeviceDouble':
-        [PyTango.DevDouble,
+        [tango.DevDouble,
          "DeviceDouble",
          [3.453456]],
         'DeviceUShort':
-        [PyTango.DevUShort,
+        [tango.DevUShort,
          "DeviceUShort",
          [1]],
         'DeviceULong':
-        [PyTango.DevULong,
+        [tango.DevULong,
          "DeviceULong",
          [23234]],
         'DeviceString':
-        [PyTango.DevString,
+        [tango.DevString,
          "DeviceString",
          ["My Sting"]],
     }
     #    Command definitions
     cmd_list = {
         'GetBoolean':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevBoolean, "ScalarBoolean"]],
+        [[tango.DevVoid, ""],
+         [tango.DevBoolean, "ScalarBoolean"]],
         'GetShort':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevShort, "ScalarShort"]],
+        [[tango.DevVoid, ""],
+         [tango.DevShort, "ScalarShort"]],
         'GetLong':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevLong, "ScalarLong"]],
+        [[tango.DevVoid, ""],
+         [tango.DevLong, "ScalarLong"]],
         'GetLong64':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevLong64, "ScalarLong64"]],
+        [[tango.DevVoid, ""],
+         [tango.DevLong64, "ScalarLong64"]],
         'GetFloat':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevFloat, "ScalarFloat"]],
+        [[tango.DevVoid, ""],
+         [tango.DevFloat, "ScalarFloat"]],
         'GetDouble':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevDouble, "ScalarDouble"]],
+        [[tango.DevVoid, ""],
+         [tango.DevDouble, "ScalarDouble"]],
         'GetUShort':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevUShort, "ScalarUShort"]],
+        [[tango.DevVoid, ""],
+         [tango.DevUShort, "ScalarUShort"]],
         'GetULong':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevULong, "ScalarULong"]],
+        [[tango.DevVoid, ""],
+         [tango.DevULong, "ScalarULong"]],
         'GetULong64':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevULong64, "ScalarULong64"]],
+        [[tango.DevVoid, ""],
+         [tango.DevULong64, "ScalarULong64"]],
         'GetString':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevString, "ScalarString"]],
+        [[tango.DevVoid, ""],
+         [tango.DevString, "ScalarString"]],
     }
     #    Attribute definitions
     attr_list = {
         'ScalarLong':
-        [[PyTango.DevLong,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevLong,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "test long scalar attribute",
         }],
         'ScalarBoolean':
-        [[PyTango.DevBoolean,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevBoolean,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "test scalar bool attribute",
         }],
         'ScalarShort':
-        [[PyTango.DevShort,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevShort,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "Scalar Short attribute",
         }],
         'ScalarUShort':
-        [[PyTango.DevUShort,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevUShort,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarUShort attribute",
         }],
         'ScalarULong':
-        [[PyTango.DevULong,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevULong,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarULong attribute",
         }],
         'ScalarLong64':
-        [[PyTango.DevLong64,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevLong64,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarLong64 attribute",
         }],
         'ScalarULong64':
-        [[PyTango.DevULong64,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevULong64,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarULong64 attribute",
         }],
         'ScalarFloat':
-        [[PyTango.DevFloat,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevFloat,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarFloat attribute",
         }],
         'ScalarDouble':
-        [[PyTango.DevDouble,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevDouble,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarDouble attribute",
         }],
         'ScalarString':
-        [[PyTango.DevString,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevString,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarString attribute",
         }],
         'ScalarEncoded':
-        [[PyTango.DevEncoded,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevEncoded,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
             'description': "ScalarEncoded attribute",
         }],
         'ScalarUChar':
-        [[PyTango.DevUChar,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevUChar,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ScalarUChar attribute",
         }],
         'SpectrumEncoded':
-        [[PyTango.DevEncoded,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevEncoded,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "SpectrumEncoded attribute",
         }],
         'ImageEncoded':
-        [[PyTango.DevEncoded,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevEncoded,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'description': "ImageEncoded attribute",
         }],
         'SpectrumBoolean':
-        [[PyTango.DevBoolean,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevBoolean,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
             'description': "SpectrumBoolean attribute",
         }],
         'SpectrumUChar':
-        [[PyTango.DevUChar,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevUChar,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumUChar attribute",
         }],
         'SpectrumShort':
-        [[PyTango.DevShort,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevShort,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumShort attribute",
         }],
         'SpectrumUShort':
-        [[PyTango.DevUShort,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevUShort,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumUShort",
         }],
         'SpectrumLong':
-        [[PyTango.DevLong,
-          PyTango.SPECTRUM,
-          PyTango.WRITE, 4096],
+        [[tango.DevLong,
+          tango.SPECTRUM,
+          tango.WRITE, 4096],
          {
              'description': "SpectrumLong attribute",
         }],
         'SpectrumULong':
-        [[PyTango.DevULong,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevULong,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumULong attribute",
         }],
         'SpectrumLong64':
-        [[PyTango.DevLong64,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevLong64,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumLong64 attribute",
         }],
         'SpectrumULong64':
-        [[PyTango.DevULong64,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevULong64,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumULong64 attribute",
         }],
         'SpectrumFloat':
-        [[PyTango.DevFloat,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevFloat,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumFloat attribute",
         }],
         'SpectrumDouble':
-        [[PyTango.DevDouble,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevDouble,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumDouble attribute",
         }],
         'SpectrumString':
-        [[PyTango.DevString,
-          PyTango.SPECTRUM,
-          PyTango.READ_WRITE, 4096],
+        [[tango.DevString,
+          tango.SPECTRUM,
+          tango.READ_WRITE, 4096],
          {
              'description': "SpectrumString attribute",
         }],
         'ImageBoolean':
-        [[PyTango.DevBoolean,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevBoolean,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageBoolean attribute",
         }],
         'ImageUChar':
-        [[PyTango.DevUChar,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevUChar,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageUChar attribute",
         }],
         'ImageShort':
-        [[PyTango.DevShort,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevShort,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
             'description': "ImageShort attribute",
         }],
         'ImageUShort':
-        [[PyTango.DevUShort,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevUShort,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageUShort attribute",
         }],
         'ImageLong':
-        [[PyTango.DevLong,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevLong,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageLong attribute",
         }],
         'ImageULong':
-        [[PyTango.DevULong,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevULong,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageULong attribute",
         }],
         'ImageLong64':
-        [[PyTango.DevLong64,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevLong64,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageLong64 attribute",
         }],
         'ImageULong64':
-        [[PyTango.DevULong64,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevULong64,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageULong64 attribute",
         }],
         'ImageFloat':
-        [[PyTango.DevFloat,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevFloat,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageFloat attribute",
         }],
         'ImageDouble':
-        [[PyTango.DevDouble,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevDouble,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageDouble attribute",
         }],
         'ImageString':
-        [[PyTango.DevString,
-          PyTango.IMAGE,
-          PyTango.READ_WRITE, 4096, 4096],
+        [[tango.DevString,
+          tango.IMAGE,
+          tango.READ_WRITE, 4096, 4096],
          {
              'description': "ImageString attribute",
         }],
@@ -1314,7 +1319,7 @@ class SimpleServerClass(PyTango.DeviceClass):
     # ------------------------------------------------------------------
 
     def __init__(self, name):
-        PyTango.DeviceClass.__init__(self, name)
+        tango.DeviceClass.__init__(self, name)
         self.set_type(name)
         # print "In SimpleServerClass  constructor"
 
@@ -1326,12 +1331,12 @@ class SimpleServerClass(PyTango.DeviceClass):
 # ==================================================================
 if __name__ == '__main__':
     try:
-        py = PyTango.Util(sys.argv)
+        py = tango.Util(sys.argv)
         py.add_TgClass(SimpleServerClass, SimpleServer, 'SimpleServer')
-        U = PyTango.Util.instance()
+        U = tango.Util.instance()
         U.server_init()
         U.server_run()
-    except PyTango.DevFailed as e:
+    except tango.DevFailed as e:
         print('-------> Received a DevFailed exception: %s' % str(e))
     except Exception as e:
         print('-------> An unforeseen exception occured.... %s' % str(e))

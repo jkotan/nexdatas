@@ -33,8 +33,11 @@ from .Errors import (PackageError, DataSourceSetupError)
 
 
 try:
-    import PyTango
-    #: (:obj:`str`) global variable if PyTango module installed
+    try:
+        import tango
+    except Exception:
+        import PyTango as tango
+    #: (:obj:`str`) global variable if tango module installed
     PYTANGO_AVAILABLE = True
 except ImportError as e:
     PYTANGO_AVAILABLE = False
@@ -54,16 +57,16 @@ class ProxyTools(object):
         :param device: tango device
         :type device: :obj:`str`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         :returns: proxy if proxy is set up
-        :rtype: :class:`PyTango.DeviceProxy`
+        :rtype: :class:`tango.DeviceProxy`
         """
         found = False
         cnt = 0
 
         try:
-            proxy = PyTango.DeviceProxy(device)
-            proxy.set_source(PyTango.DevSource.DEV)
+            proxy = tango.DeviceProxy(device)
+            proxy.set_source(tango.DevSource.DEV)
 
         except Exception:
             if streams:
@@ -90,8 +93,8 @@ class ProxyTools(object):
     def isProxyValid(cls, proxy):
         """ checks if proxy is valid
 
-        :param proxy: PyTango proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :param proxy: tango proxy
+        :type proxy: :class:`tango.DeviceProxy`
         :returns: True if proxy is valid else false
         :rtype: :obj:`bool`
 
@@ -128,7 +131,7 @@ class TangoSource(DataSource):
         self.__tngrp = None
         #: (:class:`nxswriter.DataSourcePool.DataSourcePool`) datasource pool
         self.__pool = None
-        #: (:class:`PyTango.DeviceProxy`) device proxy
+        #: (:class:`tango.DeviceProxy`) device proxy
         self.__proxy = None
 
         #: (:obj:`dict` <:obj:`str` , :obj:`dict` <:obj:`str`, any>>) \
@@ -319,11 +322,11 @@ class TangoSource(DataSource):
             if self._streams:
                 self._streams.error(
                     "TangoSource::getData() - "
-                    "Support for PyTango datasources not available",
+                    "Support for tango datasources not available",
                     std=False)
 
             raise PackageError(
-                "Support for PyTango datasources not available")
+                "Support for tango datasources not available")
 
         if self.device and self.member.memberType and self.member.name:
             if not self.__proxy or not ProxyTools.isProxyValid(self.__proxy):
@@ -402,7 +405,7 @@ class TgGroup(object):
         :param counter: counts of steps
         :type counter: :obj:`int`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
 
         #: (:class:`threading.Lock`) threading lock
@@ -411,7 +414,7 @@ class TgGroup(object):
         self.counter = counter
         #: (:obj:`dict` <:obj:`str`,  :class:`TgDevice`> ) TANGO devices
         self.devices = {}
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def getDevice(self, device):
@@ -466,7 +469,7 @@ class TgGroup(object):
         """ fetches attribute data for given proxy
 
         :param proxy: given proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         :param member: given member
         :type member: :class:`TgMember`
         """
@@ -484,7 +487,7 @@ class TgGroup(object):
         """ fetches property data for given member
 
         :param proxy: given proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         :param member: given member
         :type member: :class:`TgMember`
         """
@@ -502,7 +505,7 @@ class TgGroup(object):
         """ fetches command data for given member
 
         :param proxy: given device proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         :param member: given member
         :type member: :class:`TgMember`
         """
@@ -523,7 +526,7 @@ class TgGroup(object):
         :param counter: counts of scan steps
         :type counter: :obj:`int`
         :param proxy: device proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         :param member: required member
         :type member: :class:`TgMember`
         """
@@ -580,9 +583,9 @@ class TgDevice(object):
         :param device: tango device name
         :type device: :obj:`str`
         :param proxy: device proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
 
         #: (:obj:`str`) tango device name
@@ -596,9 +599,9 @@ class TgDevice(object):
         self.properties = []
         #: (:obj:`list` <:obj:`str`>) device command names
         self.commands = []
-        #: (:class:`PyTango.DeviceProxy`) device proxy
+        #: (:class:`tango.DeviceProxy`) device proxy
         self.proxy = proxy
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def setMember(self, member):
@@ -647,7 +650,7 @@ class TgMember(object):
         :param encoding: encoding type of Tango DevEncoded variables
         :type encoding: :obj:`str`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
         #: (:obj:`str`) name of data record
         self.name = name
@@ -659,11 +662,11 @@ class TgMember(object):
         #:        'shape': :obj:`list`<int>, 'encoding': :obj:`str`, \
         #:        'decoders': :obj:`str`} ) data value
         self.__value = None
-        #: (:class:`PyTango.DeviceAttribute`) output data
+        #: (:class:`tango.DeviceAttribute`) output data
         self.__da = None
-        #: (:class:`PyTango.CommandInfo`) input command data
+        #: (:class:`tango.CommandInfo`) input command data
         self.__cd = None
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def reset(self):
@@ -677,9 +680,9 @@ class TgMember(object):
         """ sets tango data
 
         :param data: output tango data
-        :type data: :class:`PyTango.DeviceAttribute`
+        :type data: :class:`tango.DeviceAttribute`
         :param cmd: input command data
-        :type cmd: :class:`PyTango.CommandInfo`
+        :type cmd: :class:`tango.CommandInfo`
         """
 
         self.__da = data
@@ -770,7 +773,7 @@ class TgMember(object):
         """ reads data from device proxy
 
         :param proxy: device proxy
-        :type proxy: :class:`PyTango.DeviceProxy`
+        :type proxy: :class:`tango.DeviceProxy`
         """
         self.reset()
         ename = self.name if sys.version_info > (3,) else self.name.encode()

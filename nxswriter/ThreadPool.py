@@ -42,7 +42,7 @@ class ThreadPool(object):
         :param numberOfThreads: number of threads
         :type numberOfThreads: :obj:`int`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
 
         #: (:obj:`int`) maximal number of threads
@@ -56,7 +56,7 @@ class ThreadPool(object):
         #:     list of the threads related to the appended elements
         self.__threadList = []
 
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def append(self, elem):

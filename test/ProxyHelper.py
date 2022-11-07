@@ -20,8 +20,13 @@
 # unittests for field Tags running Tango Server
 #
 
-import PyTango
 import time
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
 
 # test fixture
 
@@ -38,7 +43,7 @@ class ProxyHelper(object):
         cnt = 0
         while not found and cnt != counts:
             try:
-                if proxy.state() != PyTango.DevState.RUNNING:
+                if proxy.state() != tango.DevState.RUNNING:
                     found = True
             except Exception as e:
                 print(e)

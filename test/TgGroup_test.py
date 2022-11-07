@@ -24,10 +24,13 @@ import os
 import sys
 import random
 import struct
-import PyTango
 import binascii
 import time
 
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 try:
     import SimpleServerSetUp
@@ -53,12 +56,12 @@ if sys.version_info > (3,):
     long = int
 
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:
@@ -263,7 +266,7 @@ class TgGroupTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {

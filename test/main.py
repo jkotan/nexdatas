@@ -21,7 +21,10 @@
 #
 
 try:
-    __import__("PyTango")
+    try:
+        __import__("tango")
+    except Exception:
+        __import__("PyTango")
     # if module PyTango avalable
     PYTANGO_AVAILABLE = True
 except ImportError as e:
@@ -262,13 +265,16 @@ if PYTANGO_AVAILABLE:
             import DBFieldTagAsynchH5Cpp_test
 
 
-#: (:obj:`bool`) PyTango Bug #213 flag
+#: (:obj:`bool`) tango Bug #213 flag
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
-        import PyTango
+        try:
+            import tango
+        except Exception:
+            import PyTango as tango
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:

@@ -65,7 +65,7 @@ class NexusXMLHandler(sax.ContentHandler):
         :type globalJSON: \
         :     :obj:`dict` <:obj:`str`, :obj:`dict` <:obj:`str`, any>>
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         :param reloadmode: reload mode
         :type reloadmode: :obj: `bool`
         """
@@ -173,7 +173,7 @@ class NexusXMLHandler(sax.ContentHandler):
         #: (:obj:`bool`) if innerparse was running
         self.__inner = False
 
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def __last(self):

@@ -24,11 +24,14 @@ import os
 import sys
 import random
 import struct
-import PyTango
 import binascii
 import time
 import json
 
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 try:
     import SimpleServerSetUp
@@ -61,12 +64,12 @@ if sys.version_info > (3,):
 else:
     import thread
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:
@@ -729,7 +732,7 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -795,8 +798,8 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON,
-                      "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON,
+                      "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -953,8 +956,8 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON,
-                      "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON,
+                      "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -1108,8 +1111,8 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON,
-                      "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON,
+                      "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -1258,7 +1261,7 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -1334,7 +1337,7 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -1463,7 +1466,7 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -1589,7 +1592,7 @@ class TangoSourceTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -3794,7 +3797,7 @@ class TangoSourceTest(unittest.TestCase):
             el.member.memberType = 'property'
             el.member.name = k
             dt = el.getData()
-            dp = PyTango.DeviceProxy(el.device)
+            dp = tango.DeviceProxy(el.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             self.checkData(
                 dt, "SCALAR", dp.get_property([k])[k][0],
@@ -3828,7 +3831,7 @@ class TangoSourceTest(unittest.TestCase):
             el.member.memberType = 'property'
             el.member.name = k.lower()
             dt = el.getData()
-            dp = PyTango.DeviceProxy(el.device)
+            dp = tango.DeviceProxy(el.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             self.checkData(dt, "SCALAR", dp.get_property([k])[k][0],
                            'DevString', [1, 0], None, None, arr[k][4]

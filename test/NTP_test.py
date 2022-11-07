@@ -744,7 +744,7 @@ class NTPTest(unittest.TestCase):
 
         arrs["s"] = {
             "ScalarString": ["string", "DevString", "MyTrue"],
-            # "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}
@@ -874,7 +874,7 @@ class NTPTest(unittest.TestCase):
 
         arrs["s"] = {
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
-            # "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}
@@ -973,7 +973,7 @@ class NTPTest(unittest.TestCase):
 
         arrs["s"] = {
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
-            # "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}

@@ -24,10 +24,14 @@ import os
 import sys
 import random
 import struct
-import PyTango
 import binascii
 import time
 import threading
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 
 try:
@@ -126,14 +130,14 @@ class TangoSourceTest(unittest.TestCase):
             Exception, ProxyTools.proxySetup, "stestp09/testss/s3r228")
 
         dp = ProxyTools.proxySetup("stestp09/testss/s2r228")
-        self.assertTrue(isinstance(dp, PyTango.DeviceProxy))
-        self.assertEqual(dp.state(), PyTango._PyTango.DevState.ON)
+        self.assertTrue(isinstance(dp, tango.DeviceProxy))
+        self.assertEqual(dp.state(), tango._tango.DevState.ON)
         self.assertEqual(dp.dev_name(), "stestp09/testss/s2r228")
 
         dp = ProxyTools.proxySetup("stestp09/testss/s1r228")
-        self.assertTrue(isinstance(dp, PyTango.DeviceProxy))
+        self.assertTrue(isinstance(dp, tango.DeviceProxy))
         self.assertEqual(dp.dev_name(), "stestp09/testss/s1r228")
-        self.assertEqual(dp.state(), PyTango._PyTango.DevState.ON)
+        self.assertEqual(dp.state(), tango._tango.DevState.ON)
 
     # constructor test
     # \brief It tests default settings

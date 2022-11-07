@@ -147,7 +147,7 @@ class DataHolderTest(unittest.TestCase):
             "ScalarFloat": ["float32", "DevFloat", 12.234, 1e-5],
             "ScalarDouble": ["float64", "DevDouble", -2.456673e+02, 1e-14],
             "ScalarString": ["string", "DevString", "MyTrue"],
-            # "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         for a in arr:
@@ -407,7 +407,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["s"] = {
             "ScalarString": ["string", "DevString", "MyTrue"],
-            # "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}
@@ -567,7 +567,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["s"] = {
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
-            #  "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            #  "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}
@@ -674,7 +674,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["s"] = {
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
-            #  "State":[ "string", "DevState", PyTango._PyTango.DevState.ON],
+            #  "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
 
         types = {}

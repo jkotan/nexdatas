@@ -1,14 +1,19 @@
-import PyTango
 import subprocess
 import time
 import sys
 
-new_device_info_writer = PyTango.DbDevInfo()
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
+
+new_device_info_writer = tango.DbDevInfo()
 new_device_info_writer._class = "SimpleServer"
 new_device_info_writer.server = "SimpleServer/S1"
 new_device_info_writer.name = "stestp09/testss/s1r228"
 
-db = PyTango.Database()
+db = tango.Database()
 db.add_device(new_device_info_writer)
 db.add_server(new_device_info_writer.server, new_device_info_writer)
 
@@ -23,17 +28,17 @@ psub = subprocess.Popen(
 
 
 try:
-    #  dp = PyTango.DeviceProxy(new_device_info_writer.name)
+    #  dp = tango.DeviceProxy(new_device_info_writer.name)
 
     found = False
     cnt = 0
     while not found and cnt < 100000:
         try:
             sys.stdout.write("\b.")
-            dp = PyTango.DeviceProxy(new_device_info_writer.name)
+            dp = tango.DeviceProxy(new_device_info_writer.name)
             time.sleep(0.0001)
         #       print "STATE:",dp.state()
-            if dp.state() == PyTango.DevState.ON:
+            if dp.state() == tango.DevState.ON:
                 found = True
         except Exception as e:
             print("WHAT: %s" % e)
@@ -44,7 +49,7 @@ try:
 
 finally:
     print("tearing down ...")
-    db = PyTango.Database()
+    db = tango.Database()
     db.delete_server(new_device_info_writer.server)
     output = ""
     pipe = subprocess.Popen(

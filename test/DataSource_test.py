@@ -30,7 +30,10 @@ from nxswriter.DBaseSource import DB_AVAILABLE as DB
 
 
 try:
-    __import__("PyTango")
+    try:
+        __import__("tango")
+    except Exception:
+        __import__("PyTango")
     # global variable if PyTango module installed
     PYTANGO_AVAILABLE = True
 except ImportError as e:

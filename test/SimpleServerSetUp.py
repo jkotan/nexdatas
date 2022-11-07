@@ -23,8 +23,13 @@ import os
 import sys
 import subprocess
 
-import PyTango
 import time
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
 
 try:
     import SimpleServer
@@ -40,7 +45,7 @@ class SimpleServerSetUp(object):
 
     def __init__(self, device="stestp09/testss/s1r228", instance="S1"):
         # information about tango writer
-        self.new_device_info_writer = PyTango.DbDevInfo()
+        self.new_device_info_writer = tango.DbDevInfo()
         # information about tango writer class
         self.new_device_info_writer._class = "SimpleServer"
         # information about tango writer server
@@ -81,7 +86,7 @@ class SimpleServerSetUp(object):
     # \brief Common set up of Tango Server
     def setUp(self):
         print("\nsetting up...")
-        db = PyTango.Database()
+        db = tango.Database()
         db.add_device(self.new_device_info_writer)
         db.add_server(
             self.new_device_info_writer.server, self.new_device_info_writer)
@@ -116,9 +121,9 @@ class SimpleServerSetUp(object):
                     time.sleep(0.01)
                     cnt += 1
                     continue
-                self.dp = PyTango.DeviceProxy(dvname)
+                self.dp = tango.DeviceProxy(dvname)
                 time.sleep(0.01)
-                if self.dp.state() == PyTango.DevState.ON:
+                if self.dp.state() == tango.DevState.ON:
                     found = True
             except Exception:
                 found = False
@@ -129,7 +134,7 @@ class SimpleServerSetUp(object):
     # \brief Common tear down oif Tango Server
     def tearDown(self):
         print("tearing down ...")
-        db = PyTango.Database()
+        db = tango.Database()
         db.delete_server(self.new_device_info_writer.server)
         if sys.version_info > (3,):
             with subprocess.Popen(

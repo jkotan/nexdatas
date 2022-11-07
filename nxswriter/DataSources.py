@@ -50,9 +50,9 @@ class DataSource(object):
 
         :brief: It cleans all member variables
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def setup(self, xml):
