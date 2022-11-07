@@ -71,7 +71,7 @@ class DBaseSource(DataSource):
 
         :brief: It sets all member variables to None
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
         DataSource.__init__(self, streams=streams)
         #: (:obj:`str`) name of the host with the data source

@@ -25,7 +25,11 @@ import sys
 import json
 import numpy
 
-import PyTango
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
 try:
     from ProxyHelper import ProxyHelper
 except Exception:
@@ -61,12 +65,12 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         self._sv = ServerSetUp.ServerSetUp("testp09/testtdw/" + sins, sins)
 
         self.__status = {
-            PyTango.DevState.OFF: "Not Initialized",
-            PyTango.DevState.ON: "Ready",
-            PyTango.DevState.OPEN: "File Open",
-            PyTango.DevState.EXTRACT: "Entry Open",
-            PyTango.DevState.RUNNING: "Writing ...",
-            PyTango.DevState.FAULT: "Error",
+            tango.DevState.OFF: "Not Initialized",
+            tango.DevState.ON: "Ready",
+            tango.DevState.OPEN: "File Open",
+            tango.DevState.EXTRACT: "Entry Open",
+            tango.DevState.RUNNING: "Writing ...",
+            tango.DevState.FAULT: "Error",
         }
 
         self._scanXmlb = """
@@ -248,7 +252,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         self._sv.tearDown()
 
     def setProp(self, rc, name, value):
-        db = PyTango.Database()
+        db = tango.Database()
         name = "" + name[0].upper() + name[1:]
         db.put_device_property(
             self._sv.new_device_info_writer.name,
@@ -298,20 +302,20 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         try:
             fname = '%s/test.h5' % os.getcwd()
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
             dp.OpenFile()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.XMLSettings, "")
             self.assertEqual(dp.JSONRecord, "{}")
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -379,20 +383,20 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
         try:
             fname = '%s/test.h5' % os.getcwd()
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
             dp.OpenFile()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.XMLSettings, "")
             self.assertEqual(dp.JSONRecord, "{}")
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -437,34 +441,34 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fname = '%s/test2.h5' % os.getcwd()
         xml = '<definition> <group type="NXentry" name="entry"/></definition>'
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = xml
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
             self.assertEqual(dp.status(), self.__status[dp.state()])
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
 
             dp.CloseEntry()
             self.assertEqual(dp.status(), self.__status[dp.state()])
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             dp.CloseFile()
             self.assertEqual(dp.status(), self.__status[dp.state()])
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
 
             # check the created file
 
@@ -542,12 +546,12 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         wrongXml = """Ala ma kota."""
         xml = """<definition/>"""
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
@@ -555,7 +559,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             try:
                 error = None
                 dp.XMLSettings = wrongXml
-            except PyTango.DevFailed:
+            except tango.DevFailed:
                 error = True
             except Exception:
                 error = False
@@ -563,28 +567,28 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertTrue(error is not None)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
 #            dp.CloseFile()
 #            dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = xml
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -624,7 +628,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fmname1 = '%s.entry001.json' % fname
         fmname2 = '%s.entry002.json' % fname
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
@@ -632,18 +636,18 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXmlb % ("001", fname, "001")
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.stepsperfile, 0)
@@ -652,7 +656,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.OpenEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
@@ -660,7 +664,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca1) + '  } }')
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -668,17 +672,17 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXmlb % ("002", fname, "002")
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.stepsperfile, 0)
@@ -687,7 +691,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.OpenEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
@@ -695,7 +699,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca1) + '  } }')
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -703,19 +707,19 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -1093,25 +1097,25 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.stepsperfile, 0)
@@ -1120,7 +1124,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.OpenEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
@@ -1128,7 +1132,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca1) + '  } }')
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -1136,19 +1140,19 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -1454,7 +1458,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
@@ -1462,7 +1466,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
@@ -1470,11 +1474,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.skipacquisition, False)
@@ -1485,7 +1489,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
@@ -1495,28 +1499,28 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
@@ -1524,11 +1528,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.skipacquisition, False)
@@ -1536,20 +1540,20 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.currentfileid, 0)
 
             self.myAssertRaise(Exception, dp.openEntry)
-            self.assertEqual(dp.state(), PyTango.DevState.FAULT)
+            self.assertEqual(dp.state(), tango.DevState.FAULT)
             dp.OpenFile()
             dp.skipacquisition = True
             dp.OpenEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.skipacquisition, False)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -1558,28 +1562,28 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
@@ -1587,11 +1591,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.skipacquisition, False)
@@ -1603,13 +1607,13 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.skipacquisition, False)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.skipacquisition = True
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
@@ -1619,21 +1623,21 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.skipacquisition, False)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -1939,26 +1943,26 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
             dp.Canfail = True
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.canfail, True)
@@ -1969,35 +1973,35 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{}')
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{}')
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -2406,26 +2410,26 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Canfail = False
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.assertEqual(dp.stepsperfile, 0)
@@ -2435,35 +2439,35 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.canfail, False)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             self.myAssertRaise(Exception, dp.Record, '{}')
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.canfail, False)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.FAULT)
+            self.assertEqual(dp.state(), tango.DevState.FAULT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             self.myAssertRaise(Exception, dp.Record, '{}')
 
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.canfail, False)
-            self.assertEqual(dp.state(), PyTango.DevState.FAULT)
+            self.assertEqual(dp.state(), tango.DevState.FAULT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
             self.assertEqual(dp.canfail, True)
-            self.assertEqual(dp.state(), PyTango.DevState.FAULT)
+            self.assertEqual(dp.state(), tango.DevState.FAULT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.canfail, True)
             self.assertEqual(dp.stepsperfile, 0)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.FAULT)
+            self.assertEqual(dp.state(), tango.DevState.FAULT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -2764,26 +2768,26 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
         fname = '%s/scantest2.h5' % os.getcwd()
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[0], self._counter[1]]
@@ -2791,7 +2795,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             rec = {"data": {"exp_c01": cntg, "p09/mca/exp.02": mcag}}
             dp.Record(json.dumps(rec))
 
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[1], self._counter[0]]
@@ -2800,11 +2804,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.Record(json.dumps(rec))
 
             dp.CloseEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -3115,7 +3119,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         tfname = '%s/%s%s.h5' % (os.getcwd(), self.__class__.__name__, fun)
         fname = None
         try:
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "writer", "h5cpp")
@@ -3124,18 +3128,18 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.stepsPerFile = 2
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml1
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 0)
@@ -3144,7 +3148,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.OpenEntry()
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 1)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
@@ -3152,7 +3156,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca1) + '  } }')
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 1)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -3160,7 +3164,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 2)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
@@ -3168,7 +3172,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca2) + '  } }')
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 2)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
                       ', "p09/mca/exp.02":' +
@@ -3176,7 +3180,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 3)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.Record('{"data": {"exp_c01":' + str(self._counter[1]) +
@@ -3184,7 +3188,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                       str(self._mca2) + '  } }')
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 3)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
             dp.Record('{"data": {"exp_c01":' + str(self._counter[0]) +
                       ', "p09/mca/exp.02":' +
@@ -3192,19 +3196,19 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
 
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 4)
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseEntry()
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 1)
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
             self.assertEqual(dp.stepsperfile, 2)
             self.assertEqual(dp.currentfileid, 0)
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -4083,28 +4087,28 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fname = "scantestgrow.h5"
         try:
 
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             # self.setProp(dp, "DefaultCanFail", False)
             dp.FileName = fname
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml3 % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[0], self._counter[1]]
@@ -4112,7 +4116,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             rec = {"data": {"exp_c01": cntg, "image": imageg}}
             dp.Record(json.dumps(rec))
 
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[1], self._counter[0]]
@@ -4122,11 +4126,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.Record(json.dumps(rec))
 
             dp.CloseEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -4444,28 +4448,28 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fname = "scantestgrow.h5"
         try:
 
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             self.setProp(dp, "DefaultCanFail", False)
             dp.FileName = fname
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml3 % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[0], self._counter[1]]
@@ -4473,7 +4477,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             rec = {"data": {"exp_c01": cntg, "image": imageg}}
             dp.Record(json.dumps(rec))
 
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[1], self._counter[0]]
@@ -4483,11 +4487,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.Record(json.dumps(rec))
 
             dp.CloseEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file
@@ -4805,27 +4809,27 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
         fname = "scantestgrow.h5"
         try:
 
-            dp = PyTango.DeviceProxy(self._sv.device)
+            dp = tango.DeviceProxy(self._sv.device)
             self.assertTrue(ProxyHelper.wait(dp, 10000))
             #        print 'attributes', dp.attribute_list_query()
             dp.FileName = fname
             self.setProp(dp, "writer", "h5cpp")
             dp.FileName = fname
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenFile()
 
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.XMLSettings = self._scanXml3 % fname
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
 
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.OpenEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[0], self._counter[1]]
@@ -4833,7 +4837,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             rec = {"data": {"exp_c01": cntg, "image": imageg}}
             dp.Record(json.dumps(rec))
 
-            self.assertEqual(dp.state(), PyTango.DevState.EXTRACT)
+            self.assertEqual(dp.state(), tango.DevState.EXTRACT)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             cntg = [self._counter[1], self._counter[0]]
@@ -4843,11 +4847,11 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
             dp.Record(json.dumps(rec))
 
             dp.CloseEntry()
-            self.assertEqual(dp.state(), PyTango.DevState.OPEN)
+            self.assertEqual(dp.state(), tango.DevState.OPEN)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             dp.CloseFile()
-            self.assertEqual(dp.state(), PyTango.DevState.ON)
+            self.assertEqual(dp.state(), tango.DevState.ON)
             self.assertEqual(dp.status(), self.__status[dp.state()])
 
             # check the created file

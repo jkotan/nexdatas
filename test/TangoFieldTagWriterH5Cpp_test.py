@@ -27,7 +27,11 @@ import numpy
 import struct
 import binascii
 import time
-import PyTango
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 
 from nxswriter import Types
@@ -68,12 +72,12 @@ if sys.version_info > (3,):
 IS64BIT = (struct.calcsize("P") == 8)
 
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:
@@ -445,7 +449,7 @@ name="stestp09/testss/s1r228" port="10000" />
             det, "ScalarState", "string", "NX_CHAR",
             ["ON" for c in self._bools])
 
-        # writing encoded attributes not supported for PyTango 7.2.3
+        # writing encoded attributes not supported for tango 7.2.3
 
         self._sc.checkSingleScalarField(
             det, "InitScalarULong", "uint32", "NX_UINT32",
@@ -781,7 +785,7 @@ name="stestp09/testss/s1r228" port="10000" />
                    "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
 
-        # writing encoded attributes not supported for PyTango 7.2.3
+        # writing encoded attributes not supported for tango 7.2.3
         self._sc.checkSingleScalarField(
             det, "InitScalarULong", "uint32", "NX_UINT32",
             numpy.iinfo(getattr(numpy, 'uint32')).max,
@@ -1011,7 +1015,7 @@ name="stestp09/testss/s1r228" port="10000" />
                   '"nxswriter.DecoderPool.UINT32decoder"}'
         tdw = self.openWriter(fname, xml, json='{ ' + decoder + ' }')
 
-        dp = PyTango.DeviceProxy("stestp09/testss/s1r228")
+        dp = tango.DeviceProxy("stestp09/testss/s1r228")
         self.assertTrue(ProxyHelper.wait(dp, 10000))
 
         steps = min(len(self._logical), len(
@@ -1160,7 +1164,7 @@ name="stestp09/testss/s1r228" port="10000" />
                    "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
 
-        # writing encoded attributes not supported for PyTango 7.2.3
+        # writing encoded attributes not supported for tango 7.2.3
 
         self._sc.checkSpectrumField(
             det, "SpectrumEncoded", "int32", "NX_INT32",
@@ -1407,7 +1411,7 @@ name="stestp09/testss/s1r228" port="10000" />
                   '"nxswriter.DecoderPool.UINT32decoder"}'
         tdw = self.openWriter(fname, xml, json='{ ' + decoder + ' }')
 
-        dp = PyTango.DeviceProxy("stestp09/testss/s1r228")
+        dp = tango.DeviceProxy("stestp09/testss/s1r228")
         self.assertTrue(ProxyHelper.wait(dp, 10000))
 
         steps = min(len(self._logical), len(
@@ -1471,7 +1475,7 @@ name="stestp09/testss/s1r228" port="10000" />
 
         self._sc.checkSpectrumField(
             det, "SpectrumString", "string", "NX_CHAR", self._dates[:steps])
-        # writing encoded attributes not supported for PyTango 7.2.3
+        # writing encoded attributes not supported for tango 7.2.3
 
         self._sc.checkSpectrumField(
             det, "SpectrumEncoded", "int32", "NX_INT32", self._mca2[:steps])
@@ -1858,7 +1862,7 @@ name="stestp09/testss/s1r228" port="10000" />
         decoder = '"decoders":{"MLIMA":"nxswriter.DecoderPool.VDEOdecoder"}'
         tdw = self.openWriter(fname, xml, json='{ ' + decoder + ' }')
 
-        dp = PyTango.DeviceProxy("stestp09/testss/s1r228")
+        dp = tango.DeviceProxy("stestp09/testss/s1r228")
         self.assertTrue(ProxyHelper.wait(dp, 10000))
 
         steps = min(len(self._pco1), len(self._logical2), len(self._fpco1))
@@ -2121,7 +2125,7 @@ name="stestp09/testss/s1r228" port="10000" />
                       '{"MLIMA":"nxswriter.DecoderPool.VDEOdecoder"}'
             tdw = self.openWriter(fname, xml, json='{ ' + decoder + ' }')
 
-            dp = PyTango.DeviceProxy("stestp09/testss/s1r228")
+            dp = tango.DeviceProxy("stestp09/testss/s1r228")
             self.assertTrue(ProxyHelper.wait(dp, 10000))
 
             steps = min(len(self._pco1), len(self._logical2),
@@ -2570,7 +2574,7 @@ name="stestp09/testss/s1r228" port="10000" />
         decoder = '"decoders":{"MLIMA":"nxswriter.DecoderPool.VDEOdecoder"}'
         tdw = self.openWriter(fname, xml, json='{ ' + decoder + ' }')
 
-        dp = PyTango.DeviceProxy("stestp09/testss/s1r228")
+        dp = tango.DeviceProxy("stestp09/testss/s1r228")
         self.assertTrue(ProxyHelper.wait(dp, 10000))
 
         steps = min(len(self._pco1), len(self._logical2), len(self._fpco1))

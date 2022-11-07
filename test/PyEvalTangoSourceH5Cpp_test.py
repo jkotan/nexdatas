@@ -33,7 +33,10 @@ try:
 except Exception:
     from . import SimpleServerSetUp
 
-import PyTango
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 from nxswriter.DecoderPool import DecoderPool
 from nxswriter.DataSources import DataSource
@@ -52,12 +55,12 @@ if sys.version_info > (3,):
     long = int
     unicode = str
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:

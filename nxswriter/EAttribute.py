@@ -41,7 +41,7 @@ class EAttribute(FElement):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
 
         FElement.__init__(self, "attribute", attrs, last, streams=streams)

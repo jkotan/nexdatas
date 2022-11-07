@@ -21,7 +21,10 @@
 #
 import unittest
 
-import PyTango
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 try:
     import ServerSetUp
@@ -60,12 +63,12 @@ class XMLFieldTagAsynchH5CppTest(
 #        self._fcounter =  [1.1,-2.4,6.54,-8.456,9.456,-0.46545]
 
         self.__status = {
-            PyTango.DevState.OFF: "Not Initialized",
-            PyTango.DevState.ON: "Ready",
-            PyTango.DevState.OPEN: "File Open",
-            PyTango.DevState.EXTRACT: "Entry Open",
-            PyTango.DevState.RUNNING: "Writing ...",
-            PyTango.DevState.FAULT: "Error",
+            tango.DevState.OFF: "Not Initialized",
+            tango.DevState.ON: "Ready",
+            tango.DevState.OPEN: "File Open",
+            tango.DevState.EXTRACT: "Entry Open",
+            tango.DevState.RUNNING: "Writing ...",
+            tango.DevState.FAULT: "Error",
         }
 
     # test starter
@@ -80,7 +83,7 @@ class XMLFieldTagAsynchH5CppTest(
         self._sv.tearDown()
 
     def setProp(self, rc, name, value):
-        db = PyTango.Database()
+        db = tango.Database()
         name = "" + name[0].upper() + name[1:]
         db.put_device_property(
             self._sv.new_device_info_writer.name,
@@ -93,59 +96,59 @@ class XMLFieldTagAsynchH5CppTest(
     # \param json JSON Record with client settings
     # \returns Tango Data Writer proxy instance
     def openWriter(self, fname, xml, json=None):
-        tdw = PyTango.DeviceProxy(self._sv.new_device_info_writer.name)
+        tdw = tango.DeviceProxy(self._sv.new_device_info_writer.name)
         self.assertTrue(ProxyHelper.wait(tdw, 10000))
         self.setProp(tdw, "writer", "h5cpp")
 
         tdw.FileName = fname
-        self.assertEqual(tdw.state(), PyTango.DevState.ON)
+        self.assertEqual(tdw.state(), tango.DevState.ON)
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
 
         tdw.OpenFile()
 
-        self.assertEqual(tdw.state(), PyTango.DevState.OPEN)
+        self.assertEqual(tdw.state(), tango.DevState.OPEN)
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
 
         tdw.XMLSettings = xml
-        self.assertEqual(tdw.state(), PyTango.DevState.OPEN)
+        self.assertEqual(tdw.state(), tango.DevState.OPEN)
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
         if json:
             tdw.JSONRecord = json
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.OPEN)
+        self.assertEqual(tdw.state(), tango.DevState.OPEN)
         tdw.OpenEntryAsynch()
         self.assertTrue(ProxyHelper.wait(tdw, 10000))
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.EXTRACT)
+        self.assertEqual(tdw.state(), tango.DevState.EXTRACT)
         return tdw
 
     # closes writer
     # \param tdw Tango Data Writer proxy instance
     # \param json JSON Record with client settings
     def closeWriter(self, tdw, json=None):
-        self.assertEqual(tdw.state(), PyTango.DevState.EXTRACT)
+        self.assertEqual(tdw.state(), tango.DevState.EXTRACT)
 
         if json:
             tdw.JSONRecord = json
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.EXTRACT)
+        self.assertEqual(tdw.state(), tango.DevState.EXTRACT)
         tdw.CloseEntryAsynch()
         self.assertTrue(ProxyHelper.wait(tdw, 10000))
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.OPEN)
+        self.assertEqual(tdw.state(), tango.DevState.OPEN)
 
         tdw.CloseFile()
-        self.assertEqual(tdw.state(), PyTango.DevState.ON)
+        self.assertEqual(tdw.state(), tango.DevState.ON)
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
 
     # performs one record step
     def record(self, tdw, string):
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.EXTRACT)
+        self.assertEqual(tdw.state(), tango.DevState.EXTRACT)
         tdw.RecordAsynch(string)
         self.assertTrue(ProxyHelper.wait(tdw, 10000))
         self.assertEqual(tdw.status(), self.__status[tdw.state()])
-        self.assertEqual(tdw.state(), PyTango.DevState.EXTRACT)
+        self.assertEqual(tdw.state(), tango.DevState.EXTRACT)
 
 
 if __name__ == '__main__':

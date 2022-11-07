@@ -24,8 +24,13 @@ import os
 import sys
 import random
 import struct
-import PyTango
 import binascii
+
+
+try:
+    import tango
+except Exception:
+    import PyTango as tango
 
 try:
     import SimpleServerSetUp
@@ -60,12 +65,12 @@ class pool(object):
         self.counter = 0
 
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:
@@ -223,7 +228,7 @@ class TgMemberTest(unittest.TestCase):
         # encoding = 'UTF8'
         # group = 'common_motors'
 
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
 
         mb = TgMember(dname)
@@ -253,7 +258,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr1 = {
             "ScalarBoolean": ["bool", "DevBoolean", True],
@@ -270,7 +275,7 @@ class TgMemberTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -327,7 +332,7 @@ class TgMemberTest(unittest.TestCase):
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
         }
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
 
         for k in arr:
@@ -361,7 +366,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr = {
             "ImageBoolean": ["bool", "DevBoolean", True, [1, 0]],
@@ -410,7 +415,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr = {
             "GetBoolean": ["ScalarBoolean", "bool", "DevBoolean", True],
@@ -442,7 +447,7 @@ class TgMemberTest(unittest.TestCase):
     # \brief It tests default settings
     def test_getData_dev_prop(self):
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
 
         fun = sys._getframe().f_code.co_name
@@ -481,7 +486,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr1 = {
             "ScalarBoolean": ["bool", "DevBoolean", True],
@@ -498,7 +503,7 @@ class TgMemberTest(unittest.TestCase):
         }
 
         arr2 = {
-            "State": ["string", "DevState", PyTango._PyTango.DevState.ON],
+            "State": ["string", "DevState", tango._tango.DevState.ON],
         }
 
         arr3 = {
@@ -556,7 +561,7 @@ class TgMemberTest(unittest.TestCase):
             "SpectrumString": ["string", "DevString", "MyTrue", [1, 0]],
         }
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
 
         for k in arr:
@@ -591,7 +596,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr = {
             "ImageBoolean": ["bool", "DevBoolean", True, [1, 0]],
@@ -641,7 +646,7 @@ class TgMemberTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
         arr = {
             "GetBoolean": ["ScalarBoolean", "bool", "DevBoolean", True],
@@ -675,7 +680,7 @@ class TgMemberTest(unittest.TestCase):
     # \brief It tests default settings
     def test_setData_dev_prop(self):
         device = 'stestp09/testss/s1r228'
-        proxy = PyTango.DeviceProxy(device)
+        proxy = tango.DeviceProxy(device)
         self.assertTrue(ProxyHelper.wait(proxy, 10000))
 
         fun = sys._getframe().f_code.co_name

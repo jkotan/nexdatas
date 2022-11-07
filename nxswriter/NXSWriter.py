@@ -32,7 +32,11 @@
 
 """ Nexus Data Writer - Tango Server """
 
-import PyTango
+try:
+    import tango
+except Exception:
+    import PyTango as tango
+
 import sys
 from threading import Thread, Lock
 from datetime import datetime
@@ -49,27 +53,27 @@ class CommandThread(Thread):
         """constructor
 
         :param server: Tango server implementation
-        :type server: :class:`PyTango.Device_4Impl`
+        :type server: :class:`tango.Device_4Impl`
         :param command: Thread command
         :type command: :obj:`str`
         :param finalState: Final State Code
-        :type finalState: :class:`PyTango.DevState`
+        :type finalState: :class:`tango.DevState`
         :param args: List of command arguments
         :type args: :obj:`list` <:obj:`str`>
         """
         Thread.__init__(self)
-        #: (:class:`PyTango.Device_4Impl`) tango server
+        #: (:class:`tango.Device_4Impl`) tango server
         self.server = server
         #: (:obj:`__callable__`) command
         self.command = getattr(server.tdw, command)
-        #: (:class:`PyTango.DevState`) final state
+        #: (:class:`tango.DevState`) final state
         self.fstate = finalState
-        #: (:class:`PyTango.DevState`) error state
-        self.estate = PyTango.DevState.FAULT
+        #: (:class:`tango.DevState`) error state
+        self.estate = tango.DevState.FAULT
         #: (:obj:`list` <:obj:`str`>) command arguments
         self.args = args if isinstance(args, list) else []
-        self.dp = PyTango.DeviceProxy(self.server.get_name())
-        self.dp.set_source(PyTango.DevSource.DEV)
+        self.dp = tango.DeviceProxy(self.server.get_name())
+        self.dp.set_source(tango.DevSource.DEV)
 
     def run(self):
         """ runs the given command on the server and changes the state on exit
@@ -79,12 +83,12 @@ class CommandThread(Thread):
             with self.server.lock:
                 self.server.state_flag = self.fstate
             self.dp.state()
-        except (PyTango.DevFailed, BaseException):
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -98,7 +102,7 @@ class CommandThread(Thread):
         self.dp.state()
 
 
-class NXSDataWriter(PyTango.Device_4Impl):
+class NXSDataWriter(tango.Device_4Impl):
 
     """ Tango Server to store data in H5 files
 
@@ -119,13 +123,13 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :param name: device name
         :type name: :obj:`str`
         """
-        PyTango.Device_4Impl.__init__(self, cl, name)
+        tango.Device_4Impl.__init__(self, cl, name)
         self.debug_stream("In __init__()")
         if not hasattr(self, "lock"):
             #: (:class:`threading.Lock`) thread lock
             self.lock = Lock()
-        #: (:class:`PyTango.DevState`) state flag
-        self.state_flag = PyTango.DevState.OFF
+        #: (:class:`tango.DevState`) state flag
+        self.state_flag = tango.DevState.OFF
         #: (:class:`CommandThread`) openentry thread
         self.othread = None
         #: (:class:`CommandThread`) record thread
@@ -137,15 +141,15 @@ class NXSDataWriter(PyTango.Device_4Impl):
         self.tdw = TDW(self)
         #: (:obj:`list`<:obj:`str`>) list with errors
         self.errors = []
-        #: (:obj:`dict` < :class:`PyTango.DevState`, :obj:`str`> ) \
+        #: (:obj:`dict` < :class:`tango.DevState`, :obj:`str`> ) \
         #:      status messages
         self.__status = {
-            PyTango.DevState.OFF: "Not Initialized",
-            PyTango.DevState.ON: "Ready",
-            PyTango.DevState.OPEN: "File Open",
-            PyTango.DevState.EXTRACT: "Entry Open",
-            PyTango.DevState.RUNNING: "Writing ...",
-            PyTango.DevState.FAULT: "Error",
+            tango.DevState.OFF: "Not Initialized",
+            tango.DevState.ON: "Ready",
+            tango.DevState.OPEN: "File Open",
+            tango.DevState.EXTRACT: "Entry Open",
+            tango.DevState.RUNNING: "Writing ...",
+            tango.DevState.FAULT: "Error",
         }
         NXSDataWriter.init_device(self)
 
@@ -161,7 +165,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
                 except Exception:
                     pass
             self.tdw = None
-        self.set_state(PyTango.DevState.OFF)
+        self.set_state(tango.DevState.OFF)
 
     def init_device(self):
         """ Device initialization
@@ -171,15 +175,15 @@ class NXSDataWriter(PyTango.Device_4Impl):
             self.lock = Lock()
         try:
             oldstate = self.get_state()
-            self.set_state(PyTango.DevState.RUNNING)
+            self.set_state(tango.DevState.RUNNING)
             with self.lock:
                 self.errors = []
             if hasattr(self, 'tdw') and self.tdw:
                 if hasattr(self.tdw, 'closeFile'):
                     try:
                         if oldstate not in [
-                                PyTango.DevState.ON,
-                                PyTango.DevState.OFF
+                                tango.DevState.ON,
+                                tango.DevState.OFF
                         ]:
                             self.tdw.closeFile()
                         del self.tdw
@@ -187,13 +191,13 @@ class NXSDataWriter(PyTango.Device_4Impl):
                         pass
                 self.tdw = None
             self.tdw = TDW(self)
-            self.set_state(PyTango.DevState.ON)
-        except (PyTango.DevFailed, BaseException):
+            self.set_state(tango.DevState.ON)
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -207,24 +211,24 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """set_state method
 
         :param state: State Code
-        :type state: :class:`PyTango.DevState`
+        :type state: :class:`tango.DevState`
         """
         with self.lock:
             if state is not None:
                 self.state_flag = state
-            PyTango.Device_4Impl.set_state(self, self.state_flag)
+            tango.Device_4Impl.set_state(self, self.state_flag)
 
     def dev_state(self):
         """ dev_state method
 
         :returns: State Code
-        :rtype: :class:`PyTango.DevState`
+        :rtype: :class:`tango.DevState`
         """
         with self.lock:
-            PyTango.Device_4Impl.set_state(self, self.state_flag)
-            if self.state_flag != PyTango.DevState.ALARM:
-                PyTango.Device_4Impl.dev_state(self)
-            return PyTango.Device_4Impl.get_state(self)
+            tango.Device_4Impl.set_state(self, self.state_flag)
+            if self.state_flag != tango.DevState.ALARM:
+                tango.Device_4Impl.dev_state(self)
+            return tango.Device_4Impl.get_state(self)
 
     def always_executed_hook(self):
         """ Always excuted hook method
@@ -244,7 +248,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
     def __failed(self):
         """ on error
         """
-        self.set_state(PyTango.DevState.FAULT)
+        self.set_state(tango.DevState.FAULT)
         with self.lock:
             self.errors.append(
                 str(datetime.now()) + ":\n" + str(sys.exc_info()[1]))
@@ -253,7 +257,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read CurrentFileId
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_CurrentFileId()")
         attr.set_value(self.tdw.currentfileid)
@@ -262,7 +266,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read XMLSettings attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_XMLSettings()")
         attr.set_value(self.tdw.xmlsettings)
@@ -271,7 +275,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write XMLSettings attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_XMLSettings()")
         self.tdw.xmlsettings = attr.get_write_value()
@@ -282,9 +286,9 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -292,7 +296,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read JSONRecord attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_JSONRecord()")
 
@@ -302,7 +306,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write JSONRecord attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_JSONRecord()")
         self.tdw.jsonrecord = attr.get_write_value()
@@ -313,8 +317,8 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -322,7 +326,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read FileName attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_FileName()")
 
@@ -332,7 +336,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write FileName attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_FileName()")
         if self.is_FileName_write_allowed():
@@ -348,10 +352,10 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.OPEN,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -361,7 +365,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF]:
+        if self.get_state() in [tango.DevState.OFF]:
             return False
         return True
 
@@ -369,7 +373,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read CanFail attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_CanFail()")
 
@@ -379,7 +383,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write CanFail attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_CanFail()")
         if self.is_CanFail_write_allowed():
@@ -396,9 +400,9 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -408,7 +412,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF]:
+        if self.get_state() in [tango.DevState.OFF]:
             return False
         return True
 
@@ -416,7 +420,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read SkipAcquisition attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_SkipAcquisition()")
 
@@ -426,7 +430,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write SkipAcquisition attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_SkipAcquisition()")
         if self.is_SkipAcquisition_write_allowed():
@@ -442,8 +446,8 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -453,7 +457,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF]:
+        if self.get_state() in [tango.DevState.OFF]:
             return False
         return True
 
@@ -461,7 +465,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read StepsPerFile attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_StepsPerFile()")
 
@@ -471,7 +475,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Write StepsPerFile attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In write_StepsPerFile()")
         if self.is_StepsPerFile_write_allowed():
@@ -487,10 +491,10 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.OPEN,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -500,7 +504,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF]:
+        if self.get_state() in [tango.DevState.OFF]:
             return False
         return True
 
@@ -508,7 +512,7 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """ Read Errors attribute
 
         :param attr: attribute object
-        :type attr: :class:`PyTango.Attribute`
+        :type attr: :class:`tango.Attribute`
         """
         self.debug_stream("In read_Errors()")
 
@@ -546,25 +550,25 @@ class NXSDataWriter(PyTango.Device_4Impl):
         self.debug_stream("In OpenFile()")
 
         state = self.get_state()
-        if state in [PyTango.DevState.OPEN]:
+        if state in [tango.DevState.OPEN]:
             try:
                 self.CloseFile()
             except Exception:
                 pass
-        self.set_state(PyTango.DevState.RUNNING)
+        self.set_state(tango.DevState.RUNNING)
         with self.lock:
             self.errors = []
         try:
             self.tdw.writer = self.Writer
             self.tdw.metadataOutput = self.MetadataOutput
             self.tdw.openFile()
-            self.set_state(PyTango.DevState.OPEN)
-        except (PyTango.DevFailed, BaseException):
+            self.set_state(tango.DevState.OPEN)
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -576,9 +580,9 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -589,18 +593,18 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """
         self.debug_stream("In OpenEntry()")
 
-        self.set_state(PyTango.DevState.RUNNING)
+        self.set_state(tango.DevState.RUNNING)
         try:
             self.get_device_properties(self.get_device_class())
             self.tdw.numberOfThreads = self.NumberOfThreads
             self.tdw.openEntry()
-            self.set_state(PyTango.DevState.EXTRACT)
-        except (PyTango.DevFailed, BaseException):
+            self.set_state(tango.DevState.EXTRACT)
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -612,11 +616,11 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.FAULT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.FAULT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -628,16 +632,16 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :type argin: :obj:`str`
         """
         self.debug_stream("In Record()")
-        self.set_state(PyTango.DevState.RUNNING)
+        self.set_state(tango.DevState.RUNNING)
         try:
             self.tdw.record(argin)
-            self.set_state(PyTango.DevState.EXTRACT)
-        except (PyTango.DevFailed, BaseException):
+            self.set_state(tango.DevState.EXTRACT)
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -649,11 +653,11 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.FAULT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.OPEN,
+                                tango.DevState.FAULT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -664,18 +668,18 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """
         self.debug_stream("In CloseEntry()")
         state = self.get_state()
-        if state != PyTango.DevState.FAULT:
-            state = PyTango.DevState.OPEN
-        self.set_state(PyTango.DevState.RUNNING)
+        if state != tango.DevState.FAULT:
+            state = tango.DevState.OPEN
+        self.set_state(tango.DevState.RUNNING)
         try:
             self.tdw.closeEntry()
             self.set_state(state)
-        except (PyTango.DevFailed, BaseException):
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -687,10 +691,10 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.OPEN,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -700,13 +704,13 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :brief: Creates the new entry in asynchronous mode
         """
         self.debug_stream("In OpenEntryAsynch()")
-        self.set_state(PyTango.DevState.RUNNING)
+        self.set_state(tango.DevState.RUNNING)
         self.get_device_properties(self.get_device_class())
         self.tdw.numberOfThreads = self.NumberOfThreads
         self.tdw.writer = self.Writer
         self.tdw.metadataOutput = self.MetadataOutput
         self.othread = CommandThread(
-            self, "openEntry", PyTango.DevState.EXTRACT)
+            self, "openEntry", tango.DevState.EXTRACT)
         self.othread.start()
 
     def is_OpenEntryAsynch_allowed(self):
@@ -715,11 +719,11 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.FAULT,
-                                PyTango.DevState.EXTRACT,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.FAULT,
+                                tango.DevState.EXTRACT,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -731,9 +735,9 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :type argin: :obj:`str`
         """
         self.debug_stream("In RecordAsynch()")
-        self.set_state(PyTango.DevState.RUNNING)
+        self.set_state(tango.DevState.RUNNING)
         self.rthread = CommandThread(
-            self, "record", PyTango.DevState.EXTRACT, [argin])
+            self, "record", tango.DevState.EXTRACT, [argin])
         self.rthread.start()
 
     def is_RecordAsynch_allowed(self):
@@ -742,11 +746,11 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.FAULT,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.FAULT,
+                                tango.DevState.OPEN,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -757,9 +761,9 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """
         self.debug_stream("In CloseEntryAsynch()")
         state = self.get_state()
-        if state != PyTango.DevState.FAULT:
-            state = PyTango.DevState.OPEN
-        self.set_state(PyTango.DevState.RUNNING)
+        if state != tango.DevState.FAULT:
+            state = tango.DevState.OPEN
+        self.set_state(tango.DevState.RUNNING)
         self.cthread = CommandThread(
             self, "closeEntry", state)
         self.cthread.start()
@@ -770,10 +774,10 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.OPEN,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.OPEN,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
@@ -784,20 +788,20 @@ class NXSDataWriter(PyTango.Device_4Impl):
         """
         self.debug_stream("In CloseFile()")
         state = self.get_state()
-        if state in [PyTango.DevState.EXTRACT]:
+        if state in [tango.DevState.EXTRACT]:
             self.CloseEntry()
-        if state != PyTango.DevState.FAULT:
-            state = PyTango.DevState.ON
-        self.set_state(PyTango.DevState.RUNNING)
+        if state != tango.DevState.FAULT:
+            state = tango.DevState.ON
+        self.set_state(tango.DevState.RUNNING)
         try:
             self.tdw.closeFile()
             self.set_state(state)
-        except (PyTango.DevFailed, BaseException):
+        except (tango.DevFailed, BaseException):
             self.__failed()
             raise
         except Exception:
             self.__failed()
-            PyTango.Except.throw_exception(
+            tango.Except.throw_exception(
                 str(sys.exc_info()[0]),
                 str(sys.exc_info()[1]),
                 str(sys.exc_info()[2])
@@ -809,123 +813,123 @@ class NXSDataWriter(PyTango.Device_4Impl):
         :returns: True if the operation allowed
         :rtype: :obj:`bool`
         """
-        if self.get_state() in [PyTango.DevState.ON,
-                                PyTango.DevState.OFF,
-                                PyTango.DevState.RUNNING]:
+        if self.get_state() in [tango.DevState.ON,
+                                tango.DevState.OFF,
+                                tango.DevState.RUNNING]:
             return False
         return True
 
 
-class NXSDataWriterClass(PyTango.DeviceClass):
+class NXSDataWriterClass(tango.DeviceClass):
 
     """ NXSDataWriterClass class definition
     """
 
     #: (:obj:`dict` <:obj:`str`, \
-    #:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \
+    #:       [ :obj:`str`, :class:`tango.CmdArgType`, \
     #:       [ :obj:`list` <:obj:`int`> ] ] > ) Class Properties
     class_property_list = {
     }
 
     #: (:obj:`dict` <:obj:`str`, \
-    #:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \
+    #:       [ :obj:`str`, :class:`tango.CmdArgType`, \
     #:       [ :obj:`list` <:obj:`int`> ] ] > ) Device Properties
     device_property_list = {
         'NumberOfThreads':
-        [PyTango.DevLong,
+        [tango.DevLong,
          "maximal number of threads",
          [100]],
         'Writer':
-        [PyTango.DevString,
+        [tango.DevString,
          "writer module",
          [""]],
         'DefaultCanFail':
-        [PyTango.DevBoolean,
+        [tango.DevBoolean,
          "Default value of CanFail attribute",
          [True]],
         'AddingLogs':
-        [PyTango.DevBoolean,
+        [tango.DevBoolean,
          "Add XML logs",
          [True]],
         'MetadataOutput':
-        [PyTango.DevString,
+        [tango.DevString,
          "metadata output",
          [""]],
     }
 
     #: (:obj:`dict` <:obj:`str`, \
-    #:       [[ :class:`PyTango.CmdArgType`, :obj:`str`]] >)
+    #:       [[ :class:`tango.CmdArgType`, :obj:`str`]] >)
     #:       Command definitions
     cmd_list = {
         'OpenFile':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
         'OpenEntry':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
         'Record':
-        [[PyTango.DevString, "JSON string with data"],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevString, "JSON string with data"],
+         [tango.DevVoid, ""]],
         'CloseEntry':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
         'OpenEntryAsynch':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
         'RecordAsynch':
-        [[PyTango.DevString, "JSON string with data"],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevString, "JSON string with data"],
+         [tango.DevVoid, ""]],
         'CloseEntryAsynch':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
         'CloseFile':
-        [[PyTango.DevVoid, ""],
-         [PyTango.DevVoid, ""]],
+        [[tango.DevVoid, ""],
+         [tango.DevVoid, ""]],
     }
 
     #: (:obj:`dict` <:obj:`str`, \
-    #:  [[ :class:`PyTango.CmdArgType`, :class:`PyTango.AttrDataFormat`, \
-    #:  :class:`PyTango.AttrWriteType`], :obj:`dict` <:obj:`str`, any> ] > ) \
+    #:  [[ :class:`tango.CmdArgType`, :class:`tango.AttrDataFormat`, \
+    #:  :class:`tango.AttrWriteType`], :obj:`dict` <:obj:`str`, any> ] > ) \
     #:  Attribute definitions
     attr_list = {
         'XMLSettings':
-        [[PyTango.DevString,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevString,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "XML Configuration",
              'description': "An XML string with Nexus configuration.",
-             'Display level': PyTango.DispLevel.EXPERT,
+             'Display level': tango.DispLevel.EXPERT,
         }],
         'JSONRecord':
-        [[PyTango.DevString,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevString,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "JSON string with client data",
              'description': "A JSON string with global client data.",
-             'Display level': PyTango.DispLevel.EXPERT,
+             'Display level': tango.DispLevel.EXPERT,
         }],
         'FileName':
-        [[PyTango.DevString,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevString,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "Output file with its path",
              'description': "A name of H5 output file with its full path",
         }],
         'CanFail':
-        [[PyTango.DevBoolean,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevBoolean,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "Can fail",
              'description': "Global can fail flag. By default it is False",
         }],
         'SkipAcquisition':
-        [[PyTango.DevBoolean,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevBoolean,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "Skip acquisition",
              'description': "Skip acquisition. "
@@ -933,25 +937,25 @@ class NXSDataWriterClass(PyTango.DeviceClass):
              "after excuting the OpenEntry, Record or CloseEntry",
         }],
         'Errors':
-        [[PyTango.DevString,
-          PyTango.SPECTRUM,
-          PyTango.READ, 1000],
+        [[tango.DevString,
+          tango.SPECTRUM,
+          tango.READ, 1000],
          {
              'label': "List of errors",
              'description': "list of errors",
         }],
         'CurrentFileId':
-        [[PyTango.DevLong,
-          PyTango.SCALAR,
-          PyTango.READ],
+        [[tango.DevLong,
+          tango.SCALAR,
+          tango.READ],
          {
              'label': "Current file id",
              'description': "current file id",
         }],
         'StepsPerFile':
-        [[PyTango.DevLong,
-          PyTango.SCALAR,
-          PyTango.READ_WRITE],
+        [[tango.DevLong,
+          tango.SCALAR,
+          tango.READ_WRITE],
          {
              'label': "Steps per file",
              'description': "Number of steps per file",
@@ -962,7 +966,7 @@ class NXSDataWriterClass(PyTango.DeviceClass):
     def __init__(self, name):
         """  NXSDataWriterClass Constructor
         """
-        PyTango.DeviceClass.__init__(self, name)
+        tango.DeviceClass.__init__(self, name)
         self.set_type(name)
         print("In NXSDataWriterClass constructor")
 

@@ -60,13 +60,16 @@ except Exception:
 DEFAULTWRITERS = ["h5cpp", "h5py"]
 
 
-#: (:obj:`bool`) PyTango bug #213 flag related to EncodedAttributes in python3
+#: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
     try:
-        import PyTango
+        try:
+            import tango
+        except Exception:
+            import PyTango as tango
         PYTGMAJOR, PYTGMINOR, PYTGPATCH = list(
-            map(int, PyTango.__version__.split(".")[:3]))
+            map(int, tango.__version__.split(".")[:3]))
         if PYTGMAJOR <= 9:
             if PYTGMAJOR == 9:
                 if PYTGMINOR < 2:
@@ -89,7 +92,7 @@ class TangoDataWriter(object):
 
         :brief: It initialize the data writer for the H5 output file
         :param server: Tango server
-        :type server: :class:`PyTango.Device_4Impl`
+        :type server: :class:`tango.Device_4Impl`
         """
         #: (:obj:`str`) output file name and optional nexus parent path
         self.__parent = ""
@@ -173,7 +176,7 @@ class TangoDataWriter(object):
         #: (:obj:`dict` < :obj:`str`, :obj:`str`>) file time stamps
         self.__filetimes = {}
 
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = StreamSet(weakref.ref(server) if server else None)
 
         #: (:obj:`bool`) skip acquisition flag
@@ -181,7 +184,7 @@ class TangoDataWriter(object):
         if PYTG_BUG_213:
             self._streams.error(
                 "TangoDataWriter::TangoDataWriter() - "
-                "Reading Encoded Attributes for python3 and PyTango < 9.2.5"
+                "Reading Encoded Attributes for python3 and tango < 9.2.5"
                 " is not supported ")
 
     def __setWriter(self, writer):

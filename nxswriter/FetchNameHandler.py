@@ -96,7 +96,7 @@ class FetchNameHandler(sax.ContentHandler):
 
         :brief: It constructs parser handler for fetching group names
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
         """
         sax.ContentHandler.__init__(self)
 
@@ -112,7 +112,7 @@ class FetchNameHandler(sax.ContentHandler):
         self.__content = []
         #: (:obj:`bool`) True if inside attribute tag
         self.__attribute = False
-        #: (:class:`StreamSet` or :class:`PyTango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
 
     def startElement(self, name, attrs):
