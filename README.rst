@@ -46,7 +46,7 @@ Installation
 
 Install the dependencies:
 
-|    pninexus or h5py, PyTango, numpy, nxstools, sphinx
+|    pninexus or h5py, tango, numpy, nxstools, sphinx
 
 From sources
 """"""""""""
@@ -157,13 +157,13 @@ comments related to the client code.
 
 .. code-block:: python
 
-   # To use the Tango Server we must import the PyTango module and
+   # To use the Tango Server we must import the tango module and
    # create DeviceProxy for the server.
 
-   import PyTango
+   import tango
 
    device = "p09/tdw/r228"
-   dpx = PyTango.DeviceProxy(device)
+   dpx = tango.DeviceProxy(device)
    dpx.set_timeout_millis(10000)
 
    dpx.Init()
