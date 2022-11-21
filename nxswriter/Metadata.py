@@ -72,6 +72,8 @@ class Options(object):
         self.output = None
         #: (:obj:`list` < :obj:`str`>) list of file names
         self.args = ['']
+        #: (:obj:`bool`) empty units flag
+        self.emptyunits = False
 
 
 class Metadata(object):
