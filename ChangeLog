@@ -1,3 +1,7 @@
+2022-11-21 Jan Kotanski <jankotan@gmail.com>
+	* add empytunits metadata flag
+	* tagged as 3.5.1
+
 2022-10-24 Jan Kotanski <jankotan@gmail.com>
 	* add support for dynamic attribute shapes
 	* tagged as 3.5.0
