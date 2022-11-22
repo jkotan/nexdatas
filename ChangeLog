@@ -1,4 +1,8 @@
 2022-11-21 Jan Kotanski <jankotan@gmail.com>
+	* fix canfail mode for tango sources when proxy cannot be created
+	* tagged as 3.5.2
+
+2022-11-21 Jan Kotanski <jankotan@gmail.com>
 	* add empytunits metadata flag
 	* tagged as 3.5.1
 
