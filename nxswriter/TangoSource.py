@@ -239,8 +239,15 @@ class TangoSource(DataSource):
         elif device:
             self.device = "%s" % (edevice)
 
-        self.__proxy = ProxyTools.proxySetup(
-            self.device, streams=self._streams)
+        try:
+            self.__proxy = ProxyTools.proxySetup(
+                self.device, streams=self._streams)
+        except Exception:
+            if self._streams:
+                self._streams.error(
+                    "TangoSource::setup() - "
+                    "Cannot connect to: %s \ndefined by %s"
+                    % (self.device, xml), std=False)
 
         if not self.__proxy:
             if self._streams:
