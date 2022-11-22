@@ -51,13 +51,15 @@ class ProxyTools(object):
     """
 
     @classmethod
-    def proxySetup(cls, device, streams=None):
+    def proxySetup(cls, device, streams=None, maxcount=10):
         """ sets the Tango proxy up
 
         :param device: tango device
         :type device: :obj:`str`
         :param streams: tango-like steamset class
         :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param maxcount: a number of tries
+        :type maxcount: :obj:`int`
         :returns: proxy if proxy is set up
         :rtype: :class:`tango.DeviceProxy`
         """
@@ -76,7 +78,7 @@ class ProxyTools(object):
                     std=False)
             raise
 
-        while not found and cnt < 1000:
+        while not found and cnt < maxcount:
             if cnt > 1:
                 time.sleep(0.01)
             try:
@@ -237,8 +239,15 @@ class TangoSource(DataSource):
         elif device:
             self.device = "%s" % (edevice)
 
-        self.__proxy = ProxyTools.proxySetup(
-            self.device, streams=self._streams)
+        try:
+            self.__proxy = ProxyTools.proxySetup(
+                self.device, streams=self._streams)
+        except Exception:
+            if self._streams:
+                self._streams.error(
+                    "TangoSource::setup() - "
+                    "Cannot connect to: %s \ndefined by %s"
+                    % (self.device, xml), std=False)
 
         if not self.__proxy:
             if self._streams:
@@ -246,9 +255,9 @@ class TangoSource(DataSource):
                     "TangoSource::setup() - "
                     "Cannot connect to: %s \ndefined by %s"
                     % (self.device, xml), std=False)
-
-            raise DataSourceSetupError(
-                "Cannot connect to: %s \ndefined by %s" % (self.device, xml))
+            # to make canfail works
+            # raise DataSourceSetupError(
+            #     "Cannot connect to: %s \ndefined by %s" % (self.device, xml))
         if hostname and port and device and client:
             try:
                 host = self.__proxy.get_db_host().split(".")[0]

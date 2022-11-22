@@ -410,6 +410,7 @@ class TangoSourceTest(unittest.TestCase):
 
         dname = 'Writer'
         device = 'stestp09/testss/s1r228'
+        wdevice = 'wtestp09/testss/s1r228'
         ctype = 'command'
         atype = 'attribute'
         host = self._dbhost
@@ -578,6 +579,25 @@ class TangoSourceTest(unittest.TestCase):
         except Exception:
             self.assertEqual(ds.client, "%s:%s/%s/%s" %
                              (host.split('.')[0], port, device, dname.lower()))
+
+        self.assertEqual(ds.group, None)
+        self.assertEqual(ds.member.memberType, atype)
+        self.assertEqual(ds.member.encoding, encoding)
+
+        ds.device = None
+        ds.client = None
+        ds.member.name = None
+        ds.member.memberType = None
+        ds.member.encoding = None
+        ds.setup("<datasource> <record name='%s'/> <device name='%s' "
+                 "encoding='%s' group='__CLIENT__'/> </datasource>" %
+                 (dname, wdevice, encoding))
+        self.assertEqual(ds.member.name, dname)
+        self.assertEqual(ds.device, wdevice)
+        try:
+            self.assertEqual(ds.client, None)
+        except Exception:
+            self.assertEqual(ds.client, None)
 
         self.assertEqual(ds.group, None)
         self.assertEqual(ds.member.memberType, atype)
