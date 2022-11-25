@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter.StreamSet &#8212; NXSDataWriter 3.1.0 documentation</title>
+    <title>nxswriter.StreamSet &#8212; NXSDataWriter 3.5.2 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -36,7 +36,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>3.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.5</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -154,24 +154,31 @@
 <span class="kn">import</span> <span class="nn">weakref</span>
 
 
+<span class="c1"># (:obj:`bool`) write stream to stdout</span>
+<span class="n">stdoutflag</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># (:obj:`bool`) write stream to stderrr</span>
+<span class="n">stderrflag</span> <span class="o">=</span> <span class="kc">True</span>
+
+
 <div class="viewcode-block" id="StreamSet"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet">[docs]</a><span class="k">class</span> <span class="nc">StreamSet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">streams</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; streamset constractor</span>
 
 <span class="sd">        :param streams: tango-like steamset class</span>
-<span class="sd">        :type streams: :class:`StreamSet` or :class:`PyTango.Device_4Impl`</span>
+<span class="sd">        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1">#: (:class:`PyTango.log4tango.TangoStream`) Tango fatal log stream</span>
+        <span class="c1">#: (:class:`tango.log4tango.TangoStream`) Tango fatal log stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_fatal</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1">#: (:class:`PyTango.log4tango.TangoStream`) Tango error log stream</span>
+        <span class="c1">#: (:class:`tango.log4tango.TangoStream`) Tango error log stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_error</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1">#: (:class:`PyTango.log4tango.TangoStream`) Tango warn log stream</span>
+        <span class="c1">#: (:class:`tango.log4tango.TangoStream`) Tango warn log stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_warn</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1">#: (:class:`PyTango.log4tango.TangoStream`) Tango info log stream</span>
+        <span class="c1">#: (:class:`tango.log4tango.TangoStream`) Tango info log stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="c1">#: (:class:`PyTango.log4tango.TangoStream`) Tango debug log stream</span>
+        <span class="c1">#: (:class:`tango.log4tango.TangoStream`) Tango debug log stream</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_debug</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1">#: (:obj:`set &lt;:obj:`str` &gt;`) if tango server</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">streams</span><span class="p">,</span> <span class="s2">&quot;__call__&quot;</span><span class="p">):</span>
@@ -190,7 +197,7 @@
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">streams</span><span class="p">(),</span> <span class="s2">&quot;log_debug&quot;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_debug</span> <span class="o">=</span> <span class="n">streams</span><span class="p">()</span><span class="o">.</span><span class="n">log_debug</span>
 
-<div class="viewcode-block" id="StreamSet.fatal"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.fatal">[docs]</a>    <span class="k">def</span> <span class="nf">fatal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.fatal"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.fatal">[docs]</a>    <span class="k">def</span> <span class="nf">fatal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes fatal error message</span>
 
 <span class="sd">        :param message: error message</span>
@@ -208,7 +215,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.error"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.error"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes error message</span>
 
 <span class="sd">        :param message: error message</span>
@@ -226,7 +233,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.warn"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.warn">[docs]</a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.warn"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.warn">[docs]</a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes warning message</span>
 
 <span class="sd">        :param message: warning message</span>
@@ -244,7 +251,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.info"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.info"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stdoutflag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes info message</span>
 
 <span class="sd">        :param message: info message</span>
@@ -262,7 +269,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.debug"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.debug">[docs]</a>    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.debug"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.debug">[docs]</a>    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stdoutflag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes debug message</span>
 
 <span class="sd">        :param message: debug message</span>

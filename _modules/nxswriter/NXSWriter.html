@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter.NXSWriter &#8212; NXSDataWriter 3.1.0 documentation</title>
+    <title>nxswriter.NXSWriter &#8212; NXSDataWriter 3.5.2 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -36,7 +36,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>3.1</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.5</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -163,7 +163,11 @@
 
 <span class="sd">&quot;&quot;&quot; Nexus Data Writer - Tango Server &quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">PyTango</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">tango</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">PyTango</span> <span class="k">as</span> <span class="nn">tango</span>
+
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">Lock</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
@@ -180,27 +184,27 @@
         <span class="sd">&quot;&quot;&quot;constructor</span>
 
 <span class="sd">        :param server: Tango server implementation</span>
-<span class="sd">        :type server: :class:`PyTango.Device_4Impl`</span>
+<span class="sd">        :type server: :class:`tango.Device_4Impl`</span>
 <span class="sd">        :param command: Thread command</span>
 <span class="sd">        :type command: :obj:`str`</span>
 <span class="sd">        :param finalState: Final State Code</span>
-<span class="sd">        :type finalState: :class:`PyTango.DevState`</span>
+<span class="sd">        :type finalState: :class:`tango.DevState`</span>
 <span class="sd">        :param args: List of command arguments</span>
 <span class="sd">        :type args: :obj:`list` &lt;:obj:`str`&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Thread</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="c1">#: (:class:`PyTango.Device_4Impl`) tango server</span>
+        <span class="c1">#: (:class:`tango.Device_4Impl`) tango server</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
         <span class="c1">#: (:obj:`__callable__`) command</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">tdw</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
-        <span class="c1">#: (:class:`PyTango.DevState`) final state</span>
+        <span class="c1">#: (:class:`tango.DevState`) final state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fstate</span> <span class="o">=</span> <span class="n">finalState</span>
-        <span class="c1">#: (:class:`PyTango.DevState`) error state</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">estate</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span>
+        <span class="c1">#: (:class:`tango.DevState`) error state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estate</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span>
         <span class="c1">#: (:obj:`list` &lt;:obj:`str`&gt;) command arguments</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dp</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevSource</span><span class="o">.</span><span class="n">DEV</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dp</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DeviceProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevSource</span><span class="o">.</span><span class="n">DEV</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CommandThread.run"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.CommandThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; runs the given command on the server and changes the state on exit</span>
@@ -210,12 +214,12 @@
             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstate</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -229,7 +233,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dp</span><span class="o">.</span><span class="n">state</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="NXSDataWriter"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter">[docs]</a><span class="k">class</span> <span class="nc">NXSDataWriter</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="p">):</span>
+<div class="viewcode-block" id="NXSDataWriter"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter">[docs]</a><span class="k">class</span> <span class="nc">NXSDataWriter</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot; Tango Server to store data in H5 files</span>
 
@@ -250,13 +254,13 @@
 <span class="sd">        :param name: device name</span>
 <span class="sd">        :type name: :obj:`str`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In __init__()&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;lock&quot;</span><span class="p">):</span>
             <span class="c1">#: (:class:`threading.Lock`) thread lock</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
-        <span class="c1">#: (:class:`PyTango.DevState`) state flag</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span>
+        <span class="c1">#: (:class:`tango.DevState`) state flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span>
         <span class="c1">#: (:class:`CommandThread`) openentry thread</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">othread</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1">#: (:class:`CommandThread`) record thread</span>
@@ -268,15 +272,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span> <span class="o">=</span> <span class="n">TDW</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1">#: (:obj:`list`&lt;:obj:`str`&gt;) list with errors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="c1">#: (:obj:`dict` &lt; :class:`PyTango.DevState`, :obj:`str`&gt; ) \</span>
+        <span class="c1">#: (:obj:`dict` &lt; :class:`tango.DevState`, :obj:`str`&gt; ) \</span>
         <span class="c1">#:      status messages</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__status</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">:</span> <span class="s2">&quot;Not Initialized&quot;</span><span class="p">,</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">:</span> <span class="s2">&quot;Ready&quot;</span><span class="p">,</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">:</span> <span class="s2">&quot;File Open&quot;</span><span class="p">,</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">:</span> <span class="s2">&quot;Entry Open&quot;</span><span class="p">,</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span> <span class="s2">&quot;Writing ...&quot;</span><span class="p">,</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">:</span> <span class="s2">&quot;Not Initialized&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">:</span> <span class="s2">&quot;Ready&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">:</span> <span class="s2">&quot;File Open&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">:</span> <span class="s2">&quot;Entry Open&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span> <span class="s2">&quot;Writing ...&quot;</span><span class="p">,</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span> <span class="s2">&quot;Error&quot;</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="n">NXSDataWriter</span><span class="o">.</span><span class="n">init_device</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -292,7 +296,7 @@
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NXSDataWriter.init_device"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter.init_device">[docs]</a>    <span class="k">def</span> <span class="nf">init_device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Device initialization</span>
@@ -302,15 +306,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">oldstate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;tdw&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="p">,</span> <span class="s1">&#39;closeFile&#39;</span><span class="p">):</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">oldstate</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span>
                         <span class="p">]:</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">closeFile</span><span class="p">()</span>
                         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span>
@@ -318,13 +322,13 @@
                         <span class="k">pass</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span> <span class="o">=</span> <span class="n">TDW</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -338,24 +342,24 @@
         <span class="sd">&quot;&quot;&quot;set_state method</span>
 
 <span class="sd">        :param state: State Code</span>
-<span class="sd">        :type state: :class:`PyTango.DevState`</span>
+<span class="sd">        :type state: :class:`tango.DevState`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">=</span> <span class="n">state</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span><span class="p">)</span></div>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NXSDataWriter.dev_state"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter.dev_state">[docs]</a>    <span class="k">def</span> <span class="nf">dev_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; dev_state method</span>
 
 <span class="sd">        :returns: State Code</span>
-<span class="sd">        :rtype: :class:`PyTango.DevState`</span>
+<span class="sd">        :rtype: :class:`tango.DevState`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">!=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ALARM</span><span class="p">:</span>
-                <span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">dev_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_flag</span> <span class="o">!=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ALARM</span><span class="p">:</span>
+                <span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">dev_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">tango</span><span class="o">.</span><span class="n">Device_4Impl</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NXSDataWriter.always_executed_hook"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter.always_executed_hook">[docs]</a>    <span class="k">def</span> <span class="nf">always_executed_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Always excuted hook method</span>
@@ -375,7 +379,7 @@
     <span class="k">def</span> <span class="nf">__failed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; on error</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">)</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]))</span>
@@ -384,7 +388,7 @@
         <span class="sd">&quot;&quot;&quot; Read CurrentFileId</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_CurrentFileId()&quot;</span><span class="p">)</span>
         <span class="n">attr</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">currentfileid</span><span class="p">)</span></div>
@@ -393,7 +397,7 @@
         <span class="sd">&quot;&quot;&quot; Read XMLSettings attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_XMLSettings()&quot;</span><span class="p">)</span>
         <span class="n">attr</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">xmlsettings</span><span class="p">)</span></div>
@@ -402,7 +406,7 @@
         <span class="sd">&quot;&quot;&quot; Write XMLSettings attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_XMLSettings()&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">xmlsettings</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">get_write_value</span><span class="p">()</span></div>
@@ -413,9 +417,9 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -423,7 +427,7 @@
         <span class="sd">&quot;&quot;&quot; Read JSONRecord attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_JSONRecord()&quot;</span><span class="p">)</span>
 
@@ -433,7 +437,7 @@
         <span class="sd">&quot;&quot;&quot; Write JSONRecord attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_JSONRecord()&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">jsonrecord</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">get_write_value</span><span class="p">()</span></div>
@@ -444,8 +448,8 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -453,7 +457,7 @@
         <span class="sd">&quot;&quot;&quot; Read FileName attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_FileName()&quot;</span><span class="p">)</span>
 
@@ -463,7 +467,7 @@
         <span class="sd">&quot;&quot;&quot; Write FileName attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_FileName()&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_FileName_write_allowed</span><span class="p">():</span>
@@ -479,10 +483,10 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -492,7 +496,7 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -500,7 +504,7 @@
         <span class="sd">&quot;&quot;&quot; Read CanFail attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_CanFail()&quot;</span><span class="p">)</span>
 
@@ -510,7 +514,7 @@
         <span class="sd">&quot;&quot;&quot; Write CanFail attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_CanFail()&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_CanFail_write_allowed</span><span class="p">():</span>
@@ -527,9 +531,9 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -539,7 +543,7 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -547,7 +551,7 @@
         <span class="sd">&quot;&quot;&quot; Read SkipAcquisition attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_SkipAcquisition()&quot;</span><span class="p">)</span>
 
@@ -557,7 +561,7 @@
         <span class="sd">&quot;&quot;&quot; Write SkipAcquisition attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_SkipAcquisition()&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_SkipAcquisition_write_allowed</span><span class="p">():</span>
@@ -573,8 +577,8 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -584,7 +588,7 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -592,7 +596,7 @@
         <span class="sd">&quot;&quot;&quot; Read StepsPerFile attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_StepsPerFile()&quot;</span><span class="p">)</span>
 
@@ -602,7 +606,7 @@
         <span class="sd">&quot;&quot;&quot; Write StepsPerFile attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In write_StepsPerFile()&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_StepsPerFile_write_allowed</span><span class="p">():</span>
@@ -618,10 +622,10 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -631,7 +635,7 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -639,7 +643,7 @@
         <span class="sd">&quot;&quot;&quot; Read Errors attribute</span>
 
 <span class="sd">        :param attr: attribute object</span>
-<span class="sd">        :type attr: :class:`PyTango.Attribute`</span>
+<span class="sd">        :type attr: :class:`tango.Attribute`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In read_Errors()&quot;</span><span class="p">)</span>
 
@@ -677,24 +681,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In OpenFile()&quot;</span><span class="p">)</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">CloseFile</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">pass</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Writer</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">metadataOutput</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MetadataOutput</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">openFile</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -706,9 +711,9 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -719,18 +724,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In OpenEntry()&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_device_class</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">numberOfThreads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NumberOfThreads</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">openEntry</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -742,11 +747,11 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -758,16 +763,16 @@
 <span class="sd">        :type argin: :obj:`str`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In Record()&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">argin</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -779,11 +784,11 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -794,18 +799,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In CloseEntry()&quot;</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">closeEntry</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -817,10 +822,10 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -830,12 +835,13 @@
 <span class="sd">        :brief: Creates the new entry in asynchronous mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In OpenEntryAsynch()&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_device_class</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">numberOfThreads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NumberOfThreads</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Writer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">metadataOutput</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MetadataOutput</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">othread</span> <span class="o">=</span> <span class="n">CommandThread</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;openEntry&quot;</span><span class="p">,</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;openEntry&quot;</span><span class="p">,</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">othread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="NXSDataWriter.is_OpenEntryAsynch_allowed"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter.is_OpenEntryAsynch_allowed">[docs]</a>    <span class="k">def</span> <span class="nf">is_OpenEntryAsynch_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -844,11 +850,11 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -860,9 +866,9 @@
 <span class="sd">        :type argin: :obj:`str`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In RecordAsynch()&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rthread</span> <span class="o">=</span> <span class="n">CommandThread</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span> <span class="p">[</span><span class="n">argin</span><span class="p">])</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">,</span> <span class="p">[</span><span class="n">argin</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rthread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="NXSDataWriter.is_RecordAsynch_allowed"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriter.is_RecordAsynch_allowed">[docs]</a>    <span class="k">def</span> <span class="nf">is_RecordAsynch_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -871,11 +877,11 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -886,9 +892,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In CloseEntryAsynch()&quot;</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cthread</span> <span class="o">=</span> <span class="n">CommandThread</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;closeEntry&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cthread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
@@ -899,10 +905,10 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
@@ -913,20 +919,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_stream</span><span class="p">(</span><span class="s2">&quot;In CloseFile()&quot;</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">EXTRACT</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">CloseEntry</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">FAULT</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tdw</span><span class="o">.</span><span class="n">closeFile</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DevFailed</span><span class="p">,</span> <span class="ne">BaseException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
             <span class="k">raise</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__failed</span><span class="p">()</span>
-            <span class="n">PyTango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
+            <span class="n">tango</span><span class="o">.</span><span class="n">Except</span><span class="o">.</span><span class="n">throw_exception</span><span class="p">(</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
@@ -938,119 +944,123 @@
 <span class="sd">        :returns: True if the operation allowed</span>
 <span class="sd">        :rtype: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
-                                <span class="n">PyTango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">ON</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span>
+                                <span class="n">tango</span><span class="o">.</span><span class="n">DevState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">]:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div></div>
 
 
-<div class="viewcode-block" id="NXSDataWriterClass"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriterClass">[docs]</a><span class="k">class</span> <span class="nc">NXSDataWriterClass</span><span class="p">(</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceClass</span><span class="p">):</span>
+<div class="viewcode-block" id="NXSDataWriterClass"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.NXSWriter.NXSDataWriterClass">[docs]</a><span class="k">class</span> <span class="nc">NXSDataWriterClass</span><span class="p">(</span><span class="n">tango</span><span class="o">.</span><span class="n">DeviceClass</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot; NXSDataWriterClass class definition</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#: (:obj:`dict` &lt;:obj:`str`, \</span>
-    <span class="c1">#:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \</span>
+    <span class="c1">#:       [ :obj:`str`, :class:`tango.CmdArgType`, \</span>
     <span class="c1">#:       [ :obj:`list` &lt;:obj:`int`&gt; ] ] &gt; ) Class Properties</span>
     <span class="n">class_property_list</span> <span class="o">=</span> <span class="p">{</span>
     <span class="p">}</span>
 
     <span class="c1">#: (:obj:`dict` &lt;:obj:`str`, \</span>
-    <span class="c1">#:       [ :obj:`str`, :class:`PyTango.CmdArgType`, \</span>
+    <span class="c1">#:       [ :obj:`str`, :class:`tango.CmdArgType`, \</span>
     <span class="c1">#:       [ :obj:`list` &lt;:obj:`int`&gt; ] ] &gt; ) Device Properties</span>
     <span class="n">device_property_list</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;NumberOfThreads&#39;</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
          <span class="s2">&quot;maximal number of threads&quot;</span><span class="p">,</span>
          <span class="p">[</span><span class="mi">100</span><span class="p">]],</span>
         <span class="s1">&#39;Writer&#39;</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
          <span class="s2">&quot;writer module&quot;</span><span class="p">,</span>
          <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;DefaultCanFail&#39;</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
          <span class="s2">&quot;Default value of CanFail attribute&quot;</span><span class="p">,</span>
          <span class="p">[</span><span class="kc">True</span><span class="p">]],</span>
         <span class="s1">&#39;AddingLogs&#39;</span><span class="p">:</span>
-        <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
          <span class="s2">&quot;Add XML logs&quot;</span><span class="p">,</span>
          <span class="p">[</span><span class="kc">True</span><span class="p">]],</span>
+        <span class="s1">&#39;MetadataOutput&#39;</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+         <span class="s2">&quot;metadata output&quot;</span><span class="p">,</span>
+         <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]],</span>
     <span class="p">}</span>
 
     <span class="c1">#: (:obj:`dict` &lt;:obj:`str`, \</span>
-    <span class="c1">#:       [[ :class:`PyTango.CmdArgType`, :obj:`str`]] &gt;)</span>
+    <span class="c1">#:       [[ :class:`tango.CmdArgType`, :obj:`str`]] &gt;)</span>
     <span class="c1">#:       Command definitions</span>
     <span class="n">cmd_list</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;OpenFile&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;OpenEntry&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;Record&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span> <span class="s2">&quot;JSON string with data&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span> <span class="s2">&quot;JSON string with data&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;CloseEntry&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;OpenEntryAsynch&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;RecordAsynch&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span> <span class="s2">&quot;JSON string with data&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span> <span class="s2">&quot;JSON string with data&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;CloseEntryAsynch&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
         <span class="s1">&#39;CloseFile&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
-         <span class="p">[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span>
+         <span class="p">[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevVoid</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]],</span>
     <span class="p">}</span>
 
     <span class="c1">#: (:obj:`dict` &lt;:obj:`str`, \</span>
-    <span class="c1">#:  [[ :class:`PyTango.CmdArgType`, :class:`PyTango.AttrDataFormat`, \</span>
-    <span class="c1">#:  :class:`PyTango.AttrWriteType`], :obj:`dict` &lt;:obj:`str`, any&gt; ] &gt; ) \</span>
+    <span class="c1">#:  [[ :class:`tango.CmdArgType`, :class:`tango.AttrDataFormat`, \</span>
+    <span class="c1">#:  :class:`tango.AttrWriteType`], :obj:`dict` &lt;:obj:`str`, any&gt; ] &gt; ) \</span>
     <span class="c1">#:  Attribute definitions</span>
     <span class="n">attr_list</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;XMLSettings&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;XML Configuration&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;An XML string with Nexus configuration.&quot;</span><span class="p">,</span>
-             <span class="s1">&#39;Display level&#39;</span><span class="p">:</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DispLevel</span><span class="o">.</span><span class="n">EXPERT</span><span class="p">,</span>
+             <span class="s1">&#39;Display level&#39;</span><span class="p">:</span> <span class="n">tango</span><span class="o">.</span><span class="n">DispLevel</span><span class="o">.</span><span class="n">EXPERT</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;JSONRecord&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;JSON string with client data&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;A JSON string with global client data.&quot;</span><span class="p">,</span>
-             <span class="s1">&#39;Display level&#39;</span><span class="p">:</span> <span class="n">PyTango</span><span class="o">.</span><span class="n">DispLevel</span><span class="o">.</span><span class="n">EXPERT</span><span class="p">,</span>
+             <span class="s1">&#39;Display level&#39;</span><span class="p">:</span> <span class="n">tango</span><span class="o">.</span><span class="n">DispLevel</span><span class="o">.</span><span class="n">EXPERT</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;FileName&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;Output file with its path&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;A name of H5 output file with its full path&quot;</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;CanFail&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;Can fail&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;Global can fail flag. By default it is False&quot;</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;SkipAcquisition&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevBoolean</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;Skip acquisition&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;Skip acquisition. &quot;</span>
@@ -1058,25 +1068,25 @@
              <span class="s2">&quot;after excuting the OpenEntry, Record or CloseEntry&quot;</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;Errors&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SPECTRUM</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevString</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SPECTRUM</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;List of errors&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;list of errors&quot;</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;CurrentFileId&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;Current file id&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;current file id&quot;</span><span class="p">,</span>
         <span class="p">}],</span>
         <span class="s1">&#39;StepsPerFile&#39;</span><span class="p">:</span>
-        <span class="p">[[</span><span class="n">PyTango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
-          <span class="n">PyTango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
+        <span class="p">[[</span><span class="n">tango</span><span class="o">.</span><span class="n">DevLong</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+          <span class="n">tango</span><span class="o">.</span><span class="n">READ_WRITE</span><span class="p">],</span>
          <span class="p">{</span>
              <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s2">&quot;Steps per file&quot;</span><span class="p">,</span>
              <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;Number of steps per file&quot;</span><span class="p">,</span>
@@ -1087,7 +1097,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;  NXSDataWriterClass Constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">PyTango</span><span class="o">.</span><span class="n">DeviceClass</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">tango</span><span class="o">.</span><span class="n">DeviceClass</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_type</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In NXSDataWriterClass constructor&quot;</span><span class="p">)</span></div>
 
