@@ -1009,7 +1009,6 @@ class NXSDataWriterH5PYTest(unittest.TestCase):
             mresult = {
                 "techniques": [],
                 "scientificMetadata": {
-                    "NX_class": "NXentry",
                     "data": {
                         "NX_class": "NXdata",
                         "cnt1": {
