@@ -1,3 +1,7 @@
+2022-12-12 Jan Kotanski <jankotan@gmail.com>
+	* add fileformat metadata flag
+	* tagged as 3.5.3
+
 2022-11-21 Jan Kotanski <jankotan@gmail.com>
 	* fix canfail mode for tango sources when proxy cannot be created
 	* tagged as 3.5.2
