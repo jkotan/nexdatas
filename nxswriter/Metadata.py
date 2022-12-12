@@ -75,7 +75,7 @@ class Options(object):
         #: (:obj:`bool`) empty units flag
         self.emptyunits = False
         #: (:obj:`str`) file format
-        self.fileformat = None
+        self.fileformat = 'nxs'
 
 
 class Metadata(object):
