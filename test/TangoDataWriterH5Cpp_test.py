@@ -1130,6 +1130,10 @@ ds.res2 = str(True)
                 md2 = mf.read()
             mresult = {
                 "techniques": [],
+                "creationTime": "",
+                "creationLocation": "/DESY/PETRA III",
+                "ownerGroup": "ingestor",
+                "type": "raw",
                 "scientificMetadata": {
                     "data": {
                         "NX_class": "NXdata",
@@ -1191,9 +1195,11 @@ ds.res2 = str(True)
                 }
             }
             mresult["scientificMetadata"]["name"] = "entry001"
-            self.myAssertDict(mresult, json.loads(md1))
+            self.myAssertDict(mresult, json.loads(md1),
+                              skip=["creationTime"])
             mresult["scientificMetadata"]["name"] = "entry002"
-            self.myAssertDict(mresult, json.loads(md2))
+            self.myAssertDict(mresult, json.loads(md2),
+                              skip=["creationTime"])
         finally:
             if os.path.isfile(fname):
                 os.remove(fname)
