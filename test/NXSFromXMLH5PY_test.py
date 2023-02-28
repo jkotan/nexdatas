@@ -821,20 +821,24 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
              '--nrecords', '2',
              '-j', jsonfile,
              '--time', '0.5',
+             '-r',
              '-v',
              self._scanXmlpart],
             ['nxsfromxml', '--h5py',
              '--parent', "%s:/%s" % (fname, nxpath), '--nrecords', '2',
              '--json-file', jsonfile,
+             '-r',
              '-x', xmlfile],
             ['nxsfromxml', '--h5py',
              '-p', "%s:/%s" % (fname, nxpath), '-n', '2',
              '-d', data,
+             '--no-nexus-logs',
              '--verbose',
              '--xml-file', xmlfile],
             ['nxsfromxml', '--h5py',
              '--parent', "%s:/%s" % (fname, nxpath), '-n', '2',
              '--data', data,
+             '--no-nexus-logs',
              '-t', '0',
              self._scanXmlpart],
         ]
@@ -865,7 +869,7 @@ class NXSFromXMLH5PYTest(unittest.TestCase):
                 self.assertEqual(5, len(f.attributes))
                 self.assertEqual(f.attributes["file_name"][...], fname)
                 self.assertTrue(f.attributes["NX_class"][...], "NXroot")
-                self.assertEqual(f.size, 2)
+                self.assertEqual(f.size, 1)
 
                 en = f.open("entry1")
                 self.assertTrue(en.is_valid)
