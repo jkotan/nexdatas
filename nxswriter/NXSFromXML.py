@@ -54,6 +54,8 @@ class CreateFile(object):
         self.__verbose = options.verbose or False
         #: (:obj:`bool`) append mode
         self.__append = options.append or False
+        #: (:obj:`bool`) add nexus_logs group
+        self.__addinglogs = not options.nonexuslogs
 
         if options.args and len(options.args):
             self.__xml = options.args[0].strip()
@@ -115,6 +117,7 @@ class CreateFile(object):
             print("using the '%s' writer module" % self.__writer)
 
         tdw.writer = self.__writer
+        tdw.addingLogs = self.__addinglogs
         tdw.fileName = str(self.__parent)
         if self.__verbose:
             print("opening the '%s' file" % self.__parent)
@@ -214,6 +217,10 @@ def main():
         "-a", "--append", action="store_true",
         default=False, dest="append",
         help="append mode")
+    parser.add_argument(
+        "-r", "--no-nexus-logs", action="store_true",
+        default=False, dest="nonexuslogs",
+        help="do not create the nexus_logs group")
     parser.add_argument(
         "--h5cpp", action="store_true",
         default=False, dest="h5cpp",
