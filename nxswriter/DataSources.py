@@ -45,15 +45,19 @@ class DataSource(object):
     """ Data source
     """
 
-    def __init__(self, streams=None):
+    def __init__(self, streams=None, name=None):
         """ constructor
 
         :brief: It cleans all member variables
         :param streams: tango-like steamset class
         :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param name: datasource name
+        :type name: :obj:`str`
         """
         #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
+        #: (:obj:`str`) datasoure name
+        self._name = name
 
     def setup(self, xml):
         """ sets the parrameters up from xml

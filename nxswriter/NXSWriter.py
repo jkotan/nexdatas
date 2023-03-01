@@ -839,6 +839,14 @@ class NXSDataWriterClass(tango.DeviceClass):
         [tango.DevLong,
          "maximal number of threads",
          [100]],
+        'MaxRecordRuntime':
+        [tango.DevDouble,
+         "maximal runtime for record command in second ",
+         [0.0]],
+        'MaxElementRuntime':
+        [tango.DevDouble,
+         "maximal runtime for thread element in second",
+         [0.0]],
         'Writer':
         [tango.DevString,
          "writer module",

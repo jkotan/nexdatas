@@ -61,10 +61,15 @@ class DataSourceFactory(Element):
         """
         if "type" in attrs.keys():
             if self.__dsPool and self.__dsPool.hasDataSource(attrs["type"]):
+                name = attrs["name"] if "name" in attrs.keys() else None
                 streams = weakref.ref(self._streams) \
-                          if self._streams else (lambda: None)
-                self.last.source = self.__dsPool.get(attrs["type"])(
-                    streams=StreamSet(streams))
+                    if self._streams else (lambda: None)
+                try:
+                    self.last.source = self.__dsPool.get(attrs["type"])(
+                        streams=StreamSet(streams), name=name)
+                except Exception:
+                    self.last.source = self.__dsPool.get(attrs["type"])(
+                        streams=StreamSet(streams))
             else:
                 if self._streams:
                     self._streams.error(

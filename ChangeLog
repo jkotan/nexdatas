@@ -1,3 +1,8 @@
+2023-03-01 Jan Kotanski <jankotan@gmail.com>
+	* add MaxRecordRuntime and MaxElementRuntime tango server attributes (#136)
+	* use datasource name as a keyword for Tango datasources (#136)
+	* tagged as 3.7.0
+
 2023-02-28 Jan Kotanski <jankotan@gmail.com>
 	* add --no-nexus-logs to nxsfromxml
 	* tagged as 3.6.0

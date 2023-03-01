@@ -27,6 +27,7 @@ import json
 import sys
 import gc
 import weakref
+import time
 
 try:
     from cStringIO import StringIO
@@ -113,6 +114,10 @@ class TangoDataWriter(object):
         #: (:obj:`int`) maximal number of threads
         self.numberOfThreads = 100
         # self.numberOfThreads = 1
+        #: (:obj:`float`) maximal element record time in sec
+        self.maxElementRuntime = 0.001
+        #: (:obj:`float`) maximal record time in sec
+        self.maxRecordRuntime = 0.01
 
         #: (:class:`ThreadPool.ThreadPool`) thread pool with INIT elements
         self.__initPool = None
@@ -508,9 +513,15 @@ class TangoDataWriter(object):
             self.__stepPool.numberOfThreads = self.numberOfThreads
             self.__finalPool.numberOfThreads = self.numberOfThreads
 
+            self.__initPool.maxRuntime = self.maxElementRuntime
+            self.__stepPool.maxRuntime = self.maxElementRuntime
+            self.__finalPool.maxRuntime = self.maxElementRuntime
+
             for pool in self.__triggerPools.keys():
                 self.__triggerPools[pool].numberOfThreads = \
                     self.numberOfThreads
+                self.__triggerPools[pool].maxRuntime = \
+                    self.maxElementRuntime
 
             self.__initPool.setJSON(json.loads(self.jsonrecord))
             if not self.skipacquisition:
@@ -574,6 +585,7 @@ class TangoDataWriter(object):
         :param jsonstring: local JSON string with data records
         :type jsonstring: :obj:`str`
         """
+        st = time.time()
         # flag for STEP mode
         if self.__datasources.counter > 0:
             self.__datasources.counter += 1
@@ -617,6 +629,16 @@ class TangoDataWriter(object):
             if (self.__datasources.counter) % self.stepsperfile == 0:
                 self.__nextfile()
         self.skipacquisition = False
+        dt = time.time() - st
+        # print(dt)
+        if dt and self.maxRecordRuntime  \
+           and dt > self.maxRecordRuntime:
+                mess = "TangoDataWriter.record() - " \
+                    "The maximal record time for #%s exceeded: %s s (%s s) " \
+                    % (self.__datasources.counter, dt, self.maxRecordRuntime)
+                # print(mess)
+                if self._streams:
+                    self._streams.error(mess, std=False)
 
     def __updateNXRoot(self):
         fname = self.__filenames[-1]
@@ -747,8 +769,6 @@ class TangoDataWriter(object):
 
 
 if __name__ == "__main__":
-
-    import time
 
     # Create a TDW object
     #: (:class:`TangoDataWriter`) instance of TangoDataWriter
