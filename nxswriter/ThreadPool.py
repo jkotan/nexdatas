@@ -136,7 +136,8 @@ class ThreadPool(object):
 
         errors = []
         for el in self.__elementList:
-            if el.runtime and self.maxRuntime > 0 \
+            if hasattr(el, "runtime") and \
+               el.runtime and self.maxRuntime > 0 \
                and el.runtime > self.maxRuntime:
                 path = ""
                 if hasattr(el.h5Object, "path"):

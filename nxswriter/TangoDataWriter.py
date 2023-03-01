@@ -630,15 +630,12 @@ class TangoDataWriter(object):
                 self.__nextfile()
         self.skipacquisition = False
         dt = time.time() - st
-        # print(dt)
-        if dt and self.maxRecordRuntime  \
-           and dt > self.maxRecordRuntime:
-                mess = "TangoDataWriter.record() - " \
-                    "The maximal record time for #%s exceeded: %s s (%s s) " \
-                    % (self.__datasources.counter, dt, self.maxRecordRuntime)
-                # print(mess)
-                if self._streams:
-                    self._streams.error(mess, std=False)
+        if dt and self.maxRecordRuntime and dt > self.maxRecordRuntime:
+            mess = "TangoDataWriter.record() - " \
+                "The maximal record time for #%s exceeded: %s s (%s s) " \
+                % (self.__datasources.counter, dt, self.maxRecordRuntime)
+            if self._streams:
+                self._streams.error(mess, std=False)
 
     def __updateNXRoot(self):
         fname = self.__filenames[-1]
