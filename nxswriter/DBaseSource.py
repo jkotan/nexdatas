@@ -66,14 +66,16 @@ class DBaseSource(DataSource):
     """ DataBase data source
     """
 
-    def __init__(self, streams=None):
+    def __init__(self, streams=None, name=None):
         """ constructor
 
         :brief: It sets all member variables to None
         :param streams: tango-like steamset class
         :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param name: datasource name
+        :type name: :obj:`str`
         """
-        DataSource.__init__(self, streams=streams)
+        DataSource.__init__(self, streams=streams, name=name)
         #: (:obj:`str`) name of the host with the data source
         self.hostname = None
         #: (:obj:`str`) port related to the host

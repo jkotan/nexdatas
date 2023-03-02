@@ -55,6 +55,8 @@ class FElement(Element):
         self.source = None
         #: (:obj:`str`) notification of error in the run method
         self.error = None
+        #: (:obj:`float`) runtime
+        self.runtime = 0
         #: (:obj:`bool`) flag for devices for which is allowed to failed
         self.canfail = False
         #: (:obj:`bool`) scalar type

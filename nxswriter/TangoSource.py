@@ -115,13 +115,17 @@ class TangoSource(DataSource):
     """ Tango data source
     """
 
-    def __init__(self, streams=None):
+    def __init__(self, streams=None, name=None):
         """ constructor
 
         :brief: It cleans all member variables
+        :param streams: tango-like steamset class
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param name: datasource name
+        :type name: :obj:`str`
         """
 
-        DataSource.__init__(self, streams=streams)
+        DataSource.__init__(self, streams=streams, name=name)
         #: (:class:`TgMember`) Tango device member
         self.member = TgMember(None, streams=self._streams)
         #: (:class:`TgGroup`) datasource tango group
@@ -180,7 +184,6 @@ class TangoSource(DataSource):
         :param xml:  datasource parameters
         :type xml: :obj:`str`
         """
-
         if sys.version_info > (3,):
             xml = bytes(xml, "UTF-8")
         root = et.fromstring(xml, parser=XMLParser(collect_ids=False))
@@ -258,11 +261,13 @@ class TangoSource(DataSource):
             # to make canfail works
             # raise DataSourceSetupError(
             #     "Cannot connect to: %s \ndefined by %s" % (self.device, xml))
-        if hostname and port and device and client:
+        host = None
+        if port and device and client:
             try:
                 host = self.__proxy.get_db_host().split(".")[0]
             except Exception:
                 host = ehostname.split(".")[0]
+        if host and eport and device and client:
             self.client = "%s:%s/%s/%s" % (
                 host, eport,
                 edevice, name.lower()
@@ -293,6 +298,7 @@ class TangoSource(DataSource):
         res = None
         fclient = "/".join((fullclient or "").split('/')[:-1])
         sclient = "/".join(self.client.split('/')[:-1])
+
         clients = [
             "tango://%s" % fullclient,
             fullclient,
@@ -303,6 +309,9 @@ class TangoSource(DataSource):
             sclient,
             "tango://%s" % sclient
         ]
+        if self._name:
+            clients.append(self._name)
+        # print(clients)
         try:
             res = self._getJSONData(
                 clients,
@@ -321,11 +330,11 @@ class TangoSource(DataSource):
         """
         if self.client:
             res = self.__tryclient(self.fullclient)
-            if res:
+            if res is not None:
                 return res
             if self.fullclient is not None:
                 res = self.__tryclient(self.fullclient.lower())
-                if res:
+                if res is not None:
                     return res
         if not PYTANGO_AVAILABLE:
             if self._streams:
@@ -338,7 +347,35 @@ class TangoSource(DataSource):
                 "Support for tango datasources not available")
 
         if self.device and self.member.memberType and self.member.name:
-            if not self.__proxy or not ProxyTools.isProxyValid(self.__proxy):
+            if not self.__proxy:
+                self.__proxy = ProxyTools.proxySetup(
+                    self.device, streams=self._streams)
+                if not self.__proxy:
+                    if self._streams:
+                        self._streams.error(
+                            "TangoSource::getData() - "
+                            "Setting up lasts to long: %s" % self.device,
+                            std=False)
+
+                    raise DataSourceSetupError(
+                        "Setting up lasts to long: %s" % self.device)
+            try:
+                if self.group is None:
+                    self.member.getData(self.__proxy)
+                else:
+                    if not hasattr(self.__tngrp, "getData"):
+                        if self._streams:
+                            self._streams.error(
+                                "TangoSource::getData() - "
+                                "DataSource pool not set up",
+                                std=False)
+
+                        raise DataSourceSetupError(
+                            "DataSource pool not set up")
+
+                    self.__tngrp.getData(
+                        self.__pool.counter, self.__proxy, self.member)
+            except Exception:
                 self.__proxy = ProxyTools.proxySetup(
                     self.device, streams=self._streams)
                 if not self.__proxy:
@@ -351,21 +388,21 @@ class TangoSource(DataSource):
                     raise DataSourceSetupError(
                         "Setting up lasts to long: %s" % self.device)
 
-            if self.group is None:
-                self.member.getData(self.__proxy)
-            else:
-                if not hasattr(self.__tngrp, "getData"):
-                    if self._streams:
-                        self._streams.error(
-                            "TangoSource::getData() - "
-                            "DataSource pool not set up",
-                            std=False)
+                if self.group is None:
+                    self.member.getData(self.__proxy)
+                else:
+                    if not hasattr(self.__tngrp, "getData"):
+                        if self._streams:
+                            self._streams.error(
+                                "TangoSource::getData() - "
+                                "DataSource pool not set up",
+                                std=False)
 
-                    raise DataSourceSetupError("DataSource pool not set up")
+                        raise DataSourceSetupError(
+                            "DataSource pool not set up")
 
-                self.__tngrp.getData(
-                    self.__pool.counter, self.__proxy, self.member)
-
+                    self.__tngrp.getData(
+                        self.__pool.counter, self.__proxy, self.member)
             if hasattr(self.__tngrp, "lock"):
                 self.__tngrp.lock.acquire()
             try:

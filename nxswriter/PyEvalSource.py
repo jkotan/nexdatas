@@ -43,14 +43,16 @@ class PyEvalSource(DataSource):
     """ Python Eval data source
     """
 
-    def __init__(self, streams=None):
+    def __init__(self, streams=None, name=None):
         """ constructor
 
         :brief: It cleans all member variables
         :param streams: tango-like steamset class
         :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param name: datasource name
+        :type name: :obj:`str`
         """
-        DataSource.__init__(self, streams=streams)
+        DataSource.__init__(self, streams=streams, name=name)
         #: (:obj:`str`) name of data
         self.__name = None
         #: (:obj:`dict` <:obj:`str` , :obj:`dict` <:obj:`str`, any>>) \

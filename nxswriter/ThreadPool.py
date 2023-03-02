@@ -35,7 +35,7 @@ class ThreadPool(object):
     """ Pool with threads
     """
 
-    def __init__(self, numberOfThreads=None, streams=None):
+    def __init__(self, numberOfThreads=None, streams=None, maxruntime=0):
         """ constructor
 
         :brief: It cleans the member variables
@@ -43,6 +43,8 @@ class ThreadPool(object):
         :type numberOfThreads: :obj:`int`
         :param streams: tango-like steamset class
         :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :param maxruntime: maxruntime
+        :type maxruntime: :obj:`int`
         """
 
         #: (:obj:`int`) maximal number of threads
@@ -58,6 +60,9 @@ class ThreadPool(object):
 
         #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
         self._streams = streams
+
+        #: (:obj:`float`) maximal runtime
+        self.maxRuntime = maxruntime
 
     def append(self, elem):
         """ appends the thread element
@@ -131,6 +136,21 @@ class ThreadPool(object):
 
         errors = []
         for el in self.__elementList:
+            if hasattr(el, "runtime") and \
+               el.runtime and self.maxRuntime > 0 \
+               and el.runtime > self.maxRuntime:
+                path = ""
+                if hasattr(el.h5Object, "path"):
+                    path = str(el.h5Object.path)
+                elif hasattr(el.h5Object, "path"):
+                    path = str(el.h5Object.name)
+                mess = "ThreadPool::checkErrors() - The maximal " \
+                    "element record time (%s s) exceeded: %s s : %s " \
+                    % (self.maxRuntime, el.runtime, path)
+                # print(mess)
+                if self._streams:
+                    self._streams.warn(mess, std=False)
+
             if el.error:
                 if isinstance(el.error, tuple):
                     serror = str(tuple([str(e) for e in el.error]))

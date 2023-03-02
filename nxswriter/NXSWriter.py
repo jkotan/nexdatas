@@ -597,6 +597,8 @@ class NXSDataWriter(tango.Device_4Impl):
         try:
             self.get_device_properties(self.get_device_class())
             self.tdw.numberOfThreads = self.NumberOfThreads
+            self.tdw.maxRecordRuntime = self.MaxRecordRuntime
+            self.tdw.maxElementRuntime = self.MaxElementRuntime
             self.tdw.openEntry()
             self.set_state(tango.DevState.EXTRACT)
         except (tango.DevFailed, BaseException):
@@ -707,6 +709,8 @@ class NXSDataWriter(tango.Device_4Impl):
         self.set_state(tango.DevState.RUNNING)
         self.get_device_properties(self.get_device_class())
         self.tdw.numberOfThreads = self.NumberOfThreads
+        self.tdw.maxRecordRuntime = self.MaxRecordRuntime
+        self.tdw.maxElementRuntime = self.MaxElementRuntime
         self.tdw.writer = self.Writer
         self.tdw.metadataOutput = self.MetadataOutput
         self.othread = CommandThread(
@@ -839,6 +843,14 @@ class NXSDataWriterClass(tango.DeviceClass):
         [tango.DevLong,
          "maximal number of threads",
          [100]],
+        'MaxRecordRuntime':
+        [tango.DevDouble,
+         "maximal runtime for record command in second ",
+         [0.0]],
+        'MaxElementRuntime':
+        [tango.DevDouble,
+         "maximal runtime for thread element in second",
+         [0.0]],
         'Writer':
         [tango.DevString,
          "writer module",

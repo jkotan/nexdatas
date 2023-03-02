@@ -21,6 +21,7 @@
 
 from threading import Thread
 import sys
+import time
 
 if sys.version_info > (3,):
     import queue as Queue
@@ -60,7 +61,10 @@ class ElementThread(Thread):
                 elem = self.__queue.get(block=False)
                 if hasattr(elem, "run") and callable(elem.run):
                     elem.error = None
+                    elem.runtime = 0
+                    st = time.time()
                     elem.run()
+                    elem.runtime = time.time() - st
 
             except Queue.Empty:
                 full = False
