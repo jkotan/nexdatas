@@ -1,6 +1,6 @@
 .\" Man page generated from reStructuredText.
 .
-.TH "NXSWRITER" "1" "Feb 28, 2023" "3.6" "NXSDataWriter"
+.TH "NXSWRITER" "1" "Mar 02, 2023" "3.7" "NXSDataWriter"
 .SH NAME
 nxswriter \- nxswriter Documentation
 .
@@ -320,7 +320,7 @@ was created by XMLFile class defined in XMLCreator/simpleXML.py.
 Definitions of CLIENT datasource
 .INDENT 0.0
 .TP
-.B class nxswriter.ClientSource.ClientSource(streams=None)
+.B class nxswriter.ClientSource.ClientSource(streams=None, name=None)
 Bases: \fI\%nxswriter.DataSources.DataSource\fP
 .sp
 Client data source
@@ -332,7 +332,12 @@ constructor
 It sets all member variables to None
 .TP
 .B Parameters
+.INDENT 7.0
+.IP \(bu 2
 \fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBname\fP (\fI\%str\fP) – datasource name
+.UNINDENT
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -394,7 +399,7 @@ Definitions of DB datasource
 .UNINDENT
 .INDENT 0.0
 .TP
-.B class nxswriter.DBaseSource.DBaseSource(streams=None)
+.B class nxswriter.DBaseSource.DBaseSource(streams=None, name=None)
 Bases: \fI\%nxswriter.DataSources.DataSource\fP
 .sp
 DataBase data source
@@ -406,7 +411,12 @@ constructor
 It sets all member variables to None
 .TP
 .B Parameters
+.INDENT 7.0
+.IP \(bu 2
 \fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBname\fP (\fI\%str\fP) – datasource name
+.UNINDENT
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -753,7 +763,7 @@ adds additional datasource
 Definitions of various datasources
 .INDENT 0.0
 .TP
-.B class nxswriter.DataSources.DataSource(streams=None)
+.B class nxswriter.DataSources.DataSource(streams=None, name=None)
 Bases: \fI\%object\fP
 .sp
 Data source
@@ -765,7 +775,12 @@ constructor
 It cleans all member variables
 .TP
 .B Parameters
+.INDENT 7.0
+.IP \(bu 2
 \fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBname\fP (\fI\%str\fP) – datasource name
+.UNINDENT
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -1770,6 +1785,11 @@ runner
 .B Brief
 During its thread run it fetches the data from the source
 .UNINDENT
+.UNINDENT
+.INDENT 7.0
+.TP
+.B runtime = None
+(\fI\%float\fP) runtime
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -2875,7 +2895,7 @@ Command definitions
 .UNINDENT
 .INDENT 7.0
 .TP
-.B device_property_list = {\(aqAddingLogs\(aq: [tango._tango.CmdArgType.DevBoolean, \(aqAdd XML logs\(aq, [True]], \(aqDefaultCanFail\(aq: [tango._tango.CmdArgType.DevBoolean, \(aqDefault value of CanFail attribute\(aq, [True]], \(aqMetadataOutput\(aq: [tango._tango.CmdArgType.DevString, \(aqmetadata output\(aq, [\(aq\(aq]], \(aqNumberOfThreads\(aq: [tango._tango.CmdArgType.DevLong, \(aqmaximal number of threads\(aq, [100]], \(aqWriter\(aq: [tango._tango.CmdArgType.DevString, \(aqwriter module\(aq, [\(aq\(aq]]}
+.B device_property_list = {\(aqAddingLogs\(aq: [tango._tango.CmdArgType.DevBoolean, \(aqAdd XML logs\(aq, [True]], \(aqDefaultCanFail\(aq: [tango._tango.CmdArgType.DevBoolean, \(aqDefault value of CanFail attribute\(aq, [True]], \(aqMaxElementRuntime\(aq: [tango._tango.CmdArgType.DevDouble, \(aqmaximal runtime for thread element in second\(aq, [0.0]], \(aqMaxRecordRuntime\(aq: [tango._tango.CmdArgType.DevDouble, \(aqmaximal runtime for record command in second \(aq, [0.0]], \(aqMetadataOutput\(aq: [tango._tango.CmdArgType.DevString, \(aqmetadata output\(aq, [\(aq\(aq]], \(aqNumberOfThreads\(aq: [tango._tango.CmdArgType.DevLong, \(aqmaximal number of threads\(aq, [100]], \(aqWriter\(aq: [tango._tango.CmdArgType.DevString, \(aqwriter module\(aq, [\(aq\(aq]]}
 (\fI\%dict\fP <\fI\%str\fP, [ \fI\%str\fP, \fI\%tango.CmdArgType\fP, [ \fI\%list\fP <\fI\%int\fP> ] ] > ) Device Properties
 .UNINDENT
 .UNINDENT
@@ -3016,7 +3036,7 @@ parses the opening tag
 Definitions of PYEVAL datasource
 .INDENT 0.0
 .TP
-.B class nxswriter.PyEvalSource.PyEvalSource(streams=None)
+.B class nxswriter.PyEvalSource.PyEvalSource(streams=None, name=None)
 Bases: \fI\%nxswriter.DataSources.DataSource\fP
 .sp
 Python Eval data source
@@ -3028,7 +3048,12 @@ constructor
 It cleans all member variables
 .TP
 .B Parameters
+.INDENT 7.0
+.IP \(bu 2
 \fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBname\fP (\fI\%str\fP) – datasource name
+.UNINDENT
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -3309,6 +3334,16 @@ the json data string
 .UNINDENT
 .INDENT 7.0
 .TP
+.B maxElementRuntime = None
+(\fI\%float\fP) maximal element record time in sec
+.UNINDENT
+.INDENT 7.0
+.TP
+.B maxRecordRuntime = None
+(\fI\%float\fP) maximal record time in sec
+.UNINDENT
+.INDENT 7.0
+.TP
 .B metadataOutput = None
 (\fI\%str\fP) metadata output
 .UNINDENT
@@ -3428,7 +3463,7 @@ proxy if proxy is set up
 .UNINDENT
 .INDENT 0.0
 .TP
-.B class nxswriter.TangoSource.TangoSource(streams=None)
+.B class nxswriter.TangoSource.TangoSource(streams=None, name=None)
 Bases: \fI\%nxswriter.DataSources.DataSource\fP
 .sp
 Tango data source
@@ -3438,6 +3473,14 @@ constructor
 .TP
 .B Brief
 It cleans all member variables
+.TP
+.B Parameters
+.INDENT 7.0
+.IP \(bu 2
+\fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBname\fP (\fI\%str\fP) – datasource name
+.UNINDENT
 .UNINDENT
 .INDENT 7.0
 .TP
@@ -3766,7 +3809,7 @@ sets tango data
 Provides a pool with element threads
 .INDENT 0.0
 .TP
-.B class nxswriter.ThreadPool.ThreadPool(numberOfThreads=None, streams=None)
+.B class nxswriter.ThreadPool.ThreadPool(numberOfThreads=None, streams=None, maxruntime=0)
 Bases: \fI\%object\fP
 .sp
 Pool with threads
@@ -3783,6 +3826,8 @@ It cleans the member variables
 \fBnumberOfThreads\fP (\fI\%int\fP) – number of threads
 .IP \(bu 2
 \fBstreams\fP (\fBStreamSet\fP or \fBtango.Device_4Impl\fP) – tango\-like steamset class
+.IP \(bu 2
+\fBmaxruntime\fP (\fI\%int\fP) – maxruntime
 .UNINDENT
 .UNINDENT
 .INDENT 7.0
@@ -3819,6 +3864,11 @@ waits for all thread from the pool
 .B Parameters
 \fBtimeout\fP (\fI\%int\fP) – the maximal waiting time
 .UNINDENT
+.UNINDENT
+.INDENT 7.0
+.TP
+.B maxRuntime = None
+(\fI\%float\fP) maximal runtime
 .UNINDENT
 .INDENT 7.0
 .TP

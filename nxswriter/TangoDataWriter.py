@@ -115,9 +115,9 @@ class TangoDataWriter(object):
         self.numberOfThreads = 100
         # self.numberOfThreads = 1
         #: (:obj:`float`) maximal element record time in sec
-        self.maxElementRuntime = 0.001
+        self.maxElementRuntime = 0.0
         #: (:obj:`float`) maximal record time in sec
-        self.maxRecordRuntime = 0.01
+        self.maxRecordRuntime = 0.0
 
         #: (:class:`ThreadPool.ThreadPool`) thread pool with INIT elements
         self.__initPool = None
@@ -635,7 +635,7 @@ class TangoDataWriter(object):
                 "The maximal record time for #%s exceeded: %s s (%s s) " \
                 % (self.__datasources.counter, dt, self.maxRecordRuntime)
             if self._streams:
-                self._streams.error(mess, std=False)
+                self._streams.warn(mess, std=False)
 
     def __updateNXRoot(self):
         fname = self.__filenames[-1]

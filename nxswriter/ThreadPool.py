@@ -149,7 +149,7 @@ class ThreadPool(object):
                     % (self.maxRuntime, el.runtime, path)
                 # print(mess)
                 if self._streams:
-                    self._streams.error(mess, std=False)
+                    self._streams.warn(mess, std=False)
 
             if el.error:
                 if isinstance(el.error, tuple):

@@ -165,6 +165,8 @@ ds.res2 = str(True)
             self.assertEqual(tdw.jsonrecord, "{}")
             self.assertTrue(tdw.getFile() is None)
             self.assertTrue(tdw.numberOfThreads > 0)
+            self.assertEqual(tdw.maxRecordRuntime, 0.0)
+            self.assertEqual(tdw.maxElementRuntime, 0.0)
             self.assertTrue(isinstance(tdw.numberOfThreads, (int, long)))
 
             tdw.openFile()

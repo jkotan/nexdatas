@@ -184,7 +184,6 @@ class TangoSource(DataSource):
         :param xml:  datasource parameters
         :type xml: :obj:`str`
         """
-
         if sys.version_info > (3,):
             xml = bytes(xml, "UTF-8")
         root = et.fromstring(xml, parser=XMLParser(collect_ids=False))
@@ -262,11 +261,13 @@ class TangoSource(DataSource):
             # to make canfail works
             # raise DataSourceSetupError(
             #     "Cannot connect to: %s \ndefined by %s" % (self.device, xml))
-        if hostname and port and device and client:
+        host = None
+        if port and device and client:
             try:
                 host = self.__proxy.get_db_host().split(".")[0]
             except Exception:
                 host = ehostname.split(".")[0]
+        if host and eport and device and client:
             self.client = "%s:%s/%s/%s" % (
                 host, eport,
                 edevice, name.lower()
@@ -310,6 +311,7 @@ class TangoSource(DataSource):
         ]
         if self._name:
             clients.append(self._name)
+        # print(clients)
         try:
             res = self._getJSONData(
                 clients,
