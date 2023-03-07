@@ -1,3 +1,7 @@
+2023-03-07 Jan Kotanski <jankotan@gmail.com>
+	* send WARNING, ERROR, FATAL to stderr by default (#139)
+	* tagged as 3.8.0
+
 2023-03-01 Jan Kotanski <jankotan@gmail.com>
 	* add MaxRecordRuntime and MaxElementRuntime tango server properties (#136)
 	* use datasource name as a keyword for Tango datasources (#136)

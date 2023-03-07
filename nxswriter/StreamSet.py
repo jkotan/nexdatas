@@ -66,7 +66,7 @@ class StreamSet(object):
             if hasattr(streams(), "log_debug"):
                 self.log_debug = streams().log_debug
 
-    def fatal(self, message, std=stderrflag):
+    def fatal(self, message, std=None):
         """ writes fatal error message
 
         :param message: error message
@@ -75,16 +75,18 @@ class StreamSet(object):
                     when log stream does not exist
         :type std: :obj:`bool`
         """
+        if std is None:
+            std = stderrflag
         try:
             if self.log_fatal:
                 self.log_fatal.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:
             print(message)
 
-    def error(self, message, std=stderrflag):
+    def error(self, message, std=None):
         """ writes error message
 
         :param message: error message
@@ -93,16 +95,18 @@ class StreamSet(object):
                     when log stream does not exist
         :type std: :obj:`bool`
         """
+        if std is None:
+            std = stderrflag
         try:
             if self.log_error:
                 self.log_error.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:
             print(message)
 
-    def warn(self, message, std=stderrflag):
+    def warn(self, message, std=None):
         """ writes warning message
 
         :param message: warning message
@@ -111,16 +115,18 @@ class StreamSet(object):
                     when log stream does not exist
         :type std: :obj:`bool`
         """
+        if std is None:
+            std = stderrflag
         try:
             if self.log_warn:
                 self.log_warn.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:
             print(message)
 
-    def info(self, message, std=stdoutflag):
+    def info(self, message, std=None):
         """ writes info message
 
         :param message: info message
@@ -129,6 +135,8 @@ class StreamSet(object):
                     when log stream does not exist
         :type std: :obj:`bool`
         """
+        if std is None:
+            std = stdoutflag
         try:
             if self.log_info:
                 self.log_info.write(message + '\n')
@@ -138,7 +146,7 @@ class StreamSet(object):
         except Exception:
             print(message)
 
-    def debug(self, message, std=stdoutflag):
+    def debug(self, message, std=None):
         """ writes debug message
 
         :param message: debug message
@@ -147,6 +155,8 @@ class StreamSet(object):
                     when log stream does not exist
         :type std: :obj:`bool`
        """
+        if std is None:
+            std = stdoutflag
         try:
             if self.log_debug:
                 self.log_debug.write(message + '\n')
