@@ -635,7 +635,7 @@ class TangoDataWriter(object):
                 "The maximal record time for #%s exceeded: %s s (%s s) " \
                 % (self.__datasources.counter, dt, self.maxRecordRuntime)
             if self._streams:
-                self._streams.warn(mess, std=True)
+                self._streams.warn(mess)
 
     def __updateNXRoot(self):
         fname = self.__filenames[-1]
