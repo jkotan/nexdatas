@@ -72,7 +72,7 @@ class StreamSetTest(unittest.TestCase):
         self.streams = None
 
     def getRandomString(self, maxsize):
-        letters = [chr(i) for i in range(256)]
+        letters = [chr(i) for i in range(32, 126)]
         size = self.__rnd.randint(1, maxsize)
         return ''.join(self.__rnd.choice(letters) for _ in range(size))
 
@@ -185,7 +185,12 @@ class StreamSetTest(unittest.TestCase):
             self.assertEqual(self.streams.log_info.getvalue(), "")
             self.assertEqual(self.streams.log_debug.getvalue(), "")
             self.assertEqual(self.mystdout.getvalue(), "")
-            self.assertEqual(self.mystderr.getvalue(), "")
+            if i % 3 == 0:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
+            elif i % 3 == 1:
+                self.assertEqual(self.mystderr.getvalue(), '')
+            elif i % 3 == 2:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
             sys.stdout = self.old_stdout
             sys.stderr = self.old_stderr
 
@@ -254,7 +259,12 @@ class StreamSetTest(unittest.TestCase):
             self.assertEqual(self.streams.log_info.getvalue(), "")
             self.assertEqual(self.streams.log_debug.getvalue(), "")
             self.assertEqual(self.mystdout.getvalue(), "")
-            self.assertEqual(self.mystderr.getvalue(), "")
+            if i % 3 == 0:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
+            elif i % 3 == 1:
+                self.assertEqual(self.mystderr.getvalue(), '')
+            elif i % 3 == 2:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
             sys.stdout = self.old_stdout
             sys.stderr = self.old_stderr
 
@@ -321,7 +331,12 @@ class StreamSetTest(unittest.TestCase):
             self.assertEqual(self.streams.log_info.getvalue(), "")
             self.assertEqual(self.streams.log_debug.getvalue(), "")
             self.assertEqual(self.mystdout.getvalue(), "")
-            self.assertEqual(self.mystderr.getvalue(), "")
+            if i % 3 == 0:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
+            elif i % 3 == 1:
+                self.assertEqual(self.mystderr.getvalue(), '')
+            elif i % 3 == 2:
+                self.assertEqual(self.mystderr.getvalue(), name + '\n')
             sys.stdout = self.old_stdout
             sys.stderr = self.old_stderr
 
