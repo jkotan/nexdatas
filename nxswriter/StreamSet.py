@@ -78,7 +78,7 @@ class StreamSet(object):
         try:
             if self.log_fatal:
                 self.log_fatal.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:
@@ -96,7 +96,7 @@ class StreamSet(object):
         try:
             if self.log_error:
                 self.log_error.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:
@@ -114,7 +114,7 @@ class StreamSet(object):
         try:
             if self.log_warn:
                 self.log_warn.write(message + '\n')
-            elif std:
+            if std:
                 sys.stderr.write(message + '\n')
                 sys.stderr.flush()
         except Exception:

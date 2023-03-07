@@ -147,9 +147,8 @@ class ThreadPool(object):
                 mess = "ThreadPool::checkErrors() - The maximal " \
                     "element record time (%s s) exceeded: %s s : %s " \
                     % (self.maxRuntime, el.runtime, path)
-                # print(mess)
                 if self._streams:
-                    self._streams.warn(mess, std=False)
+                    self._streams.warn(mess, std=True)
 
             if el.error:
                 if isinstance(el.error, tuple):
