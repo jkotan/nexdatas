@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter.StreamSet &#8212; NXSDataWriter 3.7.0 documentation</title>
+    <title>nxswriter.StreamSet &#8212; NXSDataWriter 3.8.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -36,7 +36,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>3.7</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.8</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -197,7 +197,7 @@
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">streams</span><span class="p">(),</span> <span class="s2">&quot;log_debug&quot;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_debug</span> <span class="o">=</span> <span class="n">streams</span><span class="p">()</span><span class="o">.</span><span class="n">log_debug</span>
 
-<div class="viewcode-block" id="StreamSet.fatal"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.fatal">[docs]</a>    <span class="k">def</span> <span class="nf">fatal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.fatal"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.fatal">[docs]</a>    <span class="k">def</span> <span class="nf">fatal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes fatal error message</span>
 
 <span class="sd">        :param message: error message</span>
@@ -206,16 +206,18 @@
 <span class="sd">                    when log stream does not exist</span>
 <span class="sd">        :type std: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">std</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">stderrflag</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_fatal</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_fatal</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">std</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">std</span><span class="p">:</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.error"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.error"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.error">[docs]</a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes error message</span>
 
 <span class="sd">        :param message: error message</span>
@@ -224,16 +226,18 @@
 <span class="sd">                    when log stream does not exist</span>
 <span class="sd">        :type std: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">std</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">stderrflag</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_error</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_error</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">std</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">std</span><span class="p">:</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.warn"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.warn">[docs]</a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stderrflag</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.warn"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.warn">[docs]</a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes warning message</span>
 
 <span class="sd">        :param message: warning message</span>
@@ -242,16 +246,18 @@
 <span class="sd">                    when log stream does not exist</span>
 <span class="sd">        :type std: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">std</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">stderrflag</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_warn</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_warn</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">std</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">std</span><span class="p">:</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.info"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stdoutflag</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.info"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes info message</span>
 
 <span class="sd">        :param message: info message</span>
@@ -260,6 +266,8 @@
 <span class="sd">                    when log stream does not exist</span>
 <span class="sd">        :type std: :obj:`bool`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">std</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">stdoutflag</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -269,7 +277,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="StreamSet.debug"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.debug">[docs]</a>    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">stdoutflag</span><span class="p">):</span>
+<div class="viewcode-block" id="StreamSet.debug"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.StreamSet.StreamSet.debug">[docs]</a>    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; writes debug message</span>
 
 <span class="sd">        :param message: debug message</span>
@@ -278,6 +286,8 @@
 <span class="sd">                    when log stream does not exist</span>
 <span class="sd">        :type std: :obj:`bool`</span>
 <span class="sd">       &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">std</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">std</span> <span class="o">=</span> <span class="n">stdoutflag</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_debug</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">log_debug</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
