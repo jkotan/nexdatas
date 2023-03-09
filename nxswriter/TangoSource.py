@@ -250,14 +250,14 @@ class TangoSource(DataSource):
                 self._streams.error(
                     "TangoSource::setup() - "
                     "Cannot connect to: %s \ndefined by %s"
-                    % (self.device, xml), std=False)
+                    % (self.device, xml))
 
         if not self.__proxy:
             if self._streams:
                 self._streams.error(
                     "TangoSource::setup() - "
                     "Cannot connect to: %s \ndefined by %s"
-                    % (self.device, xml), std=False)
+                    % (self.device, xml))
             # to make canfail works
             # raise DataSourceSetupError(
             #     "Cannot connect to: %s \ndefined by %s" % (self.device, xml))
