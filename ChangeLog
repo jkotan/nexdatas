@@ -1,4 +1,8 @@
 2023-03-07 Jan Kotanski <jankotan@gmail.com>
+	* add timestamps to stderr and stdout logs (#142)
+	* tagged as 3.8.1
+
+2023-03-07 Jan Kotanski <jankotan@gmail.com>
 	* send WARNING, ERROR, FATAL to stderr by default (#139)
 	* tagged as 3.8.0
 
