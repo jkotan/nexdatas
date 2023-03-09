@@ -21,6 +21,7 @@
 
 import sys
 import weakref
+import datetime
 
 
 # (:obj:`bool`) write stream to stdout
@@ -81,7 +82,8 @@ class StreamSet(object):
             if self.log_fatal:
                 self.log_fatal.write(message + '\n')
             if std:
-                sys.stderr.write(message + '\n')
+                sys.stderr.write(
+                    "%s: FATAL: %s\n" % (datetime.datetime.now(), message))
                 sys.stderr.flush()
         except Exception:
             print(message)
@@ -101,7 +103,8 @@ class StreamSet(object):
             if self.log_error:
                 self.log_error.write(message + '\n')
             if std:
-                sys.stderr.write(message + '\n')
+                sys.stderr.write(
+                    "%s: ERROR: %s\n" % (datetime.datetime.now(), message))
                 sys.stderr.flush()
         except Exception:
             print(message)
@@ -121,7 +124,8 @@ class StreamSet(object):
             if self.log_warn:
                 self.log_warn.write(message + '\n')
             if std:
-                sys.stderr.write(message + '\n')
+                sys.stderr.write(
+                    "%s: WARNING: %s\n" % (datetime.datetime.now(), message))
                 sys.stderr.flush()
         except Exception:
             print(message)
@@ -141,7 +145,8 @@ class StreamSet(object):
             if self.log_info:
                 self.log_info.write(message + '\n')
             elif std:
-                sys.stdout.write(message + '\n')
+                sys.stdout.write(
+                    "%s: INFO: %s\n" % (datetime.datetime.now(), message))
                 sys.stdout.flush()
         except Exception:
             print(message)
@@ -161,7 +166,8 @@ class StreamSet(object):
             if self.log_debug:
                 self.log_debug.write(message + '\n')
             elif std:
-                sys.stdout.write(message + '\n')
+                sys.stdout.write(
+                    "%s: DEBUG: %s\n" % (datetime.datetime.now(), message))
                 sys.stdout.flush()
         except Exception:
             print(message)
