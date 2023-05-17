@@ -78,7 +78,7 @@ install_requires = [
     'numpy>1.6.0',
     'lxml',
     'fabio',
-    'nxstools',  # '>=3.30.0'
+    # 'nxstools',  # '>=3.30.0'
     # 'h5py',
     # 'pymysqldb',
     # 'psycopg2-binary'
