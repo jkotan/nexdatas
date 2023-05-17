@@ -13,7 +13,8 @@ RUN add-apt-repository "deb http://repos.pni-hdri.de/apt/ubuntu lunar main" -y
 
 # install packages
 RUN apt-get -qq update && apt-get -qq dist-upgrade
-RUN apt-get -qq update && apt-get -qq install -y mysql-client mysql-client python3-h5py python3-sphinx apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libzmq3-dev python3-distutils python3-pninexus hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4 liblog4j1.2-java python3-tz python3-setuptools python3-pytest python3-h5py
+RUN apt-get -qq update && apt-get -qq install -y mysql-client mysql-client python3-h5py python3-sphinx apt-utils debconf-utils net-tools  omniidl libomniorb4-dev libcos4-dev libzmq3-dev python3-distutils python3-pninexus  hdf5-plugin-bshuf hdf5-filter-plugin  liblog4j1.2-java python3-tz python3-setuptools python3-pytest python3-h5py
+# hdf5-plugin-bshuf hdf5-plugin-bz2 hdf5-plugin-lz4
 
 # # install h5py 2.10
 # RUN  apt-get -qq update &&  apt-get -qq install -y  git cython3 libhdf5-dev python3-dev \
@@ -43,6 +44,7 @@ RUN  sed -i "s/\[mysql\]/\[mysqld\]\nsql_mode = NO_ZERO_IN_DATE,NO_ENGINE_SUBSTI
 
 ENV MYSQL_HOST=127.0.0.1
 ENV PKG_CONFIG_PATH=/home/tango/lib/pkgconfig
+ENV HDF5_PLUGIN_PATH=/usr/lib/x86_64-linux-gnu/hdf5/serial/plugins
 USER tango
 WORKDIR /home/tango
 
