@@ -267,7 +267,9 @@ class ELinkH5CppTest(unittest.TestCase):
         # self.assertTrue(str(li7.h5Object.target_path).endswith(atts7["path"]))
         print("KL7 %s %s" % (str(li7.h5Object.target_path), atts7["path"]))
         self.assertTrue(str(li7.h5Object.target_path).replace(":NXentry", "").
-                        endswith(atts7["path"].replace(":NXentry", "")))
+                        replace("://", ":/").
+                        endswith(atts7["path"].replace(":NXentry", "").
+                                 replace("://", ":/")))
 
         l1 = self._nxFile.open("link1")
         self.assertEqual(l1.read(), fi2.h5Object.read())
