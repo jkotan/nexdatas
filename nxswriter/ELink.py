@@ -165,8 +165,7 @@ class ELink(FElement):
             else:
                 target = ("".join(self.content)).strip().encode()
         if target is not None:
-            if ('://' not in str(target) or \
-                ':/' not in str(target)) \
+            if ('://' not in str(target) or ':/' not in str(target)) \
                and self.__groupTypes is not None and \
                self.__groupTypes() is not None:
                 if sys.version_info > (3,):
