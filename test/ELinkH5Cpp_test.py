@@ -244,6 +244,7 @@ class ELinkH5CppTest(unittest.TestCase):
         self.assertTrue(str(li1.h5Object.target_path).endswith(atts1["path"]))
         self.assertTrue(isinstance(li2.h5Object, H5CppWriter.H5CppLink))
         self.assertEqual(li2.h5Object.name, atts2["name"])
+        print("KL2 %s %s" % (str(li2.h5Object.target_path), atts2["path"]))
         self.assertTrue(str(li2.h5Object.target_path).endswith(atts2["path"]))
         self.assertTrue(isinstance(li3.h5Object, H5CppWriter.H5CppLink))
         self.assertEqual(li3.h5Object.name, atts3["name"])
