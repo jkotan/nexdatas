@@ -77,7 +77,7 @@ install_requires = [
     'pytz',
     'lxml',
     'numpy>1.6.0',
-    'fabio',
+    # 'fabio',
     'nxstools',  # '>=3.30.0'
     # 'h5py',
     # 'pymysqldb',

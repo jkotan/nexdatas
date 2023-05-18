@@ -260,7 +260,8 @@ class ELinkH5PYTest(unittest.TestCase):
         self.assertTrue(isinstance(li7.h5Object, H5PYWriter.H5PYLink))
         self.assertEqual(li7.h5Object.name, atts7["name"])
         print("LKK %s %s" % (str(li7.h5Object.target_path), atts7["path"]))
-        self.assertTrue(str(li7.h5Object.target_path).endswith(atts7["path"]))
+        self.assertTrue(str(li7.h5Object.target_path.replace("://", ":/"))
+                        .endswith(atts7["path"].replace("://", ":/")))
 
         l1 = self._nxFile.open("link1")
         self.assertEqual(l1.read(), fi2.h5Object.read())
