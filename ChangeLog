@@ -1,3 +1,7 @@
+2023-05-24 Jan Kotanski <jankotan@gmail.com>
+	* add support for ':/' in the link target (#147)
+	* tagged as 3.8.2
+
 2023-03-07 Jan Kotanski <jankotan@gmail.com>
 	* add timestamps to stderr and stdout logs (#142)
 	* tagged as 3.8.1
