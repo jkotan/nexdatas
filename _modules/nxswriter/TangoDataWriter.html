@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>nxswriter.TangoDataWriter &#8212; NXSDataWriter 3.8.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nxswriter.TangoDataWriter &#8212; NXSDataWriter 3.8.2 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
 
@@ -126,7 +125,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="body col-md-12 content" role="main">
       
   <h1>Source code for nxswriter.TangoDataWriter</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
@@ -153,7 +152,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 
-<span class="kn">from</span> <span class="nn">xml</span> <span class="k">import</span> <span class="n">sax</span>
+<span class="kn">from</span> <span class="nn">xml</span> <span class="kn">import</span> <span class="n">sax</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">gc</span>
@@ -161,31 +160,31 @@
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="k">import</span> <span class="n">StringIO</span>
+    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
-<span class="kn">from</span> <span class="nn">.NexusXMLHandler</span> <span class="k">import</span> <span class="n">NexusXMLHandler</span>
-<span class="kn">from</span> <span class="nn">.FetchNameHandler</span> <span class="k">import</span> <span class="n">FetchNameHandler</span>
-<span class="kn">from</span> <span class="nn">.StreamSet</span> <span class="k">import</span> <span class="n">StreamSet</span>
-<span class="kn">from</span> <span class="nn">nxstools</span> <span class="k">import</span> <span class="n">filewriter</span> <span class="k">as</span> <span class="n">FileWriter</span>
+<span class="kn">from</span> <span class="nn">.NexusXMLHandler</span> <span class="kn">import</span> <span class="n">NexusXMLHandler</span>
+<span class="kn">from</span> <span class="nn">.FetchNameHandler</span> <span class="kn">import</span> <span class="n">FetchNameHandler</span>
+<span class="kn">from</span> <span class="nn">.StreamSet</span> <span class="kn">import</span> <span class="n">StreamSet</span>
+<span class="kn">from</span> <span class="nn">nxstools</span> <span class="kn">import</span> <span class="n">filewriter</span> <span class="k">as</span> <span class="n">FileWriter</span>
 
-<span class="kn">from</span> <span class="nn">.H5Elements</span> <span class="k">import</span> <span class="n">EFile</span>
-<span class="kn">from</span> <span class="nn">.EGroup</span> <span class="k">import</span> <span class="n">EGroup</span>
-<span class="kn">from</span> <span class="nn">.DecoderPool</span> <span class="k">import</span> <span class="n">DecoderPool</span>
-<span class="kn">from</span> <span class="nn">.DataSourcePool</span> <span class="k">import</span> <span class="n">DataSourcePool</span>
-<span class="kn">from</span> <span class="nn">.Metadata</span> <span class="k">import</span> <span class="n">Metadata</span><span class="p">,</span> <span class="n">NXSMETA</span>
+<span class="kn">from</span> <span class="nn">.H5Elements</span> <span class="kn">import</span> <span class="n">EFile</span>
+<span class="kn">from</span> <span class="nn">.EGroup</span> <span class="kn">import</span> <span class="n">EGroup</span>
+<span class="kn">from</span> <span class="nn">.DecoderPool</span> <span class="kn">import</span> <span class="n">DecoderPool</span>
+<span class="kn">from</span> <span class="nn">.DataSourcePool</span> <span class="kn">import</span> <span class="n">DataSourcePool</span>
+<span class="kn">from</span> <span class="nn">.Metadata</span> <span class="kn">import</span> <span class="n">Metadata</span><span class="p">,</span> <span class="n">NXSMETA</span>
 
 
 <span class="n">WRITERS</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">nxstools</span> <span class="k">import</span> <span class="n">h5pywriter</span> <span class="k">as</span> <span class="n">H5PYWriter</span>
+    <span class="kn">from</span> <span class="nn">nxstools</span> <span class="kn">import</span> <span class="n">h5pywriter</span> <span class="k">as</span> <span class="n">H5PYWriter</span>
     <span class="n">WRITERS</span><span class="p">[</span><span class="s2">&quot;h5py&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">H5PYWriter</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="k">pass</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">nxstools</span> <span class="k">import</span> <span class="n">h5cppwriter</span> <span class="k">as</span> <span class="n">H5CppWriter</span>
+    <span class="kn">from</span> <span class="nn">nxstools</span> <span class="kn">import</span> <span class="n">h5cppwriter</span> <span class="k">as</span> <span class="n">H5CppWriter</span>
     <span class="n">WRITERS</span><span class="p">[</span><span class="s2">&quot;h5cpp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">H5CppWriter</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="k">pass</span>
@@ -219,7 +218,7 @@
     <span class="sd">&quot;&quot;&quot; NeXuS data writer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; constructor</span>
 
 <span class="sd">        :brief: It initialize the data writer for the H5 output file</span>
@@ -974,7 +973,7 @@
         &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
     </p>
   </div>
 </footer>
