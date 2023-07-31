@@ -334,7 +334,7 @@ class PyEvalSourceTest(unittest.TestCase):
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         script = """
-if type(ds.inp) == type(ds.inp2):
+if type(ds.inp) is type(ds.inp2):
     ds.res = ds.inp + ds.inp2
 else:
     ds.res = unicode(ds.inp) + unicode(ds.inp2)
@@ -395,7 +395,7 @@ else:
                     a][2] == "DevBoolean" else arr[a][0]
                 v2 = Converters.toBool(arr2[a2][0]) if arr2[
                     a2][2] == "DevBoolean" else arr2[a2][0]
-                vv = v1 + v2 if type(v1) == type(
+                vv = v1 + v2 if type(v1) is type(
                     v2) else unicode(v1) + unicode(v2)
                 self.checkData(
                     dt, arr[a][1], vv, NTP.pTt[type(vv).__name__], arr[a][3])
@@ -407,7 +407,7 @@ else:
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         script = """
-if type(ds.inp[0]) == type(ds.inp2[0]):
+if type(ds.inp[0]) is type(ds.inp2[0]):
     ds.res = ds.inp + ds.inp2
 else:
     ds.res = [str(i) for i in ds.inp] + [str(i2) for i2 in ds.inp2]
@@ -523,7 +523,7 @@ else:
         print("Run: %s.%s() " % (self.__class__.__name__, fun))
 
         script = """
-if type(ds.inp[0][0]) == type(ds.inp2[0][0]):
+if type(ds.inp[0][0]) is type(ds.inp2[0][0]):
     ds.res = ds.inp + ds.inp2
 else:
     ds.res = [[str(j) for j in i] for i in ds.inp] + """ \
