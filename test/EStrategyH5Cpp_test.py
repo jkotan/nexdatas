@@ -182,8 +182,8 @@ class EStrategyH5CppTest(unittest.TestCase):
             el.compression, Converters.toBool(attrs["compression"]))
         self.assertEqual(st.last.rate, 2)
         self.assertEqual(el.rate, 2)
-        self.assertEqual(st.last.shuffle, True)
-        self.assertEqual(el.shuffle, True)
+        self.assertEqual(st.last.shuffle, False)
+        self.assertEqual(el.shuffle, False)
 
     # first constructor test
     # \brief It tests default settings

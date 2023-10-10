@@ -32,7 +32,7 @@ from .EAttribute import EAttribute
 from .EStrategy import EStrategy
 from .ELink import ELink
 from .H5Elements import (
-    EDoc, ESymbol, EDimensions, EDim, EFile)
+    EDoc, ESymbol, EDimensions, EDim, EFile, EFilter)
 from .DataSourceFactory import DataSourceFactory
 from .ThreadPool import ThreadPool
 from .InnerXMLParser import InnerXMLHandler
@@ -121,7 +121,7 @@ class NexusXMLHandler(sax.ContentHandler):
             'symbols': Element, 'symbol': ESymbol,
             'dimensions': EDimensions, 'dim': EDim,
             'enumeration': Element, 'item': Element,
-            'strategy': EStrategy
+            'strategy': EStrategy, 'filter': EFilter
         }
 
         #: (:obj:`list` <:obj:`dict` <:obj:`str`, :obj:`str` > >) \

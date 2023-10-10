@@ -33,7 +33,7 @@ from nxswriter.ELink import ELink
 from nxswriter.EStrategy import EStrategy
 from nxswriter.FElement import FElement
 from nxswriter.H5Elements import (
-    EDoc, ESymbol, EDimensions, EDim, EFile)
+    EDoc, ESymbol, EDimensions, EDim, EFile, EFilter)
 from nxswriter.DataSourceFactory import DataSourceFactory
 from nxswriter.Errors import UnsupportedTagError
 from nxswriter.FetchNameHandler import TNObject
@@ -568,7 +568,8 @@ class NexusXMLHandlerH5CppTest(unittest.TestCase):
                 'symbols': Element, 'symbol': ESymbol,
                 'dimensions': EDimensions,
                 'dim': EDim, 'enumeration': Element, 'item': Element,
-                'strategy': EStrategy
+                'strategy': EStrategy,
+                'filter': EFilter
             })
         self.assertEqual(nh.transparentTags, ['definition'])
         self.assertEqual(nh.close(), None)

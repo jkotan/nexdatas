@@ -56,6 +56,11 @@ class EField(FElementWithAttr):
         #: (:obj:`dict` <:obj:`str`, :obj:`str`>) \
         #:        shape of the field, i.e. {index: length}
         self.lengths = {}
+        #: (:obj:`dict` <:obj:`int`, \
+        #:        (:obj:`int`, :obj:`str`, :obj:`str`, :obj:`str`) >) \
+        #:        index filter lists, i.e. \
+        #:        {index: (filter_id, name, id, cd_values, availability)}
+        self.filters = {}
         #: (:obj:`bool`) True if field is stored in STEP mode
         self.__extraD = False
         #: (:obj:`str`) strategy, i.e. INIT, STEP, FINAL, POSTRUN
@@ -158,12 +163,41 @@ class EField(FElementWithAttr):
         datafilter = None
         # create Filter
 
-        if self.compression:
+        datafilters = []
+        if (self.compression and self.rate) or self.shuffle:
             datafilter = FileWriter.data_filter(self._lastObject())
-            datafilter.rate = self.rate
-            datafilter.shuffle = self.shuffle
-            datafilter.options = tuple(self.compression_opts)
-            datafilter.filterid = self.compression
+            if (self.compression and self.rate):
+                datafilter.rate = self.rate
+                datafilter.options = tuple(self.compression_opts)
+                datafilter.shuffle = self.shuffle
+                datafilter.filterid = self.compression
+            if self.shuffle:
+                datafilter.shuffle = self.shuffle
+            datafilters.append(datafilter)
+        if self.filters:
+            mindex = max(self.filters.keys())
+            for ind in range(mindex):
+                if ind in self.filters:
+                    (filter_id, fname, cd_values, availability) = \
+                        self.filters[ind]
+                    datafilter = FileWriter.data_filter(self._lastObject())
+
+                    datafilter.name = fname
+                    datafilter.filterid = filter_id
+                    datafilter.availability = availability
+                    try:
+                        if cd_values:
+                            options = [int(vl) for vl in cd_values.split(",")]
+                            datafilter.options = tuple(options)
+                    except Exception:
+                        if self._streams:
+                            self._streams.error(
+                                "EField::__createObject() - "
+                                "Wrong filter cd_values ",
+                                std=False)
+
+                            raise Exception("Wrong filter cd_values")
+                    datafilters.append(datafilter)
 
         if sys.version_info < (3,):
             name = name.encode()
@@ -193,9 +227,9 @@ class EField(FElementWithAttr):
                         mshape = [1]
                     else:
                         mshape = [0]
-                    if datafilter:
+                    if datafilters:
                         f = self._lastObject().create_field(
-                            name, dtype, mshape, [1], datafilter)
+                            name, dtype, mshape, [1], datafilters)
                     else:
                         f = self._lastObject().create_field(
                             name, dtype, mshape, [1])

@@ -76,9 +76,9 @@ class EStrategy(Element):
                         self.last.rate = 0
                     if self.last.rate > 9:
                         self.last.rate = 9
-                if "shuffle" in attrs.keys() and hasattr(self.last, "shuffle"):
-                    self.last.shuffle = False \
-                        if attrs["shuffle"].upper() == "FALSE" else True
+            if "shuffle" in attrs.keys() and hasattr(self.last, "shuffle"):
+                self.last.shuffle = False \
+                    if attrs["shuffle"].upper() == "FALSE" else True
 
     def store(self, xml=None, globalJSON=None):
         """ stores the tag content
