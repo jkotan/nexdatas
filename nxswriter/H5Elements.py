@@ -171,3 +171,49 @@ class EDim(Element):
                 if dh:
                     self._beforeLast().lengths[self.__index] = str(
                         dh.cast("string"))
+
+
+class EFilter(Element):
+
+    """ filter tag element
+    """
+
+    def __init__(self, attrs, last, streams=None):
+        """ constructor
+
+        :param attrs: dictionary of the tag attributes
+        :type attrs: :obj:`dict` <:obj:`str`, :obj:`str`>
+        :param last: the last element from the stack
+        :type last: :class:`nxswriter.Element.Element`
+        :param streams: tango-like steamset class
+        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        """
+        Element.__init__(self, "filter", attrs, last, streams=streams)
+        index = 0
+        try:
+            if ("index" in attrs.keys()):
+                index = int(attrs["index"])
+        except Exception:
+            pass
+        try:
+            filter_id = int(attrs["id"])
+        except Exception:
+            filter_id = 0
+        try:
+            name = attrs["name"]
+        except Exception:
+            name = ""
+        try:
+            cd_values = attrs["cd_values"]
+        except Exception:
+            cd_values = ""
+        try:
+            availability = attrs["availability"]
+        except Exception:
+            availability = ""
+
+        if filter_id or name:
+            self._beforeLast().filters[index] = (
+                filter_id, name, cd_values, availability)
+        #: (:obj:`int`) index attribute
+        self.__index = index

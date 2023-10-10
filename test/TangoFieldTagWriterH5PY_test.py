@@ -793,9 +793,10 @@ name="stestp09/testss/s1r228" port="10000" group="__CLIENT__" />
         </field>
 
        <field units="" type="NX_INT32" name="ImageLong">
-          <strategy mode="STEP"  compression="32008"
- compression_opts="0,2"  grows="2"
- shuffle="true"  />
+          <strategy mode="STEP" grows="2">
+            <filter index="0" name="shuffle" />
+            <filter index="1" id="32008" cd_values="0,2" />
+          </strategy>
           <dimensions rank="2" />
           <datasource type="TANGO">
            <device member="attribute"
