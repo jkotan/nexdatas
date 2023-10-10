@@ -737,7 +737,7 @@ class DBFieldTagWriterH5CppTest(unittest.TestCase):
                    "nexdatas_canfail_error": None})
         self._sc.checkScalarField(
             det, "pid_scalar_uint", "uint64", "NX_UINT", [
-                numpy.iinfo(getattr(numpy, 'int64')).max] * 3,
+                numpy.iinfo(getattr(numpy, 'uint64')).max] * 3,
             attrs={"type": "NX_UINT", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",
                    "nexdatas_canfail_error": None})
@@ -2418,7 +2418,7 @@ class DBFieldTagWriterH5CppTest(unittest.TestCase):
         self._sc.checkImageField(
             det, "pid_image_uint", "uint64", "NX_UINT",
             [[[numpy.iinfo(
-                getattr(numpy, 'int64')).max]]] * 3,
+                getattr(numpy, 'uint64')).max]]] * 3,
             attrs={
                 "type": "NX_UINT", "units": "", "nexdatas_source": None,
                 "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",

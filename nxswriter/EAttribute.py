@@ -164,7 +164,9 @@ class EAttribute(FElement):
         nptype = self.h5Object.dtype
         value = ''
 
-        if nptype != "string":
+        if nptype == "bool":
+            value = False
+        elif nptype != "string":
             try:
                 value = numpy.iinfo(getattr(numpy, nptype)).max
             except Exception:

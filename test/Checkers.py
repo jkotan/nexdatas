@@ -419,7 +419,7 @@ class Checker(object):
             #            if self._isNumeric(cnt[i]):
             if self._isNumeric(cv):
                 if nxtype == "NX_BOOLEAN":
-                    #    print "BOOL: ", values[i] ,cnt[i]
+                    # print( "BOOL: ", values[i] ,cnt[i])
                     self._tc.assertEqual(
                         Types.Converters.toBool(values[i]), cnt[i])
                 else:
