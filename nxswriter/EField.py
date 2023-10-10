@@ -639,12 +639,7 @@ class EField(FElementWithAttr):
             value = False
         elif nptype != "string":
             try:
-                # workaround for bug #5618 in numpy for 1.8 < ver < 1.9.2
-                #
-                if nptype == 'uint64':
-                    value = numpy.iinfo(getattr(numpy, 'int64')).max
-                else:
-                    value = numpy.iinfo(getattr(numpy, nptype)).max
+                value = numpy.iinfo(getattr(numpy, nptype)).max
             except Exception:
                 try:
                     try:
