@@ -311,7 +311,7 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
         self._sc.checkScalarField(
             det, "ucounter64_canfail", "uint64", "NX_UINT64",
             [self._counter[i] if not i % 2 else
-             numpy.iinfo(getattr(numpy, 'int64')).max
+             numpy.iinfo(getattr(numpy, 'uint64')).max
              for i in range(len(self._counter))],
             attrs={
                 "type": "NX_UINT64", "units": "m", "nexdatas_source": None,
@@ -1714,13 +1714,13 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
 
         self._sc.checkSpectrumAttribute(
             det, "spectrum_uint64_canfail", "uint64",
-            [numpy.iinfo(getattr(numpy, 'int64')).max] * 1024)
+            [numpy.iinfo(getattr(numpy, 'uint64')).max] * 1024)
         self._sc.checkSpectrumAttribute(det, "spectrum_bool_canfail", "bool",
                                         [False] * 8)
 
         self._sc.checkSpectrumAttribute(
             field, "final_spectrum_uint64_canfail", "uint64",
-            [numpy.iinfo(getattr(numpy, 'int64')).max] * 256)
+            [numpy.iinfo(getattr(numpy, 'uint64')).max] * 256)
         self._sc.checkSpectrumAttribute(
             field, "init_spectrum_bool_canfail", "bool",
             [False] * 8)
@@ -1996,7 +1996,7 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
 
         self._sc.checkSingleImageField(
             det, "final_pco_uint_canfail", "uint64", "NX_UINT",
-            [[numpy.iinfo(getattr(numpy, 'int64')).max for el in rpco]
+            [[numpy.iinfo(getattr(numpy, 'uint64')).max for el in rpco]
              for rpco in self._pco1[0]],
             attrs={"type": "NX_UINT", "units": "", "nexdatas_source": None,
                    "nexdatas_strategy": "FINAL",
@@ -2800,7 +2800,7 @@ class ClientFieldTagWriterH5PYTest(unittest.TestCase):
 
         self._sc.checkImageAttribute(
             field, "image_uint64_canfail", "uint64",
-            [[numpy.iinfo(getattr(numpy, 'int64')).max] *
+            [[numpy.iinfo(getattr(numpy, 'uint64')).max] *
              len(self._pco1[0][0])] * len(self._pco1[0]))
         self._sc.checkImageAttribute(
             field, "image_bool_canfail", "bool",

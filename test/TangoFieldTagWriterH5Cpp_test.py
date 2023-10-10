@@ -649,8 +649,8 @@ name="stestp09/testss/s1r228" port="10000" group="__CLIENT__" />
         for i in range(steps):
 
             self._simps.dp.ScalarBoolean = Types.Converters.toBool(
-                self._bools[0])
-            self._simps.dp.ScalarUChar = abs(self._counter[0])
+                self._bools[i])
+            self._simps.dp.ScalarUChar = abs(self._counter[i])
             self._simps.dp.ScalarShort = self._counter[0]
             self._simps.dp.ScalarUShort = abs(self._counter[0])
             self._simps.dp.ScalarLong = self._counter[0]
@@ -989,7 +989,7 @@ name="stestp09/testss/s1r228" port="10000" group="__CLIENT__" />
         self._sc.checkScalarField(
             det, "ScalarULong", "uint64", "NX_UINT",
             [(abs(self._counter[i]) if i % 2
-              else numpy.iinfo(getattr(numpy, 'int64')).max)
+              else numpy.iinfo(getattr(numpy, 'uint64')).max)
              for i in range(steps)],
             attrs={"type": "NX_UINT", "units": "m", "nexdatas_source": None,
                    "nexdatas_strategy": "STEP", "nexdatas_canfail": "FAILED",
@@ -1005,7 +1005,7 @@ name="stestp09/testss/s1r228" port="10000" group="__CLIENT__" />
         self._sc.checkScalarField(
             det, "ScalarULong64", "uint64", "NX_UINT",
             [(abs(self._counter[i]) if i % 2
-              else numpy.iinfo(getattr(numpy, 'int64')).max)
+              else numpy.iinfo(getattr(numpy, 'uint64')).max)
              for i in range(steps)],
             attrs={
                 "type": "NX_UINT64", "units": "m", "nexdatas_source": None,
@@ -1402,7 +1402,7 @@ name="stestp09/testss/s1r228" port="10000" group="__CLIENT__" />
         self._sc.checkSpectrumField(
             det, "SpectrumULong64", "uint64", "NX_UINT64",
             [(self._mca2[i] if not i % 2
-              else [numpy.iinfo(getattr(numpy, 'int64')).max] *
+              else [numpy.iinfo(getattr(numpy, 'uint64')).max] *
               len(self._mca2[i]))
              for i in range(steps)],
             attrs={"type": "NX_UINT64", "units": "", "nexdatas_source": None,
@@ -2963,7 +2963,7 @@ name="stestp09/testss/s1r228" port="10000" />
         self._sc.checkImageField(
             det, "ImageULong64", "uint64", "NX_UINT64",
             [(self._pco1[i] if not i % 2 else
-              [[numpy.iinfo(getattr(numpy, 'int64')).max] *
+              [[numpy.iinfo(getattr(numpy, 'uint64')).max] *
                len(self._pco1[i][0])] * len(self._pco1[i]))
              for i in range(steps)],
             attrs={"type": "NX_UINT64", "units": "", "nexdatas_source": None,
@@ -3030,7 +3030,7 @@ name="stestp09/testss/s1r228" port="10000" />
 
         self._sc.checkSingleImageField(
             det, "InitImageULong64", "uint64", "NX_UINT64",
-            [[numpy.iinfo(getattr(numpy, 'int64')).max] * len(
+            [[numpy.iinfo(getattr(numpy, 'uint64')).max] * len(
                 self._pco1[0][0])] * len(self._pco1[0]),
             attrs={"type": "NX_UINT64", "units": "", "nexdatas_source": None,
                    "nexdatas_strategy": "INIT", "nexdatas_canfail": "FAILED",

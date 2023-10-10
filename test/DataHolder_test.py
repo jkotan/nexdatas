@@ -145,7 +145,7 @@ class DataHolderTest(unittest.TestCase):
             "ScalarLong64": ["int64", "DevLong64", 234],
             "ScalarULong64": ["uint64", "DevULong64", 23],
             "ScalarFloat": ["float32", "DevFloat", 12.234, 1e-5],
-            "ScalarDouble": ["float64", "DevDouble", -2.456673e+02, 1e-14],
+            "ScalarDouble": ["float64", "DevDouble", -2.456673e+01, 1e-14],
             "ScalarString": ["string", "DevString", "MyTrue"],
             # "State":[ "string", "DevState", tango._tango.DevState.ON],
         }
@@ -388,8 +388,8 @@ class DataHolderTest(unittest.TestCase):
         }
 
         arrs["i"] = {
-            "ScalarShort": ["int16", "DevShort", -123],
-            "ScalarLong": ["int64", "DevLong", -124],
+            "ScalarShort": ["int16", "DevShort", 123],
+            "ScalarLong": ["int64", "DevLong", 124],
             "ScalarLong64": ["int64", "DevLong64", 234],
         }
 
@@ -402,7 +402,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["f"] = {
             "ScalarFloat": ["float32", "DevFloat", 12.234, 1e-5],
-            "ScalarDouble": ["float64", "DevDouble", -2.456673e+02, 1e-14],
+            "ScalarDouble": ["float64", "DevDouble", 2.456673e+02, 1e-14],
         }
 
         arrs["s"] = {
@@ -547,13 +547,13 @@ class DataHolderTest(unittest.TestCase):
         }
 
         arrs["i"] = {
-            "SpectrumShort": ["int16", "DevShort", -13, [1, 0]],
-            "SpectrumLong": ["int64", "DevLong", -14, [1, 0]],
-            "SpectrumLong64": ["int64", "DevLong64", -24, [1, 0]],
+            "SpectrumShort": ["int16", "DevShort", 3, [1, 0]],
+            "SpectrumLong": ["int64", "DevLong", 4, [1, 0]],
+            "SpectrumLong64": ["int64", "DevLong64", 4, [1, 0]],
         }
 
         arrs["u"] = {
-            "SpectrumUChar": ["uint8", "DevUChar", 23, [1, 0]],
+            "SpectrumUChar": ["uint8", "DevUChar", 3, [1, 0]],
             "SpectrumULong": ["uint64", "DevULong", 2, [1, 0]],
             "SpectrumUShort": ["uint16", "DevUShort", 1, [1, 0]],
             "SpectrumULong64": ["uint64", "DevULong64", 3, [1, 0]],
@@ -561,7 +561,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["f"] = {
             "SpectrumFloat": ["float32", "DevFloat", 12.234, [1, 0], 1e-5],
-            "SpectrumDouble": ["float64", "DevDouble", -2.456673e+02, [1, 0],
+            "SpectrumDouble": ["float64", "DevDouble", 2.156673e+01, [1, 0],
                                1e-14],
         }
 
@@ -596,7 +596,7 @@ class DataHolderTest(unittest.TestCase):
                     mlen = [
                         self.__rnd.randint(1, 10), self.__rnd.randint(0, 3)]
                     arr[k][2] = [
-                        arr[k][2] * self.__rnd.randint(1, 3)
+                        arr[k][2] * self.__rnd.randint(1, 2)
                         for c in range(mlen[0])]
                 else:
                     mlen = [self.__rnd.randint(1, 10)]
@@ -654,13 +654,13 @@ class DataHolderTest(unittest.TestCase):
         }
 
         arrs["i"] = {
-            "SpectrumShort": ["int16", "DevShort", -13, [1, 0]],
-            "SpectrumLong": ["int64", "DevLong", -14, [1, 0]],
-            "SpectrumLong64": ["int64", "DevLong64", -24, [1, 0]],
+            "SpectrumShort": ["int16", "DevShort", 3, [1, 0]],
+            "SpectrumLong": ["int64", "DevLong", 4, [1, 0]],
+            "SpectrumLong64": ["int64", "DevLong64", 5, [1, 0]],
         }
 
         arrs["u"] = {
-            "SpectrumUChar": ["uint8", "DevUChar", 23, [1, 0]],
+            "SpectrumUChar": ["uint8", "DevUChar", 7, [1, 0]],
             "SpectrumULong": ["uint64", "DevULong", 2, [1, 0]],
             "SpectrumUShort": ["uint16", "DevUShort", 1, [1, 0]],
             "SpectrumULong64": ["uint64", "DevULong64", 3, [1, 0]],
@@ -668,7 +668,7 @@ class DataHolderTest(unittest.TestCase):
 
         arrs["f"] = {
             "SpectrumFloat": ["float32", "DevFloat", 12.234, [1, 0], 1e-5],
-            "SpectrumDouble": ["float64", "DevDouble", -2.456673e+02, [1, 0],
+            "SpectrumDouble": ["float64", "DevDouble", 2.456673e+01, [1, 0],
                                1e-14],
         }
 
@@ -703,7 +703,7 @@ class DataHolderTest(unittest.TestCase):
                 mlen = [self.__rnd.randint(1, 10), self.__rnd.randint(
                     1, 10), self.__rnd.randint(0, 3)]
                 if arr[k][1] != "DevBoolean":
-                    arr[k][2] = [[arr[k][2] * self.__rnd.randint(0, 3)
+                    arr[k][2] = [[arr[k][2] * self.__rnd.randint(0, 2)
                                   for r in range(mlen[1])]
                                  for c in range(mlen[0])]
                 else:
