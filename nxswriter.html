@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nxswriter package &#8212; NXSDataWriter 3.8.2 documentation</title>
+    <title>nxswriter package &#8212; NXSDataWriter 3.9.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -36,7 +36,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>3.8</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.9</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -404,7 +404,7 @@ if <a class="reference internal" href="#nxswriter.DBaseSource.DBaseSource.format
 for strings or value for SCALAR</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -714,7 +714,7 @@ is registered</p>
 <dd class="field-odd"><p>the decoded data if data was loaded</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -896,7 +896,7 @@ is registered</p>
 <dd class="field-odd"><p>the decoded data if data was loaded</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1036,7 +1036,7 @@ is registered</p>
 <dd class="field-odd"><p>the decoded data if data was loaded</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1212,6 +1212,12 @@ is registered</p>
 <dt id="nxswriter.EField.EField.compression_opts">
 <code class="sig-name descname">compression_opts</code><a class="headerlink" href="#nxswriter.EField.EField.compression_opts" title="Permalink to this definition">¶</a></dt>
 <dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>) compression rate</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="nxswriter.EField.EField.filters">
+<code class="sig-name descname">filters</code><a class="headerlink" href="#nxswriter.EField.EField.filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>) &gt;) index filter lists, i.e. {index: (filter_id, name, id, cd_values, availability)}</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1993,6 +1999,23 @@ written as (name, value, shape)</p>
 <li><p><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – dictionary of the tag attributes</p></li>
 <li><p><strong>last</strong> (<a class="reference internal" href="#nxswriter.Element.Element" title="nxswriter.Element.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.Element.Element</span></code></a>) – the last element from the stack</p></li>
 <li><p><strong>h5fileObject</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.FileWriter.FTfile</span></code>) – H5 file object</p></li>
+<li><p><strong>streams</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">StreamSet</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">tango.Device_4Impl</span></code>) – tango-like steamset class</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="nxswriter.H5Elements.EFilter">
+<em class="property">class </em><code class="sig-prename descclassname">nxswriter.H5Elements.</code><code class="sig-name descname">EFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">last</span></em>, <em class="sig-param"><span class="n">streams</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nxswriter/H5Elements.html#EFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nxswriter.H5Elements.EFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nxswriter.Element.Element" title="nxswriter.Element.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.Element.Element</span></code></a></p>
+<p>filter tag element</p>
+<p>constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a> &lt;<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>&gt;) – dictionary of the tag attributes</p></li>
+<li><p><strong>last</strong> (<a class="reference internal" href="#nxswriter.Element.Element" title="nxswriter.Element.Element"><code class="xref py py-class docutils literal notranslate"><span class="pre">nxswriter.Element.Element</span></code></a>) – the last element from the stack</p></li>
 <li><p><strong>streams</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">StreamSet</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">tango.Device_4Impl</span></code>) – tango-like steamset class</p></li>
 </ul>
 </dd>
