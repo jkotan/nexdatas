@@ -39,7 +39,7 @@ class EFile(FElement):
         :param h5fileObject: H5 file object
         :type h5fileObject: :class:`nxswriter.FileWriter.FTfile`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         FElement.__init__(self, "file", attrs, last, h5fileObject,
                           streams=streams)
@@ -58,7 +58,7 @@ class EDoc(Element):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "doc", attrs, last, streams=streams)
 
@@ -88,7 +88,7 @@ class ESymbol(Element):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "symbol", attrs, last, streams=streams)
         #: (:obj:`dict` <:obj:`str`, :obj:`str`>) \
@@ -121,7 +121,7 @@ class EDimensions(Element):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "dimensions", attrs, last, streams=streams)
         if "rank" in attrs.keys():
@@ -141,7 +141,7 @@ class EDim(Element):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "dim", attrs, last, streams=streams)
         if ("index" in attrs.keys()) and ("value" in attrs.keys()):
@@ -186,7 +186,7 @@ class EFilter(Element):
         :param last: the last element from the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "filter", attrs, last, streams=streams)
         index = 0

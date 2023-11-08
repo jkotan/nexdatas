@@ -36,7 +36,7 @@ class ClientSource(DataSource):
 
         :brief: It sets all member variables to None
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param name: datasource name
         :type name: :obj:`str`
         """

@@ -57,7 +57,7 @@ class ProxyTools(object):
         :param device: tango device
         :type device: :obj:`str`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param maxcount: a number of tries
         :type maxcount: :obj:`int`
         :returns: proxy if proxy is set up
@@ -120,7 +120,7 @@ class TangoSource(DataSource):
 
         :brief: It cleans all member variables
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param name: datasource name
         :type name: :obj:`str`
         """
@@ -451,7 +451,7 @@ class TgGroup(object):
         :param counter: counts of steps
         :type counter: :obj:`int`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
 
         #: (:class:`threading.Lock`) threading lock
@@ -460,7 +460,7 @@ class TgGroup(object):
         self.counter = counter
         #: (:obj:`dict` <:obj:`str`,  :class:`TgDevice`> ) TANGO devices
         self.devices = {}
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = streams
 
     def getDevice(self, device):
@@ -631,7 +631,7 @@ class TgDevice(object):
         :param proxy: device proxy
         :type proxy: :class:`tango.DeviceProxy`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
 
         #: (:obj:`str`) tango device name
@@ -647,7 +647,7 @@ class TgDevice(object):
         self.commands = []
         #: (:class:`tango.DeviceProxy`) device proxy
         self.proxy = proxy
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = streams
 
     def setMember(self, member):
@@ -696,7 +696,7 @@ class TgMember(object):
         :param encoding: encoding type of Tango DevEncoded variables
         :type encoding: :obj:`str`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         #: (:obj:`str`) name of data record
         self.name = name
@@ -712,7 +712,7 @@ class TgMember(object):
         self.__da = None
         #: (:class:`tango.CommandInfo`) input command data
         self.__cd = None
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = streams
 
     def reset(self):

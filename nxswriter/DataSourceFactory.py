@@ -39,7 +39,7 @@ class DataSourceFactory(Element):
         :param last: the last element on the stack
         :type last: :class:`nxswriter.Element.Element`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, "datasource", attrs, last, streams=streams)
         #: (:class:`nxswriter.DataSourcePool.DataSourcePool`) datasource pool

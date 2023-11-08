@@ -48,7 +48,7 @@ class PyEvalSource(DataSource):
 
         :brief: It cleans all member variables
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param name: datasource name
         :type name: :obj:`str`
         """

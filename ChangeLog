@@ -1,3 +1,7 @@
+2023-11-09 Jan Kotanski <jankotan@gmail.com>
+	* change tango.Device_4Impl to tango.LatestDeviceImpl (#160)
+	* tagged as 3.10.0
+
 2023-10-11 Jan Kotanski <jankotan@gmail.com>
 	* add support for a filter tag (#154)
 	* tagged as 3.9.0
