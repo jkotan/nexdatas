@@ -46,7 +46,7 @@ class FElement(Element):
         :param h5object: H5 file object
         :type h5object: :class:`nxswriter.FileWriter.FTObject`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
         Element.__init__(self, name, attrs, last, streams=streams)
         #: (:class:`nxswriter.FileWriter.FTObject`) stored H5 file object
@@ -269,7 +269,7 @@ class FElementWithAttr(FElement):
         :param h5object: H5 file object
         :type h5object: :class:`nxswriter.FileWriter.FTObject`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param reloadmode: reload mode
         :type reloadmode: :obj:`bool`
         """

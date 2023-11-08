@@ -53,7 +53,7 @@ class CommandThread(Thread):
         """constructor
 
         :param server: Tango server implementation
-        :type server: :class:`tango.Device_4Impl`
+        :type server: :class:`tango.LatestDeviceImpl`
         :param command: Thread command
         :type command: :obj:`str`
         :param finalState: Final State Code
@@ -62,7 +62,7 @@ class CommandThread(Thread):
         :type args: :obj:`list` <:obj:`str`>
         """
         Thread.__init__(self)
-        #: (:class:`tango.Device_4Impl`) tango server
+        #: (:class:`tango.LatestDeviceImpl`) tango server
         self.server = server
         #: (:obj:`__callable__`) command
         self.command = getattr(server.tdw, command)
@@ -102,7 +102,7 @@ class CommandThread(Thread):
         self.dp.state()
 
 
-class NXSDataWriter(tango.Device_4Impl):
+class NXSDataWriter(tango.LatestDeviceImpl):
 
     """ Tango Server to store data in H5 files
 
@@ -123,7 +123,7 @@ class NXSDataWriter(tango.Device_4Impl):
         :param name: device name
         :type name: :obj:`str`
         """
-        tango.Device_4Impl.__init__(self, cl, name)
+        tango.LatestDeviceImpl.__init__(self, cl, name)
         self.debug_stream("In __init__()")
         if not hasattr(self, "lock"):
             #: (:class:`threading.Lock`) thread lock
@@ -216,7 +216,7 @@ class NXSDataWriter(tango.Device_4Impl):
         with self.lock:
             if state is not None:
                 self.state_flag = state
-            tango.Device_4Impl.set_state(self, self.state_flag)
+            tango.LatestDeviceImpl.set_state(self, self.state_flag)
 
     def dev_state(self):
         """ dev_state method
@@ -225,10 +225,10 @@ class NXSDataWriter(tango.Device_4Impl):
         :rtype: :class:`tango.DevState`
         """
         with self.lock:
-            tango.Device_4Impl.set_state(self, self.state_flag)
+            tango.LatestDeviceImpl.set_state(self, self.state_flag)
             if self.state_flag != tango.DevState.ALARM:
-                tango.Device_4Impl.dev_state(self)
-            return tango.Device_4Impl.get_state(self)
+                tango.LatestDeviceImpl.dev_state(self)
+            return tango.LatestDeviceImpl.get_state(self)
 
     def always_executed_hook(self):
         """ Always excuted hook method

@@ -59,7 +59,7 @@ else:
 # ==================================================================
 
 
-class SimpleServer(tango.Device_4Impl):
+class SimpleServer(tango.LatestDeviceImpl):
 
     # --------- Add you global variables here --------------------------
 
@@ -68,7 +68,7 @@ class SimpleServer(tango.Device_4Impl):
     # ------------------------------------------------------------------
 
     def __init__(self, cl, name):
-        tango.Device_4Impl.__init__(self, cl, name)
+        tango.LatestDeviceImpl.__init__(self, cl, name)
         SimpleServer.init_device(self)
 
     # ------------------------------------------------------------------

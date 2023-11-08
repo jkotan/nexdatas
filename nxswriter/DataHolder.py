@@ -53,7 +53,7 @@ class DataHolder(object):
         :param decoders: poll with decoding classes
         :type decoders: :class:`nxswriter.DecoderPool.DecoderPool`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         """
 
         #: (:obj:`str`) data format, i.e. SCALAR, SPECTRUM, IMAGE, VERTEX
@@ -69,7 +69,7 @@ class DataHolder(object):
         #: pool with decoding algorithm
         self.decoders = decoders
 
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = streams
         if str(self.tangoDType) == 'DevEncoded':
             self.__setupEncoded()

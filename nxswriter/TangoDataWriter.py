@@ -93,7 +93,7 @@ class TangoDataWriter(object):
 
         :brief: It initialize the data writer for the H5 output file
         :param server: Tango server
-        :type server: :class:`tango.Device_4Impl`
+        :type server: :class:`tango.LatestDeviceImpl`
         """
         #: (:obj:`str`) output file name and optional nexus parent path
         self.__parent = ""
@@ -181,7 +181,7 @@ class TangoDataWriter(object):
         #: (:obj:`dict` < :obj:`str`, :obj:`str`>) file time stamps
         self.__filetimes = {}
 
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = StreamSet(weakref.ref(server) if server else None)
 
         #: (:obj:`bool`) skip acquisition flag

@@ -42,7 +42,7 @@ class ThreadPool(object):
         :param numberOfThreads: number of threads
         :type numberOfThreads: :obj:`int`
         :param streams: tango-like steamset class
-        :type streams: :class:`StreamSet` or :class:`tango.Device_4Impl`
+        :type streams: :class:`StreamSet` or :class:`tango.LatestDeviceImpl`
         :param maxruntime: maxruntime
         :type maxruntime: :obj:`int`
         """
@@ -58,7 +58,7 @@ class ThreadPool(object):
         #:     list of the threads related to the appended elements
         self.__threadList = []
 
-        #: (:class:`StreamSet` or :class:`tango.Device_4Impl`) stream set
+        #: (:class:`StreamSet` or :class:`tango.LatestDeviceImpl`) stream set
         self._streams = streams
 
         #: (:obj:`float`) maximal runtime
