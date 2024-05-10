@@ -634,7 +634,7 @@ class TangoDataWriter(object):
             self.__nxFile.flush()
         if self.__nxFile and hasattr(self.__nxFile, "start") and \
            self.__datasources.counter == 1:
-            print("START")
+            # print("START")
             self.__nxFile.start()
         if self.stepsperfile > 0:
             if (self.__datasources.counter) % self.stepsperfile == 0:
