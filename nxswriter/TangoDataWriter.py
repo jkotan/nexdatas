@@ -552,6 +552,9 @@ class TangoDataWriter(object):
                 self.__nextfile()
             elif "swmr" in self.__pars.keys() and self.__pars["swmr"]:
                 self.__nxFile.reopen(readonly=False, **self.__pars)
+        if self.__nxFile and hasattr(self.__nxFile, "prepare"):
+            # print("START")
+            self.__nxFile.prepare()
 
     def __nextfile(self):
         self.__nxFile.close()
