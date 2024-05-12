@@ -58,7 +58,14 @@ try:
     WRITERS["h5cpp"] = H5CppWriter
 except Exception:
     pass
-DEFAULTWRITERS = ["h5cpp", "h5py"]
+
+
+try:
+    from nxstools import h5rediswriter as H5RedisWriter
+    WRITERS["h5redis"] = H5RedisWriter
+except Exception:
+    pass
+DEFAULTWRITERS = ["h5cpp", "h5py", "h5redis"]
 
 
 #: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
@@ -545,6 +552,9 @@ class TangoDataWriter(object):
                 self.__nextfile()
             elif "swmr" in self.__pars.keys() and self.__pars["swmr"]:
                 self.__nxFile.reopen(readonly=False, **self.__pars)
+        if self.__nxFile and hasattr(self.__nxFile, "prepare"):
+            # print("START")
+            self.__nxFile.prepare()
 
     def __nextfile(self):
         self.__nxFile.close()
@@ -625,6 +635,10 @@ class TangoDataWriter(object):
 
         if self.__nxFile and hasattr(self.__nxFile, "flush"):
             self.__nxFile.flush()
+        if self.__nxFile and hasattr(self.__nxFile, "start") and \
+           self.__datasources.counter == 1:
+            # print("START")
+            self.__nxFile.start()
         if self.stepsperfile > 0:
             if (self.__datasources.counter) % self.stepsperfile == 0:
                 self.__nextfile()
