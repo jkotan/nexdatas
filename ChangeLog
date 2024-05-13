@@ -1,4 +1,8 @@
 2023-11-09 Jan Kotanski <jankotan@gmail.com>
+	* call finish on writer if exists  (#165)
+	* tagged as 3.11.1
+
+2023-11-09 Jan Kotanski <jankotan@gmail.com>
 	* add support for h5redis writer (#165)
 	* tagged as 3.11.0
 

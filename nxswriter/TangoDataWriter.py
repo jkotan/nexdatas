@@ -717,6 +717,8 @@ class TangoDataWriter(object):
 
         if self.__nxFile and hasattr(self.__nxFile, "flush"):
             self.__nxFile.flush()
+        if self.__nxFile and hasattr(self.__nxFile, "finish"):
+            self.__nxFile.finish()
 
         if NXSMETA and self.__nxRoot:
             args = {}
