@@ -517,16 +517,7 @@ class NXSDataWriterH5CppTest(unittest.TestCase):
                             self.assertEqual(c.name, "python_version")
                             self.assertEqual(c.read(), sys.version)
 
-                    self.assertEqual(len(ch.attributes), 1)
-                    for at in ch.attributes:
-                        self.assertTrue(at.is_valid)
-                        self.assertTrue(hasattr(at.shape, "__iter__"))
-                        self.assertEqual(len(at.shape), 0)
-                        self.assertEqual(at.shape, ())
-                        self.assertEqual(at.dtype, "string")
-                    #                    self.assertEqual(at.dtype,"string")
-                        self.assertEqual(at.name, "NX_class")
-                        self.assertEqual(at[...], "NXcollection")
+                    self.assertEqual(len(ch.attributes), 0)
 
             self.assertEqual(cnt, f.size)
 

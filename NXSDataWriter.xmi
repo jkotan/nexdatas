@@ -23,7 +23,7 @@
       <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
       <DefaultPropValue>True</DefaultPropValue>
     </deviceProperties>
-    <deviceProperties name="AddingLogs" description="Add XML logs in nexus_logs of NXcollection">
+    <deviceProperties name="AddingLogs" description="Add XML logs in nexus_logs group">
       <type xsi:type="pogoDsl:BooleanType"/>
       <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
       <DefaultPropValue>True</DefaultPropValue>

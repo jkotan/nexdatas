@@ -437,8 +437,7 @@ class TangoDataWriter(object):
         if self.addingLogs:
             name = "nexus_logs"
             if not self.__nxRoot.exists(name):
-                ngroup = self.__nxRoot.create_group(
-                    name, "NXcollection")
+                ngroup = self.__nxRoot.create_group(name)
             else:
                 ngroup = self.__nxRoot.open(name)
             name = "configuration"
@@ -452,8 +451,7 @@ class TangoDataWriter(object):
                     error = False
                 else:
                     counter += 1
-            self.__logGroup = ngroup.create_group(
-                cname, "NXcollection")
+            self.__logGroup = ngroup.create_group(cname)
             vfield = self.__logGroup.create_field(
                 "python_version", "string")
             vfield.write(str(sys.version))
