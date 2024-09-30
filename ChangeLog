@@ -1,3 +1,7 @@
+2024-09-27 Jan Kotanski <jankotan@gmail.com>
+	* remove NXcollection attribute for nexus_logs  (#168)
+	* tagged as 3.12.0
+
 2023-11-09 Jan Kotanski <jankotan@gmail.com>
 	* call finish on writer if exists  (#165)
 	* tagged as 3.11.1
