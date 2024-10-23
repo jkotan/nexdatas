@@ -52,7 +52,7 @@ try:
     ordb.close()
 except Exception:
     import pytest
-    if pytest.__version__ > "3.0.0":
+    if pytest.__version__ > "8.0.0":
         pytest.skip()
     else:
         pytestmark = pytest.mark.skip
