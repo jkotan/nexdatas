@@ -52,9 +52,9 @@ try:
     ordb.close()
 except Exception:
     import pytest
-    if pytest.__version__ < "3.0.0":
-        pytest.skip()
-    else:
+    try:
+        pytest.skip(allow_module_level=True)
+    except Exception:
         pytestmark = pytest.mark.skip
 
 from nxswriter.DBaseSource import DBaseSource
