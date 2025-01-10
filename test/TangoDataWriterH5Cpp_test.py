@@ -54,7 +54,7 @@ class TangoDataWriterH5CppTest(unittest.TestCase):
     <group type="NXinstrument" name="instrument">
       <attribute name ="short_name"> scan instrument </attribute>
       <group type="NXdetector" name="detector">
-        <field units="m" type="NX_FLOAT" name="counter1">
+        <field units="µm" type="NX_FLOAT" name="counter1">
           <strategy mode="STEP"/>
           <datasource type="CLIENT">
             <record name="exp_c01"/>
@@ -1749,7 +1749,7 @@ ds.res2 = str(True)
 
             if os.path.isfile(fname):
                 os.remove(fname)
-#            pass
+            # pass
 
     # scanRecord test
     # \brief It tests recording of simple h5 file
