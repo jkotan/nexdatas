@@ -50,7 +50,7 @@ class TangoDataWriterH5PYTest(unittest.TestCase):
     def __init__(self, methodName):
         unittest.TestCase.__init__(self, methodName)
 
-        self._scanXmlpart = """
+        self._scanXmlpart = u"""
     <group type="NXinstrument" name="instrument">
       <attribute name ="short_name"> scan instrument </attribute>
       <group type="NXdetector" name="detector">
@@ -1681,7 +1681,7 @@ ds.res2 = str(True)
             self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
-            self.assertEqual(at[...], "µm")
+            self.assertEqual(at[...], u"µm")
 
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
