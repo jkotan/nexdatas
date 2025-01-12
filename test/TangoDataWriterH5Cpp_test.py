@@ -1683,7 +1683,7 @@ ds.res2 = str(True)
             self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
-            self.assertEqual(at[...], "m")
+            self.assertEqual(at[...], u"µm")
 
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
@@ -1957,7 +1957,7 @@ ds.res2 = str(True)
             self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
-            self.assertEqual(at[...], u"µm")
+            self.assertEqual(at[...], "m")
 
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
