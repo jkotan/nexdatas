@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nxswriter.FElement &#8212; NXSDataWriter 3.10.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <title>nxswriter.FElement &#8212; NXSDataWriter 3.13.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
-<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
 
   </head><body>
@@ -35,7 +37,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           NXSDataWriter</a>
-        <span class="navbar-text navbar-version pull-left"><b>3.10</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>3.13</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -160,12 +162,12 @@
 
 <div class="viewcode-block" id="FElement"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.FElement.FElement">[docs]</a><span class="k">class</span> <span class="nc">FElement</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot; NeXuS runnable tag element</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; NeXuS runnable tag element</span>
 <span class="sd">    tag element corresponding to one of H5 objects</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">h5object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">streams</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; constructor</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; constructor</span>
 
 <span class="sd">        :param name: tag name</span>
 <span class="sd">        :type name: :obj: `str`</span>
@@ -193,7 +195,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_scalar</span> <span class="o">=</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="FElement.run"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.FElement.FElement.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; runner</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; runner</span>
 
 <span class="sd">        :brief: During its thread run it fetches the data from the source</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -202,7 +204,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_reshape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">dsShape</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">extends</span><span class="p">,</span> <span class="n">extraD</span><span class="p">,</span> <span class="n">exDim</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; recalculates shape</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; recalculates shape</span>
 
 <span class="sd">        :param dsShape: origin shape of the object</span>
 <span class="sd">        :type dsShape: :obj:`list` &lt;:obj:`int` &gt;</span>
@@ -233,7 +235,7 @@
         <span class="k">return</span> <span class="n">shape</span>
 
     <span class="k">def</span> <span class="nf">__fetchShape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; fetches shape from value and rank</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; fetches shape from value and rank</span>
 
 <span class="sd">        :param rank: rank of the object</span>
 <span class="sd">        :type rank: : obj:`str` or obj:`int`</span>
@@ -263,7 +265,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_getExtra</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">grows</span><span class="p">,</span> <span class="n">extraD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; provides growing dimension</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; provides growing dimension</span>
 
 <span class="sd">        :param grows: growing dimension</span>
 <span class="sd">        :type grows: :obj:`int`</span>
@@ -283,7 +285,7 @@
 
     <span class="k">def</span> <span class="nf">_findShape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">lengths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extraD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">grows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extends</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">checkData</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; creates shape object from rank and lengths variables</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; creates shape object from rank and lengths variables</span>
 <span class="sd">            raises XMLSettingSyntaxError: if shape cannot be found</span>
 
 
@@ -325,7 +327,7 @@
                 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
                     <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
                 <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">if</span> <span class="n">checkData</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
                     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span>
@@ -357,7 +359,7 @@
         <span class="k">return</span> <span class="n">shape</span>
 
 <div class="viewcode-block" id="FElement.setMessage"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.FElement.FElement.setMessage">[docs]</a>    <span class="k">def</span> <span class="nf">setMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exceptionMessage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; creates the error message</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; creates the error message</span>
 
 <span class="sd">        :param exceptionMessage: additional message of exception</span>
 <span class="sd">        :type  exceptionMessage: :obj:`str`</span>
@@ -382,13 +384,13 @@
 
 <div class="viewcode-block" id="FElementWithAttr"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.FElement.FElementWithAttr">[docs]</a><span class="k">class</span> <span class="nc">FElementWithAttr</span><span class="p">(</span><span class="n">FElement</span><span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot; NeXuS runnable tag element with attributes</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; NeXuS runnable tag element with attributes</span>
 <span class="sd">        tag element corresponding to one of H5 objects with attributes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">h5object</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">streams</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">reloadmode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; constructor</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; constructor</span>
 
 <span class="sd">        :param name: tag name</span>
 <span class="sd">        :type name: :obj:`str`</span>
@@ -416,7 +418,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_reloadmode</span> <span class="o">=</span> <span class="n">reloadmode</span>
 
     <span class="k">def</span> <span class="nf">_setValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; creates DataHolder with given rank and value</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; creates DataHolder with given rank and value</span>
 
 <span class="sd">        :param rank: data rank</span>
 <span class="sd">        :type rank: :obj:`int`</span>
@@ -452,7 +454,7 @@
         <span class="k">return</span> <span class="n">dh</span>
 
     <span class="k">def</span> <span class="nf">_createAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; creates h5 attributes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; creates h5 attributes</span>
 
 <span class="sd">        :brief: It creates attributes instances which have been</span>
 <span class="sd">                stored in tagAttributes dictionary</span>
@@ -542,7 +544,7 @@
                             <span class="bp">self</span><span class="o">.</span><span class="n">__h5Instances</span><span class="p">[</span><span class="n">ekey</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_setAttributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excluded</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; creates attributes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; creates attributes</span>
 
 <span class="sd">        :brief: It creates attributes in h5Object</span>
 
@@ -627,12 +629,15 @@
                             <span class="n">ekey</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">...</span><span class="p">]</span> \
                             <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tagAttrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                     <span class="k">else</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">vl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tagAttrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+                        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                            <span class="n">vl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tagAttrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">h5Object</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-                            <span class="n">ekey</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">...</span><span class="p">]</span> \
-                            <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tagAttrs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+                            <span class="n">ekey</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">vl</span>
 
 <div class="viewcode-block" id="FElementWithAttr.h5Attribute"><a class="viewcode-back" href="../../nxswriter.html#nxswriter.FElement.FElementWithAttr.h5Attribute">[docs]</a>    <span class="k">def</span> <span class="nf">h5Attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; provides attribute h5 object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; provides attribute h5 object</span>
 
 <span class="sd">        :param name: attribute name</span>
 <span class="sd">        :type name: :obj:`str`</span>
@@ -656,7 +661,7 @@
         &copy; Copyright 2012-2017 DESY, Jan Kotanski &lt;jkotan@mail.desy.de&gt;
 
 GNU GENERAL PUBLIC LICENSE, version 3.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br/>
     </p>
   </div>
 </footer>
