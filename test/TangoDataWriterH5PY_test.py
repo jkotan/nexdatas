@@ -1681,10 +1681,7 @@ ds.res2 = str(True)
             self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
-            if sys.version_info > (3, ):
-                self.assertEqual(at[...], u"\u03bcm")
-            else:
-                self.assertEqual(at[...], b"\xce\xbcm")
+            self.assertEqual(at[...], u"\u03bcm")
 
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
