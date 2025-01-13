@@ -50,11 +50,11 @@ class TangoDataWriterH5CppTest(unittest.TestCase):
     def __init__(self, methodName):
         unittest.TestCase.__init__(self, methodName)
 
-        self._scanXmlpart = """
+        self._scanXmlpart = u"""
     <group type="NXinstrument" name="instrument">
       <attribute name ="short_name"> scan instrument </attribute>
       <group type="NXdetector" name="detector">
-        <field units="µm" type="NX_FLOAT" name="counter1">
+        <field units="\u03bcm" type="NX_FLOAT" name="counter1">
           <strategy mode="STEP"/>
           <datasource type="CLIENT">
             <record name="exp_c01"/>
@@ -1683,7 +1683,10 @@ ds.res2 = str(True)
             self.assertEqual(at.shape, ())
             self.assertEqual(at.dtype, "string")
             self.assertEqual(at.name, "units")
-            self.assertEqual(at[...], u"µm")
+            if sys.version_info > (3, ):
+                self.assertEqual(at[...], u"\u03bcm")
+            else:
+                self.assertEqual(at[...], b"\xce\xbcm")
 
             at = cnt.attributes["nexdatas_source"]
             self.assertTrue(at.is_valid)
