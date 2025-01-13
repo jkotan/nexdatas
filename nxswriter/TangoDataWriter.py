@@ -71,6 +71,7 @@ DEFAULTWRITERS = ["h5cpp", "h5py", "h5redis"]
 #: (:obj:`bool`) tango bug #213 flag related to EncodedAttributes in python3
 PYTG_BUG_213 = False
 if sys.version_info > (3,):
+    unicode = str
     try:
         try:
             import tango
@@ -315,9 +316,12 @@ class TangoDataWriter(object):
         """
         self.__fetcher = FetchNameHandler(streams=self._streams)
         if sys.version_info > (3,):
-            sax.parseString(bytes(xmlset, 'utf-8'), self.__fetcher)
-        else:
             sax.parseString(xmlset, self.__fetcher)
+        else:
+            if isinstance(xmlset, unicode):
+                sax.parseString(xmlset.encode('utf-8'), self.__fetcher)
+            else:
+                sax.parseString(xmlset, self.__fetcher)
         self.__xmlsettings = xmlset
 
     def __delXML(self):
@@ -504,7 +508,15 @@ class TangoDataWriter(object):
             parser.setContentHandler(handler)
             parser.setErrorHandler(errorHandler)
             inpsrc = sax.InputSource()
-            inpsrc.setByteStream(StringIO(self.xmlsettings))
+            if sys.version_info > (3,):
+                inpsrc.setByteStream(StringIO(self.xmlsettings))
+            else:
+                if isinstance(self.xmlsettings, unicode):
+                    inpsrc.setByteStream(
+                        StringIO(self.xmlsettings.encode('utf-8')))
+                else:
+                    inpsrc.setByteStream(StringIO(self.xmlsettings))
+
             parser.parse(inpsrc)
 
             self.__initPool = handler.initPool

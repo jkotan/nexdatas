@@ -195,7 +195,7 @@ class FElement(Element):
                 if sys.version_info > (3,):
                     val = ("".join(self.content)).strip()
                 else:
-                    val = ("".join(self.content)).strip().encode()
+                    val = ("".join(self.content)).strip().encode("utf8")
                 found = False
                 if checkData and self.source and self.source.isValid():
                     data = self.source.getData()
@@ -497,9 +497,12 @@ class FElementWithAttr(FElement):
                             ekey, "string", overwrite=True)[...] \
                             = self._tagAttrs[key].strip()
                     else:
+                        try:
+                            vl = self._tagAttrs[key].strip().encode()
+                        except Exception:
+                            vl = self._tagAttrs[key].strip().encode("utf8")
                         self.h5Object.attributes.create(
-                            ekey, "string", overwrite=True)[...] \
-                            = self._tagAttrs[key].strip().encode()
+                            ekey, "string", overwrite=True)[...] = vl
 
     def h5Attribute(self, name):
         """ provides attribute h5 object

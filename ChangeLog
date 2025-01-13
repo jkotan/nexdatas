@@ -1,3 +1,8 @@
+2025-01-13 Jan Kotanski <jankotan@gmail.com>
+	* add support for utf8 in xmla attribute/field values  (#174)
+	* add support for utf8 in py2  (#176)
+	* tagged as 3.13.0
+
 2024-09-27 Jan Kotanski <jankotan@gmail.com>
 	* remove NXcollection attribute for nexus_logs  (#168)
 	* tagged as 3.12.0
